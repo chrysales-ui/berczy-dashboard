@@ -86,6 +86,62 @@
     .alerts { grid-template-columns: 1fr; }
     .metric-value { font-size: 22px; }
   }
+
+  /* TABS */
+  .tab-nav { background: var(--navy); border-bottom: 1px solid rgba(201,168,76,0.3); display: flex; padding: 0 28px; }
+  .tab-btn { background: none; border: none; color: rgba(255,255,255,0.45); font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 12px 20px; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color 0.2s, border-color 0.2s; }
+  .tab-btn:hover { color: rgba(255,255,255,0.75); }
+  .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .tab-page { display: none; }
+  .tab-page.active { display: block; }
+
+
+
+  /* WINS SECTION */
+  .wins-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 0; }
+  .win-card { background: linear-gradient(135deg, #f0faf5 0%, #e8f7ef 100%); border: 1px solid #9FE1CB; border-radius: 10px; padding: 14px 16px; position: relative; overflow: hidden; }
+  .win-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: #1D9E75; border-radius: 3px 0 0 3px; }
+  .win-card-label { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #0F6E56; margin-bottom: 6px; }
+  .win-card-value { font-size: 22px; font-weight: 600; color: #085041; line-height: 1.1; margin-bottom: 4px; letter-spacing: -0.02em; }
+  .win-card-context { font-size: 11px; color: #0F6E56; line-height: 1.4; }
+  .win-card-change { font-size: 11px; font-weight: 600; color: #1D9E75; margin-bottom: 3px; }
+  .no-wins { padding: 14px 16px; background: #f8f7f5; border-radius: 8px; font-size: 13px; color: var(--text-muted); }
+
+  /* DATE RANGE PICKER */
+  .ins-date-bar { background: #f8f7f5; border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .ins-date-bar label { font-size: 10px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
+  .ins-date-bar input[type="date"] { background: var(--surface); border: 1px solid var(--border); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 12px; padding: 5px 10px; border-radius: 6px; cursor: pointer; outline: none; }
+  .ins-date-bar input[type="date"]:focus { border-color: var(--navy); }
+  .ins-date-bar .vs-label { font-size: 11px; color: var(--text-light); }
+  .ins-run-btn { background: var(--navy); color: #fff; border: none; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 7px 16px; border-radius: 6px; cursor: pointer; transition: background 0.2s; margin-left: auto; }
+  .ins-run-btn:hover { background: #2a5280; }
+  .ins-loading { text-align: center; padding: 40px; color: var(--text-muted); font-size: 13px; }
+
+  /* INSIGHTS PAGE */
+  .insights { padding: 24px 28px; max-width: 900px; }
+  .ins-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+  .ins-title { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--navy); }
+  .ins-period { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+  .momentum-badge { display: flex; align-items: center; gap: 8px; background: var(--navy); color: #fff; padding: 10px 18px; border-radius: 8px; }
+  .momentum-arrow { font-size: 22px; font-weight: 600; }
+  .momentum-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.6; }
+  .momentum-val { font-size: 16px; font-weight: 600; color: var(--gold); }
+  .ins-section { margin-bottom: 28px; }
+  .ins-section-title { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-light); margin-bottom: 12px; padding-bottom: 6px; border-bottom: 0.5px solid var(--border); }
+  .ins-summary { font-size: 15px; color: var(--text); line-height: 1.6; padding: 14px 18px; background: #f8f7f5; border-radius: 8px; border-left: 3px solid var(--navy); margin-bottom: 0; }
+  .ins-highlight { font-size: 14px; color: var(--text); line-height: 1.65; padding: 12px 16px; background: #f8f7f5; border-radius: 8px; margin-bottom: 8px; }
+  .channel-block { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-bottom: 12px; }
+  .channel-name { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .channel-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .ins-row { display: grid; grid-template-columns: 110px 1fr; gap: 8px 16px; margin-bottom: 7px; align-items: baseline; font-size: 13px; }
+  .ins-row-label { font-weight: 600; color: var(--text-muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .ins-row-val { color: var(--text); line-height: 1.5; }
+  .ins-row-val strong { font-weight: 600; color: var(--navy); }
+  .decision-block { background: #FEF3C7; border: 1px solid #e8d87a; border-radius: 8px; padding: 14px 18px; margin-bottom: 8px; font-size: 13px; color: #713f12; line-height: 1.6; }
+  .risk-block { background: #FAE0E0; border: 1px solid #f0a0a0; border-radius: 8px; padding: 14px 18px; margin-bottom: 8px; font-size: 13px; color: #7A1C1C; line-height: 1.6; }
+  .risk-block strong, .decision-block strong { font-weight: 600; display: block; margin-bottom: 3px; }
+  .ins-footer { font-size: 10px; color: var(--text-light); padding-top: 16px; border-top: 0.5px solid var(--border); margin-top: 8px; }
+  @media (max-width: 700px) { .ins-row { grid-template-columns: 1fr; } .ins-header { flex-direction: column; gap: 12px; } }
 </style>
 </head>
 <body>
@@ -105,6 +161,13 @@
   </div>
 </div>
 
+
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('dashboard')">Dashboard</button>
+  <button class="tab-btn" onclick="switchTab('insights')">Executive Insights</button>
+</nav>
+
+<div id="tab-dashboard" class="tab-page active">
 <div class="loading" id="loading">
   <div class="spinner"></div>
   <div class="loading-text">Loading live data from Google Sheets...</div>
@@ -226,6 +289,45 @@
   </div>
 </div>
 
+</div><!-- end tab-dashboard -->
+
+<!-- INSIGHTS PAGE -->
+<div id="tab-insights" class="tab-page">
+<div class="insights">
+
+  <div class="ins-header" style="margin-bottom:16px;">
+    <div>
+      <div class="ins-title">Executive Insights</div>
+      <div class="ins-period" id="insPeriodLabel">The Berczy Tavern &nbsp;·&nbsp; Select a date range below</div>
+    </div>
+    <div class="momentum-badge">
+      <div>
+        <div class="momentum-label">Momentum</div>
+        <div class="momentum-val" id="insMomentum">—</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DATE RANGE PICKER -->
+  <div class="ins-date-bar">
+    <label>Report period</label>
+    <input type="date" id="insStart" value="2026-02-27" />
+    <span class="vs-label">to</span>
+    <input type="date" id="insEnd" value="2026-03-12" />
+    <span class="vs-label" style="margin-left:8px;">vs prior period</span>
+    <input type="date" id="priorStart" value="2026-02-13" />
+    <span class="vs-label">to</span>
+    <input type="date" id="priorEnd" value="2026-02-26" />
+    <button class="ins-run-btn" onclick="generateInsights()">Generate ↗</button>
+  </div>
+
+  <div id="insContent">
+    <div class="ins-loading">Select a date range and click Generate to load insights.</div>
+  </div>
+
+
+</div><!-- end tab-insights -->
+
 <div class="footer">
   <div class="footer-text">Prepared by Guest Getter &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; Auto-refreshes on page load</div>
   <div class="footer-brand">Guest Getter</div>
@@ -301,13 +403,35 @@ function processData(rows) {
     const otSize  = cleanNum(r[COL.ot_size]);
     const otConf  = cleanNum(r[COL.ot_confirmed]);
 
+    const fbRes  = cleanNum(r[8]);   // FB_Reservations (Event)
+    const fbResults = cleanNum(r[9]); // FB_Results(Reservations)
+    const ggRes  = cleanNum(r[16]);  // Google_Reservations
+    const ggSv   = cleanNum(r[17]);  // Google_Store Visits
+    const ggCalls = cleanNum(r[18]); // Google_Calls From Ads
+    const ggClicks = cleanNum(r[12]); // Google_Clicks
+    const fbClicks = cleanNum(r[4]);  // FB_Link clicks
+    const fbImpr   = cleanNum(r[3]);  // FB_Impressions
+    const expSales = cleanNum(r[34]); // OT Experience Total Sales
+    const gaViews  = cleanNum(r[27]); // GA Views
+    const gaBounce = parseFloat(String(r[28]||'').replace('%','')) || 0; // GA Bounce
+
     data.push({
       date: d,
       dateStr: d.toLocaleDateString('en-CA'),
       spend: fbSpend + ggSpend,
+      fb_spend: fbSpend,
+      gg_spend: ggSpend,
       users: gaUsers,
       covers: otSize,
       confirmed: otConf,
+      fb_conv: fbRes + fbResults,
+      gg_conv: ggRes + ggSv + ggCalls,
+      gg_clicks: ggClicks,
+      fb_clicks: fbClicks,
+      fb_impr: fbImpr,
+      exp_sales: expSales,
+      ga_views: gaViews,
+      ga_bounce: gaBounce,
     });
   }
 
@@ -478,6 +602,7 @@ async function loadData() {
     const data = processData(rows);
     if (data.length === 0) throw new Error('No valid data rows found in sheet.');
 
+    _allData = data; // cache for insights engine
     renderCharts(data);
 
     document.getElementById('loading').style.display = 'none';
@@ -506,6 +631,389 @@ async function loadData() {
     picker.value = `${yyyy}-${mm}-${dd}`;
   }
 })();
+
+
+function switchTab(name) {
+  document.querySelectorAll('.tab-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+
+// ── INSIGHTS ENGINE ──────────────────────────────────────────────────────
+let _allData = null; // cached sheet data
+
+function fmt2(n, type) {
+  if (type === 'money') return '$' + Math.round(n).toLocaleString();
+  if (type === 'ca') return 'CA$' + n.toFixed(2);
+  if (type === 'pct') return (n > 0 ? '+' : '') + n.toFixed(1) + '%';
+  if (type === 'int') return Math.round(n).toLocaleString();
+  return n;
+}
+
+function insChg(a, b) {
+  if (!b) return '';
+  const p = (a - b) / b * 100;
+  const arrow = p > 0 ? '▲' : '▼';
+  const cls = p > 0 ? 'up' : 'down';
+  return ` <span class="${cls}" style="font-size:11px;">${arrow} ${Math.abs(p).toFixed(1)}%</span>`;
+}
+
+function periodStats(data, startStr, endStr) {
+  const s = new Date(startStr + 'T00:00:00');
+  const e = new Date(endStr + 'T23:59:59');
+  const rows = data.filter(d => d.date >= s && d.date <= e);
+  if (!rows.length) return null;
+
+  const ot_covers   = rows.reduce((s,d) => s + d.covers, 0);
+  const ot_conf     = rows.reduce((s,d) => s + d.confirmed, 0);
+  const ga_users    = rows.reduce((s,d) => s + d.users, 0);
+  const fb_spend    = rows.reduce((s,d) => s + d.fb_spend, 0);
+  const gg_spend    = rows.reduce((s,d) => s + d.gg_spend, 0);
+  const gg_conv     = rows.reduce((s,d) => s + d.gg_conv, 0);
+  const fb_conv     = rows.reduce((s,d) => s + d.fb_conv, 0);
+  const gg_clicks   = rows.reduce((s,d) => s + d.gg_clicks, 0);
+  const fb_clicks   = rows.reduce((s,d) => s + d.fb_clicks, 0);
+  const fb_impr     = rows.reduce((s,d) => s + d.fb_impr, 0);
+  const exp_sales   = rows.reduce((s,d) => s + d.exp_sales, 0);
+  const ga_views    = rows.reduce((s,d) => s + d.ga_views, 0);
+  const ga_bounce   = rows.reduce((s,d) => s + d.ga_bounce, 0) / rows.length;
+  const total_spend = fb_spend + gg_spend;
+  const noshow_pct  = ot_covers > 0 ? (ot_covers - ot_conf) / ot_covers * 100 : 0;
+  const rpc         = ot_conf > 0 ? exp_sales / ot_conf : 0;
+  const spc         = ot_covers > 0 ? total_spend / ot_covers : 0;
+  const cpu         = ga_users > 0 ? ot_covers / ga_users : 0;
+  const days        = rows.length;
+
+  return { ot_covers, ot_conf, ga_users, fb_spend, gg_spend, total_spend,
+           gg_conv, fb_conv, gg_clicks, fb_clicks, fb_impr, exp_sales,
+           ga_views, ga_bounce, noshow_pct, rpc, spc, cpu, days,
+           fb_ctr: fb_impr > 0 ? fb_clicks / fb_impr * 100 : 0,
+           fb_cpc: fb_clicks > 0 ? fb_spend / fb_clicks : 0,
+           gg_cpc: gg_clicks > 0 ? gg_spend / gg_clicks : 0 };
+}
+
+function pct(a, b) { return b ? (a - b) / b * 100 : 0; }
+
+function generateInsights() {
+  const insStart  = document.getElementById('insStart').value;
+  const insEnd    = document.getElementById('insEnd').value;
+  const prStart   = document.getElementById('priorStart').value;
+  const prEnd     = document.getElementById('priorEnd').value;
+
+  if (!insStart || !insEnd || !prStart || !prEnd) {
+    alert('Please fill in all four dates.');
+    return;
+  }
+
+  document.getElementById('insContent').innerHTML = '<div class="ins-loading">Calculating insights...</div>';
+
+  // Use cached data or fetch
+  const run = (data) => {
+    const rp = periodStats(data, insStart, insEnd);
+    const pr = periodStats(data, prStart, prEnd);
+
+    if (!rp || !pr) {
+      document.getElementById('insContent').innerHTML = '<div class="ins-loading">No data found for selected dates. Try a different range.</div>';
+      return;
+    }
+
+    // Momentum
+    const covChg = pct(rp.ot_covers, pr.ot_covers);
+    const momentum = covChg > 5 ? '↑ Up' : covChg < -5 ? '↓ Down' : '→ Flat';
+    document.getElementById('insMomentum').textContent = momentum;
+
+    // Period label
+    const fmtDate = s => new Date(s + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    document.getElementById('insPeriodLabel').innerHTML =
+      `The Berczy Tavern &nbsp;·&nbsp; ${fmtDate(insStart)} – ${fmtDate(insEnd)} &nbsp;·&nbsp; vs ${fmtDate(prStart)} – ${fmtDate(prEnd)}`;
+
+    // Potential lost revenue from no-shows
+    const lostCovers = Math.round(rp.ot_covers - rp.ot_conf);
+    const lostRev    = Math.round(lostCovers * rp.rpc);
+
+    // One-line summary
+    const summaryParts = [];
+    if (Math.abs(covChg) > 5) summaryParts.push(`Cover volume ${covChg > 0 ? 'up' : 'down'} ${Math.abs(covChg).toFixed(0)}%`);
+    if (rp.exp_sales > 0) summaryParts.push(`$${Math.round(rp.exp_sales).toLocaleString()} in experience sales (${pct(rp.exp_sales, pr.exp_sales) > 0 ? '+' : ''}${pct(rp.exp_sales, pr.exp_sales).toFixed(0)}%)`);
+    if (rp.noshow_pct > 30) summaryParts.push(`${rp.noshow_pct.toFixed(0)}% no-show rate warrants attention`);
+    const summary = summaryParts.join(' — ') + '.';
+
+    // Google: check if PMAX vs Search imbalance detectable (use proxy: gg_conv efficiency)
+    const ggCpr = rp.gg_conv > 0 ? rp.gg_spend / rp.gg_conv : 0;
+    const fbCpr = rp.fb_conv > 0 ? rp.fb_spend / rp.fb_conv : 0;
+
+
+    // ── WINS ENGINE ──────────────────────────────────────────────────────
+    const wins = [];
+
+    // Win: covers up significantly
+    if (pct(rp.ot_covers, pr.ot_covers) >= 10) {
+      wins.push({
+        label: 'Cover volume',
+        value: fmt2(rp.ot_covers, 'int'),
+        change: '+' + pct(rp.ot_covers, pr.ot_covers).toFixed(1) + '% vs prior period',
+        context: 'More guests through the door — highest driver of revenue growth.'
+      });
+    }
+
+    // Win: revenue up
+    if (rp.exp_sales > 0 && pct(rp.exp_sales, pr.exp_sales) >= 10) {
+      wins.push({
+        label: 'Experience sales',
+        value: '$' + Math.round(rp.exp_sales).toLocaleString(),
+        change: '+' + pct(rp.exp_sales, pr.exp_sales).toFixed(1) + '% vs prior period',
+        context: 'Total revenue from confirmed covers this period.'
+      });
+    }
+
+    // Win: revenue per cover up
+    if (rp.rpc > pr.rpc * 1.03) {
+      wins.push({
+        label: 'Revenue per cover',
+        value: '$' + rp.rpc.toFixed(2),
+        change: '+' + pct(rp.rpc, pr.rpc).toFixed(1) + '% vs prior period',
+        context: 'Guests spending more per visit — stronger value delivery or upsell.'
+      });
+    }
+
+    // Win: Google cost down
+    if (rp.gg_spend < pr.gg_spend * 0.95 && rp.gg_conv >= pr.gg_conv * 0.9) {
+      wins.push({
+        label: 'Google efficiency',
+        value: 'CA$' + (rp.gg_spend / rp.gg_conv).toFixed(2) + ' / conv',
+        change: 'Spend down ' + Math.abs(pct(rp.gg_spend, pr.gg_spend)).toFixed(0) + '%, conversions held',
+        context: 'Getting more from less on Google — efficiency improving.'
+      });
+    }
+
+    // Win: Google CPC improved
+    if (rp.gg_cpc < pr.gg_cpc * 0.95) {
+      wins.push({
+        label: 'Google CPC',
+        value: 'CA$' + rp.gg_cpc.toFixed(2),
+        change: '-' + Math.abs(pct(rp.gg_cpc, pr.gg_cpc)).toFixed(1) + '% vs prior period',
+        context: 'Cheaper clicks from Google — better bidding or improved quality scores.'
+      });
+    }
+
+    // Win: Facebook CTR up
+    if (rp.fb_ctr > pr.fb_ctr * 1.1) {
+      wins.push({
+        label: 'Facebook CTR',
+        value: rp.fb_ctr.toFixed(2) + '%',
+        change: '+' + pct(rp.fb_ctr, pr.fb_ctr).toFixed(1) + '% vs prior period',
+        context: 'More people clicking Facebook ads — creative or targeting is resonating.'
+      });
+    }
+
+    // Win: Facebook CPC down
+    if (rp.fb_cpc < pr.fb_cpc * 0.9) {
+      wins.push({
+        label: 'Facebook CPC',
+        value: 'CA$' + rp.fb_cpc.toFixed(2),
+        change: '-' + Math.abs(pct(rp.fb_cpc, pr.fb_cpc)).toFixed(1) + '% vs prior period',
+        context: 'Lower cost per click on Facebook — more reach per ad dollar.'
+      });
+    }
+
+    // Win: website users up
+    if (pct(rp.ga_users, pr.ga_users) >= 10) {
+      wins.push({
+        label: 'Website visitors',
+        value: fmt2(rp.ga_users, 'int'),
+        change: '+' + pct(rp.ga_users, pr.ga_users).toFixed(1) + '% vs prior period',
+        context: 'More people finding and visiting the website.'
+      });
+    }
+
+    // Win: bounce rate down
+    if (rp.ga_bounce < pr.ga_bounce * 0.95 && pr.ga_bounce > 0) {
+      wins.push({
+        label: 'Bounce rate',
+        value: rp.ga_bounce.toFixed(1) + '%',
+        change: '-' + Math.abs(pct(rp.ga_bounce, pr.ga_bounce)).toFixed(1) + '% vs prior period',
+        context: 'Fewer visitors leaving immediately — website engagement improving.'
+      });
+    }
+
+    // Win: cover/user ratio up
+    if (rp.cpu > pr.cpu * 1.05) {
+      wins.push({
+        label: 'Cover / visitor ratio',
+        value: rp.cpu.toFixed(3),
+        change: '+' + pct(rp.cpu, pr.cpu).toFixed(1) + '% vs prior period',
+        context: 'Converting a higher share of website visitors into reservations.'
+      });
+    }
+
+    // Win: total conversions (gg + fb) up
+    const totalConvRp = rp.gg_conv + rp.fb_conv;
+    const totalConvPr = pr.gg_conv + pr.fb_conv;
+    if (pct(totalConvRp, totalConvPr) >= 15) {
+      wins.push({
+        label: 'Total ad conversions',
+        value: fmt2(totalConvRp, 'int'),
+        change: '+' + pct(totalConvRp, totalConvPr).toFixed(1) + '% vs prior period',
+        context: 'More trackable actions from paid media — reservations, visits, calls.'
+      });
+    }
+
+    // Win: spend per cover down
+    if (rp.spc < pr.spc * 0.93) {
+      wins.push({
+        label: 'Spend per cover',
+        value: 'CA$' + rp.spc.toFixed(2),
+        change: '-' + Math.abs(pct(rp.spc, pr.spc)).toFixed(1) + '% vs prior period',
+        context: 'Each reserved cover costs less to acquire — ad efficiency improving.'
+      });
+    }
+
+    // Win: no-show rate improved
+    if (pr.noshow_pct > rp.noshow_pct + 2) {
+      wins.push({
+        label: 'No-show rate',
+        value: rp.noshow_pct.toFixed(1) + '%',
+        change: '-' + (pr.noshow_pct - rp.noshow_pct).toFixed(1) + 'pp vs prior period',
+        context: 'More reserved guests actually showing up — retention improving.'
+      });
+    }
+
+    const winsHtml = wins.length > 0
+      ? `<div class="wins-grid">${wins.map(w => `
+          <div class="win-card">
+            <div class="win-card-label">${w.label}</div>
+            <div class="win-card-value">${w.value}</div>
+            <div class="win-card-change">${w.change}</div>
+            <div class="win-card-context">${w.context}</div>
+          </div>`).join('')}</div>`
+      : `<div class="no-wins">No standout wins detected for this period — all key metrics are flat or declining vs prior period.</div>`;
+
+
+    // Build HTML
+    const html = `
+    <!-- WINS -->
+    <div class="ins-section">
+      <div class="ins-section-title" style="color:#0F6E56;border-bottom-color:#9FE1CB;">Wins This Period</div>
+      ${winsHtml}
+    </div>
+
+    <!-- SNAPSHOT -->
+    <div class="ins-section">
+      <div class="ins-section-title">Executive Snapshot</div>
+      <div class="ins-summary">${summary}</div>
+    </div>
+
+    <!-- HIGHLIGHTS -->
+    <div class="ins-section">
+      <div class="ins-section-title">Highlights of the Week</div>
+      <div class="ins-highlight">
+        The restaurant recorded <strong>${fmt2(rp.ot_covers,'int')} reserved covers</strong> (${fmt2(covChg,'pct')} vs prior period)
+        and <strong>${fmt2(rp.ot_conf,'int')} confirmed seated guests</strong>.
+        ${rp.exp_sales > 0 ? `Experience sales reached <strong>${fmt2(rp.exp_sales,'money')}</strong> at <strong>$${rp.rpc.toFixed(2)} per cover</strong> (prior: $${pr.rpc.toFixed(2)}).` : ''}
+      </div>
+      <div class="ins-highlight">
+        <strong>${rp.noshow_pct.toFixed(1)}% no-show rate</strong> (prior: ${pr.noshow_pct.toFixed(1)}%) — ${lostCovers.toLocaleString()} reserved guests did not show up,
+        representing an estimated <strong>$${lostRev.toLocaleString()} in unrealised revenue</strong> at the current revenue-per-cover rate.
+      </div>
+    </div>
+
+    <!-- BY CHANNEL -->
+    <div class="ins-section">
+      <div class="ins-section-title">By Channel</div>
+
+      <!-- Google -->
+      <div class="channel-block">
+        <div class="channel-name"><span class="channel-dot" style="background:#378ADD;"></span>Google Ads</div>
+        <div class="ins-row"><span class="ins-row-label">Key Result</span>
+          <span class="ins-row-val"><strong>${fmt2(rp.gg_conv,'int')} conversions at CA$${ggCpr.toFixed(2)} each</strong>${insChg(rp.gg_conv, pr.gg_conv)} — spend ${rp.gg_spend < pr.gg_spend ? 'decreased' : 'increased'} ${Math.abs(pct(rp.gg_spend,pr.gg_spend)).toFixed(0)}% to CA$${Math.round(rp.gg_spend).toLocaleString()}.</span></div>
+        <div class="ins-row"><span class="ins-row-label">Notable</span>
+          <span class="ins-row-val">CPC: CA$${rp.gg_cpc.toFixed(2)} vs CA$${pr.gg_cpc.toFixed(2)} prior. ${rp.gg_clicks > 0 ? `${fmt2(rp.gg_clicks,'int')} clicks this period.` : ''}</span></div>
+        <div class="ins-row"><span class="ins-row-label">Insight</span>
+          <span class="ins-row-val">${ggCpr < 5 ? 'Strong unit economics — cost per conversion is below CA$5, indicating efficient campaign structure.' : ggCpr < 15 ? 'Moderate efficiency. Review campaign mix to identify underperformers dragging up the average cost per conversion.' : 'High cost per conversion suggests budget concentration in underperforming campaigns. Audit and reallocate.'}</span></div>
+        <div class="ins-row"><span class="ins-row-label">Next</span>
+          <span class="ins-row-val">${ggCpr > 10 ? 'Review Search campaigns vs PMAX — consolidate budget into the lowest-cost conversion path.' : 'Maintain current strategy. Monitor conversion volume weekly for any seasonal dip.'}</span></div>
+      </div>
+
+      <!-- Meta -->
+      <div class="channel-block">
+        <div class="channel-name"><span class="channel-dot" style="background:#1D9E75;"></span>Meta Ads</div>
+        <div class="ins-row"><span class="ins-row-label">Key Result</span>
+          <span class="ins-row-val"><strong>${fmt2(rp.fb_conv,'int')} tracked conversions, CTR ${rp.fb_ctr.toFixed(2)}%</strong>${insChg(rp.fb_ctr, pr.fb_ctr)} — CPC CA$${rp.fb_cpc.toFixed(2)} (prior: CA$${pr.fb_cpc.toFixed(2)}).</span></div>
+        <div class="ins-row"><span class="ins-row-label">Notable</span>
+          <span class="ins-row-val">Facebook spend ${rp.fb_spend > pr.fb_spend ? 'increased' : 'decreased'} ${Math.abs(pct(rp.fb_spend,pr.fb_spend)).toFixed(0)}% to CA$${Math.round(rp.fb_spend).toLocaleString()}. ${fbCpr > 0 ? `Cost per tracked conversion: CA$${fbCpr.toFixed(2)}.` : ''}</span></div>
+        <div class="ins-row"><span class="ins-row-label">Insight</span>
+          <span class="ins-row-val">${rp.fb_ctr > 2 ? 'CTR above 2% indicates strong creative-audience match. Engagement quality is healthy.' : 'CTR below 2% suggests creative fatigue or audience mismatch — test new ad formats or refresh copy.'}</span></div>
+        <div class="ins-row"><span class="ins-row-label">Next</span>
+          <span class="ins-row-val">${fbCpr > 20 ? 'Audit campaigns with zero or high-cost conversions. Verify Meta pixel is firing on the OpenTable confirmation page.' : 'Maintain top-performing campaigns. Verify pixel tracking is capturing all conversions accurately.'}</span></div>
+      </div>
+
+      <!-- Website -->
+      <div class="channel-block">
+        <div class="channel-name"><span class="channel-dot" style="background:#BA7517;"></span>Website</div>
+        <div class="ins-row"><span class="ins-row-label">Key Result</span>
+          <span class="ins-row-val"><strong>${fmt2(rp.ga_users,'int')} unique users${insChg(rp.ga_users, pr.ga_users)}</strong> — bounce rate ${rp.ga_bounce.toFixed(1)}% (prior: ${pr.ga_bounce.toFixed(1)}%).</span></div>
+        <div class="ins-row"><span class="ins-row-label">Notable</span>
+          <span class="ins-row-val">Cover-to-visitor ratio: <strong>${rp.cpu.toFixed(3)}</strong> (prior: ${pr.cpu.toFixed(3)}). For every 100 visitors, approximately ${Math.round(rp.cpu * 100)} reserved covers.</span></div>
+        <div class="ins-row"><span class="ins-row-label">Insight</span>
+          <span class="ins-row-val">${pct(rp.cpu, pr.cpu) > 0 ? 'Conversion ratio improved — the same traffic is generating more reservations. Website or booking flow is becoming more effective.' : pct(rp.cpu, pr.cpu) < -5 ? 'Conversion ratio declined — traffic grew but bookings did not keep pace. Investigate if website changes or booking friction are factors.' : 'Conversion ratio is stable. Traffic growth directly translates to cover growth at the current rate.'}</span></div>
+        <div class="ins-row"><span class="ins-row-label">Next</span>
+          <span class="ins-row-val">Add a reservation completion goal in Google Analytics to directly measure conversion rate from visitor to booking.</span></div>
+      </div>
+
+      <!-- OpenTable -->
+      <div class="channel-block">
+        <div class="channel-name"><span class="channel-dot" style="background:#D85A30;"></span>OpenTable / Operations</div>
+        <div class="ins-row"><span class="ins-row-label">Key Result</span>
+          <span class="ins-row-val"><strong>${fmt2(rp.ot_covers,'int')} reserved, ${fmt2(rp.ot_conf,'int')} confirmed</strong> — no-show rate ${rp.noshow_pct.toFixed(1)}% (prior: ${pr.noshow_pct.toFixed(1)}%).</span></div>
+        <div class="ins-row"><span class="ins-row-label">Notable</span>
+          <span class="ins-row-val">Estimated unrealised revenue from no-shows: <strong>$${lostRev.toLocaleString()}</strong>. Ad spend per reserved cover: CA$${rp.spc.toFixed(2)} (prior: CA$${pr.spc.toFixed(2)}).</span></div>
+        <div class="ins-row"><span class="ins-row-label">Insight</span>
+          <span class="ins-row-val">${rp.noshow_pct > 35 ? 'No-show rate above 35% is a significant operational drag. Each percentage point recovered adds approximately $' + Math.round(rp.ot_covers * 0.01 * rp.rpc).toLocaleString() + ' in revenue at current rates — no additional ad spend required.' : rp.noshow_pct > 20 ? 'No-show rate is elevated. Reservation reminders and confirmation nudges could meaningfully reduce this.' : 'No-show rate is within acceptable range. Maintain current confirmation protocols.'}</span></div>
+        <div class="ins-row"><span class="ins-row-label">Next</span>
+          <span class="ins-row-val">${rp.noshow_pct > 30 ? 'Review reminder sequence timing and frequency. Consider deposit policy for groups of 4+. Track no-show rate as a weekly operational KPI.' : 'Continue monitoring. No immediate action required.'}</span></div>
+      </div>
+    </div>
+
+    <!-- DECISIONS -->
+    <div class="ins-section">
+      <div class="ins-section-title">Decisions Needed</div>
+      ${rp.noshow_pct > 30 ? '<div class="decision-block"><strong>No-show policy</strong>No-show rate at ' + rp.noshow_pct.toFixed(1) + '% — does the restaurant want to implement a credit card hold or deposit for reservations of 4+ guests?</div>' : '<div class="decision-block" style="background:none;border:0.5px dashed var(--border);color:var(--text-muted);">No decisions required this period.</div>'}
+      ${rp.fb_spend > pr.fb_spend * 1.2 ? '<div class="decision-block"><strong>Facebook budget increase</strong>Meta spend up ' + Math.abs(pct(rp.fb_spend,pr.fb_spend)).toFixed(0) + '% — confirm if this increase is intentional and aligned with current campaign objectives.</div>' : ''}
+    </div>
+
+    <!-- RISKS -->
+    <div class="ins-section">
+      <div class="ins-section-title">Risks / Watchouts</div>
+      ${rp.noshow_pct > pr.noshow_pct + 3 ? '<div class="risk-block"><strong>No-show rate increasing</strong>' + pr.noshow_pct.toFixed(1) + '% → ' + rp.noshow_pct.toFixed(1) + '%. If this trend continues, cover volume growth will not translate to proportional revenue growth.</div>' : ''}
+      ${rp.gg_conv < pr.gg_conv * 0.8 ? '<div class="risk-block"><strong>Google conversion volume declining</strong>Down ' + Math.abs(pct(rp.gg_conv,pr.gg_conv)).toFixed(0) + '% vs prior period. Audit campaign status and budget pacing.</div>' : ''}
+      ${rp.cpu < pr.cpu * 0.9 ? '<div class="risk-block"><strong>Cover-per-visitor ratio declining</strong>Fewer reservations per website visit. Monitor for website friction or declining traffic quality.</div>' : '<div class="risk-block" style="background:none;border:0.5px dashed var(--border);color:var(--text-muted);">No major risks identified this period.</div>'}
+    </div>
+
+    <div class="ins-footer">Prepared by Guest Getter &nbsp;·&nbsp; ${fmtDate(insStart)} – ${fmtDate(insEnd)} &nbsp;·&nbsp; Tone: strategic, direct, written for an owner.</div>
+    `;
+
+    document.getElementById('insContent').innerHTML = html;
+  };
+
+  if (_allData) {
+    run(_allData);
+  } else {
+    // Need to fetch sheet data first
+    fetchSheetData().then(rows => {
+      _allData = processData(rows);
+      // Augment processData to include extra fields needed by insights
+      run(_allData);
+    }).catch(err => {
+      document.getElementById('insContent').innerHTML = '<div class="ins-loading">Could not load sheet data: ' + err.message + '</div>';
+    });
+  }
+}
+
+// Auto-run insights when tab is switched to
+const _origSwitchTab = window.switchTab;
+
 
 // Load on page open
 loadData();
