@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Berczy Tavern — North Star Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #1A3A5C; --gold: #C9A84C; --gold-light: #fef9e8; --gold-border: #e8d87a;
+    --red: #cc3333; --amber: #cc7700; --blue: #1A3A5C;
+    --green: #1A7A4A; --danger: #B91C1C; --danger-bg: #FAE0E0;
+    --warn: #BA7517; --warn-bg: #FEF3C7;
+    --bg: #f4f1ec; --surface: #ffffff; --border: rgba(26,58,92,0.12);
+    --text: #1a1a1a; --text-muted: #6b7280; --text-light: #9ca3af;
+  }
+  body { background: var(--bg); font-family: 'DM Sans', sans-serif; color: var(--text); min-height: 100vh; }
+
+  /* HEADER */
+  .header { background: var(--navy); padding: 18px 28px; display: flex; align-items: center; justify-content: space-between; border-bottom: 3px solid var(--gold); }
+  .brand { font-family: 'DM Serif Display', serif; font-size: 20px; color: #fff; letter-spacing: 0.08em; text-transform: uppercase; }
+  .brand span { color: var(--gold); }
+  .subtitle { font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: 0.05em; text-transform: uppercase; margin-top: 2px; }
+  .header-right { text-align: right; }
+  .date-val { font-size: 13px; font-weight: 500; color: var(--gold); }
+  .date-lbl { font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+  .refresh-btn { margin-top: 6px; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4); color: var(--gold); font-size: 10px; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+  .refresh-btn:hover { background: rgba(201,168,76,0.25); }
+
+  /* LOADING */
+  .loading { display: flex; align-items: center; justify-content: center; min-height: 400px; flex-direction: column; gap: 16px; }
+  .spinner { width: 36px; height: 36px; border: 3px solid var(--border); border-top-color: var(--navy); border-radius: 50%; animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text { font-size: 13px; color: var(--text-muted); }
+
+  /* ERROR */
+  .error-box { margin: 24px 28px; padding: 16px 20px; background: var(--danger-bg); border-left: 3px solid var(--danger); border-radius: 8px; font-size: 13px; color: #7A1C1C; }
+
+  /* MAIN */
+  .main { padding: 20px 28px; display: none; }
+  .updated-at { font-size: 10px; color: var(--text-light); text-align: right; margin-bottom: 12px; }
+
+  /* ROWS */
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+
+  /* PANEL */
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; position: relative; }
+  .panel::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 12px 12px 0 0; }
+  .panel.red::before { background: var(--red); }
+  .panel.amber::before { background: var(--amber); }
+  .panel.blue::before { background: var(--blue); }
+  .panel-source { font-size: 9px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); margin-bottom: 12px; }
+  .metrics-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+  .metric { padding: 10px 12px; background: #f8f7f5; border-radius: 8px; border: 1px solid var(--border); }
+  .metric.hl { background: var(--gold-light); border-color: var(--gold-border); }
+  .metric-label { font-size: 9px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+  .metric.hl .metric-label { color: #9a7d0a; }
+  .metric-value { font-size: 26px; font-weight: 600; color: var(--text); line-height: 1; letter-spacing: -0.02em; }
+  .metric-change { font-size: 10px; margin-top: 4px; font-weight: 500; }
+  .down { color: var(--danger); } .up { color: var(--green); } .neutral { color: var(--warn); }
+  .chart-label { font-size: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+  .chart-wrap { position: relative; width: 100%; }
+  .chart-wrap.tall { height: 155px; }
+  .chart-wrap.mid { height: 125px; }
+
+  /* ALERTS */
+  .alerts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .alert { padding: 12px 16px; border-radius: 8px; font-size: 12px; line-height: 1.6; border-left: 3px solid; }
+  .alert.danger { background: var(--danger-bg); border-color: var(--danger); color: #7A1C1C; }
+  .alert.warn { background: var(--warn-bg); border-color: var(--warn); color: #713f12; }
+  .alert strong { font-weight: 600; display: block; margin-bottom: 2px; }
+
+  /* FOOTER */
+  .footer { background: var(--navy); padding: 12px 28px; display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
+  .footer-text { font-size: 10px; color: rgba(255,255,255,0.35); }
+  .footer-brand { font-family: 'DM Serif Display', serif; font-size: 13px; color: var(--gold); letter-spacing: 0.06em; }
+
+  @media (max-width: 900px) {
+    .main, .header { padding: 14px 16px; }
+    .row2, .row3 { grid-template-columns: 1fr; }
+    .alerts { grid-template-columns: 1fr; }
+    .metric-value { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="brand">The Berczy <span>Tavern</span></div>
+    <div class="subtitle">North Star Dashboard &nbsp;·&nbsp; Guest Getter</div>
+  </div>
+  <div class="header-right">
+    <div class="date-val" id="asOfDate">Loading...</div>
+    <div class="date-lbl">4-Week Rolling Average</div>
+    <button class="refresh-btn" onclick="loadData()">↻ Refresh</button>
+  </div>
+</div>
+
+<div class="loading" id="loading">
+  <div class="spinner"></div>
+  <div class="loading-text">Loading live data from Google Sheets...</div>
+</div>
+
+<div id="errorBox" style="display:none;"></div>
+
+<div class="main" id="main">
+  <div class="updated-at" id="updatedAt"></div>
+
+  <div class="row2">
+    <!-- COVERS -->
+    <div class="panel red">
+      <p class="panel-source">OpenTable — All Reserved Covers</p>
+      <div class="metrics-row">
+        <div class="metric">
+          <p class="metric-label">Covers (latest day)</p>
+          <p class="metric-value" id="coversDaily">—</p>
+          <p class="metric-change" id="coversDailyChg">—</p>
+        </div>
+        <div class="metric hl">
+          <p class="metric-label">4W Ave. Rolling Cover</p>
+          <p class="metric-value" id="covers4w">—</p>
+          <p class="metric-change" id="covers4wChg">—</p>
+        </div>
+      </div>
+      <p class="chart-label">Cover by Weeks</p>
+      <div class="chart-wrap tall"><canvas id="c1"></canvas></div>
+    </div>
+
+    <!-- USERS -->
+    <div class="panel amber">
+      <p class="panel-source">Google Analytics 4 — Unique Users</p>
+      <div class="metrics-row">
+        <div class="metric">
+          <p class="metric-label">Users (latest day)</p>
+          <p class="metric-value" id="usersDaily">—</p>
+          <p class="metric-change" id="usersDailyChg">—</p>
+        </div>
+        <div class="metric hl">
+          <p class="metric-label">4W Ave. Rolling User</p>
+          <p class="metric-value" id="users4w">—</p>
+          <p class="metric-change" id="users4wChg">—</p>
+        </div>
+      </div>
+      <p class="chart-label">User by Weeks</p>
+      <div class="chart-wrap tall"><canvas id="c2"></canvas></div>
+    </div>
+  </div>
+
+  <div class="row3">
+    <!-- SPEND -->
+    <div class="panel red">
+      <p class="panel-source">Meta + Google Ads</p>
+      <div class="metrics-row">
+        <div class="metric">
+          <p class="metric-label">Spend (latest day)</p>
+          <p class="metric-value" id="spendDaily">—</p>
+          <p class="metric-change" id="spendDailyChg">—</p>
+        </div>
+        <div class="metric hl">
+          <p class="metric-label">4W Ave. Rolling Spend</p>
+          <p class="metric-value" id="spend4w">—</p>
+          <p class="metric-change" id="spend4wChg">—</p>
+        </div>
+      </div>
+      <p class="chart-label">Spend by Weeks</p>
+      <div class="chart-wrap mid"><canvas id="c3"></canvas></div>
+    </div>
+
+    <!-- SPEND PER COVER -->
+    <div class="panel amber">
+      <p class="panel-source">Spend ÷ All Reserved Covers</p>
+      <div class="metrics-row">
+        <div class="metric">
+          <p class="metric-label">Spend/Cover (latest day)</p>
+          <p class="metric-value" id="spcDaily">—</p>
+          <p class="metric-change" id="spcDailyChg">—</p>
+        </div>
+        <div class="metric hl">
+          <p class="metric-label">4W Rol. Spend/Cover</p>
+          <p class="metric-value" id="spc4w">—</p>
+          <p class="metric-change" id="spc4wChg">—</p>
+        </div>
+      </div>
+      <p class="chart-label">Spend/Cover by Weeks</p>
+      <div class="chart-wrap mid"><canvas id="c4"></canvas></div>
+    </div>
+
+    <!-- COVER PER USER -->
+    <div class="panel blue">
+      <p class="panel-source">Covers ÷ Unique Visitors</p>
+      <div class="metrics-row">
+        <div class="metric">
+          <p class="metric-label">Cover/User (latest day)</p>
+          <p class="metric-value" id="cpuDaily">—</p>
+          <p class="metric-change" id="cpuDailyChg">—</p>
+        </div>
+        <div class="metric hl">
+          <p class="metric-label">4W Rol. Cover/User</p>
+          <p class="metric-value" id="cpu4w">—</p>
+          <p class="metric-change" id="cpu4wChg">—</p>
+        </div>
+      </div>
+      <p class="chart-label">Cover/User by Weeks</p>
+      <div class="chart-wrap mid"><canvas id="c5"></canvas></div>
+    </div>
+  </div>
+
+  <div class="alerts">
+    <div class="alert danger" id="noshowAlert">
+      <strong>⚠ No-Show Rate</strong>
+      Calculating...
+    </div>
+    <div class="alert warn">
+      <strong>⚠ OpenTable Fees Missing from Spend</strong>
+      Add monthly OT marketing cost for true Total Marketing Spend. Current figures = Meta + Google only.
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-text">Prepared by Guest Getter &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; Auto-refreshes on page load</div>
+  <div class="footer-brand">Guest Getter</div>
+</div>
+
+<script>
+const SHEET_ID = '1kH0yrnjAyBW3cEvosnAqfXEYL5u_oXdeT3dMCmcSNzU';
+const API_KEY  = 'AIzaSyCeUel6KGv4-Bd9QIJbpn-XDpUOEbYALgM';
+const SHEET_NAME = 'Facebook'; // Update if sheet tab name is different
+const RANGE = 'Berczy'; // Will try multiple tab names
+
+let charts = {};
+
+// Column indices (0-based) matching the CSV structure:
+// A=0 Date, C=2 FB_spend, K=10 Google_Cost, AA=26 GA_Users, AF=31 OT_Size, AH=33 OT_Covers_Confirmed
+const COL = {
+  date: 0, fb_spend: 2, gg_spend: 10, ga_users: 26, ot_size: 31, ot_confirmed: 33
+};
+
+function cleanNum(val) {
+  if (!val || val === '' || val === '#VALUE!') return 0;
+  return parseFloat(String(val).replace(/[CA$,\s]/g, '')) || 0;
+}
+
+function fmt(n, type) {
+  if (type === 'currency') return 'CA$' + n.toFixed(2);
+  if (type === 'currencyRound') return 'CA$' + Math.round(n);
+  if (type === 'ratio') return n.toFixed(3);
+  if (type === 'int') return Math.round(n).toLocaleString();
+  return n;
+}
+
+function chgHtml(curr, prev, type, lowerBetter = false) {
+  if (!prev || prev === 0) return '<span class="neutral">— no prior data</span>';
+  const pct = ((curr - prev) / prev * 100);
+  const better = lowerBetter ? pct < -5 : pct > 5;
+  const worse  = lowerBetter ? pct > 5  : pct < -5;
+  const cls = better ? 'up' : worse ? 'down' : 'neutral';
+  const arrow = pct > 0 ? '▲' : '▼';
+  return `<span class="${cls}">${arrow} ${Math.abs(pct).toFixed(1)}% vs prior 4W avg</span>`;
+}
+
+async function fetchSheetData() {
+  // Try fetching the first sheet
+  const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/A:AR?key=${API_KEY}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`API error ${res.status}: ${await res.text()}`);
+  const json = await res.json();
+  return json.values;
+}
+
+function processData(rows) {
+  // Find header row
+  let headerIdx = -1;
+  for (let i = 0; i < Math.min(rows.length, 5); i++) {
+    if (rows[i][0] && rows[i][0].toLowerCase().includes('date')) {
+      headerIdx = i; break;
+    }
+  }
+  if (headerIdx === -1) headerIdx = 0;
+
+  const data = [];
+  for (let i = headerIdx + 1; i < rows.length; i++) {
+    const r = rows[i];
+    if (!r[COL.date]) continue;
+    const dateStr = r[COL.date];
+    const d = new Date(dateStr);
+    if (isNaN(d)) continue;
+
+    const fbSpend = cleanNum(r[COL.fb_spend]);
+    const ggSpend = cleanNum(r[COL.gg_spend]);
+    const gaUsers = cleanNum(r[COL.ga_users]);
+    const otSize  = cleanNum(r[COL.ot_size]);
+    const otConf  = cleanNum(r[COL.ot_confirmed]);
+
+    data.push({
+      date: d,
+      dateStr: d.toLocaleDateString('en-CA'),
+      spend: fbSpend + ggSpend,
+      users: gaUsers,
+      covers: otSize,
+      confirmed: otConf,
+    });
+  }
+
+  // Sort by date
+  data.sort((a, b) => a.date - b.date);
+  return data;
+}
+
+function rolling28(data, field) {
+  return data.map((_, i) => {
+    const slice = data.slice(Math.max(0, i - 27), i + 1);
+    const sum = slice.reduce((s, d) => s + (d[field] || 0), 0);
+    return slice.length >= 14 ? sum / 28 : null; // need at least 14 days
+  });
+}
+
+function renderCharts(data) {
+  // Use last 56 days for charts
+  const last56 = data.slice(-56);
+  const labels = last56.map(d => d.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
+
+  const coversD = last56.map(d => d.covers);
+  const usersD  = last56.map(d => d.users);
+  const spendD  = last56.map(d => d.spend);
+
+  // Compute rolling on full dataset, then slice last 56
+  const covers4wFull = rolling28(data, 'covers');
+  const users4wFull  = rolling28(data, 'users');
+  const spend4wFull  = rolling28(data, 'spend');
+
+  const offset = data.length - 56;
+  const covers4w = covers4wFull.slice(offset);
+  const users4w  = users4wFull.slice(offset);
+  const spend4w  = spend4wFull.slice(offset);
+
+  const spcD  = last56.map(d => d.covers > 0 ? Math.min(d.spend / d.covers, 5) : null);
+  const spc4w = covers4w.map((c, i) => c && spend4w[i] ? spend4w[i] / c : null);
+
+  const cpuD  = last56.map(d => d.users > 0 ? Math.min(d.covers / d.users, 1) : null);
+  const cpu4w = covers4w.map((c, i) => c && users4w[i] ? c / users4w[i] : null);
+
+  // Current values (latest day)
+  const latest = data[data.length - 1];
+  const latestDate = latest.date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+  document.getElementById('asOfDate').textContent = `As of ${latestDate} · Auto-refreshed from Google Sheets`;
+  document.getElementById('asOfDate').style.display = 'block';
+
+  // Latest 4W rolling values
+  const lCovers4w = covers4wFull[data.length - 1] || 0;
+  const lUsers4w  = users4wFull[data.length - 1]  || 0;
+  const lSpend4w  = spend4wFull[data.length - 1]  || 0;
+  const lSpc4w    = lCovers4w > 0 ? lSpend4w / lCovers4w : 0;
+  const lCpu4w    = lUsers4w  > 0 ? lCovers4w / lUsers4w  : 0;
+
+  // Prior 4W (28 days ago)
+  const priorIdx = data.length - 29;
+  const pCovers4w = priorIdx >= 0 ? (covers4wFull[priorIdx] || 0) : 0;
+  const pUsers4w  = priorIdx >= 0 ? (users4wFull[priorIdx]  || 0) : 0;
+  const pSpend4w  = priorIdx >= 0 ? (spend4wFull[priorIdx]  || 0) : 0;
+  const pSpc4w    = pCovers4w > 0 ? pSpend4w / pCovers4w : 0;
+  const pCpu4w    = pUsers4w  > 0 ? pCovers4w / pUsers4w  : 0;
+
+  // Prior day
+  const prev = data.length >= 2 ? data[data.length - 2] : null;
+
+  // Update headline KPIs
+  document.getElementById('asOfDate').textContent = `Last updated: ${latestDate} · Live from Google Sheets`;
+
+  // Covers
+  document.getElementById('coversDaily').textContent = fmt(latest.covers, 'int');
+  document.getElementById('coversDailyChg').innerHTML = prev ? chgHtml(latest.covers, prev.covers, 'int') : '';
+  document.getElementById('covers4w').textContent = fmt(lCovers4w, 'int');
+  document.getElementById('covers4wChg').innerHTML = chgHtml(lCovers4w, pCovers4w, 'int');
+
+  // Users
+  document.getElementById('usersDaily').textContent = fmt(latest.users, 'int');
+  document.getElementById('usersDailyChg').innerHTML = prev ? chgHtml(latest.users, prev.users, 'int') : '';
+  document.getElementById('users4w').textContent = fmt(lUsers4w, 'int');
+  document.getElementById('users4wChg').innerHTML = chgHtml(lUsers4w, pUsers4w, 'int');
+
+  // Spend
+  document.getElementById('spendDaily').textContent = 'CA$' + Math.round(latest.spend);
+  document.getElementById('spendDailyChg').innerHTML = prev ? chgHtml(latest.spend, prev.spend, 'currency', true) : '';
+  document.getElementById('spend4w').textContent = 'CA$' + Math.round(lSpend4w);
+  document.getElementById('spend4wChg').innerHTML = chgHtml(lSpend4w, pSpend4w, 'currency', true);
+
+  // Spend/Cover
+  const latestSpc = latest.covers > 0 ? latest.spend / latest.covers : 0;
+  const prevSpc   = (prev && prev.covers > 0) ? prev.spend / prev.covers : 0;
+  document.getElementById('spcDaily').textContent = 'CA$' + latestSpc.toFixed(2);
+  document.getElementById('spcDailyChg').innerHTML = prev ? chgHtml(latestSpc, prevSpc, 'currency', true) : '';
+  document.getElementById('spc4w').textContent = 'CA$' + lSpc4w.toFixed(2);
+  document.getElementById('spc4wChg').innerHTML = chgHtml(lSpc4w, pSpc4w, 'currency', true);
+
+  // Cover/User
+  const latestCpu = latest.users > 0 ? latest.covers / latest.users : 0;
+  const prevCpu   = (prev && prev.users > 0) ? prev.covers / prev.users : 0;
+  document.getElementById('cpuDaily').textContent = latestCpu.toFixed(3);
+  document.getElementById('cpuDailyChg').innerHTML = prev ? chgHtml(latestCpu, prevCpu, 'ratio') : '';
+  document.getElementById('cpu4w').textContent = lCpu4w.toFixed(3);
+  document.getElementById('cpu4wChg').innerHTML = chgHtml(lCpu4w, pCpu4w, 'ratio');
+
+  // No-show alert
+  const last28 = data.slice(-28);
+  const totalRes = last28.reduce((s, d) => s + d.covers, 0);
+  const totalConf = last28.reduce((s, d) => s + d.confirmed, 0);
+  const noshowRate = totalRes > 0 ? ((totalRes - totalConf) / totalRes * 100) : 0;
+  const prior28 = data.slice(-56, -28);
+  const priorRes = prior28.reduce((s, d) => s + d.covers, 0);
+  const priorConf = prior28.reduce((s, d) => s + d.confirmed, 0);
+  const priorNoshow = priorRes > 0 ? ((priorRes - priorConf) / priorRes * 100) : 0;
+  document.getElementById('noshowAlert').innerHTML = `
+    <strong>⚠ No-Show Rate: ${priorNoshow.toFixed(1)}% → ${noshowRate.toFixed(1)}% (last 28 days)</strong>
+    ${Math.round(totalRes - totalConf).toLocaleString()} reserved covers didn't show up. Confirmed seated = ${Math.round(totalConf).toLocaleString()} vs ${Math.round(totalRes).toLocaleString()} reserved. Fix no-shows before increasing ad spend.
+  `;
+
+  // Header date
+  document.getElementById('asOfDate').textContent = latestDate;
+
+  // Draw charts
+  const xO = { ticks:{ font:{size:9}, maxRotation:40, autoSkip:true, maxTicksLimit:7, color:'#9ca3af' }, grid:{ display:false }, border:{ display:false } };
+
+  const mk = (id, daily, rolling, color, fmt_fn, mn, mx) => {
+    if (charts[id]) charts[id].destroy();
+    charts[id] = new Chart(document.getElementById(id), {
+      data:{ labels, datasets:[
+        { type:'line', label:'Daily', data:daily, borderColor:color+'99', backgroundColor:'transparent',
+          borderWidth:1.5, pointRadius:2.5, pointBackgroundColor:color+'99', tension:0.2 },
+        { type:'line', label:'4W Avg', data:rolling, borderColor:color, backgroundColor:color+'15',
+          fill:true, borderWidth:2.5, pointRadius:0, tension:0.4, borderDash:[6,3] },
+      ]},
+      options:{ responsive:true, maintainAspectRatio:false,
+        plugins:{ legend:{ display:true, position:'top', labels:{ font:{size:9}, boxWidth:8, padding:8, usePointStyle:true, color:'#6b7280',
+          generateLabels: () => [
+            { text:'Daily', fillStyle:color+'99', strokeStyle:color+'99', lineWidth:2, pointStyle:'circle' },
+            { text:'4W Avg', fillStyle:color, strokeStyle:color, lineWidth:2, pointStyle:'line', lineDash:[6,3] }
+          ]}},
+          tooltip:{ backgroundColor:'rgba(26,58,92,0.9)', titleColor:'#fff', bodyColor:'rgba(255,255,255,0.8)',
+            borderColor:'rgba(201,168,76,0.3)', borderWidth:1, padding:8, cornerRadius:6,
+            callbacks:{ label: ctx => ' '+ctx.dataset.label+': '+fmt_fn(ctx.parsed.y) }}
+        },
+        scales:{ x:xO, y:{ ticks:{ font:{size:9}, callback:fmt_fn, color:'#9ca3af' }, grid:{ color:'rgba(0,0,0,0.04)' }, border:{ display:false }, min:mn, max:mx } }
+      }
+    });
+  };
+
+  mk('c1', coversD, covers4w, '#cc3333', v => Math.round(v), 0, Math.max(...coversD)*1.1);
+  mk('c2', usersD,  users4w,  '#cc7700', v => Math.round(v).toLocaleString(), 0, Math.max(...usersD)*1.1);
+  mk('c3', spendD,  spend4w,  '#cc3333', v => 'CA$'+Math.round(v), 0, Math.max(...spendD)*1.15);
+  mk('c4', spcD,    spc4w,    '#cc7700', v => 'CA$'+v.toFixed(2), 0, 5);
+  mk('c5', cpuD,    cpu4w,    '#1A3A5C', v => v.toFixed(3), 0, 1);
+}
+
+async function loadData() {
+  document.getElementById('loading').style.display = 'flex';
+  document.getElementById('main').style.display = 'none';
+  document.getElementById('errorBox').style.display = 'none';
+
+  try {
+    const rows = await fetchSheetData();
+    const data = processData(rows);
+    if (data.length === 0) throw new Error('No valid data rows found in sheet.');
+
+    renderCharts(data);
+
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('main').style.display = 'block';
+  } catch (err) {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('errorBox').style.display = 'block';
+    document.getElementById('errorBox').innerHTML = `
+      <div class="error-box">
+        <strong>⚠ Could not load data</strong><br>
+        ${err.message}<br><br>
+        <strong>To fix:</strong> Make sure the Google Sheet is shared as "Anyone with the link can view", then click Refresh.
+      </div>`;
+  }
+}
+
+// Load on page open
+loadData();
+</script>
+</body>
+</html>
