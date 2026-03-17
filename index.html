@@ -18,40 +18,46 @@
   }
   body { background: var(--bg); font-family: 'DM Sans', sans-serif; color: var(--text); min-height: 100vh; }
 
-  /* HEADER */
-  .header { background: var(--navy); padding: 18px 28px; display: flex; align-items: center; justify-content: space-between; border-bottom: 3px solid var(--gold); }
+  .header { background: var(--navy); padding: 18px 28px; display: flex; align-items: center; justify-content: space-between; border-bottom: 3px solid var(--gold); gap: 16px; flex-wrap: wrap; }
+  .header-left { flex: 1; }
   .brand { font-family: 'DM Serif Display', serif; font-size: 20px; color: #fff; letter-spacing: 0.08em; text-transform: uppercase; }
   .brand span { color: var(--gold); }
   .subtitle { font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: 0.05em; text-transform: uppercase; margin-top: 2px; }
-  .header-right { text-align: right; }
-  .date-val { font-size: 13px; font-weight: 500; color: var(--gold); }
-  .date-lbl { font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 2px; }
-  .refresh-btn { margin-top: 6px; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4); color: var(--gold); font-size: 10px; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-family: 'DM Sans', sans-serif; }
-  .refresh-btn:hover { background: rgba(201,168,76,0.25); }
 
-  /* LOADING */
+  /* DATE PICKER AREA */
+  .date-controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .date-label { font-size: 10px; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.05em; }
+  .date-input {
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold); font-size: 13px; font-weight: 500; font-family: 'DM Sans', sans-serif;
+    padding: 6px 12px; border-radius: 6px; cursor: pointer; outline: none;
+    -webkit-appearance: none; appearance: none;
+  }
+  .date-input::-webkit-calendar-picker-indicator { filter: invert(1) sepia(1) saturate(2) hue-rotate(5deg); cursor: pointer; }
+  .date-input:focus { border-color: var(--gold); }
+  .btn { background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4); color: var(--gold); font-size: 11px; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-family: 'DM Sans', sans-serif; white-space: nowrap; }
+  .btn:hover { background: rgba(201,168,76,0.25); }
+  .btn.active { background: var(--gold); color: var(--navy); font-weight: 600; }
+  .quick-btns { display: flex; gap: 6px; }
+
   .loading { display: flex; align-items: center; justify-content: center; min-height: 400px; flex-direction: column; gap: 16px; }
   .spinner { width: 36px; height: 36px; border: 3px solid var(--border); border-top-color: var(--navy); border-radius: 50%; animation: spin 0.8s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
   .loading-text { font-size: 13px; color: var(--text-muted); }
-
-  /* ERROR */
   .error-box { margin: 24px 28px; padding: 16px 20px; background: var(--danger-bg); border-left: 3px solid var(--danger); border-radius: 8px; font-size: 13px; color: #7A1C1C; }
 
-  /* MAIN */
   .main { padding: 20px 28px; display: none; }
-  .updated-at { font-size: 10px; color: var(--text-light); text-align: right; margin-bottom: 12px; }
+  .as-of { font-size: 11px; color: var(--text-light); text-align: right; margin-bottom: 12px; }
 
-  /* ROWS */
   .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
   .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 14px; }
 
-  /* PANEL */
   .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; position: relative; }
   .panel::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 12px 12px 0 0; }
   .panel.red::before { background: var(--red); }
   .panel.amber::before { background: var(--amber); }
   .panel.blue::before { background: var(--blue); }
+
   .panel-source { font-size: 9px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); margin-bottom: 12px; }
   .metrics-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
   .metric { padding: 10px 12px; background: #f8f7f5; border-radius: 8px; border: 1px solid var(--border); }
@@ -61,19 +67,18 @@
   .metric-value { font-size: 26px; font-weight: 600; color: var(--text); line-height: 1; letter-spacing: -0.02em; }
   .metric-change { font-size: 10px; margin-top: 4px; font-weight: 500; }
   .down { color: var(--danger); } .up { color: var(--green); } .neutral { color: var(--warn); }
+
   .chart-label { font-size: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
   .chart-wrap { position: relative; width: 100%; }
   .chart-wrap.tall { height: 155px; }
   .chart-wrap.mid { height: 125px; }
 
-  /* ALERTS */
   .alerts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .alert { padding: 12px 16px; border-radius: 8px; font-size: 12px; line-height: 1.6; border-left: 3px solid; }
   .alert.danger { background: var(--danger-bg); border-color: var(--danger); color: #7A1C1C; }
   .alert.warn { background: var(--warn-bg); border-color: var(--warn); color: #713f12; }
   .alert strong { font-weight: 600; display: block; margin-bottom: 2px; }
 
-  /* FOOTER */
   .footer { background: var(--navy); padding: 12px 28px; display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
   .footer-text { font-size: 10px; color: rgba(255,255,255,0.35); }
   .footer-brand { font-family: 'DM Serif Display', serif; font-size: 13px; color: var(--gold); letter-spacing: 0.06em; }
@@ -83,20 +88,27 @@
     .row2, .row3 { grid-template-columns: 1fr; }
     .alerts { grid-template-columns: 1fr; }
     .metric-value { font-size: 22px; }
+    .date-controls { width: 100%; }
   }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <div>
+  <div class="header-left">
     <div class="brand">The Berczy <span>Tavern</span></div>
     <div class="subtitle">North Star Dashboard &nbsp;·&nbsp; Guest Getter</div>
   </div>
-  <div class="header-right">
-    <div class="date-val" id="asOfDate">Loading...</div>
-    <div class="date-lbl">4-Week Rolling Average</div>
-    <button class="refresh-btn" onclick="loadData()">↻ Refresh</button>
+  <div class="date-controls">
+    <span class="date-label">As of date</span>
+    <input type="date" class="date-input" id="datePicker" />
+    <div class="quick-btns">
+      <button class="btn active" id="btnLatest" onclick="setLatest()">Latest</button>
+      <button class="btn" id="btn7d" onclick="setDaysAgo(7)">-7d</button>
+      <button class="btn" id="btn14d" onclick="setDaysAgo(14)">-14d</button>
+      <button class="btn" id="btn30d" onclick="setDaysAgo(30)">-30d</button>
+    </div>
+    <button class="btn" onclick="loadData()">↻ Refresh</button>
   </div>
 </div>
 
@@ -104,19 +116,17 @@
   <div class="spinner"></div>
   <div class="loading-text">Loading live data from Google Sheets...</div>
 </div>
-
 <div id="errorBox" style="display:none;"></div>
 
 <div class="main" id="main">
-  <div class="updated-at" id="updatedAt"></div>
+  <div class="as-of" id="asOf"></div>
 
   <div class="row2">
-    <!-- COVERS -->
     <div class="panel red">
       <p class="panel-source">OpenTable — All Reserved Covers</p>
       <div class="metrics-row">
         <div class="metric">
-          <p class="metric-label">Covers (latest day)</p>
+          <p class="metric-label">Covers (selected date)</p>
           <p class="metric-value" id="coversDaily">—</p>
           <p class="metric-change" id="coversDailyChg">—</p>
         </div>
@@ -126,16 +136,15 @@
           <p class="metric-change" id="covers4wChg">—</p>
         </div>
       </div>
-      <p class="chart-label">Cover by Weeks</p>
+      <p class="chart-label">Cover by Weeks (trailing 56 days)</p>
       <div class="chart-wrap tall"><canvas id="c1"></canvas></div>
     </div>
 
-    <!-- USERS -->
     <div class="panel amber">
       <p class="panel-source">Google Analytics 4 — Unique Users</p>
       <div class="metrics-row">
         <div class="metric">
-          <p class="metric-label">Users (latest day)</p>
+          <p class="metric-label">Users (selected date)</p>
           <p class="metric-value" id="usersDaily">—</p>
           <p class="metric-change" id="usersDailyChg">—</p>
         </div>
@@ -145,18 +154,17 @@
           <p class="metric-change" id="users4wChg">—</p>
         </div>
       </div>
-      <p class="chart-label">User by Weeks</p>
+      <p class="chart-label">User by Weeks (trailing 56 days)</p>
       <div class="chart-wrap tall"><canvas id="c2"></canvas></div>
     </div>
   </div>
 
   <div class="row3">
-    <!-- SPEND -->
     <div class="panel red">
       <p class="panel-source">Meta + Google Ads</p>
       <div class="metrics-row">
         <div class="metric">
-          <p class="metric-label">Spend (latest day)</p>
+          <p class="metric-label">Spend (selected date)</p>
           <p class="metric-value" id="spendDaily">—</p>
           <p class="metric-change" id="spendDailyChg">—</p>
         </div>
@@ -170,12 +178,11 @@
       <div class="chart-wrap mid"><canvas id="c3"></canvas></div>
     </div>
 
-    <!-- SPEND PER COVER -->
     <div class="panel amber">
       <p class="panel-source">Spend ÷ All Reserved Covers</p>
       <div class="metrics-row">
         <div class="metric">
-          <p class="metric-label">Spend/Cover (latest day)</p>
+          <p class="metric-label">Spend/Cover (selected date)</p>
           <p class="metric-value" id="spcDaily">—</p>
           <p class="metric-change" id="spcDailyChg">—</p>
         </div>
@@ -189,12 +196,11 @@
       <div class="chart-wrap mid"><canvas id="c4"></canvas></div>
     </div>
 
-    <!-- COVER PER USER -->
     <div class="panel blue">
       <p class="panel-source">Covers ÷ Unique Visitors</p>
       <div class="metrics-row">
         <div class="metric">
-          <p class="metric-label">Cover/User (latest day)</p>
+          <p class="metric-label">Cover/User (selected date)</p>
           <p class="metric-value" id="cpuDaily">—</p>
           <p class="metric-change" id="cpuDailyChg">—</p>
         </div>
@@ -210,279 +216,272 @@
   </div>
 
   <div class="alerts">
-    <div class="alert danger" id="noshowAlert">
-      <strong>⚠ No-Show Rate</strong>
-      Calculating...
-    </div>
-    <div class="alert warn">
-      <strong>⚠ OpenTable Fees Missing from Spend</strong>
-      Add monthly OT marketing cost for true Total Marketing Spend. Current figures = Meta + Google only.
-    </div>
+    <div class="alert danger" id="noshowAlert"><strong>⚠ No-Show Rate</strong>Calculating...</div>
+    <div class="alert warn"><strong>⚠ OpenTable Fees Missing from Spend</strong>Add monthly OT marketing cost for true Total Marketing Spend. Current = Meta + Google only.</div>
   </div>
 </div>
 
 <div class="footer">
-  <div class="footer-text">Prepared by Guest Getter &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; Auto-refreshes on page load</div>
+  <div class="footer-text">Prepared by Guest Getter &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; Live from Google Sheets</div>
   <div class="footer-brand">Guest Getter</div>
 </div>
 
 <script>
 const SHEET_ID = '1kH0yrnjAyBW3cEvosnAqfXEYL5u_oXdeT3dMCmcSNzU';
 const API_KEY  = 'AIzaSyCeUel6KGv4-Bd9QIJbpn-XDpUOEbYALgM';
-const SHEET_NAME = 'Facebook'; // Update if sheet tab name is different
-const RANGE = 'Berczy'; // Will try multiple tab names
 
+let allData = [];
 let charts = {};
+let selectedDate = null;
 
-// Column indices (0-based) matching the CSV structure:
-// A=0 Date, C=2 FB_spend, K=10 Google_Cost, AA=26 GA_Users, AF=31 OT_Size, AH=33 OT_Covers_Confirmed
-const COL = {
-  date: 0, fb_spend: 2, gg_spend: 10, ga_users: 26, ot_size: 31, ot_confirmed: 33
-};
+const COL = { date:0, fb_spend:2, gg_spend:10, ga_users:26, ot_size:31, ot_confirmed:33 };
 
-function cleanNum(val) {
-  if (!val || val === '' || val === '#VALUE!') return 0;
-  return parseFloat(String(val).replace(/[CA$,\s]/g, '')) || 0;
+function cleanNum(v) {
+  if (!v || v==='' || v==='#VALUE!') return 0;
+  return parseFloat(String(v).replace(/[CA$,\s]/g,'')) || 0;
 }
 
-function fmt(n, type) {
-  if (type === 'currency') return 'CA$' + n.toFixed(2);
-  if (type === 'currencyRound') return 'CA$' + Math.round(n);
-  if (type === 'ratio') return n.toFixed(3);
-  if (type === 'int') return Math.round(n).toLocaleString();
-  return n;
+function toYMD(d) {
+  return d.toISOString().split('T')[0];
 }
 
-function chgHtml(curr, prev, type, lowerBetter = false) {
-  if (!prev || prev === 0) return '<span class="neutral">— no prior data</span>';
-  const pct = ((curr - prev) / prev * 100);
-  const better = lowerBetter ? pct < -5 : pct > 5;
-  const worse  = lowerBetter ? pct > 5  : pct < -5;
-  const cls = better ? 'up' : worse ? 'down' : 'neutral';
-  const arrow = pct > 0 ? '▲' : '▼';
-  return `<span class="${cls}">${arrow} ${Math.abs(pct).toFixed(1)}% vs prior 4W avg</span>`;
+function fromYMD(s) {
+  const [y,m,d] = s.split('-').map(Number);
+  return new Date(y, m-1, d);
 }
 
-async function fetchSheetData() {
-  // Try fetching the first sheet
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/A:AR?key=${API_KEY}`;
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`API error ${res.status}: ${await res.text()}`);
-  const json = await res.json();
-  return json.values;
-}
-
-function processData(rows) {
-  // Find header row
-  let headerIdx = -1;
-  for (let i = 0; i < Math.min(rows.length, 5); i++) {
-    if (rows[i][0] && rows[i][0].toLowerCase().includes('date')) {
-      headerIdx = i; break;
-    }
-  }
-  if (headerIdx === -1) headerIdx = 0;
-
-  const data = [];
-  for (let i = headerIdx + 1; i < rows.length; i++) {
-    const r = rows[i];
-    if (!r[COL.date]) continue;
-    const dateStr = r[COL.date];
-    const d = new Date(dateStr);
-    if (isNaN(d)) continue;
-
-    const fbSpend = cleanNum(r[COL.fb_spend]);
-    const ggSpend = cleanNum(r[COL.gg_spend]);
-    const gaUsers = cleanNum(r[COL.ga_users]);
-    const otSize  = cleanNum(r[COL.ot_size]);
-    const otConf  = cleanNum(r[COL.ot_confirmed]);
-
-    data.push({
-      date: d,
-      dateStr: d.toLocaleDateString('en-CA'),
-      spend: fbSpend + ggSpend,
-      users: gaUsers,
-      covers: otSize,
-      confirmed: otConf,
-    });
-  }
-
-  // Sort by date
-  data.sort((a, b) => a.date - b.date);
-  return data;
-}
-
-function rolling28(data, field) {
-  return data.map((_, i) => {
-    const slice = data.slice(Math.max(0, i - 27), i + 1);
-    const sum = slice.reduce((s, d) => s + (d[field] || 0), 0);
-    return slice.length >= 14 ? sum / 28 : null; // need at least 14 days
+// Date picker setup
+function initDatePicker() {
+  const picker = document.getElementById('datePicker');
+  picker.addEventListener('change', () => {
+    clearQuickBtns();
+    selectedDate = fromYMD(picker.value);
+    renderForDate(selectedDate);
   });
 }
 
-function renderCharts(data) {
-  // Use last 56 days for charts
-  const last56 = data.slice(-56);
-  const labels = last56.map(d => d.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
+function clearQuickBtns() {
+  ['btnLatest','btn7d','btn14d','btn30d'].forEach(id => document.getElementById(id).classList.remove('active'));
+}
 
-  const coversD = last56.map(d => d.covers);
-  const usersD  = last56.map(d => d.users);
-  const spendD  = last56.map(d => d.spend);
+function setLatest() {
+  clearQuickBtns();
+  document.getElementById('btnLatest').classList.add('active');
+  selectedDate = allData[allData.length-1].date;
+  document.getElementById('datePicker').value = toYMD(selectedDate);
+  renderForDate(selectedDate);
+}
 
-  // Compute rolling on full dataset, then slice last 56
-  const covers4wFull = rolling28(data, 'covers');
-  const users4wFull  = rolling28(data, 'users');
-  const spend4wFull  = rolling28(data, 'spend');
+function setDaysAgo(n) {
+  clearQuickBtns();
+  document.getElementById('btn'+n+'d').classList.add('active');
+  const latest = allData[allData.length-1].date;
+  selectedDate = new Date(latest); selectedDate.setDate(selectedDate.getDate()-n);
+  document.getElementById('datePicker').value = toYMD(selectedDate);
+  renderForDate(selectedDate);
+}
 
-  const offset = data.length - 56;
-  const covers4w = covers4wFull.slice(offset);
-  const users4w  = users4wFull.slice(offset);
-  const spend4w  = spend4wFull.slice(offset);
+function rolling28(data, field, upToIdx) {
+  const slice = data.slice(Math.max(0, upToIdx-27), upToIdx+1);
+  const sum = slice.reduce((s,d) => s+(d[field]||0), 0);
+  return slice.length >= 7 ? sum/28 : null;
+}
 
-  const spcD  = last56.map(d => d.covers > 0 ? Math.min(d.spend / d.covers, 5) : null);
-  const spc4w = covers4w.map((c, i) => c && spend4w[i] ? spend4w[i] / c : null);
+function chgHtml(curr, prev, lowerBetter=false) {
+  if (!prev || prev===0) return '<span class="neutral">— no prior data</span>';
+  const pct = (curr-prev)/prev*100;
+  const better = lowerBetter ? pct<-5 : pct>5;
+  const worse  = lowerBetter ? pct>5  : pct<-5;
+  const cls = better?'up':worse?'down':'neutral';
+  const arrow = pct>0?'▲':'▼';
+  return `<span class="${cls}">${arrow} ${Math.abs(pct).toFixed(1)}% vs prior 4W</span>`;
+}
 
-  const cpuD  = last56.map(d => d.users > 0 ? Math.min(d.covers / d.users, 1) : null);
-  const cpu4w = covers4w.map((c, i) => c && users4w[i] ? c / users4w[i] : null);
+function findIdx(targetDate) {
+  const tStr = toYMD(targetDate);
+  let idx = -1;
+  for (let i=0; i<allData.length; i++) {
+    if (toYMD(allData[i].date) <= tStr) idx = i;
+    else break;
+  }
+  return idx === -1 ? allData.length-1 : idx;
+}
 
-  // Current values (latest day)
-  const latest = data[data.length - 1];
-  const latestDate = latest.date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
-  document.getElementById('asOfDate').textContent = `As of ${latestDate} · Auto-refreshed from Google Sheets`;
-  document.getElementById('asOfDate').style.display = 'block';
+function renderForDate(date) {
+  const idx = findIdx(date);
+  const row = allData[idx];
+  const prev = idx>0 ? allData[idx-1] : null;
+  const priorIdx = Math.max(0, idx-28);
 
-  // Latest 4W rolling values
-  const lCovers4w = covers4wFull[data.length - 1] || 0;
-  const lUsers4w  = users4wFull[data.length - 1]  || 0;
-  const lSpend4w  = spend4wFull[data.length - 1]  || 0;
-  const lSpc4w    = lCovers4w > 0 ? lSpend4w / lCovers4w : 0;
-  const lCpu4w    = lUsers4w  > 0 ? lCovers4w / lUsers4w  : 0;
+  // Compute 4W rolling at idx and at priorIdx
+  const c4w  = rolling28(allData,'covers',idx)  || 0;
+  const u4w  = rolling28(allData,'users',idx)   || 0;
+  const sp4w = rolling28(allData,'spend',idx)   || 0;
+  const pc4w = rolling28(allData,'covers',priorIdx) || 0;
+  const pu4w = rolling28(allData,'users',priorIdx)  || 0;
+  const psp4w= rolling28(allData,'spend',priorIdx)  || 0;
 
-  // Prior 4W (28 days ago)
-  const priorIdx = data.length - 29;
-  const pCovers4w = priorIdx >= 0 ? (covers4wFull[priorIdx] || 0) : 0;
-  const pUsers4w  = priorIdx >= 0 ? (users4wFull[priorIdx]  || 0) : 0;
-  const pSpend4w  = priorIdx >= 0 ? (spend4wFull[priorIdx]  || 0) : 0;
-  const pSpc4w    = pCovers4w > 0 ? pSpend4w / pCovers4w : 0;
-  const pCpu4w    = pUsers4w  > 0 ? pCovers4w / pUsers4w  : 0;
+  const spc4w  = c4w  > 0 ? sp4w/c4w   : 0;
+  const pspc4w = pc4w > 0 ? psp4w/pc4w : 0;
+  const cpu4w  = u4w  > 0 ? c4w/u4w    : 0;
+  const pcpu4w = pu4w > 0 ? pc4w/pu4w  : 0;
 
-  // Prior day
-  const prev = data.length >= 2 ? data[data.length - 2] : null;
+  const dateStr = row.date.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
+  document.getElementById('asOf').textContent = `Showing: ${dateStr} · 4W rolling avg = trailing 28 days · Live from Google Sheets`;
+  document.getElementById('datePicker').value = toYMD(row.date);
 
-  // Update headline KPIs
-  document.getElementById('asOfDate').textContent = `Last updated: ${latestDate} · Live from Google Sheets`;
+  // Daily values
+  const spc = row.covers>0 ? row.spend/row.covers : 0;
+  const cpu = row.users>0  ? row.covers/row.users  : 0;
+  const pSpc = (prev&&prev.covers>0) ? prev.spend/prev.covers : 0;
+  const pCpu = (prev&&prev.users>0)  ? prev.covers/prev.users  : 0;
 
-  // Covers
-  document.getElementById('coversDaily').textContent = fmt(latest.covers, 'int');
-  document.getElementById('coversDailyChg').innerHTML = prev ? chgHtml(latest.covers, prev.covers, 'int') : '';
-  document.getElementById('covers4w').textContent = fmt(lCovers4w, 'int');
-  document.getElementById('covers4wChg').innerHTML = chgHtml(lCovers4w, pCovers4w, 'int');
+  // Set KPIs
+  set('coversDaily', Math.round(row.covers).toLocaleString());
+  set('coversDailyChg', prev ? chgHtml(row.covers,prev.covers) : '');
+  set('covers4w', Math.round(c4w).toLocaleString());
+  set('covers4wChg', chgHtml(c4w,pc4w));
 
-  // Users
-  document.getElementById('usersDaily').textContent = fmt(latest.users, 'int');
-  document.getElementById('usersDailyChg').innerHTML = prev ? chgHtml(latest.users, prev.users, 'int') : '';
-  document.getElementById('users4w').textContent = fmt(lUsers4w, 'int');
-  document.getElementById('users4wChg').innerHTML = chgHtml(lUsers4w, pUsers4w, 'int');
+  set('usersDaily', Math.round(row.users).toLocaleString());
+  set('usersDailyChg', prev ? chgHtml(row.users,prev.users) : '');
+  set('users4w', Math.round(u4w).toLocaleString());
+  set('users4wChg', chgHtml(u4w,pu4w));
 
-  // Spend
-  document.getElementById('spendDaily').textContent = 'CA$' + Math.round(latest.spend);
-  document.getElementById('spendDailyChg').innerHTML = prev ? chgHtml(latest.spend, prev.spend, 'currency', true) : '';
-  document.getElementById('spend4w').textContent = 'CA$' + Math.round(lSpend4w);
-  document.getElementById('spend4wChg').innerHTML = chgHtml(lSpend4w, pSpend4w, 'currency', true);
+  set('spendDaily', 'CA$'+Math.round(row.spend));
+  set('spendDailyChg', prev ? chgHtml(row.spend,prev.spend,true) : '');
+  set('spend4w', 'CA$'+Math.round(sp4w));
+  set('spend4wChg', chgHtml(sp4w,psp4w,true));
 
-  // Spend/Cover
-  const latestSpc = latest.covers > 0 ? latest.spend / latest.covers : 0;
-  const prevSpc   = (prev && prev.covers > 0) ? prev.spend / prev.covers : 0;
-  document.getElementById('spcDaily').textContent = 'CA$' + latestSpc.toFixed(2);
-  document.getElementById('spcDailyChg').innerHTML = prev ? chgHtml(latestSpc, prevSpc, 'currency', true) : '';
-  document.getElementById('spc4w').textContent = 'CA$' + lSpc4w.toFixed(2);
-  document.getElementById('spc4wChg').innerHTML = chgHtml(lSpc4w, pSpc4w, 'currency', true);
+  set('spcDaily', 'CA$'+spc.toFixed(2));
+  set('spcDailyChg', prev ? chgHtml(spc,pSpc,true) : '');
+  set('spc4w', 'CA$'+spc4w.toFixed(2));
+  set('spc4wChg', chgHtml(spc4w,pspc4w,true));
 
-  // Cover/User
-  const latestCpu = latest.users > 0 ? latest.covers / latest.users : 0;
-  const prevCpu   = (prev && prev.users > 0) ? prev.covers / prev.users : 0;
-  document.getElementById('cpuDaily').textContent = latestCpu.toFixed(3);
-  document.getElementById('cpuDailyChg').innerHTML = prev ? chgHtml(latestCpu, prevCpu, 'ratio') : '';
-  document.getElementById('cpu4w').textContent = lCpu4w.toFixed(3);
-  document.getElementById('cpu4wChg').innerHTML = chgHtml(lCpu4w, pCpu4w, 'ratio');
+  set('cpuDaily', cpu.toFixed(3));
+  set('cpuDailyChg', prev ? chgHtml(cpu,pCpu) : '');
+  set('cpu4w', cpu4w.toFixed(3));
+  set('cpu4wChg', chgHtml(cpu4w,pcpu4w));
 
-  // No-show alert
-  const last28 = data.slice(-28);
-  const totalRes = last28.reduce((s, d) => s + d.covers, 0);
-  const totalConf = last28.reduce((s, d) => s + d.confirmed, 0);
-  const noshowRate = totalRes > 0 ? ((totalRes - totalConf) / totalRes * 100) : 0;
-  const prior28 = data.slice(-56, -28);
-  const priorRes = prior28.reduce((s, d) => s + d.covers, 0);
-  const priorConf = prior28.reduce((s, d) => s + d.confirmed, 0);
-  const priorNoshow = priorRes > 0 ? ((priorRes - priorConf) / priorRes * 100) : 0;
-  document.getElementById('noshowAlert').innerHTML = `
-    <strong>⚠ No-Show Rate: ${priorNoshow.toFixed(1)}% → ${noshowRate.toFixed(1)}% (last 28 days)</strong>
-    ${Math.round(totalRes - totalConf).toLocaleString()} reserved covers didn't show up. Confirmed seated = ${Math.round(totalConf).toLocaleString()} vs ${Math.round(totalRes).toLocaleString()} reserved. Fix no-shows before increasing ad spend.
-  `;
+  // No-show
+  const last28 = allData.slice(Math.max(0,idx-27),idx+1);
+  const tRes  = last28.reduce((s,d)=>s+d.covers,0);
+  const tConf = last28.reduce((s,d)=>s+d.confirmed,0);
+  const nsr   = tRes>0 ? (tRes-tConf)/tRes*100 : 0;
+  const prior28 = allData.slice(Math.max(0,priorIdx-27),priorIdx+1);
+  const pRes  = prior28.reduce((s,d)=>s+d.covers,0);
+  const pConf = prior28.reduce((s,d)=>s+d.confirmed,0);
+  const pnsr  = pRes>0 ? (pRes-pConf)/pRes*100 : 0;
+  document.getElementById('noshowAlert').innerHTML = `<strong>⚠ No-Show Rate: ${pnsr.toFixed(1)}% → ${nsr.toFixed(1)}% (trailing 28 days from selected date)</strong>${Math.round(tRes-tConf).toLocaleString()} reserved covers didn't show up. Confirmed seated = ${Math.round(tConf).toLocaleString()} vs ${Math.round(tRes).toLocaleString()} reserved.`;
 
-  // Header date
-  document.getElementById('asOfDate').textContent = latestDate;
+  // Charts — show 56 days ending at selected date
+  const start = Math.max(0, idx-55);
+  const window56 = allData.slice(start, idx+1);
+  const labels = window56.map(d => d.date.toLocaleDateString('en-US',{month:'short',day:'numeric'}));
 
-  // Draw charts
-  const xO = { ticks:{ font:{size:9}, maxRotation:40, autoSkip:true, maxTicksLimit:7, color:'#9ca3af' }, grid:{ display:false }, border:{ display:false } };
+  const coversD = window56.map(d=>d.covers);
+  const usersD  = window56.map(d=>d.users);
+  const spendD  = window56.map(d=>d.spend);
 
-  const mk = (id, daily, rolling, color, fmt_fn, mn, mx) => {
+  const covers4wArr = window56.map((_,i) => rolling28(allData,'covers',start+i));
+  const users4wArr  = window56.map((_,i) => rolling28(allData,'users',start+i));
+  const spend4wArr  = window56.map((_,i) => rolling28(allData,'spend',start+i));
+  const spcDArr  = window56.map(d => d.covers>0 ? Math.min(d.spend/d.covers,5) : null);
+  const spc4wArr = covers4wArr.map((c,i) => c&&spend4wArr[i] ? spend4wArr[i]/c : null);
+  const cpuDArr  = window56.map(d => d.users>0 ? Math.min(d.covers/d.users,1) : null);
+  const cpu4wArr = covers4wArr.map((c,i) => c&&users4wArr[i] ? c/users4wArr[i] : null);
+
+  // Highlight selected date
+  const selI = window56.length-1;
+
+  const xO = { ticks:{font:{size:9},maxRotation:40,autoSkip:true,maxTicksLimit:7,color:'#9ca3af'}, grid:{display:false}, border:{display:false} };
+
+  const mk = (id, daily, rolling, color, fmtFn, mn, mx) => {
     if (charts[id]) charts[id].destroy();
+    const pointR = daily.map((_,i)=>i===selI?5:2);
+    const pointBC = daily.map((_,i)=>i===selI?'#fff':color+'99');
+    const pointBW = daily.map((_,i)=>i===selI?2:0);
     charts[id] = new Chart(document.getElementById(id), {
       data:{ labels, datasets:[
         { type:'line', label:'Daily', data:daily, borderColor:color+'99', backgroundColor:'transparent',
-          borderWidth:1.5, pointRadius:2.5, pointBackgroundColor:color+'99', tension:0.2 },
-        { type:'line', label:'4W Avg', data:rolling, borderColor:color, backgroundColor:color+'15',
+          borderWidth:1.5, pointRadius:pointR, pointBackgroundColor:color+'99',
+          pointBorderColor:pointBC, pointBorderWidth:pointBW, tension:0.2 },
+        { type:'line', label:'4W Avg', data:rolling, borderColor:color, backgroundColor:color+'18',
           fill:true, borderWidth:2.5, pointRadius:0, tension:0.4, borderDash:[6,3] },
       ]},
       options:{ responsive:true, maintainAspectRatio:false,
-        plugins:{ legend:{ display:true, position:'top', labels:{ font:{size:9}, boxWidth:8, padding:8, usePointStyle:true, color:'#6b7280',
-          generateLabels: () => [
-            { text:'Daily', fillStyle:color+'99', strokeStyle:color+'99', lineWidth:2, pointStyle:'circle' },
-            { text:'4W Avg', fillStyle:color, strokeStyle:color, lineWidth:2, pointStyle:'line', lineDash:[6,3] }
+        plugins:{ legend:{display:true,position:'top',labels:{font:{size:9},boxWidth:8,padding:8,usePointStyle:true,color:'#6b7280',
+          generateLabels:()=>[
+            {text:'Daily',fillStyle:color+'99',strokeStyle:color+'99',lineWidth:2,pointStyle:'circle'},
+            {text:'4W Avg',fillStyle:color,strokeStyle:color,lineWidth:2,pointStyle:'line',lineDash:[6,3]}
           ]}},
-          tooltip:{ backgroundColor:'rgba(26,58,92,0.9)', titleColor:'#fff', bodyColor:'rgba(255,255,255,0.8)',
-            borderColor:'rgba(201,168,76,0.3)', borderWidth:1, padding:8, cornerRadius:6,
-            callbacks:{ label: ctx => ' '+ctx.dataset.label+': '+fmt_fn(ctx.parsed.y) }}
+          tooltip:{backgroundColor:'rgba(26,58,92,0.9)',titleColor:'#fff',bodyColor:'rgba(255,255,255,0.8)',
+            borderColor:'rgba(201,168,76,0.3)',borderWidth:1,padding:8,cornerRadius:6,
+            callbacks:{label:ctx=>' '+ctx.dataset.label+': '+fmtFn(ctx.parsed.y)}}
         },
-        scales:{ x:xO, y:{ ticks:{ font:{size:9}, callback:fmt_fn, color:'#9ca3af' }, grid:{ color:'rgba(0,0,0,0.04)' }, border:{ display:false }, min:mn, max:mx } }
+        scales:{ x:xO, y:{ticks:{font:{size:9},callback:fmtFn,color:'#9ca3af'},grid:{color:'rgba(0,0,0,0.04)'},border:{display:false},min:mn,max:mx} }
       }
     });
   };
 
-  mk('c1', coversD, covers4w, '#cc3333', v => Math.round(v), 0, Math.max(...coversD)*1.1);
-  mk('c2', usersD,  users4w,  '#cc7700', v => Math.round(v).toLocaleString(), 0, Math.max(...usersD)*1.1);
-  mk('c3', spendD,  spend4w,  '#cc3333', v => 'CA$'+Math.round(v), 0, Math.max(...spendD)*1.15);
-  mk('c4', spcD,    spc4w,    '#cc7700', v => 'CA$'+v.toFixed(2), 0, 5);
-  mk('c5', cpuD,    cpu4w,    '#1A3A5C', v => v.toFixed(3), 0, 1);
+  mk('c1',coversD,covers4wArr,'#cc3333',v=>Math.round(v),0,Math.max(...coversD.filter(Boolean))*1.15||100);
+  mk('c2',usersD,users4wArr,'#cc7700',v=>Math.round(v).toLocaleString(),0,Math.max(...usersD.filter(Boolean))*1.15||100);
+  mk('c3',spendD,spend4wArr,'#cc3333',v=>'CA$'+Math.round(v),0,Math.max(...spendD.filter(Boolean))*1.15||100);
+  mk('c4',spcDArr,spc4wArr,'#cc7700',v=>v?'CA$'+v.toFixed(2):'',0,5);
+  mk('c5',cpuDArr,cpu4wArr,'#1A3A5C',v=>v?v.toFixed(3):'',0,1);
+}
+
+function set(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = val;
 }
 
 async function loadData() {
-  document.getElementById('loading').style.display = 'flex';
-  document.getElementById('main').style.display = 'none';
-  document.getElementById('errorBox').style.display = 'none';
-
+  document.getElementById('loading').style.display='flex';
+  document.getElementById('main').style.display='none';
+  document.getElementById('errorBox').style.display='none';
   try {
-    const rows = await fetchSheetData();
-    const data = processData(rows);
-    if (data.length === 0) throw new Error('No valid data rows found in sheet.');
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/A:AR?key=${API_KEY}`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`API error ${res.status}: ${await res.text()}`);
+    const json = await res.json();
+    const rows = json.values;
 
-    renderCharts(data);
+    // Find header
+    let hi = 0;
+    for (let i=0;i<Math.min(rows.length,5);i++) { if (rows[i][0]&&rows[i][0].toLowerCase().includes('date')){hi=i;break;} }
 
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById('main').style.display = 'block';
-  } catch (err) {
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById('errorBox').style.display = 'block';
-    document.getElementById('errorBox').innerHTML = `
-      <div class="error-box">
-        <strong>⚠ Could not load data</strong><br>
-        ${err.message}<br><br>
-        <strong>To fix:</strong> Make sure the Google Sheet is shared as "Anyone with the link can view", then click Refresh.
-      </div>`;
+    allData = [];
+    for (let i=hi+1;i<rows.length;i++) {
+      const r=rows[i]; if(!r[COL.date])continue;
+      const d=new Date(r[COL.date]); if(isNaN(d))continue;
+      allData.push({ date:d, spend:cleanNum(r[COL.fb_spend])+cleanNum(r[COL.gg_spend]),
+        users:cleanNum(r[COL.ga_users]), covers:cleanNum(r[COL.ot_size]),
+        confirmed:cleanNum(r[COL.ot_confirmed]) });
+    }
+    allData.sort((a,b)=>a.date-b.date);
+    if (!allData.length) throw new Error('No data found in sheet.');
+
+    // Set date picker min/max
+    const picker=document.getElementById('datePicker');
+    picker.min = toYMD(allData[0].date);
+    picker.max = toYMD(allData[allData.length-1].date);
+
+    // Default to latest
+    selectedDate = allData[allData.length-1].date;
+    picker.value = toYMD(selectedDate);
+    document.getElementById('btnLatest').classList.add('active');
+
+    renderForDate(selectedDate);
+    document.getElementById('loading').style.display='none';
+    document.getElementById('main').style.display='block';
+  } catch(err) {
+    document.getElementById('loading').style.display='none';
+    document.getElementById('errorBox').style.display='block';
+    document.getElementById('errorBox').innerHTML=`<div class="error-box"><strong>⚠ Could not load data</strong><br>${err.message}<br><br><strong>To fix:</strong> Make sure the Google Sheet is shared as "Anyone with the link can view", then click ↻ Refresh.</div>`;
   }
 }
 
-// Load on page open
+initDatePicker();
 loadData();
 </script>
 </body>
