@@ -35,7 +35,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap');
     .logo { display: flex; align-items: center; gap: 16px; }
-    .logo-icon { width: 54px; height: 54px; flex-shrink: 0; }
+    .logo-icon { width: 58px; height: 66px; flex-shrink: 0; }
     .logo-wordmark { display: flex; flex-direction: column; line-height: 1; gap: 2px; }
     .logo-the    { font-family: 'Cormorant Garamond', serif; font-size: 9px;  font-weight: 300; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); }
     .logo-name   { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--text); line-height: 1; }
@@ -178,16 +178,17 @@
 
 <header>
   <div class="logo">
-    <!-- Berczy monogram: thin gold ring + small dot + italic serif B -->
-    <svg class="logo-icon" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Thin outer ring -->
-      <circle cx="27" cy="27" r="25" stroke="#c9a050" stroke-width="0.9" fill="none"/>
-      <!-- Small accent dot upper-left -->
-      <circle cx="11" cy="13" r="2" fill="#c9a050"/>
-      <!-- Elegant italic B -->
-      <text x="29" y="38" text-anchor="middle"
+    <!-- Berczy monogram: dot · italic B · sweeping crescent arc -->
+    <svg class="logo-icon" viewBox="0 0 68 82" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Sweeping crescent arc around right side of B -->
+      <path d="M 20 4 C 82 4, 82 82, 20 82"
+            stroke="#c9a050" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+      <!-- Small dot upper-left -->
+      <circle cx="10" cy="18" r="2.8" fill="#c9a050"/>
+      <!-- Large elegant italic serif B -->
+      <text x="14" y="64"
             font-family="Cormorant Garamond, Georgia, serif"
-            font-size="30" font-weight="400" font-style="italic"
+            font-size="62" font-weight="400" font-style="italic"
             fill="#c9a050">B</text>
     </svg>
     <div class="logo-wordmark">
