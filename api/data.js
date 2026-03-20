@@ -152,8 +152,8 @@ async function processReservations() {
   const times = {}, sizes = {}, monthly = {}, ltSpends = [];
   for (let i = 1; i < lines.length; i++) {
     const col = parseCSVLine(lines[i]);
-    if (!col[0] || !col[0].match(/\d+\/\d+\/\d+/)) continue;
-    const [m, d, y] = col[0].split('/');
+    if (!col[2] || !col[2].match(/\d+\/\d+\/\d+/)) continue; // col[2] = Created Date
+    const [m, d, y] = col[2].split('/');
     if (!y || parseInt(y) < 2020) continue;
     const dt = new Date(parseInt(y), parseInt(m)-1, parseInt(d));
     const dow = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][dt.getDay()];

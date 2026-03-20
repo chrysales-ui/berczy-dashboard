@@ -12,13 +12,13 @@
     "avgLifetimeSpend": 338.41
   },
   "days": {
-    "Mon": 33,
-    "Tue": 2943,
-    "Wed": 3068,
-    "Thu": 3668,
-    "Fri": 5992,
-    "Sat": 8716,
-    "Sun": 5041
+    "Mon": 2101,
+    "Tue": 4001,
+    "Wed": 3845,
+    "Thu": 4189,
+    "Fri": 5495,
+    "Sat": 6198,
+    "Sun": 3632
   },
   "times": [
     {
@@ -315,211 +315,171 @@
   "monthly": [
     {
       "month": "2024-07",
-      "reservations": 800,
-      "covers": 1828,
-      "firstVisit": 332,
-      "cancelled": 81,
+      "reservations": 879,
+      "covers": 2091,
+      "firstVisit": 379,
+      "cancelled": 107,
       "noShow": 5
     },
     {
       "month": "2024-08",
-      "reservations": 1111,
-      "covers": 2826,
-      "firstVisit": 397,
-      "cancelled": 136,
-      "noShow": 17
+      "reservations": 1110,
+      "covers": 3060,
+      "firstVisit": 400,
+      "cancelled": 131,
+      "noShow": 19
     },
     {
       "month": "2024-09",
-      "reservations": 1234,
-      "covers": 3516,
-      "firstVisit": 443,
-      "cancelled": 163,
-      "noShow": 28
+      "reservations": 1286,
+      "covers": 3693,
+      "firstVisit": 472,
+      "cancelled": 177,
+      "noShow": 30
     },
     {
       "month": "2024-10",
-      "reservations": 1487,
-      "covers": 4084,
-      "firstVisit": 489,
-      "cancelled": 173,
-      "noShow": 18
+      "reservations": 1517,
+      "covers": 4284,
+      "firstVisit": 510,
+      "cancelled": 177,
+      "noShow": 15
     },
     {
       "month": "2024-11",
-      "reservations": 1621,
-      "covers": 4631,
-      "firstVisit": 588,
-      "cancelled": 186,
+      "reservations": 1683,
+      "covers": 5041,
+      "firstVisit": 624,
+      "cancelled": 209,
       "noShow": 39
     },
     {
       "month": "2024-12",
-      "reservations": 1509,
-      "covers": 4920,
-      "firstVisit": 656,
-      "cancelled": 219,
-      "noShow": 22
+      "reservations": 1350,
+      "covers": 4028,
+      "firstVisit": 554,
+      "cancelled": 179,
+      "noShow": 23
     },
     {
       "month": "2025-01",
-      "reservations": 1342,
-      "covers": 3723,
-      "firstVisit": 606,
-      "cancelled": 201,
-      "noShow": 26
-    },
-    {
-      "month": "2025-02",
-      "reservations": 1410,
-      "covers": 3786,
-      "firstVisit": 689,
-      "cancelled": 303,
-      "noShow": 35
-    },
-    {
-      "month": "2025-03",
-      "reservations": 1227,
-      "covers": 3581,
-      "firstVisit": 496,
-      "cancelled": 167,
-      "noShow": 18
-    },
-    {
-      "month": "2025-04",
-      "reservations": 1169,
-      "covers": 3476,
-      "firstVisit": 446,
-      "cancelled": 124,
-      "noShow": 24
-    },
-    {
-      "month": "2025-05",
-      "reservations": 1331,
-      "covers": 3757,
-      "firstVisit": 465,
-      "cancelled": 171,
-      "noShow": 31
-    },
-    {
-      "month": "2025-06",
-      "reservations": 994,
-      "covers": 2957,
-      "firstVisit": 365,
-      "cancelled": 124,
-      "noShow": 14
-    },
-    {
-      "month": "2025-07",
-      "reservations": 1376,
-      "covers": 3918,
-      "firstVisit": 507,
-      "cancelled": 171,
-      "noShow": 19
-    },
-    {
-      "month": "2025-08",
-      "reservations": 1449,
-      "covers": 4303,
-      "firstVisit": 473,
-      "cancelled": 156,
+      "reservations": 1658,
+      "covers": 4645,
+      "firstVisit": 801,
+      "cancelled": 296,
       "noShow": 32
     },
     {
-      "month": "2025-09",
-      "reservations": 1422,
-      "covers": 3927,
-      "firstVisit": 490,
-      "cancelled": 144,
+      "month": "2025-02",
+      "reservations": 1183,
+      "covers": 3230,
+      "firstVisit": 544,
+      "cancelled": 231,
+      "noShow": 29
+    },
+    {
+      "month": "2025-03",
+      "reservations": 1212,
+      "covers": 3448,
+      "firstVisit": 484,
+      "cancelled": 164,
+      "noShow": 17
+    },
+    {
+      "month": "2025-04",
+      "reservations": 1192,
+      "covers": 3453,
+      "firstVisit": 459,
+      "cancelled": 123,
       "noShow": 26
     },
     {
-      "month": "2025-10",
-      "reservations": 1475,
-      "covers": 4240,
+      "month": "2025-05",
+      "reservations": 1287,
+      "covers": 3694,
+      "firstVisit": 437,
+      "cancelled": 162,
+      "noShow": 29
+    },
+    {
+      "month": "2025-06",
+      "reservations": 971,
+      "covers": 2993,
+      "firstVisit": 366,
+      "cancelled": 123,
+      "noShow": 15
+    },
+    {
+      "month": "2025-07",
+      "reservations": 1411,
+      "covers": 4480,
+      "firstVisit": 519,
+      "cancelled": 171,
+      "noShow": 22
+    },
+    {
+      "month": "2025-08",
+      "reservations": 1424,
+      "covers": 3857,
+      "firstVisit": 459,
+      "cancelled": 157,
+      "noShow": 30
+    },
+    {
+      "month": "2025-09",
+      "reservations": 1453,
+      "covers": 4127,
       "firstVisit": 501,
-      "cancelled": 188,
-      "noShow": 33
+      "cancelled": 147,
+      "noShow": 28
+    },
+    {
+      "month": "2025-10",
+      "reservations": 1547,
+      "covers": 4678,
+      "firstVisit": 537,
+      "cancelled": 214,
+      "noShow": 36
     },
     {
       "month": "2025-11",
-      "reservations": 2118,
-      "covers": 6165,
-      "firstVisit": 797,
-      "cancelled": 257,
-      "noShow": 42
+      "reservations": 2284,
+      "covers": 7135,
+      "firstVisit": 892,
+      "cancelled": 314,
+      "noShow": 39
     },
     {
       "month": "2025-12",
-      "reservations": 2065,
-      "covers": 6941,
-      "firstVisit": 862,
-      "cancelled": 316,
-      "noShow": 43
+      "reservations": 1857,
+      "covers": 5629,
+      "firstVisit": 743,
+      "cancelled": 253,
+      "noShow": 41
     },
     {
       "month": "2026-01",
-      "reservations": 1690,
-      "covers": 4826,
-      "firstVisit": 715,
-      "cancelled": 260,
-      "noShow": 27
+      "reservations": 1823,
+      "covers": 5280,
+      "firstVisit": 682,
+      "cancelled": 242,
+      "noShow": 25
     },
     {
       "month": "2026-02",
-      "reservations": 1712,
-      "covers": 4667,
-      "firstVisit": 607,
-      "cancelled": 247,
-      "noShow": 20
+      "reservations": 1604,
+      "covers": 4474,
+      "firstVisit": 582,
+      "cancelled": 230,
+      "noShow": 21
     },
     {
       "month": "2026-03",
-      "reservations": 869,
-      "covers": 2855,
-      "firstVisit": 216,
-      "cancelled": 78,
-      "noShow": 8
-    },
-    {
-      "month": "2026-04",
-      "reservations": 42,
-      "covers": 220,
-      "firstVisit": 0,
-      "cancelled": 3,
-      "noShow": 0
-    },
-    {
-      "month": "2026-05",
-      "reservations": 2,
-      "covers": 34,
-      "firstVisit": 0,
-      "cancelled": 0,
-      "noShow": 0
-    },
-    {
-      "month": "2026-06",
-      "reservations": 2,
-      "covers": 88,
-      "firstVisit": 0,
-      "cancelled": 0,
-      "noShow": 0
-    },
-    {
-      "month": "2026-09",
-      "reservations": 1,
-      "covers": 90,
-      "firstVisit": 0,
-      "cancelled": 0,
-      "noShow": 0
-    },
-    {
-      "month": "2026-10",
-      "reservations": 3,
-      "covers": 178,
-      "firstVisit": 0,
-      "cancelled": 0,
-      "noShow": 0
+      "reservations": 730,
+      "covers": 2217,
+      "firstVisit": 195,
+      "cancelled": 61,
+      "noShow": 6
     }
   ]
 }
