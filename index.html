@@ -1084,7 +1084,7 @@ function buildWeekly(daily) {
 function rolling4(arr, key) {
   return arr.map((_, i) => {
     const w = arr.slice(Math.max(0, i - 3), i + 1);
-    return +(w.reduce((s, x) => s + x[key], 0) / w.length).toFixed(2);
+    return +(w.reduce((s, x) => s + x[key], 0) / 4).toFixed(2); // always ÷4
   });
 }
 
