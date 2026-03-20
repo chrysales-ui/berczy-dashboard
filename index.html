@@ -1178,47 +1178,35 @@ function renderRolling() {
   if (!asOfInput.value) asOfInput.value = daily[daily.length - 1].date;
   const asOf = asOfInput.value;
 
-  // 28-day window ending on asOf (the selected date itself is day 28)
-  const win28Start = addDays(asOf, -27);
-  const prevWinEnd = addDays(win28Start, -1);   // day before current window
-  const prevWinStart = addDays(prevWinEnd, -27); // previous 28-day window
+  // Build weekly series (Fri-Thu) and rolling averages — shared for KPIs + charts
+  const weekly  = buildWeeklySeries(daily, asOf);
+  const rolling = build28DayRolling(daily, weekly, asOf);
 
-  // KPI rolling values: sum ÷ 4
-  const curr4 = {
-    covers: sumRange(daily, win28Start, asOf, 'covers') / 4,
-    spend:  sumRange(daily, win28Start, asOf, 'spend')  / 4,
-    users:  sumRange(daily, win28Start, asOf, 'users')  / 4,
-  };
-  const prev4 = {
-    covers: sumRange(daily, prevWinStart, prevWinEnd, 'covers') / 4,
-    spend:  sumRange(daily, prevWinStart, prevWinEnd, 'spend')  / 4,
-    users:  sumRange(daily, prevWinStart, prevWinEnd, 'users')  / 4,
-  };
+  // Current and previous week from Fri-Thu buckets
+  const empty = { covers: 0, spend: 0, users: 0 };
+  const thisWeek = weekly[weekly.length - 1] || empty;
+  const prevWeek = weekly[weekly.length - 2] || empty;
+
+  // Current and previous 4W rolling averages
+  const curr4 = rolling[rolling.length - 1] || empty;
+  const prev4 = rolling[rolling.length - 2] || empty;
+
+  // Derived ratios
   const currSPC = curr4.covers > 0 ? curr4.spend / curr4.covers : 0;
   const prevSPC = prev4.covers > 0 ? prev4.spend / prev4.covers : 0;
   const currCPU = curr4.users  > 0 ? curr4.covers / curr4.users : 0;
   const prevCPU = prev4.users  > 0 ? prev4.covers / prev4.users : 0;
   const currSPU = curr4.users  > 0 ? curr4.spend  / curr4.users : 0;
   const prevSPU = prev4.users  > 0 ? prev4.spend  / prev4.users : 0;
+  const twSPC = thisWeek.covers > 0 ? thisWeek.spend/thisWeek.covers : 0;
+  const twCPU = thisWeek.users  > 0 ? thisWeek.covers/thisWeek.users : 0;
+  const twSPU = thisWeek.users  > 0 ? thisWeek.spend/thisWeek.users  : 0;
+  const pwSPC = prevWeek.covers > 0 ? prevWeek.spend/prevWeek.covers : 0;
+  const pwCPU = prevWeek.users  > 0 ? prevWeek.covers/prevWeek.users : 0;
+  const pwSPU = prevWeek.users  > 0 ? prevWeek.spend/prevWeek.users  : 0;
 
-  // "Current week" = last 7 days ending on asOf
-  const weekStart = addDays(asOf, -6);
-  const thisWeek = {
-    covers: sumRange(daily, weekStart, asOf, 'covers'),
-    spend:  sumRange(daily, weekStart, asOf, 'spend'),
-    users:  sumRange(daily, weekStart, asOf, 'users'),
-  };
-
-  // "Previous week" = 7 days before current week
-  const prevWeekEnd   = addDays(weekStart, -1);
-  const prevWeekStart = addDays(prevWeekEnd, -6);
-  const prevWeek = {
-    covers: sumRange(daily, prevWeekStart, prevWeekEnd, 'covers'),
-    spend:  sumRange(daily, prevWeekStart, prevWeekEnd, 'spend'),
-    users:  sumRange(daily, prevWeekStart, prevWeekEnd, 'users'),
-  };
-
-  // Update window label
+  // 28-day window label
+  const win28Start = addDays(asOf, -27);
   document.getElementById('rollingWindowLabel').textContent =
     `28-day window: ${win28Start} → ${asOf}`;
 
@@ -1226,13 +1214,6 @@ function renderRolling() {
   const n  = v => Math.round(v).toLocaleString();
   const d2 = v => '$' + (+v).toFixed(2);
   const p3 = v => (+v).toFixed(3);
-
-  const twSPC = thisWeek.covers > 0 ? thisWeek.spend/thisWeek.covers : 0;
-  const twCPU = thisWeek.users  > 0 ? thisWeek.covers/thisWeek.users : 0;
-  const twSPU = thisWeek.users  > 0 ? thisWeek.spend/thisWeek.users  : 0;
-  const pwSPC = prevWeek.covers > 0 ? prevWeek.spend/prevWeek.covers : 0;
-  const pwCPU = prevWeek.users  > 0 ? prevWeek.covers/prevWeek.users : 0;
-  const pwSPU = prevWeek.users  > 0 ? prevWeek.spend/prevWeek.users  : 0;
 
   document.getElementById('rolling-kpis').innerHTML = [
     rollingKpi('🍽️','rgba(79,142,247,0.2)', 'Covers',        thisWeek.covers, n,  prevWeek.covers, curr4.covers, n,  prev4.covers),
@@ -1242,10 +1223,6 @@ function renderRolling() {
     rollingKpi('🔄','rgba(167,139,250,0.2)', 'Cover / User',  twCPU,           p3, pwCPU,           currCPU,      p3, prevCPU),
     rollingKpi('📈','rgba(242,107,107,0.2)', 'Spend / User',  twSPU,           p3, pwSPU,           currSPU,      p3, prevSPU),
   ].join('');
-
-  // Charts: weekly buckets + 28-day rolling avg line
-  const weekly  = buildWeeklySeries(daily, asOf);
-  const rolling = build28DayRolling(daily, weekly, asOf);
 
   const wLabels = weekly.map(w => {
     const d = new Date(w.week + 'T00:00:00');
