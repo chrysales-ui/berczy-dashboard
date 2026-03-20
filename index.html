@@ -7,18 +7,18 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     :root {
-      --bg: #0d1b12;
-      --card: #142019;
-      --card2: #1c2d22;
-      --border: #2a4233;
+      --bg: #1b3025;
+      --card: #243d2e;
+      --card2: #2d4d3a;
+      --border: #3d6650;
       --accent: #c9a050;
       --accent2: #a8833c;
-      --blue: #4f8ef7;
+      --blue: #6aadff;
       --green: #3ecf8e;
       --red: #f26b6b;
-      --purple: #a78bfa;
-      --text: #f0ede4;
-      --muted: #8aaa95;
+      --purple: #b39dfa;
+      --text: #f5f2ea;
+      --muted: #a8c4b4;
       --radius: 12px;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,7 +26,7 @@
 
     /* ── Header ── */
     header {
-      background: linear-gradient(135deg, #1c2d22 0%, #0d1b12 100%);
+      background: linear-gradient(135deg, #2d4d3a 0%, #1b3025 100%);
       border-bottom: 1px solid var(--border);
       padding: 20px 32px;
       display: flex; align-items: center; justify-content: space-between;
@@ -544,7 +544,7 @@ function updateRangeInfo() {
 
 // ── Chart defaults ─────────────────────────────────────────────────────────
 Chart.defaults.color = '#8b8fa8';
-Chart.defaults.borderColor = '#2a4233';
+Chart.defaults.borderColor = '#3d6650';
 Chart.defaults.font.family = 'Inter, system-ui, sans-serif';
 
 function mkChart(id, config) {
