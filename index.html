@@ -1092,11 +1092,16 @@ function renderEmail() {
 
 // ── 4W Rolling ────────────────────────────────────────────────────────────
 
-// Add/subtract days from a YYYY-MM-DD string
+// Convert a local Date to YYYY-MM-DD without UTC shift
+function localStr(d) {
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+// Add/subtract days from a YYYY-MM-DD string (stays in local time)
 function addDays(dateStr, n) {
-  const d = new Date(dateStr + 'T00:00:00');
+  const d = new Date(dateStr + 'T12:00:00'); // noon avoids DST/UTC-midnight shift
   d.setDate(d.getDate() + n);
-  return d.toISOString().slice(0, 10);
+  return localStr(d);
 }
 
 // Sum a key over daily rows in [fromDate, toDate] inclusive
@@ -1111,11 +1116,11 @@ function buildWeeklySeries(daily, asOfDate) {
   const filtered = daily.filter(d => d.date <= asOfDate);
   const weeks = {};
   filtered.forEach(d => {
-    const dt  = new Date(d.date + 'T00:00:00');
+    const dt  = new Date(d.date + 'T12:00:00'); // noon avoids UTC midnight shift
     const day = dt.getDay(); // 0=Sun,1=Mon,...,5=Fri,6=Sat
     const fri = new Date(dt);
     fri.setDate(dt.getDate() - (day - 5 + 7) % 7); // rewind to most recent Friday
-    const key = fri.toISOString().slice(0, 10);
+    const key = localStr(fri);
     if (!weeks[key]) weeks[key] = { week: key, covers: 0, spend: 0, users: 0 };
     weeks[key].covers += d.covers;
     weeks[key].spend  += d.spend;
@@ -1182,10 +1187,21 @@ function renderRolling() {
   const weekly  = buildWeeklySeries(daily, asOf);
   const rolling = build28DayRolling(daily, weekly, asOf);
 
-  // Current and previous week from Fri-Thu buckets
+  // Current week = last 7 days ending on asOf; prev week = 7 days before that
   const empty = { covers: 0, spend: 0, users: 0 };
-  const thisWeek = weekly[weekly.length - 1] || empty;
-  const prevWeek = weekly[weekly.length - 2] || empty;
+  const weekStart     = addDays(asOf, -6);
+  const prevWeekEnd   = addDays(weekStart, -1);
+  const prevWeekStart = addDays(prevWeekEnd, -6);
+  const thisWeek = {
+    covers: sumRange(daily, weekStart, asOf, 'covers'),
+    spend:  sumRange(daily, weekStart, asOf, 'spend'),
+    users:  sumRange(daily, weekStart, asOf, 'users'),
+  };
+  const prevWeek = {
+    covers: sumRange(daily, prevWeekStart, prevWeekEnd, 'covers'),
+    spend:  sumRange(daily, prevWeekStart, prevWeekEnd, 'spend'),
+    users:  sumRange(daily, prevWeekStart, prevWeekEnd, 'users'),
+  };
 
   // Current and previous 4W rolling averages
   const curr4 = rolling[rolling.length - 1] || empty;
@@ -1224,8 +1240,10 @@ function renderRolling() {
     rollingKpi('📈','rgba(242,107,107,0.2)', 'Spend / User',  twSPU,           p3, pwSPU,           currSPU,      p3, prevSPU),
   ].join('');
 
-  const wLabels = weekly.map(w => {
-    const d = new Date(w.week + 'T00:00:00');
+  // Label each bar by its Thursday end date (week ending X); last bucket uses asOf
+  const wLabels = weekly.map((w, i) => {
+    const end = i === weekly.length - 1 ? asOf : addDays(w.week, 6);
+    const d = new Date(end + 'T12:00:00');
     return `${d.toLocaleString('default',{month:'short'})} ${d.getDate()}`;
   });
 
