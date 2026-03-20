@@ -1,0 +1,79 @@
+{
+  "monthly": [
+    {
+      "month": "2025-10",
+      "total": 5719,
+      "delivered": 3468,
+      "opened": 1798,
+      "clicked": 221,
+      "unsubscribed": 231,
+      "replied": 1,
+      "openRate": 31.4,
+      "clickRate": 3.9,
+      "unsubRate": 4
+    },
+    {
+      "month": "2025-11",
+      "total": 5481,
+      "delivered": 3403,
+      "opened": 1676,
+      "clicked": 265,
+      "unsubscribed": 137,
+      "replied": 0,
+      "openRate": 30.6,
+      "clickRate": 4.8,
+      "unsubRate": 2.5
+    },
+    {
+      "month": "2025-12",
+      "total": 18984,
+      "delivered": 12860,
+      "opened": 5357,
+      "clicked": 411,
+      "unsubscribed": 322,
+      "replied": 34,
+      "openRate": 28.2,
+      "clickRate": 2.2,
+      "unsubRate": 1.7
+    },
+    {
+      "month": "2026-01",
+      "total": 10935,
+      "delivered": 8240,
+      "opened": 2302,
+      "clicked": 274,
+      "unsubscribed": 116,
+      "replied": 3,
+      "openRate": 21.1,
+      "clickRate": 2.5,
+      "unsubRate": 1.1
+    }
+  ],
+  "subscribersByMonth": [
+    {
+      "month": "2025-08",
+      "count": 161
+    },
+    {
+      "month": "2025-09",
+      "count": 1846
+    },
+    {
+      "month": "2025-10",
+      "count": 3849
+    },
+    {
+      "month": "2025-11",
+      "count": 7
+    },
+    {
+      "month": "2025-12",
+      "count": 509
+    },
+    {
+      "month": "2026-01",
+      "count": 1
+    }
+  ],
+  "totalSubscribers": 6373
+}

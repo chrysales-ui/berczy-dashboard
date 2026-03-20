@@ -1,0 +1,13 @@
+{
+  "name": "berczy-dashboard",
+  "version": "1.0.0",
+  "description": "The Berczy Tavern - Guest Getter Analytics Dashboard",
+  "main": "fetch-data.js",
+  "scripts": {
+    "fetch": "node fetch-data.js",
+    "dev": "npx serve . -p 3000"
+  },
+  "dependencies": {
+    "node-fetch": "^2.7.0"
+  }
+}

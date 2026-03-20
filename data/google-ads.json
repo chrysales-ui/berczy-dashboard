@@ -1,0 +1,255 @@
+{
+  "monthly": [
+    {
+      "month": "2024-07",
+      "spend": 88.8,
+      "impressions": 1403,
+      "clicks": 56,
+      "reservations": 0,
+      "calls": 0,
+      "ctr": 3.99,
+      "cpc": 1.59,
+      "costPerRes": 0
+    },
+    {
+      "month": "2024-08",
+      "spend": 3158.7599999999993,
+      "impressions": 708552,
+      "clicks": 10275,
+      "reservations": 0,
+      "calls": 1,
+      "ctr": 1.45,
+      "cpc": 0.31,
+      "costPerRes": 0
+    },
+    {
+      "month": "2024-09",
+      "spend": 5354.899999999998,
+      "impressions": 4197367,
+      "clicks": 37927,
+      "reservations": 0,
+      "calls": 0,
+      "ctr": 0.9,
+      "cpc": 0.14,
+      "costPerRes": 0
+    },
+    {
+      "month": "2024-10",
+      "spend": 2342.2399999999993,
+      "impressions": 2335770,
+      "clicks": 20428,
+      "reservations": 0,
+      "calls": 1,
+      "ctr": 0.87,
+      "cpc": 0.11,
+      "costPerRes": 0
+    },
+    {
+      "month": "2024-11",
+      "spend": 2737.2600000000007,
+      "impressions": 3548594,
+      "clicks": 22886,
+      "reservations": 0,
+      "calls": 3,
+      "ctr": 0.64,
+      "cpc": 0.12,
+      "costPerRes": 0
+    },
+    {
+      "month": "2024-12",
+      "spend": 2736.9399999999996,
+      "impressions": 3074890,
+      "clicks": 22348,
+      "reservations": 0,
+      "calls": 2,
+      "ctr": 0.73,
+      "cpc": 0.12,
+      "costPerRes": 0
+    },
+    {
+      "month": "2025-01",
+      "spend": 2312.27,
+      "impressions": 2653003,
+      "clicks": 27016,
+      "reservations": 0,
+      "calls": 0,
+      "ctr": 1.02,
+      "cpc": 0.09,
+      "costPerRes": 0
+    },
+    {
+      "month": "2025-02",
+      "spend": 1949.9599999999996,
+      "impressions": 1346521,
+      "clicks": 16272,
+      "reservations": 0,
+      "calls": 1,
+      "ctr": 1.21,
+      "cpc": 0.12,
+      "costPerRes": 0
+    },
+    {
+      "month": "2025-05",
+      "spend": 1471.2799999999997,
+      "impressions": 458227,
+      "clicks": 4649,
+      "reservations": 0,
+      "calls": 1,
+      "ctr": 1.01,
+      "cpc": 0.32,
+      "costPerRes": 0
+    },
+    {
+      "month": "2025-06",
+      "spend": 3945.689999999999,
+      "impressions": 1090710,
+      "clicks": 11761,
+      "reservations": 0,
+      "calls": 10,
+      "ctr": 1.08,
+      "cpc": 0.34,
+      "costPerRes": 0
+    },
+    {
+      "month": "2025-07",
+      "spend": 4550.75,
+      "impressions": 1205302,
+      "clicks": 17077,
+      "reservations": 0,
+      "calls": 29,
+      "ctr": 1.42,
+      "cpc": 0.27,
+      "costPerRes": 0
+    },
+    {
+      "month": "2025-08",
+      "spend": 4543.220000000001,
+      "impressions": 1125938,
+      "clicks": 21127,
+      "reservations": 0,
+      "calls": 14,
+      "ctr": 1.88,
+      "cpc": 0.22,
+      "costPerRes": 0
+    },
+    {
+      "month": "2025-09",
+      "spend": 4193.46,
+      "impressions": 684281,
+      "clicks": 14610,
+      "reservations": 65,
+      "calls": 21,
+      "ctr": 2.14,
+      "cpc": 0.29,
+      "costPerRes": 64.51
+    },
+    {
+      "month": "2025-10",
+      "spend": 3035.3100000000013,
+      "impressions": 487769,
+      "clicks": 11702,
+      "reservations": 100,
+      "calls": 19,
+      "ctr": 2.4,
+      "cpc": 0.26,
+      "costPerRes": 30.35
+    },
+    {
+      "month": "2025-11",
+      "spend": 3014.4099999999994,
+      "impressions": 516401,
+      "clicks": 12345,
+      "reservations": 176,
+      "calls": 47,
+      "ctr": 2.39,
+      "cpc": 0.24,
+      "costPerRes": 17.13
+    },
+    {
+      "month": "2025-12",
+      "spend": 3002.3299999999995,
+      "impressions": 550750,
+      "clicks": 10973,
+      "reservations": 183,
+      "calls": 50,
+      "ctr": 1.99,
+      "cpc": 0.27,
+      "costPerRes": 16.41
+    },
+    {
+      "month": "2026-01",
+      "spend": 3040.8100000000004,
+      "impressions": 512020,
+      "clicks": 9722,
+      "reservations": 175,
+      "calls": 39,
+      "ctr": 1.9,
+      "cpc": 0.31,
+      "costPerRes": 17.38
+    },
+    {
+      "month": "2026-02",
+      "spend": 2977.9399999999996,
+      "impressions": 488260,
+      "clicks": 9818,
+      "reservations": 157,
+      "calls": 54,
+      "ctr": 2.01,
+      "cpc": 0.3,
+      "costPerRes": 18.97
+    },
+    {
+      "month": "2026-03",
+      "spend": 1403.9900000000005,
+      "impressions": 214125,
+      "clicks": 5371,
+      "reservations": 89,
+      "calls": 16,
+      "ctr": 2.51,
+      "cpc": 0.26,
+      "costPerRes": 15.78
+    }
+  ],
+  "campaigns": [
+    {
+      "name": "TBT-Phase-1-Search-Campaign",
+      "spend": 9064.429999999998,
+      "clicks": 20302,
+      "impressions": 501726,
+      "reservations": 0,
+      "calls": 5,
+      "cpc": 0.45,
+      "costPerRes": 0
+    },
+    {
+      "name": "GG | PMAX - Table Reservation",
+      "spend": 42822.16999999999,
+      "clicks": 258332,
+      "impressions": 24500540,
+      "reservations": 873,
+      "calls": 284,
+      "cpc": 0.17,
+      "costPerRes": 49.05
+    },
+    {
+      "name": "GG | Search - Table Reservation",
+      "spend": 3676.470000000001,
+      "clicks": 7281,
+      "impressions": 195998,
+      "reservations": 54,
+      "calls": 12,
+      "cpc": 0.5,
+      "costPerRes": 68.08
+    },
+    {
+      "name": "GG | Search - Brand",
+      "spend": 297.25,
+      "clicks": 448,
+      "impressions": 1619,
+      "reservations": 18,
+      "calls": 7,
+      "cpc": 0.66,
+      "costPerRes": 16.51
+    }
+  ]
+}

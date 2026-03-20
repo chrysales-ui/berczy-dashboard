@@ -1,0 +1,47 @@
+[
+  {
+    "month": "2025-08",
+    "spend": 428.28,
+    "impressions": 68888,
+    "clicks": 1158,
+    "leads": 0,
+    "ctr": 1.68,
+    "costPerLead": 0
+  },
+  {
+    "month": "2025-09",
+    "spend": 766.14,
+    "impressions": 36357,
+    "clicks": 986,
+    "leads": 0,
+    "ctr": 2.71,
+    "costPerLead": 0
+  },
+  {
+    "month": "2025-10",
+    "spend": 1482.3800000000006,
+    "impressions": 28493,
+    "clicks": 1139,
+    "leads": 16,
+    "ctr": 4,
+    "costPerLead": 92.65
+  },
+  {
+    "month": "2025-11",
+    "spend": 1521.3799999999999,
+    "impressions": 33254,
+    "clicks": 1226,
+    "leads": 15,
+    "ctr": 3.69,
+    "costPerLead": 101.43
+  },
+  {
+    "month": "2025-12",
+    "spend": 717.75,
+    "impressions": 12694,
+    "clicks": 547,
+    "leads": 5,
+    "ctr": 4.31,
+    "costPerLead": 143.55
+  }
+]

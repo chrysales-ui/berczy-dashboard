@@ -1,0 +1,54 @@
+name: Update Dashboard Data
+
+on:
+  schedule:
+    # Daily at 6:00 AM UTC (2 AM EST / 1 AM CST)
+    - cron: '0 6 * * *'
+    # Weekly summary on Monday at 7:00 AM UTC
+    - cron: '0 7 * * 1'
+    # Monthly on the 1st at 8:00 AM UTC
+    - cron: '0 8 1 * *'
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason for manual run'
+        required: false
+        default: 'On-demand refresh'
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch latest data from Google Sheets
+        run: node fetch-data.js
+
+      - name: Check for changes
+        id: changes
+        run: |
+          git diff --quiet data/ || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push updated data
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/
+          git commit -m "chore: auto-update dashboard data [$(date -u '+%Y-%m-%d %H:%M UTC')]"
+          git push
+
+      - name: No changes detected
+        if: steps.changes.outputs.changed != 'true'
+        run: echo "Data unchanged since last run — no commit needed."

@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Berczy Tavern — Analytics Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --card: #1a1d27;
+      --card2: #222536;
+      --border: #2e3148;
+      --accent: #f5a623;
+      --accent2: #e8734a;
+      --blue: #4f8ef7;
+      --green: #3ecf8e;
+      --red: #f26b6b;
+      --purple: #a78bfa;
+      --text: #e8eaf0;
+      --muted: #8b8fa8;
+      --radius: 12px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; min-height: 100vh; }
+
+    /* ── Header ── */
+    header {
+      background: linear-gradient(135deg, #1a1d27 0%, #0f1117 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .logo { display: flex; align-items: center; gap: 12px; }
+    .logo-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent), var(--accent2)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+    .logo h1 { font-size: 18px; font-weight: 700; color: var(--text); }
+    .logo p { font-size: 12px; color: var(--muted); margin-top: 1px; }
+    .header-right { display: flex; align-items: center; gap: 16px; }
+    .last-updated { font-size: 12px; color: var(--muted); }
+    .refresh-btn { background: var(--card2); border: 1px solid var(--border); color: var(--text); padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 13px; transition: all 0.2s; }
+    .refresh-btn:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+
+    /* ── Nav ── */
+    nav { background: var(--card); border-bottom: 1px solid var(--border); padding: 0 32px; display: flex; gap: 4px; overflow-x: auto; }
+    .tab-btn { padding: 14px 20px; font-size: 13px; font-weight: 500; color: var(--muted); background: none; border: none; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
+    .tab-btn:hover { color: var(--text); }
+    .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    /* ── Main ── */
+    main { padding: 28px 32px; max-width: 1440px; margin: 0 auto; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ── KPI Cards ── */
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 28px; }
+    .kpi-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+    .kpi-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .kpi-value { font-size: 28px; font-weight: 700; color: var(--text); }
+    .kpi-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .kpi-change { font-size: 12px; margin-top: 6px; }
+    .kpi-change.up { color: var(--green); }
+    .kpi-change.down { color: var(--red); }
+
+    /* ── Charts ── */
+    .chart-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 20px; margin-bottom: 28px; }
+    .chart-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+    .chart-card.full { grid-column: 1 / -1; }
+    .chart-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .chart-subtitle { font-size: 12px; color: var(--muted); margin-bottom: 20px; }
+    .chart-wrap { position: relative; height: 260px; }
+
+    /* ── Insights ── */
+    .insights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 28px; }
+    .insight-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; border-left: 4px solid var(--border); }
+    .insight-card.positive { border-left-color: var(--green); }
+    .insight-card.warning { border-left-color: var(--red); }
+    .insight-card.opportunity { border-left-color: var(--accent); }
+    .insight-card.info { border-left-color: var(--blue); }
+    .insight-title { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    .insight-body { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    /* ── Section titles ── */
+    .section-title { font-size: 16px; font-weight: 700; margin-bottom: 16px; color: var(--text); display: flex; align-items: center; gap: 8px; }
+    .section-title span { font-size: 11px; color: var(--muted); font-weight: 400; }
+
+    /* ── Tables ── */
+    .table-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 28px; }
+    .table-card table { width: 100%; border-collapse: collapse; }
+    .table-card th { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); background: var(--card2); }
+    .table-card td { font-size: 13px; padding: 11px 16px; border-bottom: 1px solid rgba(46,49,72,0.5); }
+    .table-card tr:last-child td { border-bottom: none; }
+    .table-card tr:hover td { background: rgba(255,255,255,0.02); }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+    .badge.green { background: rgba(62,207,142,0.15); color: var(--green); }
+    .badge.red { background: rgba(242,107,107,0.15); color: var(--red); }
+    .badge.yellow { background: rgba(245,166,35,0.15); color: var(--accent); }
+    .badge.blue { background: rgba(79,142,247,0.15); color: var(--blue); }
+
+    /* ── Funnel ── */
+    .funnel { display: flex; flex-direction: column; gap: 8px; }
+    .funnel-row { display: flex; align-items: center; gap: 12px; }
+    .funnel-label { font-size: 13px; width: 140px; flex-shrink: 0; }
+    .funnel-bar-wrap { flex: 1; background: var(--card2); border-radius: 6px; height: 28px; overflow: hidden; }
+    .funnel-bar { height: 100%; border-radius: 6px; display: flex; align-items: center; padding-left: 10px; font-size: 12px; font-weight: 600; transition: width 0.8s ease; }
+    .funnel-count { font-size: 13px; color: var(--muted); width: 50px; text-align: right; flex-shrink: 0; }
+
+    /* ── Loading ── */
+    .loading { display: flex; align-items: center; justify-content: center; height: 200px; color: var(--muted); font-size: 14px; gap: 10px; }
+    .spinner { width: 20px; height: 20px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Donut row ── */
+    .donut-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 28px; }
+    .donut-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; text-align: center; }
+    .donut-wrap { position: relative; height: 180px; }
+    .donut-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
+    .donut-center .val { font-size: 24px; font-weight: 700; }
+    .donut-center .lbl { font-size: 11px; color: var(--muted); }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      header { padding: 14px 16px; }
+      main { padding: 16px; }
+      nav { padding: 0 16px; }
+      .chart-grid { grid-template-columns: 1fr; }
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">🍺</div>
+    <div>
+      <h1>The Berczy Tavern</h1>
+      <p>Guest Getter Analytics</p>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="last-updated" id="lastUpdated">Loading...</span>
+    <button class="refresh-btn" onclick="loadData()">↻ Refresh</button>
+  </div>
+</header>
+
+<nav>
+  <button class="tab-btn active" onclick="switchTab('overview', this)">Overview</button>
+  <button class="tab-btn" onclick="switchTab('insights', this)">💡 Insights</button>
+  <button class="tab-btn" onclick="switchTab('facebook', this)">Facebook Ads</button>
+  <button class="tab-btn" onclick="switchTab('google', this)">Google Ads</button>
+  <button class="tab-btn" onclick="switchTab('reservations', this)">Reservations</button>
+  <button class="tab-btn" onclick="switchTab('events', this)">Private Events</button>
+  <button class="tab-btn" onclick="switchTab('email', this)">Email</button>
+</nav>
+
+<main>
+
+  <!-- ══ OVERVIEW ══════════════════════════════════════════════════════════ -->
+  <div id="tab-overview" class="tab-content active">
+    <div class="kpi-grid" id="kpi-overview">
+      <div class="loading"><div class="spinner"></div> Loading...</div>
+    </div>
+    <div class="chart-grid">
+      <div class="chart-card full">
+        <div class="chart-title">Monthly Covers & Ad Spend</div>
+        <div class="chart-subtitle">Covers served vs total marketing spend per month</div>
+        <div class="chart-wrap"><canvas id="chart-coversSpend"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Cost Per Cover</div>
+        <div class="chart-subtitle">Marketing spend ÷ covers</div>
+        <div class="chart-wrap"><canvas id="chart-costPerCover"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Website Users</div>
+        <div class="chart-subtitle">Monthly unique visitors</div>
+        <div class="chart-wrap"><canvas id="chart-users"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ INSIGHTS ══════════════════════════════════════════════════════════ -->
+  <div id="tab-insights" class="tab-content">
+    <div class="section-title">💡 Exclusive Insights <span>Auto-generated from your data</span></div>
+    <div class="insights-grid" id="insights-grid">
+      <div class="loading"><div class="spinner"></div> Analysing data...</div>
+    </div>
+
+    <div class="section-title">📈 Month-over-Month Comparison</div>
+    <div class="chart-grid">
+      <div class="chart-card full">
+        <div class="chart-title">Key Metrics — Last 12 Months</div>
+        <div class="chart-subtitle">Covers, spend, and cost-per-cover trends</div>
+        <div class="chart-wrap" style="height:300px"><canvas id="chart-momTrend"></canvas></div>
+      </div>
+    </div>
+
+    <div class="section-title">🏆 Best & Worst Months</div>
+    <div class="table-card" id="table-bestWorst">
+      <div class="loading"><div class="spinner"></div></div>
+    </div>
+  </div>
+
+  <!-- ══ FACEBOOK ══════════════════════════════════════════════════════════ -->
+  <div id="tab-facebook" class="tab-content">
+    <div class="kpi-grid" id="kpi-facebook">
+      <div class="loading"><div class="spinner"></div></div>
+    </div>
+    <div class="chart-grid">
+      <div class="chart-card full">
+        <div class="chart-title">Facebook Monthly Spend & Clicks</div>
+        <div class="chart-subtitle">Ad spend vs link clicks per month</div>
+        <div class="chart-wrap"><canvas id="chart-fbSpendClicks"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Click-Through Rate (CTR %)</div>
+        <div class="chart-subtitle">Monthly CTR trend</div>
+        <div class="chart-wrap"><canvas id="chart-fbCTR"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Cost Per Click (CPC $)</div>
+        <div class="chart-subtitle">Monthly CPC trend</div>
+        <div class="chart-wrap"><canvas id="chart-fbCPC"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ GOOGLE ADS ════════════════════════════════════════════════════════ -->
+  <div id="tab-google" class="tab-content">
+    <div class="kpi-grid" id="kpi-google">
+      <div class="loading"><div class="spinner"></div></div>
+    </div>
+    <div class="chart-grid">
+      <div class="chart-card full">
+        <div class="chart-title">Google Ads Monthly Performance</div>
+        <div class="chart-subtitle">Spend, clicks, and attributed reservations</div>
+        <div class="chart-wrap"><canvas id="chart-googleMonthly"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">CTR Trend</div>
+        <div class="chart-subtitle">Click-through rate improving over time?</div>
+        <div class="chart-wrap"><canvas id="chart-googleCTR"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Cost Per Reservation</div>
+        <div class="chart-subtitle">How much does each Google reservation cost?</div>
+        <div class="chart-wrap"><canvas id="chart-googleCPR"></canvas></div>
+      </div>
+    </div>
+    <div class="section-title">Campaign Breakdown</div>
+    <div class="table-card" id="table-campaigns"></div>
+  </div>
+
+  <!-- ══ RESERVATIONS ══════════════════════════════════════════════════════ -->
+  <div id="tab-reservations" class="tab-content">
+    <div class="kpi-grid" id="kpi-reservations">
+      <div class="loading"><div class="spinner"></div></div>
+    </div>
+    <div class="chart-grid">
+      <div class="chart-card">
+        <div class="chart-title">Bookings by Day of Week</div>
+        <div class="chart-subtitle">Which days are busiest?</div>
+        <div class="chart-wrap"><canvas id="chart-resDays"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Peak Seating Times</div>
+        <div class="chart-subtitle">When are guests booking?</div>
+        <div class="chart-wrap"><canvas id="chart-resTimes"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Party Size Distribution</div>
+        <div class="chart-subtitle">How many people per booking?</div>
+        <div class="chart-wrap"><canvas id="chart-resSizes"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">First-Time vs Returning Guests</div>
+        <div class="chart-subtitle">Guest loyalty over time</div>
+        <div class="chart-wrap"><canvas id="chart-resFirstReturn"></canvas></div>
+      </div>
+    </div>
+    <div class="section-title">Monthly Reservation Trend</div>
+    <div class="chart-grid">
+      <div class="chart-card full">
+        <div class="chart-title">Reservations & Covers Per Month</div>
+        <div class="chart-subtitle">Volume trend over time</div>
+        <div class="chart-wrap"><canvas id="chart-resMonthly"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PRIVATE EVENTS ════════════════════════════════════════════════════ -->
+  <div id="tab-events" class="tab-content">
+    <div class="kpi-grid" id="kpi-events">
+      <div class="loading"><div class="spinner"></div></div>
+    </div>
+    <div class="chart-grid">
+      <div class="chart-card">
+        <div class="chart-title">Lead Pipeline Funnel</div>
+        <div class="chart-subtitle">Where leads end up</div>
+        <div id="funnel-events" style="padding: 10px 0;"></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Top Lost Reasons</div>
+        <div class="chart-subtitle">Why leads don't convert</div>
+        <div class="chart-wrap"><canvas id="chart-lostReasons"></canvas></div>
+      </div>
+      <div class="chart-card full">
+        <div class="chart-title">Monthly Lead Volume</div>
+        <div class="chart-subtitle">New leads per month</div>
+        <div class="chart-wrap"><canvas id="chart-eventsMonthly"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ EMAIL ════════════════════════════════════════════════════════════ -->
+  <div id="tab-email" class="tab-content">
+    <div class="kpi-grid" id="kpi-email">
+      <div class="loading"><div class="spinner"></div></div>
+    </div>
+    <div class="chart-grid">
+      <div class="chart-card full">
+        <div class="chart-title">Email Campaign Performance</div>
+        <div class="chart-subtitle">Open rate, click rate, and unsubscribe rate by month</div>
+        <div class="chart-wrap"><canvas id="chart-emailRates"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Sends by Month</div>
+        <div class="chart-subtitle">Volume of emails sent</div>
+        <div class="chart-wrap"><canvas id="chart-emailVolume"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Subscriber Growth</div>
+        <div class="chart-subtitle">New subscribers added per month</div>
+        <div class="chart-wrap"><canvas id="chart-subGrowth"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ── State ──────────────────────────────────────────────────────────────────
+const charts = {};
+let DATA = {};
+
+// ── Chart defaults ─────────────────────────────────────────────────────────
+Chart.defaults.color = '#8b8fa8';
+Chart.defaults.borderColor = '#2e3148';
+Chart.defaults.font.family = 'Inter, system-ui, sans-serif';
+
+function mkChart(id, config) {
+  if (charts[id]) { charts[id].destroy(); }
+  const ctx = document.getElementById(id);
+  if (!ctx) return;
+  charts[id] = new Chart(ctx, config);
+}
+
+const COLORS = {
+  accent: '#f5a623', accent2: '#e8734a', blue: '#4f8ef7',
+  green: '#3ecf8e', red: '#f26b6b', purple: '#a78bfa',
+  muted: '#8b8fa8',
+};
+
+function gradient(ctx, color) {
+  const g = ctx.createLinearGradient(0, 0, 0, 260);
+  g.addColorStop(0, color + '40');
+  g.addColorStop(1, color + '00');
+  return g;
+}
+
+// ── Tab switching ──────────────────────────────────────────────────────────
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(`tab-${name}`).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── KPI helper ────────────────────────────────────────────────────────────
+function kpiCard(label, value, sub, changeClass, changeText) {
+  return `<div class="kpi-card">
+    <div class="kpi-label">${label}</div>
+    <div class="kpi-value">${value}</div>
+    ${sub ? `<div class="kpi-sub">${sub}</div>` : ''}
+    ${changeText ? `<div class="kpi-change ${changeClass}">${changeText}</div>` : ''}
+  </div>`;
+}
+
+function fmt(n, prefix='', suffix='') {
+  if (n === undefined || n === null) return '—';
+  if (n >= 1000000) return prefix + (n/1000000).toFixed(1) + 'M' + suffix;
+  if (n >= 1000) return prefix + (n/1000).toFixed(1) + 'K' + suffix;
+  return prefix + n.toLocaleString() + suffix;
+}
+
+// ── Load all data ──────────────────────────────────────────────────────────
+async function loadData() {
+  try {
+    const files = ['summary','facebook','google-ads','google-private','reservations','perfect-venue','email','insights','meta'];
+    const results = await Promise.all(files.map(f =>
+      fetch(`data/${f}.json?t=${Date.now()}`).then(r => r.json()).catch(() => null)
+    ));
+    DATA.summary      = results[0];
+    DATA.facebook     = results[1];
+    DATA.googleAds    = results[2];
+    DATA.googlePrivate= results[3];
+    DATA.reservations = results[4];
+    DATA.perfectVenue = results[5];
+    DATA.email        = results[6];
+    DATA.insights     = results[7];
+    DATA.meta         = results[8];
+
+    if (DATA.meta) {
+      const d = new Date(DATA.meta.lastUpdated);
+      document.getElementById('lastUpdated').textContent = `Updated: ${d.toLocaleString()}`;
+    }
+
+    renderAll();
+  } catch(e) {
+    console.error('Load error:', e);
+    document.getElementById('lastUpdated').textContent = 'Error loading data';
+  }
+}
+
+function renderAll() {
+  renderOverview();
+  renderInsights();
+  renderFacebook();
+  renderGoogle();
+  renderReservations();
+  renderEvents();
+  renderEmail();
+}
+
+// ── Overview ──────────────────────────────────────────────────────────────
+function renderOverview() {
+  if (!DATA.summary) return;
+  const { monthly, daily } = DATA.summary;
+  const active = monthly.filter(m => m.covers > 0);
+  const last = active[active.length - 1] || {};
+  const prev = active[active.length - 2] || {};
+
+  const totalCovers = active.reduce((a,b) => a+b.covers, 0);
+  const totalSpend  = active.reduce((a,b) => a+b.spend, 0);
+  const totalUsers  = active.reduce((a,b) => a+b.users, 0);
+  const bestMonth   = [...active].sort((a,b) => b.covers - a.covers)[0] || {};
+  const coverChange = prev.covers ? (((last.covers - prev.covers)/prev.covers)*100).toFixed(1) : null;
+
+  document.getElementById('kpi-overview').innerHTML = [
+    kpiCard('Total Covers', fmt(totalCovers), 'All time', '', ''),
+    kpiCard('Total Ad Spend', fmt(totalSpend,'$'), 'All time', '', ''),
+    kpiCard('Avg Cost/Cover', `$${(totalSpend/totalCovers).toFixed(2)}`, 'All time', '', ''),
+    kpiCard('Website Users', fmt(totalUsers), 'All time', '', ''),
+    kpiCard('Best Month', bestMonth.month || '—', `${fmt(bestMonth.covers)} covers`, 'up', ''),
+    kpiCard('Last Month Covers', fmt(last.covers), last.month, coverChange > 0 ? 'up' : 'down', coverChange ? `${coverChange > 0 ? '▲' : '▼'} ${Math.abs(coverChange)}% vs prev` : ''),
+  ].join('');
+
+  const labels = active.map(m => m.month.slice(2));
+  const ctx1 = document.getElementById('chart-coversSpend');
+
+  mkChart('chart-coversSpend', {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Covers', data: active.map(m => m.covers), backgroundColor: COLORS.blue+'99', borderColor: COLORS.blue, borderWidth: 1, yAxisID: 'y' },
+        { label: 'Ad Spend ($)', data: active.map(m => m.spend), type: 'line', borderColor: COLORS.accent, backgroundColor: 'transparent', borderWidth: 2, pointRadius: 3, tension: 0.3, yAxisID: 'y1' },
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false, interaction: { mode: 'index' }, scales: {
+      y: { position: 'left', title: { display: true, text: 'Covers' } },
+      y1: { position: 'right', title: { display: true, text: 'Spend ($)' }, grid: { drawOnChartArea: false } }
+    }}
+  });
+
+  const activeWithSpend = active.filter(m => m.spend > 0);
+  mkChart('chart-costPerCover', {
+    type: 'line',
+    data: { labels: activeWithSpend.map(m => m.month.slice(2)), datasets: [{
+      label: '$/Cover', data: activeWithSpend.map(m => m.costPerCover),
+      borderColor: COLORS.accent2, backgroundColor: (ctx) => gradient(ctx.chart.ctx, COLORS.accent2),
+      fill: true, tension: 0.4, pointRadius: 3,
+    }]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { callback: v => '$'+v } } } }
+  });
+
+  mkChart('chart-users', {
+    type: 'line',
+    data: { labels, datasets: [{
+      label: 'Users', data: active.map(m => m.users),
+      borderColor: COLORS.purple, backgroundColor: (ctx) => gradient(ctx.chart.ctx, COLORS.purple),
+      fill: true, tension: 0.4, pointRadius: 3,
+    }]},
+    options: { responsive: true, maintainAspectRatio: false }
+  });
+}
+
+// ── Insights ──────────────────────────────────────────────────────────────
+function renderInsights() {
+  if (!DATA.insights) return;
+  const grid = document.getElementById('insights-grid');
+  grid.innerHTML = DATA.insights.map(ins => `
+    <div class="insight-card ${ins.type}">
+      <div class="insight-title">${ins.title}</div>
+      <div class="insight-body">${ins.body}</div>
+    </div>
+  `).join('');
+
+  // MoM trend - last 12 months
+  if (DATA.summary) {
+    const active = DATA.summary.monthly.filter(m => m.covers > 0).slice(-12);
+    mkChart('chart-momTrend', {
+      type: 'line',
+      data: {
+        labels: active.map(m => m.month.slice(2)),
+        datasets: [
+          { label: 'Covers', data: active.map(m => m.covers), borderColor: COLORS.blue, tension: 0.3, pointRadius: 4, yAxisID: 'y' },
+          { label: 'Spend ($)', data: active.map(m => m.spend), borderColor: COLORS.accent, tension: 0.3, pointRadius: 4, yAxisID: 'y1', borderDash: [5,3] },
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false, scales: {
+        y: { position: 'left' },
+        y1: { position: 'right', grid: { drawOnChartArea: false } }
+      }}
+    });
+
+    // Best/worst table
+    const sorted = [...active].sort((a,b) => b.covers - a.covers);
+    const top3 = sorted.slice(0,3);
+    const bot3 = sorted.slice(-3).reverse();
+    const combined = [
+      ...top3.map(m => ({...m, rank: 'top'})),
+      ...bot3.map(m => ({...m, rank: 'bot'})),
+    ];
+    document.getElementById('table-bestWorst').innerHTML = `
+      <table>
+        <thead><tr><th>Month</th><th>Covers</th><th>Spend</th><th>Cost/Cover</th><th>Daily Avg</th><th></th></tr></thead>
+        <tbody>${combined.map(m => `
+          <tr>
+            <td>${m.month}</td>
+            <td>${m.covers.toLocaleString()}</td>
+            <td>$${m.spend.toLocaleString()}</td>
+            <td>$${m.costPerCover}</td>
+            <td>${m.avgDailyCovers}</td>
+            <td>${m.rank==='top' ? '<span class="badge green">Top</span>' : '<span class="badge red">Low</span>'}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>`;
+  }
+}
+
+// ── Facebook ──────────────────────────────────────────────────────────────
+function renderFacebook() {
+  if (!DATA.facebook) return;
+  const fb = DATA.facebook.filter(m => m.spend > 0);
+  const totSpend = fb.reduce((a,b) => a+b.spend, 0);
+  const totReach = fb.reduce((a,b) => a+b.reach, 0);
+  const totClicks = fb.reduce((a,b) => a+b.clicks, 0);
+  const totImpr = fb.reduce((a,b) => a+b.impressions, 0);
+  const avgCPC = fb.reduce((a,b) => a+b.cpc, 0) / fb.length;
+  const avgCTR = fb.reduce((a,b) => a+b.ctr, 0) / fb.length;
+
+  document.getElementById('kpi-facebook').innerHTML = [
+    kpiCard('Total FB Spend', `$${totSpend.toLocaleString()}`, 'All time', '',''),
+    kpiCard('Total Reach', fmt(totReach), 'Unique accounts', '',''),
+    kpiCard('Total Clicks', fmt(totClicks), 'Link clicks', '',''),
+    kpiCard('Avg CTR', `${avgCTR.toFixed(2)}%`, 'Click-through rate', '',''),
+    kpiCard('Avg CPC', `$${avgCPC.toFixed(2)}`, 'Cost per click', '',''),
+    kpiCard('Total Impressions', fmt(totImpr), 'Ad impressions', '',''),
+  ].join('');
+
+  const labels = fb.map(m => m.month.slice(2));
+  mkChart('chart-fbSpendClicks', {
+    type: 'bar',
+    data: { labels, datasets: [
+      { label: 'Spend ($)', data: fb.map(m => m.spend), backgroundColor: COLORS.accent+'88', yAxisID: 'y' },
+      { label: 'Clicks', data: fb.map(m => m.clicks), type: 'line', borderColor: COLORS.green, backgroundColor: 'transparent', borderWidth: 2, tension: 0.3, yAxisID: 'y1' },
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: {
+      y: { position: 'left' }, y1: { position: 'right', grid: { drawOnChartArea: false } }
+    }}
+  });
+
+  mkChart('chart-fbCTR', {
+    type: 'line',
+    data: { labels, datasets: [{ label: 'CTR %', data: fb.map(m => m.ctr), borderColor: COLORS.blue, backgroundColor: (ctx) => gradient(ctx.chart.ctx, COLORS.blue), fill: true, tension: 0.4, pointRadius: 4 }]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { ticks: { callback: v => v+'%' } } } }
+  });
+
+  mkChart('chart-fbCPC', {
+    type: 'line',
+    data: { labels, datasets: [{ label: 'CPC $', data: fb.map(m => m.cpc), borderColor: COLORS.red, backgroundColor: (ctx) => gradient(ctx.chart.ctx, COLORS.red), fill: true, tension: 0.4, pointRadius: 4 }]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { ticks: { callback: v => '$'+v } } } }
+  });
+}
+
+// ── Google ─────────────────────────────────────────────────────────────────
+function renderGoogle() {
+  if (!DATA.googleAds) return;
+  const { monthly, campaigns } = DATA.googleAds;
+  const active = monthly.filter(m => m.spend > 0);
+  const totSpend = active.reduce((a,b)=>a+b.spend,0);
+  const totClicks = active.reduce((a,b)=>a+b.clicks,0);
+  const totImpr = active.reduce((a,b)=>a+b.impressions,0);
+  const totRes = active.reduce((a,b)=>a+b.reservations,0);
+  const totCalls = active.reduce((a,b)=>a+b.calls,0);
+
+  document.getElementById('kpi-google').innerHTML = [
+    kpiCard('Total G Spend', `$${totSpend.toLocaleString()}`, 'All time','',''),
+    kpiCard('Total Clicks', fmt(totClicks), 'Website visits','',''),
+    kpiCard('Total Impressions', fmt(totImpr), 'Ad views','',''),
+    kpiCard('Reservations', totRes.toLocaleString(), 'Attributed','',''),
+    kpiCard('Calls from Ads', totCalls.toLocaleString(), 'Phone calls','',''),
+    kpiCard('Cost / Reservation', totRes > 0 ? `$${(totSpend/totRes).toFixed(0)}` : '—', 'Avg','',''),
+  ].join('');
+
+  const labels = active.map(m => m.month.slice(2));
+  mkChart('chart-googleMonthly', {
+    type: 'bar',
+    data: { labels, datasets: [
+      { label: 'Spend ($)', data: active.map(m => m.spend), backgroundColor: COLORS.blue+'88', yAxisID: 'y' },
+      { label: 'Clicks', data: active.map(m => m.clicks), type: 'line', borderColor: COLORS.green, tension: 0.3, yAxisID: 'y1' },
+      { label: 'Reservations', data: active.map(m => m.reservations), type: 'line', borderColor: COLORS.accent, tension: 0.3, yAxisID: 'y2' },
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: {
+      y: { position: 'left' },
+      y1: { position: 'right', grid: { drawOnChartArea: false } },
+      y2: { position: 'right', grid: { drawOnChartArea: false }, display: false },
+    }}
+  });
+
+  mkChart('chart-googleCTR', {
+    type: 'line',
+    data: { labels, datasets: [{ label: 'CTR %', data: active.map(m => m.ctr), borderColor: COLORS.purple, backgroundColor: (ctx) => gradient(ctx.chart.ctx, COLORS.purple), fill: true, tension: 0.4 }]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { ticks: { callback: v => v+'%' } } } }
+  });
+
+  const resMonths = active.filter(m => m.costPerRes > 0);
+  mkChart('chart-googleCPR', {
+    type: 'bar',
+    data: { labels: resMonths.map(m => m.month.slice(2)), datasets: [{ label: 'Cost/Res ($)', data: resMonths.map(m => m.costPerRes), backgroundColor: COLORS.accent2+'88', borderColor: COLORS.accent2 }]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { ticks: { callback: v => '$'+v } } } }
+  });
+
+  document.getElementById('table-campaigns').innerHTML = `
+    <table>
+      <thead><tr><th>Campaign</th><th>Spend</th><th>Clicks</th><th>CPC</th><th>Reservations</th><th>Calls</th><th>Cost/Res</th></tr></thead>
+      <tbody>${campaigns.map(c => `
+        <tr>
+          <td>${c.name}</td>
+          <td>$${c.spend.toLocaleString()}</td>
+          <td>${c.clicks.toLocaleString()}</td>
+          <td>$${c.cpc}</td>
+          <td>${c.reservations}</td>
+          <td>${c.calls}</td>
+          <td>${c.costPerRes > 0 ? '$'+c.costPerRes : '—'}</td>
+        </tr>`).join('')}
+      </tbody>
+    </table>`;
+}
+
+// ── Reservations ──────────────────────────────────────────────────────────
+function renderReservations() {
+  if (!DATA.reservations) return;
+  const { summary, days, times, sizes, monthly } = DATA.reservations;
+
+  document.getElementById('kpi-reservations').innerHTML = [
+    kpiCard('Total Reservations', fmt(summary.total), 'All time','',''),
+    kpiCard('Total Covers', fmt(summary.totalCovers), 'Guests served','',''),
+    kpiCard('Avg Party Size', summary.avgPartySize, 'Per booking','',''),
+    kpiCard('Return Rate', `${summary.returnRate}%`, 'Returning guests', 'up',''),
+    kpiCard('Cancellation Rate', `${summary.cancellationRate}%`, '', summary.cancellationRate > 15 ? 'down' : '', ''),
+    kpiCard('Marketing Opt-In', `${summary.optInRate}%`, 'Email subscribers','',''),
+  ].join('');
+
+  const dayOrder = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  mkChart('chart-resDays', {
+    type: 'bar',
+    data: { labels: dayOrder, datasets: [{ label: 'Reservations', data: dayOrder.map(d => days[d]||0), backgroundColor: [COLORS.muted+'88', COLORS.muted+'88', COLORS.muted+'88', COLORS.muted+'88', COLORS.accent+'88', COLORS.blue+'aa', COLORS.green+'88'] }]},
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+  });
+
+  const peakTimes = times.filter(t => t.hour >= 11 && t.hour <= 23);
+  mkChart('chart-resTimes', {
+    type: 'bar',
+    data: { labels: peakTimes.map(t => t.label), datasets: [{ label: 'Bookings', data: peakTimes.map(t => t.count), backgroundColor: COLORS.purple+'88' }]},
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+  });
+
+  const top8Sizes = sizes.slice(0,8);
+  mkChart('chart-resSizes', {
+    type: 'doughnut',
+    data: { labels: top8Sizes.map(s => `Party of ${s.size}`), datasets: [{ data: top8Sizes.map(s => s.count), backgroundColor: [COLORS.blue, COLORS.accent, COLORS.green, COLORS.purple, COLORS.accent2, COLORS.red, '#60a5fa', '#34d399'] }]},
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { boxWidth: 12, font: { size: 11 } } } } }
+  });
+
+  const monthlyFiltered = monthly.filter(m => m.reservations > 0).slice(-18);
+  mkChart('chart-resFirstReturn', {
+    type: 'bar',
+    data: { labels: monthlyFiltered.map(m => m.month.slice(2)), datasets: [
+      { label: 'First Visit', data: monthlyFiltered.map(m => m.firstVisit), backgroundColor: COLORS.accent+'88', stack: 'a' },
+      { label: 'Returning', data: monthlyFiltered.map(m => m.reservations - m.firstVisit), backgroundColor: COLORS.blue+'88', stack: 'a' },
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true } } }
+  });
+
+  mkChart('chart-resMonthly', {
+    type: 'line',
+    data: { labels: monthlyFiltered.map(m => m.month.slice(2)), datasets: [
+      { label: 'Reservations', data: monthlyFiltered.map(m => m.reservations), borderColor: COLORS.blue, tension: 0.3, yAxisID: 'y' },
+      { label: 'Covers', data: monthlyFiltered.map(m => m.covers), borderColor: COLORS.green, tension: 0.3, yAxisID: 'y' },
+    ]},
+    options: { responsive: true, maintainAspectRatio: false }
+  });
+}
+
+// ── Events ────────────────────────────────────────────────────────────────
+function renderEvents() {
+  if (!DATA.perfectVenue) return;
+  const { statuses, lostReasons, monthly, totalCompletedRevenue, avgRevenuePerEvent, closeRate } = DATA.perfectVenue;
+  const total = statuses.reduce((a,b) => a+b.count, 0);
+
+  document.getElementById('kpi-events').innerHTML = [
+    kpiCard('Total Leads', total, 'All time','',''),
+    kpiCard('Close Rate', `${closeRate}%`, 'Completed/decided', closeRate > 40 ? 'up' : 'down',''),
+    kpiCard('Completed Events', statuses.find(s=>s.status==='Completed')?.count||0, '','',''),
+    kpiCard('Lost Leads', statuses.find(s=>s.status==='Lost')?.count||0, '','',''),
+    kpiCard('Total Revenue', `$${totalCompletedRevenue.toLocaleString()}`, 'Completed events','',''),
+    kpiCard('Avg Revenue/Event', `$${avgRevenuePerEvent}`, 'Per completed event','',''),
+  ].join('');
+
+  const funnelColors = { Completed: COLORS.green, Confirmed: COLORS.blue, 'Proposal Sent': COLORS.purple, Lead: COLORS.accent, Qualified: COLORS.accent2, Lost: COLORS.red };
+  document.getElementById('funnel-events').innerHTML = `<div class="funnel">${
+    statuses.map(s => {
+      const pct = (s.count/total*100).toFixed(0);
+      const color = funnelColors[s.status] || COLORS.muted;
+      return `<div class="funnel-row">
+        <div class="funnel-label">${s.status}</div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:${pct}%;background:${color}88;color:${color}">${pct}%</div></div>
+        <div class="funnel-count">${s.count}</div>
+      </div>`;
+    }).join('')
+  }</div>`;
+
+  mkChart('chart-lostReasons', {
+    type: 'bar',
+    data: { labels: lostReasons.map(r => r.reason), datasets: [{ label: 'Count', data: lostReasons.map(r => r.count), backgroundColor: COLORS.red+'88' }]},
+    options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } } }
+  });
+
+  const monthlyFiltered = monthly.slice(-18);
+  mkChart('chart-eventsMonthly', {
+    type: 'bar',
+    data: { labels: monthlyFiltered.map(m => m.month.slice(2)), datasets: [
+      { label: 'Total Leads', data: monthlyFiltered.map(m => m.leads), backgroundColor: COLORS.blue+'88' },
+      { label: 'Completed', data: monthlyFiltered.map(m => m.completed), backgroundColor: COLORS.green+'88' },
+      { label: 'Lost', data: monthlyFiltered.map(m => m.lost), backgroundColor: COLORS.red+'44' },
+    ]},
+    options: { responsive: true, maintainAspectRatio: false }
+  });
+}
+
+// ── Email ─────────────────────────────────────────────────────────────────
+function renderEmail() {
+  if (!DATA.email) return;
+  const { monthly, subscribersByMonth, totalSubscribers } = DATA.email;
+  const totSends = monthly.reduce((a,b)=>a+b.total,0);
+  const totOpened = monthly.reduce((a,b)=>a+b.opened,0);
+  const totClicked = monthly.reduce((a,b)=>a+b.clicked,0);
+  const totUnsub = monthly.reduce((a,b)=>a+b.unsubscribed,0);
+  const avgOpen = monthly.length ? (monthly.reduce((a,b)=>a+b.openRate,0)/monthly.length).toFixed(1) : 0;
+
+  document.getElementById('kpi-email').innerHTML = [
+    kpiCard('Total Sends', fmt(totSends), 'All campaigns','',''),
+    kpiCard('Total Subscribers', fmt(totalSubscribers), 'Email list','',''),
+    kpiCard('Avg Open Rate', `${avgOpen}%`, 'Industry avg ~22%', parseFloat(avgOpen) > 22 ? 'up' : 'down',''),
+    kpiCard('Total Clicks', fmt(totClicked), 'Email link clicks','',''),
+    kpiCard('Total Unsubscribes', totUnsub, '', totUnsub > 500 ? 'down' : '',''),
+    kpiCard('Total Opened', fmt(totOpened), 'Emails opened','',''),
+  ].join('');
+
+  const labels = monthly.map(m => m.month.slice(2));
+  mkChart('chart-emailRates', {
+    type: 'line',
+    data: { labels, datasets: [
+      { label: 'Open Rate %', data: monthly.map(m => m.openRate), borderColor: COLORS.green, tension: 0.3, pointRadius: 5 },
+      { label: 'Click Rate %', data: monthly.map(m => m.clickRate), borderColor: COLORS.blue, tension: 0.3, pointRadius: 5 },
+      { label: 'Unsub Rate %', data: monthly.map(m => m.unsubRate), borderColor: COLORS.red, tension: 0.3, pointRadius: 5, borderDash: [5,3] },
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { ticks: { callback: v => v+'%' } } } }
+  });
+
+  mkChart('chart-emailVolume', {
+    type: 'bar',
+    data: { labels, datasets: [
+      { label: 'Delivered', data: monthly.map(m => m.delivered), backgroundColor: COLORS.muted+'88', stack:'a' },
+      { label: 'Opened', data: monthly.map(m => m.opened), backgroundColor: COLORS.green+'88', stack:'a' },
+      { label: 'Clicked', data: monthly.map(m => m.clicked), backgroundColor: COLORS.blue+'88', stack:'a' },
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true } } }
+  });
+
+  mkChart('chart-subGrowth', {
+    type: 'bar',
+    data: { labels: subscribersByMonth.map(s => s.month.slice(2)), datasets: [{ label: 'New Subscribers', data: subscribersByMonth.map(s => s.count), backgroundColor: COLORS.accent+'88' }]},
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+  });
+}
+
+// ── Boot ───────────────────────────────────────────────────────────────────
+loadData();
+</script>
+</body>
+</html>

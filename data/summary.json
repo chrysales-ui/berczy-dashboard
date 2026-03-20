@@ -1,0 +1,3957 @@
+{
+  "daily": [
+    {
+      "date": "2024-07-01",
+      "spend": 0,
+      "covers": 0,
+      "users": 25
+    },
+    {
+      "date": "2024-07-02",
+      "spend": 0,
+      "covers": 0,
+      "users": 25
+    },
+    {
+      "date": "2024-07-03",
+      "spend": 0,
+      "covers": 0,
+      "users": 34
+    },
+    {
+      "date": "2024-07-04",
+      "spend": 0,
+      "covers": 0,
+      "users": 26
+    },
+    {
+      "date": "2024-07-05",
+      "spend": 36,
+      "covers": 0,
+      "users": 181
+    },
+    {
+      "date": "2024-07-06",
+      "spend": 58,
+      "covers": 83,
+      "users": 310
+    },
+    {
+      "date": "2024-07-07",
+      "spend": 62,
+      "covers": 30,
+      "users": 416
+    },
+    {
+      "date": "2024-07-08",
+      "spend": 58,
+      "covers": 64,
+      "users": 368
+    },
+    {
+      "date": "2024-07-09",
+      "spend": 58,
+      "covers": 37,
+      "users": 449
+    },
+    {
+      "date": "2024-07-10",
+      "spend": 55,
+      "covers": 4,
+      "users": 515
+    },
+    {
+      "date": "2024-07-11",
+      "spend": 55,
+      "covers": 95,
+      "users": 638
+    },
+    {
+      "date": "2024-07-12",
+      "spend": 50,
+      "covers": 148,
+      "users": 540
+    },
+    {
+      "date": "2024-07-13",
+      "spend": 54,
+      "covers": 72,
+      "users": 419
+    },
+    {
+      "date": "2024-07-14",
+      "spend": 57,
+      "covers": 8,
+      "users": 385
+    },
+    {
+      "date": "2024-07-15",
+      "spend": 54,
+      "covers": 33,
+      "users": 436
+    },
+    {
+      "date": "2024-07-16",
+      "spend": 55,
+      "covers": 103,
+      "users": 520
+    },
+    {
+      "date": "2024-07-17",
+      "spend": 55,
+      "covers": 119,
+      "users": 706
+    },
+    {
+      "date": "2024-07-18",
+      "spend": 46,
+      "covers": 100,
+      "users": 467
+    },
+    {
+      "date": "2024-07-19",
+      "spend": 0,
+      "covers": 165,
+      "users": 562
+    },
+    {
+      "date": "2024-07-20",
+      "spend": 0,
+      "covers": 120,
+      "users": 302
+    },
+    {
+      "date": "2024-07-21",
+      "spend": 0,
+      "covers": 25,
+      "users": 175
+    },
+    {
+      "date": "2024-07-22",
+      "spend": 0,
+      "covers": 30,
+      "users": 168
+    },
+    {
+      "date": "2024-07-23",
+      "spend": 0,
+      "covers": 114,
+      "users": 286
+    },
+    {
+      "date": "2024-07-24",
+      "spend": 21,
+      "covers": 121,
+      "users": 476
+    },
+    {
+      "date": "2024-07-25",
+      "spend": 56,
+      "covers": 95,
+      "users": 505
+    },
+    {
+      "date": "2024-07-26",
+      "spend": 53,
+      "covers": 147,
+      "users": 446
+    },
+    {
+      "date": "2024-07-27",
+      "spend": 53,
+      "covers": 105,
+      "users": 489
+    },
+    {
+      "date": "2024-07-28",
+      "spend": 60,
+      "covers": 33,
+      "users": 421
+    },
+    {
+      "date": "2024-07-29",
+      "spend": 55,
+      "covers": 33,
+      "users": 385
+    },
+    {
+      "date": "2024-07-30",
+      "spend": 56,
+      "covers": 101,
+      "users": 419
+    },
+    {
+      "date": "2024-07-31",
+      "spend": 146,
+      "covers": 106,
+      "users": 545
+    },
+    {
+      "date": "2024-08-01",
+      "spend": 144,
+      "covers": 113,
+      "users": 540
+    },
+    {
+      "date": "2024-08-02",
+      "spend": 144,
+      "covers": 63,
+      "users": 485
+    },
+    {
+      "date": "2024-08-03",
+      "spend": 191,
+      "covers": 109,
+      "users": 677
+    },
+    {
+      "date": "2024-08-04",
+      "spend": 194,
+      "covers": 41,
+      "users": 531
+    },
+    {
+      "date": "2024-08-05",
+      "spend": 192,
+      "covers": 41,
+      "users": 561
+    },
+    {
+      "date": "2024-08-06",
+      "spend": 196,
+      "covers": 105,
+      "users": 551
+    },
+    {
+      "date": "2024-08-07",
+      "spend": 190,
+      "covers": 113,
+      "users": 587
+    },
+    {
+      "date": "2024-08-08",
+      "spend": 188,
+      "covers": 97,
+      "users": 578
+    },
+    {
+      "date": "2024-08-09",
+      "spend": 187,
+      "covers": 148,
+      "users": 637
+    },
+    {
+      "date": "2024-08-10",
+      "spend": 185,
+      "covers": 151,
+      "users": 564
+    },
+    {
+      "date": "2024-08-11",
+      "spend": 191,
+      "covers": 17,
+      "users": 623
+    },
+    {
+      "date": "2024-08-12",
+      "spend": 188,
+      "covers": 42,
+      "users": 749
+    },
+    {
+      "date": "2024-08-13",
+      "spend": 190,
+      "covers": 103,
+      "users": 977
+    },
+    {
+      "date": "2024-08-14",
+      "spend": 182,
+      "covers": 96,
+      "users": 897
+    },
+    {
+      "date": "2024-08-15",
+      "spend": 178,
+      "covers": 99,
+      "users": 855
+    },
+    {
+      "date": "2024-08-16",
+      "spend": 175,
+      "covers": 140,
+      "users": 884
+    },
+    {
+      "date": "2024-08-17",
+      "spend": 180,
+      "covers": 217,
+      "users": 921
+    },
+    {
+      "date": "2024-08-18",
+      "spend": 182,
+      "covers": 29,
+      "users": 891
+    },
+    {
+      "date": "2024-08-19",
+      "spend": 143,
+      "covers": 52,
+      "users": 741
+    },
+    {
+      "date": "2024-08-20",
+      "spend": 0,
+      "covers": 114,
+      "users": 210
+    },
+    {
+      "date": "2024-08-21",
+      "spend": 0,
+      "covers": 96,
+      "users": 205
+    },
+    {
+      "date": "2024-08-22",
+      "spend": 0,
+      "covers": 69,
+      "users": 187
+    },
+    {
+      "date": "2024-08-23",
+      "spend": 44,
+      "covers": 136,
+      "users": 468
+    },
+    {
+      "date": "2024-08-24",
+      "spend": 42,
+      "covers": 183,
+      "users": 491
+    },
+    {
+      "date": "2024-08-25",
+      "spend": 42,
+      "covers": 43,
+      "users": 364
+    },
+    {
+      "date": "2024-08-26",
+      "spend": 132,
+      "covers": 98,
+      "users": 593
+    },
+    {
+      "date": "2024-08-27",
+      "spend": 140,
+      "covers": 111,
+      "users": 712
+    },
+    {
+      "date": "2024-08-28",
+      "spend": 161,
+      "covers": 91,
+      "users": 902
+    },
+    {
+      "date": "2024-08-29",
+      "spend": 161,
+      "covers": 104,
+      "users": 918
+    },
+    {
+      "date": "2024-08-30",
+      "spend": 160,
+      "covers": 155,
+      "users": 855
+    },
+    {
+      "date": "2024-08-31",
+      "spend": 153,
+      "covers": 84,
+      "users": 843
+    },
+    {
+      "date": "2024-09-01",
+      "spend": 160,
+      "covers": 73,
+      "users": 995
+    },
+    {
+      "date": "2024-09-02",
+      "spend": 162,
+      "covers": 27,
+      "users": 1075
+    },
+    {
+      "date": "2024-09-03",
+      "spend": 200,
+      "covers": 94,
+      "users": 1219
+    },
+    {
+      "date": "2024-09-04",
+      "spend": 197,
+      "covers": 98,
+      "users": 1215
+    },
+    {
+      "date": "2024-09-05",
+      "spend": 196,
+      "covers": 85,
+      "users": 1196
+    },
+    {
+      "date": "2024-09-06",
+      "spend": 201,
+      "covers": 192,
+      "users": 1207
+    },
+    {
+      "date": "2024-09-07",
+      "spend": 194,
+      "covers": 162,
+      "users": 1361
+    },
+    {
+      "date": "2024-09-08",
+      "spend": 202,
+      "covers": 95,
+      "users": 1293
+    },
+    {
+      "date": "2024-09-09",
+      "spend": 189,
+      "covers": 65,
+      "users": 1142
+    },
+    {
+      "date": "2024-09-10",
+      "spend": 450,
+      "covers": 150,
+      "users": 2239
+    },
+    {
+      "date": "2024-09-11",
+      "spend": 451,
+      "covers": 125,
+      "users": 2284
+    },
+    {
+      "date": "2024-09-12",
+      "spend": 443,
+      "covers": 154,
+      "users": 2428
+    },
+    {
+      "date": "2024-09-13",
+      "spend": 431,
+      "covers": 183,
+      "users": 2598
+    },
+    {
+      "date": "2024-09-14",
+      "spend": 436,
+      "covers": 188,
+      "users": 2630
+    },
+    {
+      "date": "2024-09-15",
+      "spend": 422,
+      "covers": 102,
+      "users": 2827
+    },
+    {
+      "date": "2024-09-16",
+      "spend": 371,
+      "covers": 58,
+      "users": 2429
+    },
+    {
+      "date": "2024-09-17",
+      "spend": 384,
+      "covers": 176,
+      "users": 2570
+    },
+    {
+      "date": "2024-09-18",
+      "spend": 372,
+      "covers": 170,
+      "users": 2510
+    },
+    {
+      "date": "2024-09-19",
+      "spend": 385,
+      "covers": 200,
+      "users": 2546
+    },
+    {
+      "date": "2024-09-20",
+      "spend": 395,
+      "covers": 176,
+      "users": 2397
+    },
+    {
+      "date": "2024-09-21",
+      "spend": 52,
+      "covers": 211,
+      "users": 710
+    },
+    {
+      "date": "2024-09-22",
+      "spend": 51,
+      "covers": 75,
+      "users": 517
+    },
+    {
+      "date": "2024-09-23",
+      "spend": 142,
+      "covers": 55,
+      "users": 942
+    },
+    {
+      "date": "2024-09-24",
+      "spend": 142,
+      "covers": 103,
+      "users": 1063
+    },
+    {
+      "date": "2024-09-25",
+      "spend": 150,
+      "covers": 58,
+      "users": 992
+    },
+    {
+      "date": "2024-09-26",
+      "spend": 114,
+      "covers": 143,
+      "users": 988
+    },
+    {
+      "date": "2024-09-27",
+      "spend": 95,
+      "covers": 172,
+      "users": 947
+    },
+    {
+      "date": "2024-09-28",
+      "spend": 103,
+      "covers": 161,
+      "users": 982
+    },
+    {
+      "date": "2024-09-29",
+      "spend": 110,
+      "covers": 56,
+      "users": 983
+    },
+    {
+      "date": "2024-09-30",
+      "spend": 93,
+      "covers": 86,
+      "users": 877
+    },
+    {
+      "date": "2024-10-01",
+      "spend": 14,
+      "covers": 159,
+      "users": 419
+    },
+    {
+      "date": "2024-10-02",
+      "spend": 13,
+      "covers": 137,
+      "users": 344
+    },
+    {
+      "date": "2024-10-03",
+      "spend": 12,
+      "covers": 123,
+      "users": 354
+    },
+    {
+      "date": "2024-10-04",
+      "spend": 103,
+      "covers": 183,
+      "users": 832
+    },
+    {
+      "date": "2024-10-05",
+      "spend": 102,
+      "covers": 195,
+      "users": 856
+    },
+    {
+      "date": "2024-10-06",
+      "spend": 100,
+      "covers": 122,
+      "users": 789
+    },
+    {
+      "date": "2024-10-07",
+      "spend": 104,
+      "covers": 24,
+      "users": 879
+    },
+    {
+      "date": "2024-10-08",
+      "spend": 98,
+      "covers": 132,
+      "users": 922
+    },
+    {
+      "date": "2024-10-09",
+      "spend": 0,
+      "covers": 184,
+      "users": 297
+    },
+    {
+      "date": "2024-10-10",
+      "spend": 0,
+      "covers": 98,
+      "users": 265
+    },
+    {
+      "date": "2024-10-11",
+      "spend": 107,
+      "covers": 180,
+      "users": 850
+    },
+    {
+      "date": "2024-10-12",
+      "spend": 155,
+      "covers": 166,
+      "users": 1277
+    },
+    {
+      "date": "2024-10-13",
+      "spend": 158,
+      "covers": 116,
+      "users": 1259
+    },
+    {
+      "date": "2024-10-14",
+      "spend": 157,
+      "covers": 31,
+      "users": 1252
+    },
+    {
+      "date": "2024-10-15",
+      "spend": 157,
+      "covers": 106,
+      "users": 1217
+    },
+    {
+      "date": "2024-10-16",
+      "spend": 160,
+      "covers": 207,
+      "users": 1312
+    },
+    {
+      "date": "2024-10-17",
+      "spend": 150,
+      "covers": 161,
+      "users": 1225
+    },
+    {
+      "date": "2024-10-18",
+      "spend": 148,
+      "covers": 144,
+      "users": 1241
+    },
+    {
+      "date": "2024-10-19",
+      "spend": 156,
+      "covers": 189,
+      "users": 1343
+    },
+    {
+      "date": "2024-10-20",
+      "spend": 156,
+      "covers": 87,
+      "users": 1291
+    },
+    {
+      "date": "2024-10-21",
+      "spend": 150,
+      "covers": 109,
+      "users": 1207
+    },
+    {
+      "date": "2024-10-22",
+      "spend": 153,
+      "covers": 99,
+      "users": 1183
+    },
+    {
+      "date": "2024-10-23",
+      "spend": 152,
+      "covers": 153,
+      "users": 1190
+    },
+    {
+      "date": "2024-10-24",
+      "spend": 151,
+      "covers": 141,
+      "users": 1189
+    },
+    {
+      "date": "2024-10-25",
+      "spend": 196,
+      "covers": 173,
+      "users": 1257
+    },
+    {
+      "date": "2024-10-26",
+      "spend": 178,
+      "covers": 244,
+      "users": 1314
+    },
+    {
+      "date": "2024-10-27",
+      "spend": 158,
+      "covers": 124,
+      "users": 1218
+    },
+    {
+      "date": "2024-10-28",
+      "spend": 153,
+      "covers": 64,
+      "users": 1113
+    },
+    {
+      "date": "2024-10-29",
+      "spend": 147,
+      "covers": 122,
+      "users": 1170
+    },
+    {
+      "date": "2024-10-30",
+      "spend": 148,
+      "covers": 152,
+      "users": 1082
+    },
+    {
+      "date": "2024-10-31",
+      "spend": 123,
+      "covers": 159,
+      "users": 1032
+    },
+    {
+      "date": "2024-11-01",
+      "spend": 142,
+      "covers": 170,
+      "users": 1220
+    },
+    {
+      "date": "2024-11-02",
+      "spend": 139,
+      "covers": 239,
+      "users": 1357
+    },
+    {
+      "date": "2024-11-03",
+      "spend": 143,
+      "covers": 158,
+      "users": 1237
+    },
+    {
+      "date": "2024-11-04",
+      "spend": 139,
+      "covers": 148,
+      "users": 1192
+    },
+    {
+      "date": "2024-11-05",
+      "spend": 138,
+      "covers": 121,
+      "users": 1144
+    },
+    {
+      "date": "2024-11-06",
+      "spend": 142,
+      "covers": 148,
+      "users": 1133
+    },
+    {
+      "date": "2024-11-07",
+      "spend": 142,
+      "covers": 226,
+      "users": 1080
+    },
+    {
+      "date": "2024-11-08",
+      "spend": 134,
+      "covers": 246,
+      "users": 1080
+    },
+    {
+      "date": "2024-11-09",
+      "spend": 147,
+      "covers": 203,
+      "users": 1265
+    },
+    {
+      "date": "2024-11-10",
+      "spend": 146,
+      "covers": 141,
+      "users": 1185
+    },
+    {
+      "date": "2024-11-11",
+      "spend": 136,
+      "covers": 153,
+      "users": 1180
+    },
+    {
+      "date": "2024-11-12",
+      "spend": 135,
+      "covers": 181,
+      "users": 1130
+    },
+    {
+      "date": "2024-11-13",
+      "spend": 134,
+      "covers": 150,
+      "users": 1138
+    },
+    {
+      "date": "2024-11-14",
+      "spend": 136,
+      "covers": 140,
+      "users": 1104
+    },
+    {
+      "date": "2024-11-15",
+      "spend": 156,
+      "covers": 241,
+      "users": 1245
+    },
+    {
+      "date": "2024-11-16",
+      "spend": 149,
+      "covers": 205,
+      "users": 1281
+    },
+    {
+      "date": "2024-11-17",
+      "spend": 139,
+      "covers": 103,
+      "users": 1162
+    },
+    {
+      "date": "2024-11-18",
+      "spend": 127,
+      "covers": 88,
+      "users": 1117
+    },
+    {
+      "date": "2024-11-19",
+      "spend": 125,
+      "covers": 152,
+      "users": 1075
+    },
+    {
+      "date": "2024-11-20",
+      "spend": 126,
+      "covers": 148,
+      "users": 960
+    },
+    {
+      "date": "2024-11-21",
+      "spend": 139,
+      "covers": 200,
+      "users": 992
+    },
+    {
+      "date": "2024-11-22",
+      "spend": 130,
+      "covers": 216,
+      "users": 1090
+    },
+    {
+      "date": "2024-11-23",
+      "spend": 139,
+      "covers": 249,
+      "users": 1140
+    },
+    {
+      "date": "2024-11-24",
+      "spend": 129,
+      "covers": 132,
+      "users": 1044
+    },
+    {
+      "date": "2024-11-25",
+      "spend": 133,
+      "covers": 98,
+      "users": 922
+    },
+    {
+      "date": "2024-11-26",
+      "spend": 128,
+      "covers": 127,
+      "users": 936
+    },
+    {
+      "date": "2024-11-27",
+      "spend": 128,
+      "covers": 193,
+      "users": 989
+    },
+    {
+      "date": "2024-11-28",
+      "spend": 128,
+      "covers": 105,
+      "users": 986
+    },
+    {
+      "date": "2024-11-29",
+      "spend": 107,
+      "covers": 210,
+      "users": 840
+    },
+    {
+      "date": "2024-11-30",
+      "spend": 99,
+      "covers": 150,
+      "users": 822
+    },
+    {
+      "date": "2024-12-01",
+      "spend": 106,
+      "covers": 66,
+      "users": 868
+    },
+    {
+      "date": "2024-12-02",
+      "spend": 105,
+      "covers": 103,
+      "users": 872
+    },
+    {
+      "date": "2024-12-03",
+      "spend": 97,
+      "covers": 119,
+      "users": 881
+    },
+    {
+      "date": "2024-12-04",
+      "spend": 123,
+      "covers": 170,
+      "users": 939
+    },
+    {
+      "date": "2024-12-05",
+      "spend": 145,
+      "covers": 113,
+      "users": 1043
+    },
+    {
+      "date": "2024-12-06",
+      "spend": 148,
+      "covers": 196,
+      "users": 1076
+    },
+    {
+      "date": "2024-12-07",
+      "spend": 150,
+      "covers": 177,
+      "users": 1235
+    },
+    {
+      "date": "2024-12-08",
+      "spend": 152,
+      "covers": 140,
+      "users": 1185
+    },
+    {
+      "date": "2024-12-09",
+      "spend": 148,
+      "covers": 95,
+      "users": 1107
+    },
+    {
+      "date": "2024-12-10",
+      "spend": 148,
+      "covers": 162,
+      "users": 1120
+    },
+    {
+      "date": "2024-12-11",
+      "spend": 144,
+      "covers": 190,
+      "users": 1152
+    },
+    {
+      "date": "2024-12-12",
+      "spend": 144,
+      "covers": 150,
+      "users": 1106
+    },
+    {
+      "date": "2024-12-13",
+      "spend": 147,
+      "covers": 162,
+      "users": 1078
+    },
+    {
+      "date": "2024-12-14",
+      "spend": 150,
+      "covers": 184,
+      "users": 1155
+    },
+    {
+      "date": "2024-12-15",
+      "spend": 149,
+      "covers": 135,
+      "users": 1135
+    },
+    {
+      "date": "2024-12-16",
+      "spend": 146,
+      "covers": 106,
+      "users": 1051
+    },
+    {
+      "date": "2024-12-17",
+      "spend": 146,
+      "covers": 327,
+      "users": 1054
+    },
+    {
+      "date": "2024-12-18",
+      "spend": 142,
+      "covers": 193,
+      "users": 1043
+    },
+    {
+      "date": "2024-12-19",
+      "spend": 144,
+      "covers": 177,
+      "users": 1033
+    },
+    {
+      "date": "2024-12-20",
+      "spend": 145,
+      "covers": 126,
+      "users": 1046
+    },
+    {
+      "date": "2024-12-21",
+      "spend": 145,
+      "covers": 145,
+      "users": 1052
+    },
+    {
+      "date": "2024-12-22",
+      "spend": 147,
+      "covers": 81,
+      "users": 1022
+    },
+    {
+      "date": "2024-12-23",
+      "spend": 143,
+      "covers": 25,
+      "users": 951
+    },
+    {
+      "date": "2024-12-24",
+      "spend": 140,
+      "covers": 43,
+      "users": 978
+    },
+    {
+      "date": "2024-12-25",
+      "spend": 142,
+      "covers": 23,
+      "users": 897
+    },
+    {
+      "date": "2024-12-26",
+      "spend": 138,
+      "covers": 59,
+      "users": 964
+    },
+    {
+      "date": "2024-12-27",
+      "spend": 142,
+      "covers": 193,
+      "users": 1169
+    },
+    {
+      "date": "2024-12-28",
+      "spend": 138,
+      "covers": 176,
+      "users": 1214
+    },
+    {
+      "date": "2024-12-29",
+      "spend": 141,
+      "covers": 88,
+      "users": 1184
+    },
+    {
+      "date": "2024-12-30",
+      "spend": 136,
+      "covers": 48,
+      "users": 1158
+    },
+    {
+      "date": "2024-12-31",
+      "spend": 127,
+      "covers": 56,
+      "users": 1078
+    },
+    {
+      "date": "2025-01-01",
+      "spend": 140,
+      "covers": 49,
+      "users": 1298
+    },
+    {
+      "date": "2025-01-02",
+      "spend": 126,
+      "covers": 126,
+      "users": 1290
+    },
+    {
+      "date": "2025-01-03",
+      "spend": 145,
+      "covers": 141,
+      "users": 1452
+    },
+    {
+      "date": "2025-01-04",
+      "spend": 165,
+      "covers": 162,
+      "users": 1425
+    },
+    {
+      "date": "2025-01-05",
+      "spend": 146,
+      "covers": 80,
+      "users": 1314
+    },
+    {
+      "date": "2025-01-06",
+      "spend": 132,
+      "covers": 69,
+      "users": 1281
+    },
+    {
+      "date": "2025-01-07",
+      "spend": 140,
+      "covers": 130,
+      "users": 1402
+    },
+    {
+      "date": "2025-01-08",
+      "spend": 151,
+      "covers": 198,
+      "users": 1370
+    },
+    {
+      "date": "2025-01-09",
+      "spend": 127,
+      "covers": 93,
+      "users": 1392
+    },
+    {
+      "date": "2025-01-10",
+      "spend": 0,
+      "covers": 193,
+      "users": 405
+    },
+    {
+      "date": "2025-01-11",
+      "spend": 0,
+      "covers": 202,
+      "users": 376
+    },
+    {
+      "date": "2025-01-12",
+      "spend": 0,
+      "covers": 109,
+      "users": 299
+    },
+    {
+      "date": "2025-01-13",
+      "spend": 0,
+      "covers": 110,
+      "users": 299
+    },
+    {
+      "date": "2025-01-14",
+      "spend": 0,
+      "covers": 139,
+      "users": 395
+    },
+    {
+      "date": "2025-01-15",
+      "spend": 0,
+      "covers": 131,
+      "users": 382
+    },
+    {
+      "date": "2025-01-16",
+      "spend": 0,
+      "covers": 213,
+      "users": 303
+    },
+    {
+      "date": "2025-01-17",
+      "spend": 6,
+      "covers": 144,
+      "users": 366
+    },
+    {
+      "date": "2025-01-18",
+      "spend": 202,
+      "covers": 206,
+      "users": 778
+    },
+    {
+      "date": "2025-01-19",
+      "spend": 104,
+      "covers": 115,
+      "users": 1304
+    },
+    {
+      "date": "2025-01-20",
+      "spend": 102,
+      "covers": 100,
+      "users": 1408
+    },
+    {
+      "date": "2025-01-21",
+      "spend": 103,
+      "covers": 187,
+      "users": 1389
+    },
+    {
+      "date": "2025-01-22",
+      "spend": 121,
+      "covers": 79,
+      "users": 1591
+    },
+    {
+      "date": "2025-01-23",
+      "spend": 112,
+      "covers": 140,
+      "users": 1548
+    },
+    {
+      "date": "2025-01-24",
+      "spend": 108,
+      "covers": 219,
+      "users": 1528
+    },
+    {
+      "date": "2025-01-25",
+      "spend": 103,
+      "covers": 266,
+      "users": 1572
+    },
+    {
+      "date": "2025-01-26",
+      "spend": 90,
+      "covers": 144,
+      "users": 1451
+    },
+    {
+      "date": "2025-01-27",
+      "spend": 101,
+      "covers": 174,
+      "users": 1286
+    },
+    {
+      "date": "2025-01-28",
+      "spend": 33,
+      "covers": 167,
+      "users": 791
+    },
+    {
+      "date": "2025-01-29",
+      "spend": 102,
+      "covers": 156,
+      "users": 1304
+    },
+    {
+      "date": "2025-01-30",
+      "spend": 134,
+      "covers": 172,
+      "users": 1549
+    },
+    {
+      "date": "2025-01-31",
+      "spend": 75,
+      "covers": 231,
+      "users": 1543
+    },
+    {
+      "date": "2025-02-01",
+      "spend": 103,
+      "covers": 166,
+      "users": 1802
+    },
+    {
+      "date": "2025-02-02",
+      "spend": 127,
+      "covers": 138,
+      "users": 1991
+    },
+    {
+      "date": "2025-02-03",
+      "spend": 115,
+      "covers": 147,
+      "users": 1752
+    },
+    {
+      "date": "2025-02-04",
+      "spend": 113,
+      "covers": 181,
+      "users": 1904
+    },
+    {
+      "date": "2025-02-05",
+      "spend": 114,
+      "covers": 176,
+      "users": 1704
+    },
+    {
+      "date": "2025-02-06",
+      "spend": 113,
+      "covers": 140,
+      "users": 1596
+    },
+    {
+      "date": "2025-02-07",
+      "spend": 112,
+      "covers": 150,
+      "users": 1452
+    },
+    {
+      "date": "2025-02-08",
+      "spend": 53,
+      "covers": 144,
+      "users": 1082
+    },
+    {
+      "date": "2025-02-09",
+      "spend": 27,
+      "covers": 109,
+      "users": 485
+    },
+    {
+      "date": "2025-02-10",
+      "spend": 208,
+      "covers": 85,
+      "users": 855
+    },
+    {
+      "date": "2025-02-11",
+      "spend": 113,
+      "covers": 149,
+      "users": 554
+    },
+    {
+      "date": "2025-02-12",
+      "spend": 57,
+      "covers": 172,
+      "users": 462
+    },
+    {
+      "date": "2025-02-13",
+      "spend": 189,
+      "covers": 122,
+      "users": 654
+    },
+    {
+      "date": "2025-02-14",
+      "spend": 125,
+      "covers": 83,
+      "users": 399
+    },
+    {
+      "date": "2025-02-15",
+      "spend": 39,
+      "covers": 123,
+      "users": 332
+    },
+    {
+      "date": "2025-02-16",
+      "spend": 104,
+      "covers": 54,
+      "users": 238
+    },
+    {
+      "date": "2025-02-17",
+      "spend": 70,
+      "covers": 15,
+      "users": 220
+    },
+    {
+      "date": "2025-02-18",
+      "spend": 136,
+      "covers": 92,
+      "users": 279
+    },
+    {
+      "date": "2025-02-19",
+      "spend": 32,
+      "covers": 83,
+      "users": 370
+    },
+    {
+      "date": "2025-02-20",
+      "spend": 0,
+      "covers": 114,
+      "users": 215
+    },
+    {
+      "date": "2025-02-21",
+      "spend": 0,
+      "covers": 103,
+      "users": 250
+    },
+    {
+      "date": "2025-02-22",
+      "spend": 0,
+      "covers": 155,
+      "users": 297
+    },
+    {
+      "date": "2025-02-23",
+      "spend": 0,
+      "covers": 77,
+      "users": 254
+    },
+    {
+      "date": "2025-02-24",
+      "spend": 0,
+      "covers": 53,
+      "users": 167
+    },
+    {
+      "date": "2025-02-25",
+      "spend": 0,
+      "covers": 93,
+      "users": 166
+    },
+    {
+      "date": "2025-02-26",
+      "spend": 0,
+      "covers": 61,
+      "users": 176
+    },
+    {
+      "date": "2025-02-27",
+      "spend": 0,
+      "covers": 114,
+      "users": 211
+    },
+    {
+      "date": "2025-02-28",
+      "spend": 0,
+      "covers": 131,
+      "users": 248
+    },
+    {
+      "date": "2025-03-01",
+      "spend": 0,
+      "covers": 148,
+      "users": 260
+    },
+    {
+      "date": "2025-03-02",
+      "spend": 0,
+      "covers": 47,
+      "users": 220
+    },
+    {
+      "date": "2025-03-03",
+      "spend": 0,
+      "covers": 65,
+      "users": 175
+    },
+    {
+      "date": "2025-03-04",
+      "spend": 0,
+      "covers": 97,
+      "users": 188
+    },
+    {
+      "date": "2025-03-05",
+      "spend": 0,
+      "covers": 84,
+      "users": 202
+    },
+    {
+      "date": "2025-03-06",
+      "spend": 0,
+      "covers": 89,
+      "users": 195
+    },
+    {
+      "date": "2025-03-07",
+      "spend": 0,
+      "covers": 136,
+      "users": 255
+    },
+    {
+      "date": "2025-03-08",
+      "spend": 0,
+      "covers": 154,
+      "users": 274
+    },
+    {
+      "date": "2025-03-09",
+      "spend": 0,
+      "covers": 91,
+      "users": 199
+    },
+    {
+      "date": "2025-03-10",
+      "spend": 0,
+      "covers": 64,
+      "users": 199
+    },
+    {
+      "date": "2025-03-11",
+      "spend": 0,
+      "covers": 97,
+      "users": 233
+    },
+    {
+      "date": "2025-03-12",
+      "spend": 0,
+      "covers": 90,
+      "users": 213
+    },
+    {
+      "date": "2025-03-13",
+      "spend": 0,
+      "covers": 104,
+      "users": 227
+    },
+    {
+      "date": "2025-03-14",
+      "spend": 0,
+      "covers": 159,
+      "users": 272
+    },
+    {
+      "date": "2025-03-15",
+      "spend": 0,
+      "covers": 180,
+      "users": 257
+    },
+    {
+      "date": "2025-03-16",
+      "spend": 0,
+      "covers": 78,
+      "users": 212
+    },
+    {
+      "date": "2025-03-17",
+      "spend": 0,
+      "covers": 96,
+      "users": 200
+    },
+    {
+      "date": "2025-03-18",
+      "spend": 0,
+      "covers": 144,
+      "users": 230
+    },
+    {
+      "date": "2025-03-19",
+      "spend": 0,
+      "covers": 92,
+      "users": 169
+    },
+    {
+      "date": "2025-03-20",
+      "spend": 0,
+      "covers": 74,
+      "users": 216
+    },
+    {
+      "date": "2025-03-21",
+      "spend": 0,
+      "covers": 179,
+      "users": 263
+    },
+    {
+      "date": "2025-03-22",
+      "spend": 0,
+      "covers": 175,
+      "users": 276
+    },
+    {
+      "date": "2025-03-23",
+      "spend": 0,
+      "covers": 84,
+      "users": 204
+    },
+    {
+      "date": "2025-03-24",
+      "spend": 0,
+      "covers": 146,
+      "users": 186
+    },
+    {
+      "date": "2025-03-25",
+      "spend": 0,
+      "covers": 137,
+      "users": 253
+    },
+    {
+      "date": "2025-03-26",
+      "spend": 0,
+      "covers": 149,
+      "users": 218
+    },
+    {
+      "date": "2025-03-27",
+      "spend": 0,
+      "covers": 110,
+      "users": 221
+    },
+    {
+      "date": "2025-03-28",
+      "spend": 0,
+      "covers": 103,
+      "users": 231
+    },
+    {
+      "date": "2025-03-29",
+      "spend": 0,
+      "covers": 119,
+      "users": 271
+    },
+    {
+      "date": "2025-03-30",
+      "spend": 0,
+      "covers": 86,
+      "users": 203
+    },
+    {
+      "date": "2025-03-31",
+      "spend": 0,
+      "covers": 71,
+      "users": 153
+    },
+    {
+      "date": "2025-04-01",
+      "spend": 0,
+      "covers": 119,
+      "users": 194
+    },
+    {
+      "date": "2025-04-02",
+      "spend": 0,
+      "covers": 90,
+      "users": 222
+    },
+    {
+      "date": "2025-04-03",
+      "spend": 0,
+      "covers": 123,
+      "users": 202
+    },
+    {
+      "date": "2025-04-04",
+      "spend": 0,
+      "covers": 166,
+      "users": 314
+    },
+    {
+      "date": "2025-04-05",
+      "spend": 0,
+      "covers": 189,
+      "users": 268
+    },
+    {
+      "date": "2025-04-06",
+      "spend": 0,
+      "covers": 77,
+      "users": 173
+    },
+    {
+      "date": "2025-04-07",
+      "spend": 0,
+      "covers": 90,
+      "users": 196
+    },
+    {
+      "date": "2025-04-08",
+      "spend": 0,
+      "covers": 73,
+      "users": 195
+    },
+    {
+      "date": "2025-04-09",
+      "spend": 0,
+      "covers": 77,
+      "users": 207
+    },
+    {
+      "date": "2025-04-10",
+      "spend": 0,
+      "covers": 111,
+      "users": 209
+    },
+    {
+      "date": "2025-04-11",
+      "spend": 0,
+      "covers": 192,
+      "users": 277
+    },
+    {
+      "date": "2025-04-12",
+      "spend": 0,
+      "covers": 259,
+      "users": 340
+    },
+    {
+      "date": "2025-04-13",
+      "spend": 0,
+      "covers": 105,
+      "users": 220
+    },
+    {
+      "date": "2025-04-14",
+      "spend": 0,
+      "covers": 56,
+      "users": 175
+    },
+    {
+      "date": "2025-04-15",
+      "spend": 0,
+      "covers": 83,
+      "users": 213
+    },
+    {
+      "date": "2025-04-16",
+      "spend": 0,
+      "covers": 50,
+      "users": 181
+    },
+    {
+      "date": "2025-04-17",
+      "spend": 0,
+      "covers": 145,
+      "users": 268
+    },
+    {
+      "date": "2025-04-18",
+      "spend": 0,
+      "covers": 119,
+      "users": 223
+    },
+    {
+      "date": "2025-04-19",
+      "spend": 0,
+      "covers": 124,
+      "users": 200
+    },
+    {
+      "date": "2025-04-20",
+      "spend": 0,
+      "covers": 82,
+      "users": 154
+    },
+    {
+      "date": "2025-04-21",
+      "spend": 0,
+      "covers": 90,
+      "users": 132
+    },
+    {
+      "date": "2025-04-22",
+      "spend": 0,
+      "covers": 101,
+      "users": 222
+    },
+    {
+      "date": "2025-04-23",
+      "spend": 0,
+      "covers": 159,
+      "users": 216
+    },
+    {
+      "date": "2025-04-24",
+      "spend": 0,
+      "covers": 114,
+      "users": 198
+    },
+    {
+      "date": "2025-04-25",
+      "spend": 0,
+      "covers": 176,
+      "users": 243
+    },
+    {
+      "date": "2025-04-26",
+      "spend": 0,
+      "covers": 189,
+      "users": 237
+    },
+    {
+      "date": "2025-04-27",
+      "spend": 0,
+      "covers": 75,
+      "users": 165
+    },
+    {
+      "date": "2025-04-28",
+      "spend": 0,
+      "covers": 60,
+      "users": 131
+    },
+    {
+      "date": "2025-04-29",
+      "spend": 0,
+      "covers": 39,
+      "users": 158
+    },
+    {
+      "date": "2025-04-30",
+      "spend": 0,
+      "covers": 120,
+      "users": 183
+    },
+    {
+      "date": "2025-05-01",
+      "spend": 0,
+      "covers": 92,
+      "users": 218
+    },
+    {
+      "date": "2025-05-02",
+      "spend": 0,
+      "covers": 167,
+      "users": 267
+    },
+    {
+      "date": "2025-05-03",
+      "spend": 6,
+      "covers": 192,
+      "users": 279
+    },
+    {
+      "date": "2025-05-04",
+      "spend": 86,
+      "covers": 90,
+      "users": 304
+    },
+    {
+      "date": "2025-05-05",
+      "spend": 0,
+      "covers": 187,
+      "users": 283
+    },
+    {
+      "date": "2025-05-06",
+      "spend": 0,
+      "covers": 112,
+      "users": 212
+    },
+    {
+      "date": "2025-05-07",
+      "spend": 0,
+      "covers": 123,
+      "users": 213
+    },
+    {
+      "date": "2025-05-08",
+      "spend": 0,
+      "covers": 100,
+      "users": 238
+    },
+    {
+      "date": "2025-05-09",
+      "spend": 0,
+      "covers": 217,
+      "users": 237
+    },
+    {
+      "date": "2025-05-10",
+      "spend": 0,
+      "covers": 127,
+      "users": 324
+    },
+    {
+      "date": "2025-05-11",
+      "spend": 0,
+      "covers": 96,
+      "users": 204
+    },
+    {
+      "date": "2025-05-12",
+      "spend": 0,
+      "covers": 57,
+      "users": 164
+    },
+    {
+      "date": "2025-05-13",
+      "spend": 0,
+      "covers": 97,
+      "users": 189
+    },
+    {
+      "date": "2025-05-14",
+      "spend": 0,
+      "covers": 77,
+      "users": 178
+    },
+    {
+      "date": "2025-05-15",
+      "spend": 0,
+      "covers": 63,
+      "users": 155
+    },
+    {
+      "date": "2025-05-16",
+      "spend": 13,
+      "covers": 108,
+      "users": 270
+    },
+    {
+      "date": "2025-05-17",
+      "spend": 25,
+      "covers": 136,
+      "users": 440
+    },
+    {
+      "date": "2025-05-18",
+      "spend": 128,
+      "covers": 64,
+      "users": 512
+    },
+    {
+      "date": "2025-05-19",
+      "spend": 150,
+      "covers": 39,
+      "users": 383
+    },
+    {
+      "date": "2025-05-20",
+      "spend": 112,
+      "covers": 88,
+      "users": 342
+    },
+    {
+      "date": "2025-05-21",
+      "spend": 95,
+      "covers": 122,
+      "users": 389
+    },
+    {
+      "date": "2025-05-22",
+      "spend": 70,
+      "covers": 98,
+      "users": 358
+    },
+    {
+      "date": "2025-05-23",
+      "spend": 100,
+      "covers": 108,
+      "users": 434
+    },
+    {
+      "date": "2025-05-24",
+      "spend": 137,
+      "covers": 188,
+      "users": 470
+    },
+    {
+      "date": "2025-05-25",
+      "spend": 103,
+      "covers": 112,
+      "users": 540
+    },
+    {
+      "date": "2025-05-26",
+      "spend": 71,
+      "covers": 90,
+      "users": 387
+    },
+    {
+      "date": "2025-05-27",
+      "spend": 74,
+      "covers": 112,
+      "users": 364
+    },
+    {
+      "date": "2025-05-28",
+      "spend": 86,
+      "covers": 93,
+      "users": 435
+    },
+    {
+      "date": "2025-05-29",
+      "spend": 131,
+      "covers": 214,
+      "users": 439
+    },
+    {
+      "date": "2025-05-30",
+      "spend": 204,
+      "covers": 133,
+      "users": 406
+    },
+    {
+      "date": "2025-05-31",
+      "spend": 316,
+      "covers": 192,
+      "users": 478
+    },
+    {
+      "date": "2025-06-01",
+      "spend": 155,
+      "covers": 101,
+      "users": 436
+    },
+    {
+      "date": "2025-06-02",
+      "spend": 81,
+      "covers": 30,
+      "users": 356
+    },
+    {
+      "date": "2025-06-03",
+      "spend": 118,
+      "covers": 50,
+      "users": 304
+    },
+    {
+      "date": "2025-06-04",
+      "spend": 148,
+      "covers": 80,
+      "users": 350
+    },
+    {
+      "date": "2025-06-05",
+      "spend": 110,
+      "covers": 92,
+      "users": 200
+    },
+    {
+      "date": "2025-06-06",
+      "spend": 101,
+      "covers": 102,
+      "users": 200
+    },
+    {
+      "date": "2025-06-07",
+      "spend": 200,
+      "covers": 161,
+      "users": 180
+    },
+    {
+      "date": "2025-06-08",
+      "spend": 92,
+      "covers": 85,
+      "users": 190
+    },
+    {
+      "date": "2025-06-09",
+      "spend": 42,
+      "covers": 52,
+      "users": 145
+    },
+    {
+      "date": "2025-06-10",
+      "spend": 113,
+      "covers": 148,
+      "users": 240
+    },
+    {
+      "date": "2025-06-11",
+      "spend": 117,
+      "covers": 114,
+      "users": 286
+    },
+    {
+      "date": "2025-06-12",
+      "spend": 125,
+      "covers": 68,
+      "users": 316
+    },
+    {
+      "date": "2025-06-13",
+      "spend": 154,
+      "covers": 116,
+      "users": 391
+    },
+    {
+      "date": "2025-06-14",
+      "spend": 232,
+      "covers": 161,
+      "users": 440
+    },
+    {
+      "date": "2025-06-15",
+      "spend": 151,
+      "covers": 108,
+      "users": 348
+    },
+    {
+      "date": "2025-06-16",
+      "spend": 80,
+      "covers": 33,
+      "users": 330
+    },
+    {
+      "date": "2025-06-17",
+      "spend": 94,
+      "covers": 77,
+      "users": 269
+    },
+    {
+      "date": "2025-06-18",
+      "spend": 309,
+      "covers": 73,
+      "users": 777
+    },
+    {
+      "date": "2025-06-19",
+      "spend": 330,
+      "covers": 228,
+      "users": 1126
+    },
+    {
+      "date": "2025-06-20",
+      "spend": 162,
+      "covers": 221,
+      "users": 529
+    },
+    {
+      "date": "2025-06-21",
+      "spend": 325,
+      "covers": 171,
+      "users": 629
+    },
+    {
+      "date": "2025-06-22",
+      "spend": 236,
+      "covers": 128,
+      "users": 465
+    },
+    {
+      "date": "2025-06-23",
+      "spend": 107,
+      "covers": 34,
+      "users": 290
+    },
+    {
+      "date": "2025-06-24",
+      "spend": 108,
+      "covers": 77,
+      "users": 301
+    },
+    {
+      "date": "2025-06-25",
+      "spend": 111,
+      "covers": 78,
+      "users": 303
+    },
+    {
+      "date": "2025-06-26",
+      "spend": 104,
+      "covers": 72,
+      "users": 299
+    },
+    {
+      "date": "2025-06-27",
+      "spend": 118,
+      "covers": 104,
+      "users": 284
+    },
+    {
+      "date": "2025-06-28",
+      "spend": 149,
+      "covers": 130,
+      "users": 285
+    },
+    {
+      "date": "2025-06-29",
+      "spend": 147,
+      "covers": 66,
+      "users": 293
+    },
+    {
+      "date": "2025-06-30",
+      "spend": 198,
+      "covers": 33,
+      "users": 326
+    },
+    {
+      "date": "2025-07-01",
+      "spend": 189,
+      "covers": 32,
+      "users": 287
+    },
+    {
+      "date": "2025-07-02",
+      "spend": 129,
+      "covers": 40,
+      "users": 330
+    },
+    {
+      "date": "2025-07-03",
+      "spend": 146,
+      "covers": 164,
+      "users": 340
+    },
+    {
+      "date": "2025-07-04",
+      "spend": 180,
+      "covers": 220,
+      "users": 364
+    },
+    {
+      "date": "2025-07-05",
+      "spend": 262,
+      "covers": 134,
+      "users": 364
+    },
+    {
+      "date": "2025-07-06",
+      "spend": 201,
+      "covers": 135,
+      "users": 395
+    },
+    {
+      "date": "2025-07-07",
+      "spend": 135,
+      "covers": 128,
+      "users": 400
+    },
+    {
+      "date": "2025-07-08",
+      "spend": 116,
+      "covers": 158,
+      "users": 436
+    },
+    {
+      "date": "2025-07-09",
+      "spend": 126,
+      "covers": 164,
+      "users": 423
+    },
+    {
+      "date": "2025-07-10",
+      "spend": 141,
+      "covers": 147,
+      "users": 407
+    },
+    {
+      "date": "2025-07-11",
+      "spend": 239,
+      "covers": 235,
+      "users": 409
+    },
+    {
+      "date": "2025-07-12",
+      "spend": 306,
+      "covers": 211,
+      "users": 429
+    },
+    {
+      "date": "2025-07-13",
+      "spend": 247,
+      "covers": 99,
+      "users": 413
+    },
+    {
+      "date": "2025-07-14",
+      "spend": 132,
+      "covers": 98,
+      "users": 320
+    },
+    {
+      "date": "2025-07-15",
+      "spend": 136,
+      "covers": 147,
+      "users": 423
+    },
+    {
+      "date": "2025-07-16",
+      "spend": 153,
+      "covers": 154,
+      "users": 428
+    },
+    {
+      "date": "2025-07-17",
+      "spend": 158,
+      "covers": 124,
+      "users": 384
+    },
+    {
+      "date": "2025-07-18",
+      "spend": 229,
+      "covers": 139,
+      "users": 436
+    },
+    {
+      "date": "2025-07-19",
+      "spend": 321,
+      "covers": 150,
+      "users": 482
+    },
+    {
+      "date": "2025-07-20",
+      "spend": 184,
+      "covers": 95,
+      "users": 463
+    },
+    {
+      "date": "2025-07-21",
+      "spend": 134,
+      "covers": 75,
+      "users": 445
+    },
+    {
+      "date": "2025-07-22",
+      "spend": 162,
+      "covers": 108,
+      "users": 464
+    },
+    {
+      "date": "2025-07-23",
+      "spend": 199,
+      "covers": 155,
+      "users": 416
+    },
+    {
+      "date": "2025-07-24",
+      "spend": 185,
+      "covers": 196,
+      "users": 423
+    },
+    {
+      "date": "2025-07-25",
+      "spend": 257,
+      "covers": 193,
+      "users": 442
+    },
+    {
+      "date": "2025-07-26",
+      "spend": 240,
+      "covers": 193,
+      "users": 467
+    },
+    {
+      "date": "2025-07-27",
+      "spend": 141,
+      "covers": 149,
+      "users": 370
+    },
+    {
+      "date": "2025-07-28",
+      "spend": 150,
+      "covers": 111,
+      "users": 372
+    },
+    {
+      "date": "2025-07-29",
+      "spend": 181,
+      "covers": 172,
+      "users": 413
+    },
+    {
+      "date": "2025-07-30",
+      "spend": 196,
+      "covers": 124,
+      "users": 400
+    },
+    {
+      "date": "2025-07-31",
+      "spend": 211,
+      "covers": 230,
+      "users": 415
+    },
+    {
+      "date": "2025-08-01",
+      "spend": 190,
+      "covers": 114,
+      "users": 385
+    },
+    {
+      "date": "2025-08-02",
+      "spend": 195,
+      "covers": 165,
+      "users": 381
+    },
+    {
+      "date": "2025-08-03",
+      "spend": 177,
+      "covers": 103,
+      "users": 361
+    },
+    {
+      "date": "2025-08-04",
+      "spend": 152,
+      "covers": 34,
+      "users": 331
+    },
+    {
+      "date": "2025-08-05",
+      "spend": 204,
+      "covers": 110,
+      "users": 425
+    },
+    {
+      "date": "2025-08-06",
+      "spend": 209,
+      "covers": 110,
+      "users": 452
+    },
+    {
+      "date": "2025-08-07",
+      "spend": 210,
+      "covers": 113,
+      "users": 400
+    },
+    {
+      "date": "2025-08-08",
+      "spend": 192,
+      "covers": 134,
+      "users": 427
+    },
+    {
+      "date": "2025-08-09",
+      "spend": 181,
+      "covers": 190,
+      "users": 422
+    },
+    {
+      "date": "2025-08-10",
+      "spend": 194,
+      "covers": 112,
+      "users": 380
+    },
+    {
+      "date": "2025-08-11",
+      "spend": 156,
+      "covers": 79,
+      "users": 384
+    },
+    {
+      "date": "2025-08-12",
+      "spend": 217,
+      "covers": 132,
+      "users": 464
+    },
+    {
+      "date": "2025-08-13",
+      "spend": 196,
+      "covers": 100,
+      "users": 433
+    },
+    {
+      "date": "2025-08-14",
+      "spend": 182,
+      "covers": 159,
+      "users": 442
+    },
+    {
+      "date": "2025-08-15",
+      "spend": 209,
+      "covers": 195,
+      "users": 410
+    },
+    {
+      "date": "2025-08-16",
+      "spend": 206,
+      "covers": 197,
+      "users": 428
+    },
+    {
+      "date": "2025-08-17",
+      "spend": 156,
+      "covers": 98,
+      "users": 366
+    },
+    {
+      "date": "2025-08-18",
+      "spend": 133,
+      "covers": 30,
+      "users": 322
+    },
+    {
+      "date": "2025-08-19",
+      "spend": 247,
+      "covers": 179,
+      "users": 474
+    },
+    {
+      "date": "2025-08-20",
+      "spend": 157,
+      "covers": 74,
+      "users": 478
+    },
+    {
+      "date": "2025-08-21",
+      "spend": 227,
+      "covers": 121,
+      "users": 444
+    },
+    {
+      "date": "2025-08-22",
+      "spend": 192,
+      "covers": 181,
+      "users": 481
+    },
+    {
+      "date": "2025-08-23",
+      "spend": 183,
+      "covers": 138,
+      "users": 416
+    },
+    {
+      "date": "2025-08-24",
+      "spend": 156,
+      "covers": 148,
+      "users": 365
+    },
+    {
+      "date": "2025-08-25",
+      "spend": 181,
+      "covers": 73,
+      "users": 345
+    },
+    {
+      "date": "2025-08-26",
+      "spend": 200,
+      "covers": 141,
+      "users": 423
+    },
+    {
+      "date": "2025-08-27",
+      "spend": 177,
+      "covers": 124,
+      "users": 482
+    },
+    {
+      "date": "2025-08-28",
+      "spend": 180,
+      "covers": 116,
+      "users": 750
+    },
+    {
+      "date": "2025-08-29",
+      "spend": 178,
+      "covers": 174,
+      "users": 391
+    },
+    {
+      "date": "2025-08-30",
+      "spend": 182,
+      "covers": 106,
+      "users": 390
+    },
+    {
+      "date": "2025-08-31",
+      "spend": 161,
+      "covers": 107,
+      "users": 421
+    },
+    {
+      "date": "2025-09-01",
+      "spend": 140,
+      "covers": 31,
+      "users": 321
+    },
+    {
+      "date": "2025-09-02",
+      "spend": 241,
+      "covers": 128,
+      "users": 477
+    },
+    {
+      "date": "2025-09-03",
+      "spend": 189,
+      "covers": 188,
+      "users": 496
+    },
+    {
+      "date": "2025-09-04",
+      "spend": 188,
+      "covers": 115,
+      "users": 441
+    },
+    {
+      "date": "2025-09-05",
+      "spend": 202,
+      "covers": 269,
+      "users": 485
+    },
+    {
+      "date": "2025-09-06",
+      "spend": 204,
+      "covers": 178,
+      "users": 481
+    },
+    {
+      "date": "2025-09-07",
+      "spend": 162,
+      "covers": 133,
+      "users": 416
+    },
+    {
+      "date": "2025-09-08",
+      "spend": 164,
+      "covers": 85,
+      "users": 384
+    },
+    {
+      "date": "2025-09-09",
+      "spend": 219,
+      "covers": 141,
+      "users": 405
+    },
+    {
+      "date": "2025-09-10",
+      "spend": 196,
+      "covers": 119,
+      "users": 423
+    },
+    {
+      "date": "2025-09-11",
+      "spend": 187,
+      "covers": 185,
+      "users": 382
+    },
+    {
+      "date": "2025-09-12",
+      "spend": 178,
+      "covers": 169,
+      "users": 425
+    },
+    {
+      "date": "2025-09-13",
+      "spend": 184,
+      "covers": 170,
+      "users": 421
+    },
+    {
+      "date": "2025-09-14",
+      "spend": 178,
+      "covers": 128,
+      "users": 390
+    },
+    {
+      "date": "2025-09-15",
+      "spend": 157,
+      "covers": 97,
+      "users": 330
+    },
+    {
+      "date": "2025-09-16",
+      "spend": 159,
+      "covers": 129,
+      "users": 343
+    },
+    {
+      "date": "2025-09-17",
+      "spend": 127,
+      "covers": 120,
+      "users": 346
+    },
+    {
+      "date": "2025-09-18",
+      "spend": 282,
+      "covers": 115,
+      "users": 1213
+    },
+    {
+      "date": "2025-09-19",
+      "spend": 308,
+      "covers": 162,
+      "users": 1303
+    },
+    {
+      "date": "2025-09-20",
+      "spend": 258,
+      "covers": 209,
+      "users": 1250
+    },
+    {
+      "date": "2025-09-21",
+      "spend": 175,
+      "covers": 114,
+      "users": 962
+    },
+    {
+      "date": "2025-09-22",
+      "spend": 206,
+      "covers": 68,
+      "users": 865
+    },
+    {
+      "date": "2025-09-23",
+      "spend": 258,
+      "covers": 136,
+      "users": 866
+    },
+    {
+      "date": "2025-09-24",
+      "spend": 237,
+      "covers": 130,
+      "users": 883
+    },
+    {
+      "date": "2025-09-25",
+      "spend": 248,
+      "covers": 140,
+      "users": 811
+    },
+    {
+      "date": "2025-09-26",
+      "spend": 258,
+      "covers": 114,
+      "users": 925
+    },
+    {
+      "date": "2025-09-27",
+      "spend": 227,
+      "covers": 179,
+      "users": 1027
+    },
+    {
+      "date": "2025-09-28",
+      "spend": 191,
+      "covers": 74,
+      "users": 850
+    },
+    {
+      "date": "2025-09-29",
+      "spend": 223,
+      "covers": 168,
+      "users": 849
+    },
+    {
+      "date": "2025-09-30",
+      "spend": 222,
+      "covers": 133,
+      "users": 670
+    },
+    {
+      "date": "2025-10-01",
+      "spend": 171,
+      "covers": 107,
+      "users": 605
+    },
+    {
+      "date": "2025-10-02",
+      "spend": 187,
+      "covers": 166,
+      "users": 604
+    },
+    {
+      "date": "2025-10-03",
+      "spend": 191,
+      "covers": 167,
+      "users": 586
+    },
+    {
+      "date": "2025-10-04",
+      "spend": 186,
+      "covers": 161,
+      "users": 596
+    },
+    {
+      "date": "2025-10-05",
+      "spend": 178,
+      "covers": 87,
+      "users": 581
+    },
+    {
+      "date": "2025-10-06",
+      "spend": 191,
+      "covers": 75,
+      "users": 512
+    },
+    {
+      "date": "2025-10-07",
+      "spend": 169,
+      "covers": 151,
+      "users": 567
+    },
+    {
+      "date": "2025-10-08",
+      "spend": 105,
+      "covers": 117,
+      "users": 492
+    },
+    {
+      "date": "2025-10-09",
+      "spend": 227,
+      "covers": 148,
+      "users": 589
+    },
+    {
+      "date": "2025-10-10",
+      "spend": 161,
+      "covers": 188,
+      "users": 608
+    },
+    {
+      "date": "2025-10-11",
+      "spend": 231,
+      "covers": 166,
+      "users": 863
+    },
+    {
+      "date": "2025-10-12",
+      "spend": 176,
+      "covers": 96,
+      "users": 671
+    },
+    {
+      "date": "2025-10-13",
+      "spend": 164,
+      "covers": 39,
+      "users": 518
+    },
+    {
+      "date": "2025-10-14",
+      "spend": 183,
+      "covers": 180,
+      "users": 679
+    },
+    {
+      "date": "2025-10-15",
+      "spend": 172,
+      "covers": 342,
+      "users": 906
+    },
+    {
+      "date": "2025-10-16",
+      "spend": 184,
+      "covers": 137,
+      "users": 689
+    },
+    {
+      "date": "2025-10-17",
+      "spend": 164,
+      "covers": 184,
+      "users": 667
+    },
+    {
+      "date": "2025-10-18",
+      "spend": 188,
+      "covers": 119,
+      "users": 705
+    },
+    {
+      "date": "2025-10-19",
+      "spend": 163,
+      "covers": 138,
+      "users": 641
+    },
+    {
+      "date": "2025-10-20",
+      "spend": 168,
+      "covers": 91,
+      "users": 534
+    },
+    {
+      "date": "2025-10-21",
+      "spend": 163,
+      "covers": 196,
+      "users": 680
+    },
+    {
+      "date": "2025-10-22",
+      "spend": 169,
+      "covers": 208,
+      "users": 723
+    },
+    {
+      "date": "2025-10-23",
+      "spend": 173,
+      "covers": 228,
+      "users": 794
+    },
+    {
+      "date": "2025-10-24",
+      "spend": 198,
+      "covers": 173,
+      "users": 727
+    },
+    {
+      "date": "2025-10-25",
+      "spend": 161,
+      "covers": 243,
+      "users": 806
+    },
+    {
+      "date": "2025-10-26",
+      "spend": 204,
+      "covers": 106,
+      "users": 803
+    },
+    {
+      "date": "2025-10-27",
+      "spend": 149,
+      "covers": 98,
+      "users": 645
+    },
+    {
+      "date": "2025-10-28",
+      "spend": 186,
+      "covers": 133,
+      "users": 748
+    },
+    {
+      "date": "2025-10-29",
+      "spend": 152,
+      "covers": 91,
+      "users": 582
+    },
+    {
+      "date": "2025-10-30",
+      "spend": 175,
+      "covers": 150,
+      "users": 565
+    },
+    {
+      "date": "2025-10-31",
+      "spend": 126,
+      "covers": 193,
+      "users": 463
+    },
+    {
+      "date": "2025-11-01",
+      "spend": 138,
+      "covers": 209,
+      "users": 551
+    },
+    {
+      "date": "2025-11-02",
+      "spend": 167,
+      "covers": 233,
+      "users": 685
+    },
+    {
+      "date": "2025-11-03",
+      "spend": 183,
+      "covers": 157,
+      "users": 695
+    },
+    {
+      "date": "2025-11-04",
+      "spend": 186,
+      "covers": 289,
+      "users": 703
+    },
+    {
+      "date": "2025-11-05",
+      "spend": 164,
+      "covers": 159,
+      "users": 743
+    },
+    {
+      "date": "2025-11-06",
+      "spend": 206,
+      "covers": 199,
+      "users": 710
+    },
+    {
+      "date": "2025-11-07",
+      "spend": 200,
+      "covers": 254,
+      "users": 703
+    },
+    {
+      "date": "2025-11-08",
+      "spend": 194,
+      "covers": 318,
+      "users": 770
+    },
+    {
+      "date": "2025-11-09",
+      "spend": 163,
+      "covers": 237,
+      "users": 692
+    },
+    {
+      "date": "2025-11-10",
+      "spend": 177,
+      "covers": 145,
+      "users": 627
+    },
+    {
+      "date": "2025-11-11",
+      "spend": 220,
+      "covers": 388,
+      "users": 725
+    },
+    {
+      "date": "2025-11-12",
+      "spend": 193,
+      "covers": 216,
+      "users": 682
+    },
+    {
+      "date": "2025-11-13",
+      "spend": 181,
+      "covers": 229,
+      "users": 677
+    },
+    {
+      "date": "2025-11-14",
+      "spend": 178,
+      "covers": 189,
+      "users": 577
+    },
+    {
+      "date": "2025-11-15",
+      "spend": 182,
+      "covers": 268,
+      "users": 707
+    },
+    {
+      "date": "2025-11-16",
+      "spend": 171,
+      "covers": 171,
+      "users": 676
+    },
+    {
+      "date": "2025-11-17",
+      "spend": 188,
+      "covers": 106,
+      "users": 553
+    },
+    {
+      "date": "2025-11-18",
+      "spend": 172,
+      "covers": 329,
+      "users": 615
+    },
+    {
+      "date": "2025-11-19",
+      "spend": 185,
+      "covers": 266,
+      "users": 838
+    },
+    {
+      "date": "2025-11-20",
+      "spend": 167,
+      "covers": 220,
+      "users": 646
+    },
+    {
+      "date": "2025-11-21",
+      "spend": 182,
+      "covers": 318,
+      "users": 621
+    },
+    {
+      "date": "2025-11-22",
+      "spend": 204,
+      "covers": 270,
+      "users": 651
+    },
+    {
+      "date": "2025-11-23",
+      "spend": 170,
+      "covers": 231,
+      "users": 648
+    },
+    {
+      "date": "2025-11-24",
+      "spend": 175,
+      "covers": 168,
+      "users": 582
+    },
+    {
+      "date": "2025-11-25",
+      "spend": 170,
+      "covers": 158,
+      "users": 602
+    },
+    {
+      "date": "2025-11-26",
+      "spend": 194,
+      "covers": 290,
+      "users": 682
+    },
+    {
+      "date": "2025-11-27",
+      "spend": 199,
+      "covers": 277,
+      "users": 682
+    },
+    {
+      "date": "2025-11-28",
+      "spend": 185,
+      "covers": 273,
+      "users": 668
+    },
+    {
+      "date": "2025-11-29",
+      "spend": 184,
+      "covers": 328,
+      "users": 651
+    },
+    {
+      "date": "2025-11-30",
+      "spend": 191,
+      "covers": 240,
+      "users": 659
+    },
+    {
+      "date": "2025-12-01",
+      "spend": 200,
+      "covers": 156,
+      "users": 613
+    },
+    {
+      "date": "2025-12-02",
+      "spend": 202,
+      "covers": 304,
+      "users": 835
+    },
+    {
+      "date": "2025-12-03",
+      "spend": 211,
+      "covers": 305,
+      "users": 741
+    },
+    {
+      "date": "2025-12-04",
+      "spend": 203,
+      "covers": 250,
+      "users": 801
+    },
+    {
+      "date": "2025-12-05",
+      "spend": 179,
+      "covers": 231,
+      "users": 767
+    },
+    {
+      "date": "2025-12-06",
+      "spend": 180,
+      "covers": 299,
+      "users": 754
+    },
+    {
+      "date": "2025-12-07",
+      "spend": 223,
+      "covers": 210,
+      "users": 792
+    },
+    {
+      "date": "2025-12-08",
+      "spend": 214,
+      "covers": 235,
+      "users": 817
+    },
+    {
+      "date": "2025-12-09",
+      "spend": 204,
+      "covers": 209,
+      "users": 793
+    },
+    {
+      "date": "2025-12-10",
+      "spend": 162,
+      "covers": 182,
+      "users": 668
+    },
+    {
+      "date": "2025-12-11",
+      "spend": 177,
+      "covers": 197,
+      "users": 639
+    },
+    {
+      "date": "2025-12-12",
+      "spend": 231,
+      "covers": 256,
+      "users": 769
+    },
+    {
+      "date": "2025-12-13",
+      "spend": 188,
+      "covers": 206,
+      "users": 727
+    },
+    {
+      "date": "2025-12-14",
+      "spend": 233,
+      "covers": 169,
+      "users": 697
+    },
+    {
+      "date": "2025-12-15",
+      "spend": 153,
+      "covers": 137,
+      "users": 551
+    },
+    {
+      "date": "2025-12-16",
+      "spend": 239,
+      "covers": 198,
+      "users": 666
+    },
+    {
+      "date": "2025-12-17",
+      "spend": 184,
+      "covers": 99,
+      "users": 666
+    },
+    {
+      "date": "2025-12-18",
+      "spend": 217,
+      "covers": 101,
+      "users": 532
+    },
+    {
+      "date": "2025-12-19",
+      "spend": 189,
+      "covers": 210,
+      "users": 588
+    },
+    {
+      "date": "2025-12-20",
+      "spend": 191,
+      "covers": 292,
+      "users": 621
+    },
+    {
+      "date": "2025-12-21",
+      "spend": 227,
+      "covers": 154,
+      "users": 643
+    },
+    {
+      "date": "2025-12-22",
+      "spend": 184,
+      "covers": 109,
+      "users": 518
+    },
+    {
+      "date": "2025-12-23",
+      "spend": 192,
+      "covers": 153,
+      "users": 467
+    },
+    {
+      "date": "2025-12-24",
+      "spend": 120,
+      "covers": 34,
+      "users": 355
+    },
+    {
+      "date": "2025-12-25",
+      "spend": 191,
+      "covers": 31,
+      "users": 345
+    },
+    {
+      "date": "2025-12-26",
+      "spend": 248,
+      "covers": 89,
+      "users": 455
+    },
+    {
+      "date": "2025-12-27",
+      "spend": 212,
+      "covers": 220,
+      "users": 625
+    },
+    {
+      "date": "2025-12-28",
+      "spend": 189,
+      "covers": 158,
+      "users": 603
+    },
+    {
+      "date": "2025-12-29",
+      "spend": 184,
+      "covers": 89,
+      "users": 622
+    },
+    {
+      "date": "2025-12-30",
+      "spend": 190,
+      "covers": 225,
+      "users": 696
+    },
+    {
+      "date": "2025-12-31",
+      "spend": 146,
+      "covers": 121,
+      "users": 502
+    },
+    {
+      "date": "2026-01-01",
+      "spend": 197,
+      "covers": 68,
+      "users": 550
+    },
+    {
+      "date": "2026-01-02",
+      "spend": 194,
+      "covers": 222,
+      "users": 658
+    },
+    {
+      "date": "2026-01-03",
+      "spend": 185,
+      "covers": 209,
+      "users": 657
+    },
+    {
+      "date": "2026-01-04",
+      "spend": 210,
+      "covers": 157,
+      "users": 669
+    },
+    {
+      "date": "2026-01-05",
+      "spend": 180,
+      "covers": 116,
+      "users": 774
+    },
+    {
+      "date": "2026-01-06",
+      "spend": 245,
+      "covers": 154,
+      "users": 681
+    },
+    {
+      "date": "2026-01-07",
+      "spend": 203,
+      "covers": 176,
+      "users": 637
+    },
+    {
+      "date": "2026-01-08",
+      "spend": 203,
+      "covers": 168,
+      "users": 596
+    },
+    {
+      "date": "2026-01-09",
+      "spend": 194,
+      "covers": 137,
+      "users": 576
+    },
+    {
+      "date": "2026-01-10",
+      "spend": 191,
+      "covers": 173,
+      "users": 698
+    },
+    {
+      "date": "2026-01-11",
+      "spend": 175,
+      "covers": 203,
+      "users": 581
+    },
+    {
+      "date": "2026-01-12",
+      "spend": 203,
+      "covers": 106,
+      "users": 587
+    },
+    {
+      "date": "2026-01-13",
+      "spend": 225,
+      "covers": 250,
+      "users": 584
+    },
+    {
+      "date": "2026-01-14",
+      "spend": 166,
+      "covers": 194,
+      "users": 629
+    },
+    {
+      "date": "2026-01-15",
+      "spend": 138,
+      "covers": 226,
+      "users": 342
+    },
+    {
+      "date": "2026-01-16",
+      "spend": 103,
+      "covers": 156,
+      "users": 379
+    },
+    {
+      "date": "2026-01-17",
+      "spend": 106,
+      "covers": 199,
+      "users": 700
+    },
+    {
+      "date": "2026-01-18",
+      "spend": 73,
+      "covers": 167,
+      "users": 824
+    },
+    {
+      "date": "2026-01-19",
+      "spend": 93,
+      "covers": 118,
+      "users": 450
+    },
+    {
+      "date": "2026-01-20",
+      "spend": 104,
+      "covers": 141,
+      "users": 493
+    },
+    {
+      "date": "2026-01-21",
+      "spend": 105,
+      "covers": 149,
+      "users": 387
+    },
+    {
+      "date": "2026-01-22",
+      "spend": 271,
+      "covers": 174,
+      "users": 687
+    },
+    {
+      "date": "2026-01-23",
+      "spend": 262,
+      "covers": 198,
+      "users": 833
+    },
+    {
+      "date": "2026-01-24",
+      "spend": 264,
+      "covers": 209,
+      "users": 734
+    },
+    {
+      "date": "2026-01-25",
+      "spend": 184,
+      "covers": 151,
+      "users": 574
+    },
+    {
+      "date": "2026-01-26",
+      "spend": 201,
+      "covers": 82,
+      "users": 564
+    },
+    {
+      "date": "2026-01-27",
+      "spend": 226,
+      "covers": 194,
+      "users": 623
+    },
+    {
+      "date": "2026-01-28",
+      "spend": 192,
+      "covers": 169,
+      "users": 598
+    },
+    {
+      "date": "2026-01-29",
+      "spend": 190,
+      "covers": 197,
+      "users": 633
+    },
+    {
+      "date": "2026-01-30",
+      "spend": 179,
+      "covers": 213,
+      "users": 624
+    },
+    {
+      "date": "2026-01-31",
+      "spend": 182,
+      "covers": 204,
+      "users": 664
+    },
+    {
+      "date": "2026-02-01",
+      "spend": 208,
+      "covers": 174,
+      "users": 696
+    },
+    {
+      "date": "2026-02-02",
+      "spend": 221,
+      "covers": 252,
+      "users": 616
+    },
+    {
+      "date": "2026-02-03",
+      "spend": 198,
+      "covers": 230,
+      "users": 644
+    },
+    {
+      "date": "2026-02-04",
+      "spend": 224,
+      "covers": 209,
+      "users": 832
+    },
+    {
+      "date": "2026-02-05",
+      "spend": 187,
+      "covers": 219,
+      "users": 743
+    },
+    {
+      "date": "2026-02-06",
+      "spend": 227,
+      "covers": 146,
+      "users": 695
+    },
+    {
+      "date": "2026-02-07",
+      "spend": 212,
+      "covers": 175,
+      "users": 651
+    },
+    {
+      "date": "2026-02-08",
+      "spend": 171,
+      "covers": 112,
+      "users": 540
+    },
+    {
+      "date": "2026-02-09",
+      "spend": 221,
+      "covers": 137,
+      "users": 520
+    },
+    {
+      "date": "2026-02-10",
+      "spend": 166,
+      "covers": 179,
+      "users": 493
+    },
+    {
+      "date": "2026-02-11",
+      "spend": 177,
+      "covers": 167,
+      "users": 521
+    },
+    {
+      "date": "2026-02-12",
+      "spend": 173,
+      "covers": 143,
+      "users": 533
+    },
+    {
+      "date": "2026-02-13",
+      "spend": 196,
+      "covers": 194,
+      "users": 596
+    },
+    {
+      "date": "2026-02-14",
+      "spend": 183,
+      "covers": 150,
+      "users": 572
+    },
+    {
+      "date": "2026-02-15",
+      "spend": 130,
+      "covers": 148,
+      "users": 536
+    },
+    {
+      "date": "2026-02-16",
+      "spend": 161,
+      "covers": 87,
+      "users": 454
+    },
+    {
+      "date": "2026-02-17",
+      "spend": 194,
+      "covers": 140,
+      "users": 459
+    },
+    {
+      "date": "2026-02-18",
+      "spend": 155,
+      "covers": 108,
+      "users": 403
+    },
+    {
+      "date": "2026-02-19",
+      "spend": 152,
+      "covers": 149,
+      "users": 382
+    },
+    {
+      "date": "2026-02-20",
+      "spend": 243,
+      "covers": 174,
+      "users": 1008
+    },
+    {
+      "date": "2026-02-21",
+      "spend": 201,
+      "covers": 121,
+      "users": 627
+    },
+    {
+      "date": "2026-02-22",
+      "spend": 157,
+      "covers": 109,
+      "users": 521
+    },
+    {
+      "date": "2026-02-23",
+      "spend": 183,
+      "covers": 108,
+      "users": 429
+    },
+    {
+      "date": "2026-02-24",
+      "spend": 218,
+      "covers": 182,
+      "users": 482
+    },
+    {
+      "date": "2026-02-25",
+      "spend": 164,
+      "covers": 138,
+      "users": 444
+    },
+    {
+      "date": "2026-02-26",
+      "spend": 179,
+      "covers": 167,
+      "users": 493
+    },
+    {
+      "date": "2026-02-27",
+      "spend": 188,
+      "covers": 78,
+      "users": 612
+    },
+    {
+      "date": "2026-02-28",
+      "spend": 175,
+      "covers": 278,
+      "users": 659
+    },
+    {
+      "date": "2026-03-01",
+      "spend": 184,
+      "covers": 97,
+      "users": 544
+    },
+    {
+      "date": "2026-03-02",
+      "spend": 183,
+      "covers": 82,
+      "users": 487
+    },
+    {
+      "date": "2026-03-03",
+      "spend": 241,
+      "covers": 203,
+      "users": 579
+    },
+    {
+      "date": "2026-03-04",
+      "spend": 221,
+      "covers": 226,
+      "users": 619
+    },
+    {
+      "date": "2026-03-05",
+      "spend": 212,
+      "covers": 208,
+      "users": 668
+    },
+    {
+      "date": "2026-03-06",
+      "spend": 213,
+      "covers": 214,
+      "users": 676
+    },
+    {
+      "date": "2026-03-07",
+      "spend": 257,
+      "covers": 269,
+      "users": 738
+    },
+    {
+      "date": "2026-03-08",
+      "spend": 217,
+      "covers": 146,
+      "users": 628
+    },
+    {
+      "date": "2026-03-09",
+      "spend": 181,
+      "covers": 169,
+      "users": 472
+    },
+    {
+      "date": "2026-03-10",
+      "spend": 179,
+      "covers": 234,
+      "users": 506
+    },
+    {
+      "date": "2026-03-11",
+      "spend": 165,
+      "covers": 212,
+      "users": 509
+    },
+    {
+      "date": "2026-03-12",
+      "spend": 160,
+      "covers": 157,
+      "users": 403
+    },
+    {
+      "date": "2026-03-13",
+      "spend": 178,
+      "covers": 0,
+      "users": 17
+    },
+    {
+      "date": "2026-03-14",
+      "spend": 174,
+      "covers": 0,
+      "users": 0
+    },
+    {
+      "date": "2026-03-15",
+      "spend": 167,
+      "covers": 0,
+      "users": 0
+    },
+    {
+      "date": "2026-03-16",
+      "spend": 93,
+      "covers": 0,
+      "users": 0
+    },
+    {
+      "date": "2026-03-17",
+      "spend": 86,
+      "covers": 0,
+      "users": 0
+    },
+    {
+      "date": "2026-03-18",
+      "spend": 16,
+      "covers": 0,
+      "users": 0
+    },
+    {
+      "date": "2026-03-19",
+      "spend": 0,
+      "covers": 0,
+      "users": 0
+    }
+  ],
+  "monthly": [
+    {
+      "month": "2024-07",
+      "spend": 1253,
+      "covers": 2091,
+      "users": 11639,
+      "days": 31,
+      "costPerCover": 0.6,
+      "avgDailyCovers": 67.5
+    },
+    {
+      "month": "2024-08",
+      "spend": 4455,
+      "covers": 3060,
+      "users": 19997,
+      "days": 31,
+      "costPerCover": 1.46,
+      "avgDailyCovers": 98.7
+    },
+    {
+      "month": "2024-09",
+      "spend": 7293,
+      "covers": 3693,
+      "users": 47162,
+      "days": 30,
+      "costPerCover": 1.97,
+      "avgDailyCovers": 123.1
+    },
+    {
+      "month": "2024-10",
+      "spend": 3759,
+      "covers": 4284,
+      "users": 31179,
+      "days": 31,
+      "costPerCover": 0.88,
+      "avgDailyCovers": 138.2
+    },
+    {
+      "month": "2024-11",
+      "spend": 4035,
+      "covers": 5041,
+      "users": 33046,
+      "days": 30,
+      "costPerCover": 0.8,
+      "avgDailyCovers": 168
+    },
+    {
+      "month": "2024-12",
+      "spend": 4318,
+      "covers": 4028,
+      "users": 32846,
+      "days": 31,
+      "costPerCover": 1.07,
+      "avgDailyCovers": 129.9
+    },
+    {
+      "month": "2025-01",
+      "spend": 2768,
+      "covers": 4645,
+      "users": 34091,
+      "days": 31,
+      "costPerCover": 0.6,
+      "avgDailyCovers": 149.8
+    },
+    {
+      "month": "2025-02",
+      "spend": 1950,
+      "covers": 3230,
+      "users": 20115,
+      "days": 28,
+      "costPerCover": 0.6,
+      "avgDailyCovers": 115.4
+    },
+    {
+      "month": "2025-03",
+      "spend": 0,
+      "covers": 3448,
+      "users": 6875,
+      "days": 31,
+      "costPerCover": 0,
+      "avgDailyCovers": 111.2
+    },
+    {
+      "month": "2025-04",
+      "spend": 0,
+      "covers": 3453,
+      "users": 6316,
+      "days": 30,
+      "costPerCover": 0,
+      "avgDailyCovers": 115.1
+    },
+    {
+      "month": "2025-05",
+      "spend": 1907,
+      "covers": 3694,
+      "users": 10112,
+      "days": 31,
+      "costPerCover": 0.52,
+      "avgDailyCovers": 119.2
+    },
+    {
+      "month": "2025-06",
+      "spend": 4517,
+      "covers": 2993,
+      "users": 10888,
+      "days": 30,
+      "costPerCover": 1.51,
+      "avgDailyCovers": 99.8
+    },
+    {
+      "month": "2025-07",
+      "spend": 5786,
+      "covers": 4480,
+      "users": 12560,
+      "days": 31,
+      "costPerCover": 1.29,
+      "avgDailyCovers": 144.5
+    },
+    {
+      "month": "2025-08",
+      "spend": 5780,
+      "covers": 3857,
+      "users": 13073,
+      "days": 31,
+      "costPerCover": 1.5,
+      "avgDailyCovers": 124.4
+    },
+    {
+      "month": "2025-09",
+      "spend": 6168,
+      "covers": 4127,
+      "users": 19440,
+      "days": 30,
+      "costPerCover": 1.49,
+      "avgDailyCovers": 137.6
+    },
+    {
+      "month": "2025-10",
+      "spend": 5415,
+      "covers": 4678,
+      "users": 20149,
+      "days": 31,
+      "costPerCover": 1.16,
+      "avgDailyCovers": 150.9
+    },
+    {
+      "month": "2025-11",
+      "spend": 5469,
+      "covers": 7135,
+      "users": 20021,
+      "days": 30,
+      "costPerCover": 0.77,
+      "avgDailyCovers": 237.8
+    },
+    {
+      "month": "2025-12",
+      "spend": 6063,
+      "covers": 5629,
+      "users": 19868,
+      "days": 31,
+      "costPerCover": 1.08,
+      "avgDailyCovers": 181.6
+    },
+    {
+      "month": "2026-01",
+      "spend": 5644,
+      "covers": 5280,
+      "users": 18986,
+      "days": 31,
+      "costPerCover": 1.07,
+      "avgDailyCovers": 170.3
+    },
+    {
+      "month": "2026-02",
+      "spend": 5264,
+      "covers": 4474,
+      "users": 16161,
+      "days": 28,
+      "costPerCover": 1.18,
+      "avgDailyCovers": 159.8
+    },
+    {
+      "month": "2026-03",
+      "spend": 3127,
+      "covers": 2217,
+      "users": 6846,
+      "days": 19,
+      "costPerCover": 1.41,
+      "avgDailyCovers": 116.7
+    }
+  ]
+}
