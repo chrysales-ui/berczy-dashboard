@@ -1092,16 +1092,17 @@ function renderEmail() {
 
 // ── 4W Rolling ────────────────────────────────────────────────────────────
 
-// Convert a local Date to YYYY-MM-DD without UTC shift
-function localStr(d) {
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+// All date arithmetic uses UTC to avoid timezone/DST issues.
+// Date strings are always YYYY-MM-DD and treated as UTC midnight.
+
+function addDays(dateStr, n) {
+  const ms = new Date(dateStr + 'T00:00:00Z').getTime() + n * 86400000;
+  return new Date(ms).toISOString().slice(0, 10);
 }
 
-// Add/subtract days from a YYYY-MM-DD string (stays in local time)
-function addDays(dateStr, n) {
-  const d = new Date(dateStr + 'T12:00:00'); // noon avoids DST/UTC-midnight shift
-  d.setDate(d.getDate() + n);
-  return localStr(d);
+function fmtDate(dateStr) {
+  const d = new Date(dateStr + 'T00:00:00Z');
+  return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getUTCMonth()] + ' ' + d.getUTCDate();
 }
 
 // Sum a key over daily rows in [fromDate, toDate] inclusive
@@ -1116,11 +1117,10 @@ function buildWeeklySeries(daily, asOfDate) {
   const filtered = daily.filter(d => d.date <= asOfDate);
   const weeks = {};
   filtered.forEach(d => {
-    const dt  = new Date(d.date + 'T12:00:00'); // noon avoids UTC midnight shift
-    const day = dt.getDay(); // 0=Sun,1=Mon,...,5=Fri,6=Sat
-    const fri = new Date(dt);
-    fri.setDate(dt.getDate() - (day - 5 + 7) % 7); // rewind to most recent Friday
-    const key = localStr(fri);
+    const dt  = new Date(d.date + 'T00:00:00Z'); // parse as UTC midnight
+    const day = dt.getUTCDay(); // 0=Sun,1=Mon,...,5=Fri,6=Sat (UTC = matches date string)
+    const offset = (day - 5 + 7) % 7; // days back to most recent Friday
+    const key = new Date(dt.getTime() - offset * 86400000).toISOString().slice(0, 10);
     if (!weeks[key]) weeks[key] = { week: key, covers: 0, spend: 0, users: 0 };
     weeks[key].covers += d.covers;
     weeks[key].spend  += d.spend;
@@ -1185,8 +1185,8 @@ function renderRolling() {
 
   // Last complete Fri-Thu week ending on or before asOf
   const empty = { covers: 0, spend: 0, users: 0 };
-  const asOfDt = new Date(asOf + 'T12:00:00');
-  const daysSinceThu = (asOfDt.getDay() - 4 + 7) % 7; // 0 if Thu, 1 if Fri, ...
+  const asOfDt = new Date(asOf + 'T00:00:00Z');
+  const daysSinceThu = (asOfDt.getUTCDay() - 4 + 7) % 7; // 0 if Thu, 1 if Fri, ...
   const lastThu = addDays(asOf, -daysSinceThu); // Thursday ≤ asOf
   const lastFri = addDays(lastThu, -6);          // Friday that starts that week
 
@@ -1248,10 +1248,7 @@ function renderRolling() {
   ].join('');
 
   // Label each bar by its Friday start date (e.g. "Mar 6" = week of Mar 6–12)
-  const wLabels = weekly.map(w => {
-    const d = new Date(w.week + 'T12:00:00');
-    return `${d.toLocaleString('default',{month:'short'})} ${d.getDate()}`;
-  });
+  const wLabels = weekly.map(w => fmtDate(w.week));
 
   const wSPC = weekly.map(w => w.covers > 0 ? w.spend/w.covers : 0);
   const wCPU = weekly.map(w => w.users  > 0 ? w.covers/w.users : 0);
