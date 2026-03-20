@@ -593,30 +593,54 @@ function fmt(n, prefix='', suffix='') {
 
 // ── Load all data ──────────────────────────────────────────────────────────
 async function loadData() {
+  const btn = document.querySelector('.refresh-btn');
+  if (btn) { btn.textContent = '↻ Loading...'; btn.disabled = true; }
   try {
-    const files = ['summary','facebook','google-ads','google-private','reservations','perfect-venue','email','insights','meta'];
-    const results = await Promise.all(files.map(f =>
-      fetch(`data/${f}.json?t=${Date.now()}`).then(r => r.json()).catch(() => null)
-    ));
-    DATA.summary      = results[0];
-    DATA.facebook     = results[1];
-    DATA.googleAds    = results[2];
-    DATA.googlePrivate= results[3];
-    DATA.reservations = results[4];
-    DATA.perfectVenue = results[5];
-    DATA.email        = results[6];
-    DATA.insights     = results[7];
-    DATA.meta         = results[8];
+    // Try live API first (Vercel), fall back to static JSON (GitHub Pages)
+    let live = null;
+    try {
+      const r = await fetch(`/api/data?t=${Date.now()}`);
+      if (r.ok) live = await r.json();
+    } catch(_) {}
+
+    if (live) {
+      DATA.summary       = live.summary;
+      DATA.facebook      = live.facebook;
+      DATA.googleAds     = live.googleAds;
+      DATA.googlePrivate = live.googlePrivate;
+      DATA.reservations  = live.reservations;
+      DATA.perfectVenue  = live.perfectVenue;
+      DATA.email         = live.email;
+      DATA.meta          = live.meta;
+      DATA.insights      = null; // regenerated client-side below
+    } else {
+      const files = ['summary','facebook','google-ads','google-private','reservations','perfect-venue','email','insights','meta'];
+      const results = await Promise.all(files.map(f =>
+        fetch(`data/${f}.json?t=${Date.now()}`).then(r => r.json()).catch(() => null)
+      ));
+      DATA.summary      = results[0];
+      DATA.facebook     = results[1];
+      DATA.googleAds    = results[2];
+      DATA.googlePrivate= results[3];
+      DATA.reservations = results[4];
+      DATA.perfectVenue = results[5];
+      DATA.email        = results[6];
+      DATA.insights     = results[7];
+      DATA.meta         = results[8];
+    }
 
     if (DATA.meta) {
       const d = new Date(DATA.meta.lastUpdated);
-      document.getElementById('lastUpdated').textContent = `Updated: ${d.toLocaleString()}`;
+      const src = DATA.meta.source === 'live' ? ' · live' : '';
+      document.getElementById('lastUpdated').textContent = `Updated: ${d.toLocaleString()}${src}`;
     }
 
     renderAll();
   } catch(e) {
     console.error('Load error:', e);
     document.getElementById('lastUpdated').textContent = 'Error loading data';
+  } finally {
+    if (btn) { btn.textContent = '↻ Refresh'; btn.disabled = false; }
   }
 }
 
