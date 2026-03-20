@@ -470,13 +470,14 @@ function fmtDate(dateStr) {
   return `${parseInt(m)}/${parseInt(d)}/${y}`;
 }
 
-function delta(curr, prev, fmtFn) {
+function delta(curr, prev, fmtFn, invert) {
   if (!prev || prev === 0) return { cls: '', text: '' };
   const pct = ((curr - prev) / Math.abs(prev) * 100);
   const up = curr >= prev;
+  const good = invert ? !up : up;
   const prevStr = fmtFn ? fmtFn(prev) : prev.toLocaleString(undefined, {maximumFractionDigits: 0});
   return {
-    cls: up ? 'up' : 'down',
+    cls: good ? 'up' : 'down',
     text: `${up ? '▲' : '▼'} ${Math.abs(pct).toFixed(1)}% <span class="prev-val">prev: ${prevStr}</span>`
   };
 }
@@ -674,8 +675,8 @@ function renderOverview() {
   const prevCPC = prevCovers > 0 ? prevSpend / prevCovers : 0;
 
   const dCovers = delta(totalCovers, prevCovers, v => v.toLocaleString(undefined,{maximumFractionDigits:0}));
-  const dSpend  = delta(totalSpend,  prevSpend,  v => '$' + v.toLocaleString(undefined,{maximumFractionDigits:0}));
-  const dCPC    = delta(currCPC,     prevCPC,    v => '$' + v.toFixed(2));
+  const dSpend  = delta(totalSpend,  prevSpend,  v => '$' + v.toLocaleString(undefined,{maximumFractionDigits:0}), true);
+  const dCPC    = delta(currCPC,     prevCPC,    v => '$' + v.toFixed(2), true);
   const dUsers  = delta(totalUsers,  prevUsers,  v => v.toLocaleString(undefined,{maximumFractionDigits:0}));
 
   const rangeLabel = RANGE.from ? 'In range' : 'All time';
@@ -801,11 +802,11 @@ function renderFacebook() {
   const pCPC    = fbPrev.length ? fbPrev.reduce((a,b) => a+b.cpc, 0) / fbPrev.length : 0;
   const pCTR    = fbPrev.length ? fbPrev.reduce((a,b) => a+b.ctr, 0) / fbPrev.length : 0;
 
-  const dSpend  = delta(totSpend,  pSpend,  v => '$' + v.toLocaleString(undefined,{maximumFractionDigits:0}));
+  const dSpend  = delta(totSpend,  pSpend,  v => '$' + v.toLocaleString(undefined,{maximumFractionDigits:0}), true);
   const dReach  = delta(totReach,  pReach,  v => v.toLocaleString(undefined,{maximumFractionDigits:0}));
   const dClicks = delta(totClicks, pClicks, v => v.toLocaleString(undefined,{maximumFractionDigits:0}));
   const dImpr   = delta(totImpr,   pImpr,   v => v.toLocaleString(undefined,{maximumFractionDigits:0}));
-  const dCPC    = delta(avgCPC,    pCPC,    v => '$' + v.toFixed(2));
+  const dCPC    = delta(avgCPC,    pCPC,    v => '$' + v.toFixed(2), true);
   const dCTR    = delta(avgCTR,    pCTR,    v => v.toFixed(2) + '%');
 
   const rangeLabel = RANGE.from ? 'In range' : 'All time';
@@ -864,12 +865,12 @@ function renderGoogle() {
   const pCalls  = prevActive.reduce((a,b)=>a+b.calls,0);
   const prevCPR = pRes > 0 ? pSpend / pRes : 0;
 
-  const dSpend  = delta(totSpend,  pSpend,  v => '$' + v.toLocaleString(undefined,{maximumFractionDigits:0}));
+  const dSpend  = delta(totSpend,  pSpend,  v => '$' + v.toLocaleString(undefined,{maximumFractionDigits:0}), true);
   const dClicks = delta(totClicks, pClicks, v => v.toLocaleString(undefined,{maximumFractionDigits:0}));
   const dImpr   = delta(totImpr,   pImpr,   v => v.toLocaleString(undefined,{maximumFractionDigits:0}));
   const dRes    = delta(totRes,    pRes,    v => v.toLocaleString(undefined,{maximumFractionDigits:0}));
   const dCalls  = delta(totCalls,  pCalls,  v => v.toLocaleString(undefined,{maximumFractionDigits:0}));
-  const dCPR    = delta(currCPR,   prevCPR, v => '$' + v.toFixed(0));
+  const dCPR    = delta(currCPR,   prevCPR, v => '$' + v.toFixed(0), true);
 
   const rangeLabel = RANGE.from ? 'In range' : 'All time';
   document.getElementById('kpi-google').innerHTML = [
@@ -1144,16 +1145,17 @@ function build28DayRolling(daily, weekly, asOf) {
   });
 }
 
-function pctBadge(curr, prev, fmt) {
+function pctBadge(curr, prev, fmt, invert) {
   if (!prev) return '';
   const pct = ((curr - prev) / Math.abs(prev) * 100).toFixed(1);
   const up = parseFloat(pct) >= 0;
-  return `<div class="rolling-kpi-change ${up?'up':'down'}" style="margin-top:3px">
+  const good = invert ? !up : up; // for spend: higher = bad
+  return `<div class="rolling-kpi-change ${good?'up':'down'}" style="margin-top:3px">
     ${up?'↑':'↓'} ${Math.abs(pct)}% <span style="color:var(--muted);font-weight:400">prev ${fmt(prev)}</span>
   </div>`;
 }
 
-function rollingKpi(icon, bg, name, currVal, currFmt, prevCurrVal, roll4Val, roll4Fmt, prevRoll4Val) {
+function rollingKpi(icon, bg, name, currVal, currFmt, prevCurrVal, roll4Val, roll4Fmt, prevRoll4Val, invert) {
   return `<div class="rolling-kpi">
     <div class="rolling-kpi-header">
       <div class="rolling-kpi-icon" style="background:${bg}">${icon}</div>
@@ -1163,12 +1165,12 @@ function rollingKpi(icon, bg, name, currVal, currFmt, prevCurrVal, roll4Val, rol
       <div>
         <div style="font-size:10px;color:var(--muted);margin-bottom:2px">Current week</div>
         <div class="rolling-kpi-current">${currFmt(currVal)}</div>
-        ${pctBadge(currVal, prevCurrVal, currFmt)}
+        ${pctBadge(currVal, prevCurrVal, currFmt, invert)}
       </div>
       <div class="rolling-kpi-right">
         <div class="rolling-kpi-roll-label">4W Ave. Rolling</div>
         <div class="rolling-kpi-roll-val">${roll4Fmt(roll4Val)}</div>
-        ${pctBadge(roll4Val, prevRoll4Val, roll4Fmt)}
+        ${pctBadge(roll4Val, prevRoll4Val, roll4Fmt, invert)}
       </div>
     </div>
   </div>`;
@@ -1241,10 +1243,10 @@ function renderRolling() {
   document.getElementById('rolling-kpis').innerHTML = [
     rollingKpi('🍽️','rgba(79,142,247,0.2)', 'Covers',        thisWeek.covers, n,  prevWeek.covers, curr4.covers, n,  prev4.covers),
     rollingKpi('👤','rgba(62,207,142,0.2)',  'Website Users', thisWeek.users,  n,  prevWeek.users,  curr4.users,  n,  prev4.users),
-    rollingKpi('💰','rgba(245,166,35,0.2)',  'Ad Spend',      thisWeek.spend,  $n, prevWeek.spend,  curr4.spend,  $n, prev4.spend),
-    rollingKpi('📊','rgba(232,115,74,0.2)',  'Spend / Cover', twSPC,           d2, pwSPC,           currSPC,      d2, prevSPC),
+    rollingKpi('💰','rgba(245,166,35,0.2)',  'Ad Spend',      thisWeek.spend,  $n, prevWeek.spend,  curr4.spend,  $n, prev4.spend,  true),
+    rollingKpi('📊','rgba(232,115,74,0.2)',  'Spend / Cover', twSPC,           d2, pwSPC,           currSPC,      d2, prevSPC,      true),
     rollingKpi('🔄','rgba(167,139,250,0.2)', 'Cover / User',  twCPU,           p3, pwCPU,           currCPU,      p3, prevCPU),
-    rollingKpi('📈','rgba(242,107,107,0.2)', 'Spend / User',  twSPU,           p3, pwSPU,           currSPU,      p3, prevSPU),
+    rollingKpi('📈','rgba(242,107,107,0.2)', 'Spend / User',  twSPU,           p3, pwSPU,           currSPU,      p3, prevSPU,      true),
   ].join('');
 
   // Label each bar by its Friday start date (e.g. "Mar 6" = week of Mar 6–12)
