@@ -78,26 +78,33 @@
     .kpi-change .prev-val { color: var(--muted); font-weight: 400; }
 
     /* ── Rolling KPI Cards ── */
-    .rolling-kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 28px; }
+    .rolling-kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
     @media (max-width: 900px) { .rolling-kpi-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 560px) { .rolling-kpi-grid { grid-template-columns: 1fr; } }
-    .rolling-kpi { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 20px; display: flex; flex-direction: column; gap: 10px; }
+    .rolling-kpi { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; border-left-width: 3px; border-left-style: solid; }
     .rolling-kpi-header { display: flex; align-items: center; gap: 8px; }
-    .rolling-kpi-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
-    .rolling-kpi-name { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; }
-    .rolling-kpi-body { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
-    .rolling-kpi-current { font-size: 26px; font-weight: 700; color: var(--text); }
-    .rolling-kpi-right { text-align: right; }
-    .rolling-kpi-roll-label { font-size: 10px; color: var(--muted); margin-bottom: 2px; }
-    .rolling-kpi-roll-val { font-size: 16px; font-weight: 600; color: var(--text); }
-    .rolling-kpi-change { font-size: 11px; margin-top: 3px; font-weight: 600; }
+    .rolling-kpi-icon { width: 28px; height: 28px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+    .rolling-kpi-name { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
+    .rolling-kpi-body { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+    .rolling-kpi-left { flex: 1; }
+    .rolling-kpi-week-label { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+    .rolling-kpi-current { font-size: 24px; font-weight: 700; color: var(--text); line-height: 1.1; }
+    .rolling-kpi-divider { width: 1px; background: var(--border); align-self: stretch; flex-shrink: 0; }
+    .rolling-kpi-right { text-align: right; min-width: 90px; }
+    .rolling-kpi-roll-label { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+    .rolling-kpi-roll-val { font-size: 16px; font-weight: 700; color: var(--text); }
+    .rolling-kpi-change { font-size: 10px; margin-top: 2px; font-weight: 600; }
     .rolling-kpi-change.up { color: var(--green); }
     .rolling-kpi-change.down { color: var(--red); }
 
     /* ── Charts ── */
     .chart-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 20px; margin-bottom: 28px; }
-    .rolling-chart-grid { grid-template-columns: repeat(2, 1fr); }
-    @media (max-width: 900px) { .rolling-chart-grid { grid-template-columns: 1fr; } }
+    .rolling-chart-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .rolling-chart-grid .chart-card { padding: 14px 16px; }
+    .rolling-chart-grid .chart-title { font-size: 12px; margin-bottom: 2px; }
+    .rolling-chart-grid .chart-subtitle { font-size: 11px; margin-bottom: 10px; }
+    @media (max-width: 1100px) { .rolling-chart-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 700px)  { .rolling-chart-grid { grid-template-columns: 1fr; } }
     .chart-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
     .chart-card.full { grid-column: 1 / -1; }
     .chart-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
@@ -403,33 +410,33 @@
     <div class="chart-grid rolling-chart-grid">
       <div class="chart-card">
         <div class="chart-title">Covers by Week</div>
-        <div class="chart-subtitle">Weekly covers + 4W rolling average</div>
-        <div class="chart-wrap" style="height:280px"><canvas id="chart-rollCovers"></canvas></div>
+        <div class="chart-subtitle">Weekly covers + 4W rolling avg</div>
+        <div class="chart-wrap" style="height:180px"><canvas id="chart-rollCovers"></canvas></div>
       </div>
       <div class="chart-card">
         <div class="chart-title">Users by Week</div>
-        <div class="chart-subtitle">Weekly website users + 4W rolling average</div>
-        <div class="chart-wrap"><canvas id="chart-rollUsers"></canvas></div>
+        <div class="chart-subtitle">Weekly users + 4W rolling avg</div>
+        <div class="chart-wrap" style="height:180px"><canvas id="chart-rollUsers"></canvas></div>
       </div>
       <div class="chart-card">
         <div class="chart-title">Spend by Week</div>
-        <div class="chart-subtitle">Weekly ad spend + 4W rolling average</div>
-        <div class="chart-wrap"><canvas id="chart-rollSpend"></canvas></div>
+        <div class="chart-subtitle">Weekly ad spend + 4W rolling avg</div>
+        <div class="chart-wrap" style="height:180px"><canvas id="chart-rollSpend"></canvas></div>
       </div>
       <div class="chart-card">
-        <div class="chart-title">Spend / Cover by Week</div>
-        <div class="chart-subtitle">Cost per cover weekly + 4W rolling</div>
-        <div class="chart-wrap"><canvas id="chart-rollSpendCover"></canvas></div>
+        <div class="chart-title">Spend / Cover</div>
+        <div class="chart-subtitle">Cost per cover + 4W rolling avg</div>
+        <div class="chart-wrap" style="height:180px"><canvas id="chart-rollSpendCover"></canvas></div>
       </div>
       <div class="chart-card">
-        <div class="chart-title">Cover / User by Week</div>
+        <div class="chart-title">Cover / User</div>
         <div class="chart-subtitle">Conversion rate: covers ÷ users</div>
-        <div class="chart-wrap"><canvas id="chart-rollCoverUser"></canvas></div>
+        <div class="chart-wrap" style="height:180px"><canvas id="chart-rollCoverUser"></canvas></div>
       </div>
       <div class="chart-card">
-        <div class="chart-title">Spend / User by Week</div>
+        <div class="chart-title">Spend / User</div>
         <div class="chart-subtitle">Marketing cost per website visitor</div>
-        <div class="chart-wrap"><canvas id="chart-rollSpendUser"></canvas></div>
+        <div class="chart-wrap" style="height:180px"><canvas id="chart-rollSpendUser"></canvas></div>
       </div>
     </div>
   </div>
@@ -1159,20 +1166,21 @@ function pctBadge(curr, prev, fmt, invert) {
   </div>`;
 }
 
-function rollingKpi(icon, bg, name, currVal, currFmt, prevCurrVal, roll4Val, roll4Fmt, prevRoll4Val, invert) {
-  return `<div class="rolling-kpi">
+function rollingKpi(icon, bg, name, currVal, currFmt, prevCurrVal, roll4Val, roll4Fmt, prevRoll4Val, invert, borderColor) {
+  return `<div class="rolling-kpi" style="border-left-color:${borderColor||'var(--border)'}">
     <div class="rolling-kpi-header">
       <div class="rolling-kpi-icon" style="background:${bg}">${icon}</div>
       <div class="rolling-kpi-name">${name}</div>
     </div>
     <div class="rolling-kpi-body">
-      <div>
-        <div style="font-size:10px;color:var(--muted);margin-bottom:2px">Current week</div>
+      <div class="rolling-kpi-left">
+        <div class="rolling-kpi-week-label">Current Week</div>
         <div class="rolling-kpi-current">${currFmt(currVal)}</div>
         ${pctBadge(currVal, prevCurrVal, currFmt, invert)}
       </div>
+      <div class="rolling-kpi-divider"></div>
       <div class="rolling-kpi-right">
-        <div class="rolling-kpi-roll-label">4W Ave. Rolling</div>
+        <div class="rolling-kpi-roll-label">4W Rolling Avg</div>
         <div class="rolling-kpi-roll-val">${roll4Fmt(roll4Val)}</div>
         ${pctBadge(roll4Val, prevRoll4Val, roll4Fmt, invert)}
       </div>
@@ -1245,12 +1253,12 @@ function renderRolling() {
   const p3 = v => (+v).toFixed(3);
 
   document.getElementById('rolling-kpis').innerHTML = [
-    rollingKpi('🍽️','rgba(79,142,247,0.2)', 'Covers',        thisWeek.covers, n,  prevWeek.covers, curr4.covers, n,  prev4.covers),
-    rollingKpi('👤','rgba(62,207,142,0.2)',  'Website Users', thisWeek.users,  n,  prevWeek.users,  curr4.users,  n,  prev4.users),
-    rollingKpi('💰','rgba(245,166,35,0.2)',  'Ad Spend',      thisWeek.spend,  $n, prevWeek.spend,  curr4.spend,  $n, prev4.spend,  true),
-    rollingKpi('📊','rgba(232,115,74,0.2)',  'Spend / Cover', twSPC,           d2, pwSPC,           currSPC,      d2, prevSPC,      true),
-    rollingKpi('🔄','rgba(167,139,250,0.2)', 'Cover / User',  twCPU,           p3, pwCPU,           currCPU,      p3, prevCPU),
-    rollingKpi('📈','rgba(242,107,107,0.2)', 'Spend / User',  twSPU,           p3, pwSPU,           currSPU,      p3, prevSPU,      true),
+    rollingKpi('🍽️','rgba(79,142,247,0.2)', 'Covers',        thisWeek.covers, n,  prevWeek.covers, curr4.covers, n,  prev4.covers, false, '#4f8ef7'),
+    rollingKpi('👤','rgba(62,207,142,0.2)',  'Website Users', thisWeek.users,  n,  prevWeek.users,  curr4.users,  n,  prev4.users,  false, '#3ecf8e'),
+    rollingKpi('💰','rgba(201,160,80,0.2)',  'Ad Spend',      thisWeek.spend,  $n, prevWeek.spend,  curr4.spend,  $n, prev4.spend,  true,  '#c9a050'),
+    rollingKpi('📊','rgba(232,115,74,0.2)',  'Spend / Cover', twSPC,           d2, pwSPC,           currSPC,      d2, prevSPC,      true,  '#e8734a'),
+    rollingKpi('🔄','rgba(167,139,250,0.2)', 'Cover / User',  twCPU,           p3, pwCPU,           currCPU,      p3, prevCPU,      false, '#a78bfa'),
+    rollingKpi('📈','rgba(242,107,107,0.2)', 'Spend / User',  twSPU,           p3, pwSPU,           currSPU,      p3, prevSPU,      true,  '#f26b6b'),
   ].join('');
 
   // Label each bar by its Friday start date (e.g. "Mar 6" = week of Mar 6–12)
