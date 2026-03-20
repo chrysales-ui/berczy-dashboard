@@ -41,6 +41,20 @@
     .refresh-btn { background: var(--card2); border: 1px solid var(--border); color: var(--text); padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 13px; transition: all 0.2s; }
     .refresh-btn:hover { background: var(--accent); color: #000; border-color: var(--accent); }
 
+    /* ── Date Range Bar ── */
+    .date-bar { background: var(--card); border-bottom: 1px solid var(--border); padding: 10px 32px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .date-bar-label { font-size: 12px; color: var(--muted); flex-shrink: 0; }
+    .preset-btn { background: var(--card2); border: 1px solid var(--border); color: var(--muted); padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; transition: all 0.15s; }
+    .preset-btn:hover { color: var(--text); border-color: var(--accent); }
+    .preset-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+    .date-sep { color: var(--border); font-size: 12px; }
+    .date-inputs { display: flex; align-items: center; gap: 6px; margin-left: 6px; }
+    .date-inputs input[type=month] { background: var(--card2); border: 1px solid var(--border); color: var(--text); padding: 4px 10px; border-radius: 6px; font-size: 12px; cursor: pointer; }
+    .date-inputs input[type=month]:focus { outline: none; border-color: var(--accent); }
+    .date-inputs span { font-size: 12px; color: var(--muted); }
+    .date-range-info { margin-left: auto; font-size: 11px; color: var(--muted); }
+    @media (max-width: 768px) { .date-bar { padding: 10px 16px; } .date-range-info { display: none; } }
+
     /* ── Nav ── */
     nav { background: var(--card); border-bottom: 1px solid var(--border); padding: 0 32px; display: flex; gap: 4px; overflow-x: auto; }
     .tab-btn { padding: 14px 20px; font-size: 13px; font-weight: 500; color: var(--muted); background: none; border: none; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
@@ -153,6 +167,21 @@
   <button class="tab-btn" onclick="switchTab('events', this)">Private Events</button>
   <button class="tab-btn" onclick="switchTab('email', this)">Email</button>
 </nav>
+
+<div class="date-bar">
+  <span class="date-bar-label">Date Range:</span>
+  <button class="preset-btn" onclick="setPreset(3, this)">Last 3 mo</button>
+  <button class="preset-btn" onclick="setPreset(6, this)">Last 6 mo</button>
+  <button class="preset-btn" onclick="setPreset(12, this)">Last 12 mo</button>
+  <button class="preset-btn active" onclick="setPreset(0, this)">All Time</button>
+  <span class="date-sep">|</span>
+  <div class="date-inputs">
+    <input type="month" id="dateFrom" onchange="setCustomRange()" />
+    <span>→</span>
+    <input type="month" id="dateTo" onchange="setCustomRange()" />
+  </div>
+  <span class="date-range-info" id="dateRangeInfo"></span>
+</div>
 
 <main>
 
@@ -343,6 +372,54 @@
 // ── State ──────────────────────────────────────────────────────────────────
 const charts = {};
 let DATA = {};
+let RANGE = { from: null, to: null }; // null = no filter (all time)
+
+// ── Date Range Helpers ──────────────────────────────────────────────────────
+function filterMonthly(arr) {
+  if (!arr || !arr.length) return arr;
+  if (!RANGE.from && !RANGE.to) return arr;
+  return arr.filter(m => {
+    const mo = m.month || m;
+    return (!RANGE.from || mo >= RANGE.from) && (!RANGE.to || mo <= RANGE.to);
+  });
+}
+
+function setPreset(months, btn) {
+  document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  if (months === 0) {
+    RANGE = { from: null, to: null };
+    document.getElementById('dateFrom').value = '';
+    document.getElementById('dateTo').value = '';
+  } else {
+    const now = new Date();
+    const to = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
+    const fromDate = new Date(now.getFullYear(), now.getMonth() - months + 1, 1);
+    const from = `${fromDate.getFullYear()}-${String(fromDate.getMonth()+1).padStart(2,'0')}`;
+    RANGE = { from, to };
+    document.getElementById('dateFrom').value = from;
+    document.getElementById('dateTo').value = to;
+  }
+  updateRangeInfo();
+  if (Object.keys(DATA).length) renderAll();
+}
+
+function setCustomRange() {
+  const from = document.getElementById('dateFrom').value;
+  const to = document.getElementById('dateTo').value;
+  RANGE = { from: from || null, to: to || null };
+  document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+  updateRangeInfo();
+  if (Object.keys(DATA).length) renderAll();
+}
+
+function updateRangeInfo() {
+  const el = document.getElementById('dateRangeInfo');
+  if (!RANGE.from && !RANGE.to) { el.textContent = 'Showing all available data'; return; }
+  const f = RANGE.from ? RANGE.from : '…';
+  const t = RANGE.to ? RANGE.to : '…';
+  el.textContent = `Showing ${f} → ${t}`;
+}
 
 // ── Chart defaults ─────────────────────────────────────────────────────────
 Chart.defaults.color = '#8b8fa8';
@@ -437,7 +514,7 @@ function renderAll() {
 function renderOverview() {
   if (!DATA.summary) return;
   const { monthly, daily } = DATA.summary;
-  const active = monthly.filter(m => m.covers > 0);
+  const active = filterMonthly(monthly).filter(m => m.covers > 0);
   const last = active[active.length - 1] || {};
   const prev = active[active.length - 2] || {};
 
@@ -507,9 +584,9 @@ function renderInsights() {
     </div>
   `).join('');
 
-  // MoM trend - last 12 months
+  // MoM trend - last 12 months (or within range)
   if (DATA.summary) {
-    const active = DATA.summary.monthly.filter(m => m.covers > 0).slice(-12);
+    const active = filterMonthly(DATA.summary.monthly).filter(m => m.covers > 0).slice(-12);
     mkChart('chart-momTrend', {
       type: 'line',
       data: {
@@ -553,7 +630,7 @@ function renderInsights() {
 // ── Facebook ──────────────────────────────────────────────────────────────
 function renderFacebook() {
   if (!DATA.facebook) return;
-  const fb = DATA.facebook.filter(m => m.spend > 0);
+  const fb = filterMonthly(DATA.facebook).filter(m => m.spend > 0);
   const totSpend = fb.reduce((a,b) => a+b.spend, 0);
   const totReach = fb.reduce((a,b) => a+b.reach, 0);
   const totClicks = fb.reduce((a,b) => a+b.clicks, 0);
@@ -599,7 +676,7 @@ function renderFacebook() {
 function renderGoogle() {
   if (!DATA.googleAds) return;
   const { monthly, campaigns } = DATA.googleAds;
-  const active = monthly.filter(m => m.spend > 0);
+  const active = filterMonthly(monthly).filter(m => m.spend > 0);
   const totSpend = active.reduce((a,b)=>a+b.spend,0);
   const totClicks = active.reduce((a,b)=>a+b.clicks,0);
   const totImpr = active.reduce((a,b)=>a+b.impressions,0);
@@ -695,7 +772,7 @@ function renderReservations() {
     options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { boxWidth: 12, font: { size: 11 } } } } }
   });
 
-  const monthlyFiltered = monthly.filter(m => m.reservations > 0).slice(-18);
+  const monthlyFiltered = filterMonthly(monthly).filter(m => m.reservations > 0).slice(-18);
   mkChart('chart-resFirstReturn', {
     type: 'bar',
     data: { labels: monthlyFiltered.map(m => m.month.slice(2)), datasets: [
@@ -705,11 +782,12 @@ function renderReservations() {
     options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true } } }
   });
 
+  const resMonthlyAll = filterMonthly(monthly).filter(m => m.reservations > 0);
   mkChart('chart-resMonthly', {
     type: 'line',
-    data: { labels: monthlyFiltered.map(m => m.month.slice(2)), datasets: [
-      { label: 'Reservations', data: monthlyFiltered.map(m => m.reservations), borderColor: COLORS.blue, tension: 0.3, yAxisID: 'y' },
-      { label: 'Covers', data: monthlyFiltered.map(m => m.covers), borderColor: COLORS.green, tension: 0.3, yAxisID: 'y' },
+    data: { labels: resMonthlyAll.map(m => m.month.slice(2)), datasets: [
+      { label: 'Reservations', data: resMonthlyAll.map(m => m.reservations), borderColor: COLORS.blue, tension: 0.3, yAxisID: 'y' },
+      { label: 'Covers', data: resMonthlyAll.map(m => m.covers), borderColor: COLORS.green, tension: 0.3, yAxisID: 'y' },
     ]},
     options: { responsive: true, maintainAspectRatio: false }
   });
@@ -749,7 +827,7 @@ function renderEvents() {
     options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } } }
   });
 
-  const monthlyFiltered = monthly.slice(-18);
+  const monthlyFiltered = filterMonthly(monthly).slice(-18);
   mkChart('chart-eventsMonthly', {
     type: 'bar',
     data: { labels: monthlyFiltered.map(m => m.month.slice(2)), datasets: [
@@ -764,7 +842,8 @@ function renderEvents() {
 // ── Email ─────────────────────────────────────────────────────────────────
 function renderEmail() {
   if (!DATA.email) return;
-  const { monthly, subscribersByMonth, totalSubscribers } = DATA.email;
+  const { subscribersByMonth, totalSubscribers } = DATA.email;
+  const monthly = filterMonthly(DATA.email.monthly);
   const totSends = monthly.reduce((a,b)=>a+b.total,0);
   const totOpened = monthly.reduce((a,b)=>a+b.opened,0);
   const totClicked = monthly.reduce((a,b)=>a+b.clicked,0);
@@ -772,7 +851,7 @@ function renderEmail() {
   const avgOpen = monthly.length ? (monthly.reduce((a,b)=>a+b.openRate,0)/monthly.length).toFixed(1) : 0;
 
   document.getElementById('kpi-email').innerHTML = [
-    kpiCard('Total Sends', fmt(totSends), 'All campaigns','',''),
+    kpiCard('Total Sends', fmt(totSends), 'In range','',''),
     kpiCard('Total Subscribers', fmt(totalSubscribers), 'Email list','',''),
     kpiCard('Avg Open Rate', `${avgOpen}%`, 'Industry avg ~22%', parseFloat(avgOpen) > 22 ? 'up' : 'down',''),
     kpiCard('Total Clicks', fmt(totClicked), 'Email link clicks','',''),
