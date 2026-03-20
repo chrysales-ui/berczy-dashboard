@@ -1183,20 +1183,27 @@ function renderRolling() {
   if (!asOfInput.value) asOfInput.value = daily[daily.length - 1].date;
   const asOf = asOfInput.value;
 
-  // Build weekly series (Fri-Thu) and rolling averages — shared for KPIs + charts
-  const weekly  = buildWeeklySeries(daily, asOf);
+  // Last complete Fri-Thu week ending on or before asOf
+  const empty = { covers: 0, spend: 0, users: 0 };
+  const asOfDt = new Date(asOf + 'T12:00:00');
+  const daysSinceThu = (asOfDt.getDay() - 4 + 7) % 7; // 0 if Thu, 1 if Fri, ...
+  const lastThu = addDays(asOf, -daysSinceThu); // Thursday ≤ asOf
+  const lastFri = addDays(lastThu, -6);          // Friday that starts that week
+
+  // Chart only shows complete Fri-Thu weeks (up to lastThu)
+  const weekly  = buildWeeklySeries(daily, lastThu);
+  // Rolling average uses asOf as window end (includes partial week days if any)
   const rolling = build28DayRolling(daily, weekly, asOf);
 
-  // Current week = last 7 days ending on asOf; prev week = 7 days before that
-  const empty = { covers: 0, spend: 0, users: 0 };
-  const weekStart     = addDays(asOf, -6);
-  const prevWeekEnd   = addDays(weekStart, -1);
-  const prevWeekStart = addDays(prevWeekEnd, -6);
+  // Current week KPI = last complete Fri-Thu week
   const thisWeek = {
-    covers: sumRange(daily, weekStart, asOf, 'covers'),
-    spend:  sumRange(daily, weekStart, asOf, 'spend'),
-    users:  sumRange(daily, weekStart, asOf, 'users'),
+    covers: sumRange(daily, lastFri, lastThu, 'covers'),
+    spend:  sumRange(daily, lastFri, lastThu, 'spend'),
+    users:  sumRange(daily, lastFri, lastThu, 'users'),
   };
+  // Previous week = the week before
+  const prevWeekEnd   = addDays(lastFri, -1);
+  const prevWeekStart = addDays(prevWeekEnd, -6);
   const prevWeek = {
     covers: sumRange(daily, prevWeekStart, prevWeekEnd, 'covers'),
     spend:  sumRange(daily, prevWeekStart, prevWeekEnd, 'spend'),
@@ -1240,10 +1247,9 @@ function renderRolling() {
     rollingKpi('📈','rgba(242,107,107,0.2)', 'Spend / User',  twSPU,           p3, pwSPU,           currSPU,      p3, prevSPU),
   ].join('');
 
-  // Label each bar by its Thursday end date (week ending X); last bucket uses asOf
-  const wLabels = weekly.map((w, i) => {
-    const end = i === weekly.length - 1 ? asOf : addDays(w.week, 6);
-    const d = new Date(end + 'T12:00:00');
+  // Label each bar by its Thursday end date (week ending X)
+  const wLabels = weekly.map(w => {
+    const d = new Date(addDays(w.week, 6) + 'T12:00:00');
     return `${d.toLocaleString('default',{month:'short'})} ${d.getDate()}`;
   });
 
