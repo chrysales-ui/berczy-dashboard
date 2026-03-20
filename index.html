@@ -1247,9 +1247,9 @@ function renderRolling() {
     rollingKpi('📈','rgba(242,107,107,0.2)', 'Spend / User',  twSPU,           p3, pwSPU,           currSPU,      p3, prevSPU),
   ].join('');
 
-  // Label each bar by its Thursday end date (week ending X)
+  // Label each bar by its Friday start date (e.g. "Mar 6" = week of Mar 6–12)
   const wLabels = weekly.map(w => {
-    const d = new Date(addDays(w.week, 6) + 'T12:00:00');
+    const d = new Date(w.week + 'T12:00:00');
     return `${d.toLocaleString('default',{month:'short'})} ${d.getDate()}`;
   });
 
