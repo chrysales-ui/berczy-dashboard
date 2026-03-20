@@ -1139,9 +1139,16 @@ function build28DayRolling(daily, weekly, asOf) {
   });
 }
 
-function rollingKpi(icon, bg, name, currVal, currFmt, roll4Val, roll4Fmt, prevRoll4Val) {
-  const pct = prevRoll4Val > 0 ? ((roll4Val - prevRoll4Val) / prevRoll4Val * 100).toFixed(1) : null;
-  const up  = pct !== null && parseFloat(pct) >= 0;
+function pctBadge(curr, prev, fmt) {
+  if (!prev) return '';
+  const pct = ((curr - prev) / Math.abs(prev) * 100).toFixed(1);
+  const up = parseFloat(pct) >= 0;
+  return `<div class="rolling-kpi-change ${up?'up':'down'}" style="margin-top:3px">
+    ${up?'↑':'↓'} ${Math.abs(pct)}% <span style="color:var(--muted);font-weight:400">prev ${fmt(prev)}</span>
+  </div>`;
+}
+
+function rollingKpi(icon, bg, name, currVal, currFmt, prevCurrVal, roll4Val, roll4Fmt, prevRoll4Val) {
   return `<div class="rolling-kpi">
     <div class="rolling-kpi-header">
       <div class="rolling-kpi-icon" style="background:${bg}">${icon}</div>
@@ -1151,11 +1158,12 @@ function rollingKpi(icon, bg, name, currVal, currFmt, roll4Val, roll4Fmt, prevRo
       <div>
         <div style="font-size:10px;color:var(--muted);margin-bottom:2px">Current week</div>
         <div class="rolling-kpi-current">${currFmt(currVal)}</div>
+        ${pctBadge(currVal, prevCurrVal, currFmt)}
       </div>
       <div class="rolling-kpi-right">
         <div class="rolling-kpi-roll-label">4W Ave. Rolling</div>
         <div class="rolling-kpi-roll-val">${roll4Fmt(roll4Val)}</div>
-        ${pct !== null ? `<div class="rolling-kpi-change ${up?'up':'down'}">${up?'↑':'↓'} ${Math.abs(pct)}%</div>` : ''}
+        ${pctBadge(roll4Val, prevRoll4Val, roll4Fmt)}
       </div>
     </div>
   </div>`;
@@ -1193,12 +1201,21 @@ function renderRolling() {
   const currSPU = curr4.users  > 0 ? curr4.spend  / curr4.users : 0;
   const prevSPU = prev4.users  > 0 ? prev4.spend  / prev4.users : 0;
 
-  // "Current week" value = last 7 days ending on asOf
+  // "Current week" = last 7 days ending on asOf
   const weekStart = addDays(asOf, -6);
   const thisWeek = {
     covers: sumRange(daily, weekStart, asOf, 'covers'),
     spend:  sumRange(daily, weekStart, asOf, 'spend'),
     users:  sumRange(daily, weekStart, asOf, 'users'),
+  };
+
+  // "Previous week" = 7 days before current week
+  const prevWeekEnd   = addDays(weekStart, -1);
+  const prevWeekStart = addDays(prevWeekEnd, -6);
+  const prevWeek = {
+    covers: sumRange(daily, prevWeekStart, prevWeekEnd, 'covers'),
+    spend:  sumRange(daily, prevWeekStart, prevWeekEnd, 'spend'),
+    users:  sumRange(daily, prevWeekStart, prevWeekEnd, 'users'),
   };
 
   // Update window label
@@ -1210,13 +1227,20 @@ function renderRolling() {
   const d2 = v => '$' + (+v).toFixed(2);
   const p3 = v => (+v).toFixed(3);
 
+  const twSPC = thisWeek.covers > 0 ? thisWeek.spend/thisWeek.covers : 0;
+  const twCPU = thisWeek.users  > 0 ? thisWeek.covers/thisWeek.users : 0;
+  const twSPU = thisWeek.users  > 0 ? thisWeek.spend/thisWeek.users  : 0;
+  const pwSPC = prevWeek.covers > 0 ? prevWeek.spend/prevWeek.covers : 0;
+  const pwCPU = prevWeek.users  > 0 ? prevWeek.covers/prevWeek.users : 0;
+  const pwSPU = prevWeek.users  > 0 ? prevWeek.spend/prevWeek.users  : 0;
+
   document.getElementById('rolling-kpis').innerHTML = [
-    rollingKpi('🍽️','rgba(79,142,247,0.2)', 'Covers',        thisWeek.covers, n,  curr4.covers, n,  prev4.covers),
-    rollingKpi('👤','rgba(62,207,142,0.2)',  'Website Users', thisWeek.users,  n,  curr4.users,  n,  prev4.users),
-    rollingKpi('💰','rgba(245,166,35,0.2)',  'Ad Spend',      thisWeek.spend,  $n, curr4.spend,  $n, prev4.spend),
-    rollingKpi('📊','rgba(232,115,74,0.2)',  'Spend / Cover', thisWeek.covers > 0 ? thisWeek.spend/thisWeek.covers : 0, d2, currSPC, d2, prevSPC),
-    rollingKpi('🔄','rgba(167,139,250,0.2)', 'Cover / User',  thisWeek.users  > 0 ? thisWeek.covers/thisWeek.users  : 0, p3, currCPU, p3, prevCPU),
-    rollingKpi('📈','rgba(242,107,107,0.2)', 'Spend / User',  thisWeek.users  > 0 ? thisWeek.spend/thisWeek.users   : 0, p3, currSPU, p3, prevSPU),
+    rollingKpi('🍽️','rgba(79,142,247,0.2)', 'Covers',        thisWeek.covers, n,  prevWeek.covers, curr4.covers, n,  prev4.covers),
+    rollingKpi('👤','rgba(62,207,142,0.2)',  'Website Users', thisWeek.users,  n,  prevWeek.users,  curr4.users,  n,  prev4.users),
+    rollingKpi('💰','rgba(245,166,35,0.2)',  'Ad Spend',      thisWeek.spend,  $n, prevWeek.spend,  curr4.spend,  $n, prev4.spend),
+    rollingKpi('📊','rgba(232,115,74,0.2)',  'Spend / Cover', twSPC,           d2, pwSPC,           currSPC,      d2, prevSPC),
+    rollingKpi('🔄','rgba(167,139,250,0.2)', 'Cover / User',  twCPU,           p3, pwCPU,           currCPU,      p3, prevCPU),
+    rollingKpi('📈','rgba(242,107,107,0.2)', 'Spend / User',  twSPU,           p3, pwSPU,           currSPU,      p3, prevSPU),
   ].join('');
 
   // Charts: weekly buckets + 28-day rolling avg line
