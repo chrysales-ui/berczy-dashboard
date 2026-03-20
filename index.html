@@ -1100,12 +1100,13 @@ function buildWeeklySeries(daily, asOfDate) {
   return Object.values(weeks).sort((a, b) => a.week.localeCompare(b.week));
 }
 
-// For each weekly bucket, compute 4W rolling avg = sum of 28 days ending on that week's last day ÷ 4
-function build28DayRolling(daily, weekly) {
-  return weekly.map(w => {
-    // week start = w.week (Monday), week end = w.week + 6 days (Sunday)
-    const weekEnd   = addDays(w.week, 6);
-    const windowStart = addDays(weekEnd, -27); // 28 days ending on weekEnd
+// For each weekly bucket, compute 4W rolling avg = sum of 28 days ending on that day ÷ 4
+// For the last bucket, use asOf as the end date instead of Sunday
+function build28DayRolling(daily, weekly, asOf) {
+  return weekly.map((w, i) => {
+    const isLast = i === weekly.length - 1;
+    const weekEnd = isLast ? asOf : addDays(w.week, 6);
+    const windowStart = addDays(weekEnd, -27);
     return {
       covers: sumRange(daily, windowStart, weekEnd, 'covers') / 4,
       spend:  sumRange(daily, windowStart, weekEnd, 'spend')  / 4,
@@ -1196,7 +1197,7 @@ function renderRolling() {
 
   // Charts: weekly buckets + 28-day rolling avg line
   const weekly  = buildWeeklySeries(daily, asOf);
-  const rolling = build28DayRolling(daily, weekly);
+  const rolling = build28DayRolling(daily, weekly, asOf);
 
   const wLabels = weekly.map(w => {
     const d = new Date(w.week + 'T00:00:00');
