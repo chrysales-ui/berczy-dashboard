@@ -1088,10 +1088,10 @@ function buildWeeklySeries(daily, asOfDate) {
   const weeks = {};
   filtered.forEach(d => {
     const dt  = new Date(d.date + 'T00:00:00');
-    const day = dt.getDay();
-    const mon = new Date(dt);
-    mon.setDate(dt.getDate() + (day === 0 ? -6 : 1 - day));
-    const key = mon.toISOString().slice(0, 10);
+    const day = dt.getDay(); // 0=Sun,1=Mon,...,5=Fri,6=Sat
+    const fri = new Date(dt);
+    fri.setDate(dt.getDate() - (day - 5 + 7) % 7); // rewind to most recent Friday
+    const key = fri.toISOString().slice(0, 10);
     if (!weeks[key]) weeks[key] = { week: key, covers: 0, spend: 0, users: 0 };
     weeks[key].covers += d.covers;
     weeks[key].spend  += d.spend;
@@ -1100,8 +1100,8 @@ function buildWeeklySeries(daily, asOfDate) {
   return Object.values(weeks).sort((a, b) => a.week.localeCompare(b.week));
 }
 
-// For each weekly bucket, compute 4W rolling avg = sum of 28 days ending on that day ÷ 4
-// For the last bucket, use asOf as the end date instead of Sunday
+// For each weekly bucket, compute 4W rolling avg = sum of 28 days ending on that Thursday ÷ 4
+// For the last bucket, use asOf as the end date instead of Thursday
 function build28DayRolling(daily, weekly, asOf) {
   return weekly.map((w, i) => {
     const isLast = i === weekly.length - 1;
