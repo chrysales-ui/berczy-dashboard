@@ -3,71 +3,69 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Berczy Tavern — Analytics Dashboard</title>
+  <title>The Berczy — Performance Dashboard</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     :root {
-      --bg: #1b3025;
-      --card: #243d2e;
-      --card2: #2d4d3a;
-      --border: #3d6650;
-      --accent: #c9a050;
-      --accent2: #a8833c;
-      --blue: #6aadff;
-      --green: #3ecf8e;
-      --red: #f26b6b;
-      --purple: #b39dfa;
-      --text: #f5f2ea;
-      --muted: #a8c4b4;
-      --radius: 12px;
+      --bg: #000;
+      --card: #0d0d0d;
+      --card2: #141414;
+      --border: #1f1f1f;
+      --accent: #22c55e;
+      --accent2: #16a34a;
+      --blue: #7bbfff;
+      --green: #22c55e;
+      --red: #f07070;
+      --purple: #baaafb;
+      --text: #fff;
+      --muted: #666;
+      --radius: 8px;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; min-height: 100vh; }
 
     /* ── Header ── */
     header {
-      background: linear-gradient(135deg, #2d4d3a 0%, #1b3025 100%);
+      background: #000;
       border-bottom: 1px solid var(--border);
-      padding: 20px 32px;
+      padding: 0 32px;
       display: flex; align-items: center; justify-content: space-between;
+      height: 44px;
       position: sticky; top: 0; z-index: 100;
     }
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap');
-    .logo { display: flex; align-items: center; gap: 16px; }
-    .logo-icon { width: 58px; height: 66px; flex-shrink: 0; }
-    .logo-wordmark { display: flex; flex-direction: column; line-height: 1; gap: 2px; }
-    .logo-the    { font-family: 'Cormorant Garamond', serif; font-size: 9px;  font-weight: 300; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); }
-    .logo-name   { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--text); line-height: 1; }
-    .logo-tavern { font-family: 'Cormorant Garamond', serif; font-size: 9px;  font-weight: 300; letter-spacing: 6px; text-transform: uppercase; color: var(--accent); }
-    .logo-sub    { font-size: 10px; color: var(--muted); letter-spacing: 1px; margin-top: 3px; }
+    .header-brand { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+    .header-brand-back { color: var(--muted); text-decoration: none; font-size: 13px; display: flex; align-items: center; gap: 4px; }
+    .header-brand-back:hover { color: var(--text); }
+    .header-brand-sep { color: #333; }
+    .header-brand-name { color: var(--text); font-weight: 500; }
     .header-right { display: flex; align-items: center; gap: 16px; }
-    .last-updated { font-size: 12px; color: var(--muted); }
-    .refresh-btn { background: var(--card2); border: 1px solid var(--border); color: var(--text); padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 13px; transition: all 0.2s; }
-    .refresh-btn:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+    .last-updated { font-size: 11px; color: var(--muted); }
+    .refresh-btn { background: transparent; border: 1px solid #333; color: var(--muted); padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; transition: all 0.2s; }
+    .refresh-btn:hover { border-color: var(--accent); color: var(--accent); }
 
     /* ── Date Range Bar ── */
-    .date-bar { background: var(--card); border-bottom: 1px solid var(--border); padding: 10px 32px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .date-bar-label { font-size: 12px; color: var(--muted); flex-shrink: 0; }
-    .preset-btn { background: var(--card2); border: 1px solid var(--border); color: var(--muted); padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; transition: all 0.15s; }
-    .preset-btn:hover { color: var(--text); border-color: var(--accent); }
-    .preset-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
-    .date-sep { color: var(--border); font-size: 12px; }
+    .date-bar { background: #000; border-bottom: 1px solid var(--border); padding: 8px 32px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .date-bar-label { font-size: 11px; color: var(--muted); flex-shrink: 0; }
+    .preset-btn { background: transparent; border: 1px solid #222; color: var(--muted); padding: 4px 10px; border-radius: 5px; cursor: pointer; font-size: 11px; transition: all 0.15s; }
+    .preset-btn:hover { color: var(--text); border-color: #444; }
+    .preset-btn.active { background: #1a1a1a; border-color: #444; color: var(--text); font-weight: 600; }
+    .date-sep { color: #333; font-size: 11px; }
     .date-inputs { display: flex; align-items: center; gap: 6px; margin-left: 6px; }
-    .date-inputs input[type=date] { background: var(--card2); border: 1px solid var(--border); color: var(--text); padding: 4px 10px; border-radius: 6px; font-size: 12px; cursor: pointer; color-scheme: dark; }
-    .date-inputs input[type=date]:focus { outline: none; border-color: var(--accent); }
-    .date-inputs span { font-size: 12px; color: var(--muted); }
+    .date-inputs input[type=date] { background: #0d0d0d; border: 1px solid #222; color: var(--text); padding: 3px 8px; border-radius: 5px; font-size: 11px; cursor: pointer; color-scheme: dark; }
+    .date-inputs input[type=date]:focus { outline: none; border-color: #444; }
+    .date-inputs span { font-size: 11px; color: var(--muted); }
     .date-range-info { margin-left: auto; font-size: 11px; color: var(--muted); }
-    @media (max-width: 768px) { .date-bar { padding: 10px 16px; } .date-range-info { display: none; } }
+    @media (max-width: 768px) { .date-bar { padding: 8px 16px; } .date-range-info { display: none; } }
 
     /* ── Nav ── */
-    nav { background: var(--card); border-bottom: 1px solid var(--border); padding: 0 32px; display: flex; gap: 4px; overflow-x: auto; }
-    .tab-btn { padding: 14px 20px; font-size: 13px; font-weight: 500; color: var(--muted); background: none; border: none; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
+    nav { background: #000; border-bottom: 1px solid var(--border); padding: 0 32px; display: flex; gap: 0; overflow-x: auto; }
+    .tab-btn { padding: 12px 18px; font-size: 13px; font-weight: 400; color: var(--muted); background: none; border: none; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; white-space: nowrap; }
     .tab-btn:hover { color: var(--text); }
-    .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .tab-btn.active { color: var(--text); border-bottom-color: var(--accent); font-weight: 500; }
 
     /* ── Main ── */
-    main { padding: 28px 32px; max-width: 1440px; margin: 0 auto; }
+    main { padding: 0; max-width: 1440px; margin: 0 auto; }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
@@ -140,6 +138,16 @@
     .badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 600; }
     .badge.green { background: rgba(62,207,142,0.15); color: var(--green); }
     .badge.red { background: rgba(242,107,107,0.15); color: var(--red); }
+    .benchmark-table { width:100%; border-collapse:collapse; font-size:13px; }
+    .benchmark-table th { text-align:left; padding:10px 14px; color:var(--muted); font-weight:500; border-bottom:1px solid var(--border); font-size:11px; text-transform:uppercase; letter-spacing:0.5px; }
+    .benchmark-table td { padding:11px 14px; border-bottom:1px solid var(--border); vertical-align:middle; }
+    .benchmark-table tr:last-child td { border-bottom:none; }
+    .benchmark-table tr:hover td { background:var(--card2); }
+    .bm-metric { font-weight:500; color:var(--text); }
+    .bm-yours { font-weight:600; font-size:14px; }
+    .bm-industry { color:var(--muted); }
+    .bm-verdict { font-size:12px; color:var(--muted); }
+    .bm-status { font-size:18px; }
     .badge.yellow { background: rgba(245,166,35,0.15); color: var(--accent); }
     .badge.blue { background: rgba(79,142,247,0.15); color: var(--blue); }
 
@@ -164,39 +172,109 @@
     .donut-center .val { font-size: 24px; font-weight: 700; }
     .donut-center .lbl { font-size: 11px; color: var(--muted); }
 
+    /* ── North Star Hero ── */
+    .north-star-section {
+      text-align: center;
+      padding: 80px 32px 60px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0;
+    }
+    .north-star-eyebrow {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .north-star-value {
+      font-size: clamp(72px, 12vw, 120px);
+      font-weight: 800;
+      line-height: 1;
+      color: var(--text);
+      letter-spacing: -2px;
+      margin-bottom: 20px;
+    }
+    .north-star-sub {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .north-star-trend {
+      font-size: 13px;
+      color: var(--accent);
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+    .north-star-trend.down-bad { color: var(--red); }
+
+    /* ── Secondary metrics row ── */
+    .hero-metrics-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-metric {
+      padding: 32px 24px;
+      border-right: 1px solid var(--border);
+    }
+    .hero-metric:last-child { border-right: none; }
+    .hero-metric-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 12px; }
+    .hero-metric-value { font-size: 36px; font-weight: 700; color: var(--text); line-height: 1; margin-bottom: 8px; }
+    .hero-metric-prev { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+    .hero-metric-change { font-size: 12px; font-weight: 600; }
+    .hero-metric-change.up { color: var(--accent); }
+    .hero-metric-change.down { color: var(--red); }
+
+    /* ── Bottom row (2-col) ── */
+    .hero-bottom-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-bottom-cell {
+      padding: 28px 32px;
+      border-right: 1px solid var(--border);
+    }
+    .hero-bottom-cell:last-child { border-right: none; }
+    .hero-bottom-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 8px; }
+    .hero-bottom-value { font-size: 28px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .hero-bottom-sub { font-size: 12px; color: var(--muted); }
+
+    /* ── Page header (non-overview tabs) ── */
+    .page-header { padding: 32px 32px 24px; border-bottom: 1px solid var(--border); margin-bottom: 0; }
+    .page-header h1 { font-size: 28px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .page-header p { font-size: 13px; color: var(--muted); }
+
+    /* ── Section label ── */
+    .section-eyebrow {
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+
     /* ── Responsive ── */
     @media (max-width: 768px) {
-      header { padding: 14px 16px; }
+      header { padding: 0 16px; }
       main { padding: 16px; }
       nav { padding: 0 16px; }
       .chart-grid { grid-template-columns: 1fr; }
       .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-metrics-row { grid-template-columns: 1fr; }
+      .hero-metric { border-right: none; border-bottom: 1px solid var(--border); }
+      .hero-bottom-row { grid-template-columns: 1fr; }
+      .hero-bottom-cell { border-right: none; border-bottom: 1px solid var(--border); }
+      .north-star-section { padding: 48px 20px 40px; }
     }
   </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">
-    <!-- Berczy monogram: dot · italic B · sweeping crescent arc -->
-    <svg class="logo-icon" viewBox="0 0 68 82" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Sweeping crescent arc around right side of B -->
-      <path d="M 20 4 C 82 4, 82 82, 20 82"
-            stroke="#c9a050" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-      <!-- Small dot upper-left -->
-      <circle cx="10" cy="18" r="2.8" fill="#c9a050"/>
-      <!-- Large elegant italic serif B -->
-      <text x="14" y="64"
-            font-family="Cormorant Garamond, Georgia, serif"
-            font-size="62" font-weight="400" font-style="italic"
-            fill="#c9a050">B</text>
-    </svg>
-    <div class="logo-wordmark">
-      <span class="logo-the">The</span>
-      <span class="logo-name">Berczy</span>
-      <span class="logo-tavern">Tavern</span>
-      <span class="logo-sub">Guest Getter Analytics</span>
-    </div>
+  <div class="header-brand">
+    <a class="header-brand-back" href="#">
+      <img src="berczy-logo-transparent.png" alt="" style="width:22px;height:22px;border-radius:3px;object-fit:cover;">
+      OldTown
+    </a>
+    <span class="header-brand-sep">|</span>
+    <span class="header-brand-name">The Berczy Tavern</span>
   </div>
   <div class="header-right">
     <span class="last-updated" id="lastUpdated">Loading...</span>
@@ -205,14 +283,16 @@
 </header>
 
 <nav>
-  <button class="tab-btn active" onclick="switchTab('overview', this)">Overview</button>
-  <button class="tab-btn" onclick="switchTab('insights', this)">💡 Insights</button>
-  <button class="tab-btn" onclick="switchTab('facebook', this)">Facebook Ads</button>
-  <button class="tab-btn" onclick="switchTab('google', this)">Google Ads</button>
+  <button class="tab-btn active" onclick="switchTab('overview', this)">Dashboard</button>
+  <button class="tab-btn" onclick="switchTab('ads', this)">Ads</button>
+  <button class="tab-btn" onclick="switchTab('facebook', this)">Meta</button>
+  <button class="tab-btn" onclick="switchTab('google', this)">Google</button>
+  <button class="tab-btn" onclick="switchTab('social', this)">Social Media</button>
   <button class="tab-btn" onclick="switchTab('reservations', this)">Reservations</button>
   <button class="tab-btn" onclick="switchTab('events', this)">Private Events</button>
-  <button class="tab-btn" onclick="switchTab('email', this)">Email</button>
-  <button class="tab-btn" onclick="switchTab('rolling', this)">📊 4W Rolling</button>
+  <button class="tab-btn" onclick="switchTab('email', this)">Emails</button>
+  <button class="tab-btn" onclick="switchTab('insights', this)">Insights</button>
+  <button class="tab-btn" onclick="switchTab('rolling', this)">4W Rolling</button>
 </nav>
 
 <div class="date-bar">
@@ -232,33 +312,121 @@
 
 <main>
 
-  <!-- ══ OVERVIEW ══════════════════════════════════════════════════════════ -->
+  <!-- ══ OVERVIEW / DASHBOARD ═══════════════════════════════════════════════ -->
   <div id="tab-overview" class="tab-content active">
-    <div class="kpi-grid" id="kpi-overview">
-      <div class="loading"><div class="spinner"></div> Loading...</div>
+
+    <!-- North Star Hero -->
+    <div class="north-star-section">
+      <div class="north-star-eyebrow">The North Star</div>
+      <div class="north-star-value" id="ns-value">—</div>
+      <div class="north-star-sub" id="ns-sub">Spend per cover</div>
+      <div class="north-star-trend" id="ns-trend"></div>
     </div>
-    <div class="chart-grid">
-      <div class="chart-card full">
-        <div class="chart-title">Monthly Covers & Ad Spend</div>
-        <div class="chart-subtitle">Covers served vs total marketing spend per month</div>
-        <div class="chart-wrap"><canvas id="chart-coversSpend"></canvas></div>
+
+    <!-- Secondary metrics -->
+    <div class="hero-metrics-row">
+      <div class="hero-metric">
+        <div class="hero-metric-label">Covers</div>
+        <div class="hero-metric-value" id="ns-covers">—</div>
+        <div class="hero-metric-prev" id="ns-covers-prev"></div>
+        <div class="hero-metric-change" id="ns-covers-change"></div>
       </div>
-      <div class="chart-card">
-        <div class="chart-title">Cost Per Cover</div>
-        <div class="chart-subtitle">Marketing spend ÷ covers</div>
-        <div class="chart-wrap"><canvas id="chart-costPerCover"></canvas></div>
+      <div class="hero-metric">
+        <div class="hero-metric-label">Unique Web Visitors</div>
+        <div class="hero-metric-value" id="ns-users">—</div>
+        <div class="hero-metric-prev" id="ns-users-prev"></div>
+        <div class="hero-metric-change" id="ns-users-change"></div>
       </div>
-      <div class="chart-card">
-        <div class="chart-title">Website Users</div>
-        <div class="chart-subtitle">Monthly unique visitors</div>
-        <div class="chart-wrap"><canvas id="chart-users"></canvas></div>
+      <div class="hero-metric">
+        <div class="hero-metric-label">Total Ad Spend</div>
+        <div class="hero-metric-value" id="ns-spend">—</div>
+        <div class="hero-metric-prev" id="ns-spend-prev"></div>
+        <div class="hero-metric-change" id="ns-spend-change"></div>
       </div>
+    </div>
+
+    <!-- Bottom row -->
+    <div class="hero-bottom-row">
+      <div class="hero-bottom-cell">
+        <div class="hero-bottom-label">Total Mktg Spend</div>
+        <div class="hero-bottom-value" id="ns-total-spend">—</div>
+        <div class="hero-bottom-sub" id="ns-total-spend-sub"></div>
+      </div>
+      <div class="hero-bottom-cell">
+        <div class="hero-bottom-label">Covers Per Web Visitor</div>
+        <div class="hero-bottom-value" id="ns-conv">—</div>
+        <div class="hero-bottom-sub" id="ns-conv-sub"></div>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div style="padding: 28px 32px 0;">
+      <div class="chart-grid">
+        <div class="chart-card full">
+          <div class="chart-title">Monthly Covers & Ad Spend</div>
+          <div class="chart-subtitle">Covers served vs total marketing spend per month</div>
+          <div class="chart-wrap"><canvas id="chart-coversSpend"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Cost Per Cover</div>
+          <div class="chart-subtitle">Marketing spend ÷ covers</div>
+          <div class="chart-wrap"><canvas id="chart-costPerCover"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Website Users</div>
+          <div class="chart-subtitle">Monthly unique visitors</div>
+          <div class="chart-wrap"><canvas id="chart-users"></canvas></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ ADS COMBINED ═════════════════════════════════════════════════════ -->
+  <div id="tab-ads" class="tab-content">
+    <div class="page-header">
+      <h1>Ad Performance</h1>
+      <p>Paid social & search campaign breakdown</p>
+    </div>
+    <div style="padding: 28px 32px;">
+
+      <!-- Website Funnel -->
+      <div class="chart-card" style="margin-bottom:20px;">
+        <div class="section-eyebrow">Website Funnel</div>
+        <div class="chart-title" style="font-size:18px;margin-bottom:4px;">Website visits → unique visitors → covers</div>
+        <div id="ads-funnel" style="margin-top:20px;"></div>
+      </div>
+
+      <!-- Channel Split -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;" id="ads-channel-split">
+        <div class="loading"><div class="spinner"></div></div>
+      </div>
+
+      <!-- Traffic sources -->
+      <div class="chart-card" style="margin-bottom:20px;">
+        <div class="section-eyebrow">Website Traffic Sources</div>
+        <div class="chart-title" style="font-size:18px;margin-bottom:16px;">Where visitors come from</div>
+        <div id="ads-traffic-sources"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ SOCIAL MEDIA ════════════════════════════════════════════════════ -->
+  <div id="tab-social" class="tab-content">
+    <div class="page-header">
+      <h1>Social Media</h1>
+      <p>Organic reach, engagement, and follower growth</p>
+    </div>
+    <div style="padding:60px 32px;text-align:center;color:var(--muted);">
+      <div style="font-size:14px;">Social media analytics coming soon.</div>
     </div>
   </div>
 
   <!-- ══ INSIGHTS ══════════════════════════════════════════════════════════ -->
   <div id="tab-insights" class="tab-content">
-    <div class="section-title">💡 Exclusive Insights <span>Auto-generated from your data</span></div>
+    <div class="page-header"><h1>Insights</h1><p>Auto-generated from your data</p></div>
+    <div style="padding:28px 32px;">
+    <div class="section-title">Key Signals <span>Auto-generated from your data</span></div>
     <div class="insights-grid" id="insights-grid">
       <div class="loading"><div class="spinner"></div> Analysing data...</div>
     </div>
@@ -272,14 +440,31 @@
       </div>
     </div>
 
-    <div class="section-title">🏆 Best & Worst Months</div>
+    <div class="section-title">📋 Confirmed Bookings vs Actual Covers</div>
+    <div class="chart-grid" style="margin-bottom:24px">
+      <div class="chart-card full">
+        <div class="chart-title">Booked Covers vs Covers That Arrived</div>
+        <div class="chart-subtitle">Gap = cancellations + no-shows. Growing gap = revenue leaking.</div>
+        <div class="chart-wrap" style="height:280px"><canvas id="chart-bookedVsActual"></canvas></div>
+      </div>
+    </div>
+
+    <div class="section-title">📊 How You Compare — Industry Benchmarks</div>
+    <div class="table-card" id="benchmarks-table">
+      <div class="loading"><div class="spinner"></div></div>
+    </div>
+
+    <div class="section-title">Best & Worst Months</div>
     <div class="table-card" id="table-bestWorst">
       <div class="loading"><div class="spinner"></div></div>
+    </div>
     </div>
   </div>
 
   <!-- ══ FACEBOOK ══════════════════════════════════════════════════════════ -->
   <div id="tab-facebook" class="tab-content">
+    <div class="page-header"><h1>Meta Ads</h1><p>Facebook & Instagram paid campaigns</p></div>
+    <div style="padding:28px 32px;">
     <div class="kpi-grid" id="kpi-facebook">
       <div class="loading"><div class="spinner"></div></div>
     </div>
@@ -299,11 +484,29 @@
         <div class="chart-subtitle">Monthly CPC trend</div>
         <div class="chart-wrap"><canvas id="chart-fbCPC"></canvas></div>
       </div>
+      <div class="chart-card">
+        <div class="chart-title">Facebook Reservations & Cost/Reservation</div>
+        <div class="chart-subtitle">Bookings driven by Facebook ads per month</div>
+        <div class="chart-wrap"><canvas id="chart-fbReservations"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Profile Visits vs Reservations</div>
+        <div class="chart-subtitle">How many profile visits convert to bookings</div>
+        <div class="chart-wrap"><canvas id="chart-fbProfileVisits"></canvas></div>
+      </div>
+      <div class="chart-card full">
+        <div class="chart-title">Campaign Conversion Breakdown</div>
+        <div class="chart-subtitle">Spend, clicks, reservations and profile visits per campaign</div>
+        <div id="fb-campaign-table" style="overflow-x:auto"></div>
+      </div>
+    </div>
     </div>
   </div>
 
   <!-- ══ GOOGLE ADS ════════════════════════════════════════════════════════ -->
   <div id="tab-google" class="tab-content">
+    <div class="page-header"><h1>Google Ads</h1><p>Search & Performance Max campaigns</p></div>
+    <div style="padding:28px 32px;">
     <div class="kpi-grid" id="kpi-google">
       <div class="loading"><div class="spinner"></div></div>
     </div>
@@ -326,10 +529,13 @@
     </div>
     <div class="section-title">Campaign Breakdown</div>
     <div class="table-card" id="table-campaigns"></div>
+    </div>
   </div>
 
   <!-- ══ RESERVATIONS ══════════════════════════════════════════════════════ -->
   <div id="tab-reservations" class="tab-content">
+    <div class="page-header"><h1>Reservations</h1><p>Guest booking patterns and behaviour</p></div>
+    <div style="padding:28px 32px;">
     <div class="kpi-grid" id="kpi-reservations">
       <div class="loading"><div class="spinner"></div></div>
     </div>
@@ -363,10 +569,13 @@
         <div class="chart-wrap"><canvas id="chart-resMonthly"></canvas></div>
       </div>
     </div>
+    </div>
   </div>
 
   <!-- ══ PRIVATE EVENTS ════════════════════════════════════════════════════ -->
   <div id="tab-events" class="tab-content">
+    <div class="page-header"><h1>Private Events</h1><p>Lead pipeline and venue bookings</p></div>
+    <div style="padding:28px 32px;">
     <div class="kpi-grid" id="kpi-events">
       <div class="loading"><div class="spinner"></div></div>
     </div>
@@ -387,10 +596,13 @@
         <div class="chart-wrap"><canvas id="chart-eventsMonthly"></canvas></div>
       </div>
     </div>
+    </div>
   </div>
 
   <!-- ══ EMAIL ════════════════════════════════════════════════════════════ -->
   <div id="tab-email" class="tab-content">
+    <div class="page-header"><h1>Emails</h1><p>Campaign performance and subscriber growth</p></div>
+    <div style="padding:28px 32px;">
     <div class="kpi-grid" id="kpi-email">
       <div class="loading"><div class="spinner"></div></div>
     </div>
@@ -411,12 +623,17 @@
         <div class="chart-wrap"><canvas id="chart-subGrowth"></canvas></div>
       </div>
     </div>
+    </div>
   </div>
+
+  <!-- ══ INSIGHTS ── moved here ════════════════════════════════════════════ -->
 
   <!-- ══ 4W ROLLING ═══════════════════════════════════════════════════════ -->
   <div id="tab-rolling" class="tab-content">
+    <div class="page-header"><h1>4-Week Rolling</h1><p>Weekly trends against 4-week averages</p></div>
+    <div style="padding:28px 32px;">
     <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;flex-wrap:wrap;">
-      <div class="section-title" style="margin-bottom:0">📊 4-Week Rolling Averages</div>
+      <div class="section-title" style="margin-bottom:0">4-Week Rolling Averages</div>
       <div style="display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 16px;">
         <span style="font-size:12px;color:var(--muted);">As of date:</span>
         <input type="date" id="rollingAsOf" style="background:var(--card2);border:1px solid var(--border);color:var(--text);padding:5px 10px;border-radius:6px;font-size:13px;font-weight:600;color-scheme:dark;" onchange="renderRolling()" />
@@ -458,6 +675,7 @@
         <div class="chart-wrap" style="height:180px"><canvas id="chart-rollSpendUser"></canvas></div>
       </div>
     </div>
+    </div>
   </div>
 
 </main>
@@ -468,6 +686,7 @@ const charts = {};
 let DATA = {};
 let RANGE = { from: null, to: null }; // null = no filter (all time)
 let PREV_RANGE = { from: null, to: null };
+let RANGE_IS_PRESET = false; // true = preset button (use monthly charts), false = custom date (use daily charts)
 
 // ── Date Range Helpers ──────────────────────────────────────────────────────
 // Convert a YYYY-MM-DD date string to YYYY-MM month key
@@ -522,15 +741,15 @@ function setPreset(months, btn) {
     document.getElementById('dateTo').value = '';
   } else {
     const now = new Date();
-    const toDate = new Date(now.getFullYear(), now.getMonth() + 1, 0); // last day of current month
-    const fromDate = new Date(now.getFullYear(), now.getMonth() - months + 1, 1);
+    // Snap to last N complete calendar months (exclude current partial month)
+    const toDate   = new Date(now.getFullYear(), now.getMonth(), 0); // last day of previous month
+    const fromDate = new Date(now.getFullYear(), now.getMonth() - months, 1); // first day N months back
     const to   = toDate.toISOString().slice(0, 10);
     const from = fromDate.toISOString().slice(0, 10);
     RANGE = { from, to };
-    // prev period = same # of days immediately before
-    const diffMs = toDate - fromDate;
-    const prevToDate   = new Date(fromDate - 86400000);
-    const prevFromDate = new Date(prevToDate - diffMs);
+    // prev period = same number of calendar months immediately before
+    const prevToDate   = new Date(now.getFullYear(), now.getMonth() - months, 0);
+    const prevFromDate = new Date(now.getFullYear(), now.getMonth() - months * 2, 1);
     PREV_RANGE = {
       from: prevFromDate.toISOString().slice(0, 10),
       to:   prevToDate.toISOString().slice(0, 10),
@@ -538,11 +757,13 @@ function setPreset(months, btn) {
     document.getElementById('dateFrom').value = from;
     document.getElementById('dateTo').value = to;
   }
+  RANGE_IS_PRESET = months !== 0;
   updateRangeInfo();
   if (Object.keys(DATA).length) renderAll();
 }
 
 function setCustomRange() {
+  RANGE_IS_PRESET = false;
   const from = document.getElementById('dateFrom').value;
   const to = document.getElementById('dateTo').value;
   RANGE = { from: from || null, to: to || null };
@@ -573,8 +794,8 @@ function updateRangeInfo() {
 }
 
 // ── Chart defaults ─────────────────────────────────────────────────────────
-Chart.defaults.color = '#8b8fa8';
-Chart.defaults.borderColor = '#3d6650';
+Chart.defaults.color = '#666';
+Chart.defaults.borderColor = '#1f1f1f';
 Chart.defaults.font.family = 'Inter, system-ui, sans-serif';
 
 function mkChart(id, config) {
@@ -585,9 +806,9 @@ function mkChart(id, config) {
 }
 
 const COLORS = {
-  accent: '#f5a623', accent2: '#e8734a', blue: '#4f8ef7',
-  green: '#3ecf8e', red: '#f26b6b', purple: '#a78bfa',
-  muted: '#8b8fa8',
+  accent: '#22c55e', accent2: '#4ade80', blue: '#4f8ef7',
+  green: '#22c55e', red: '#f26b6b', purple: '#a78bfa',
+  muted: '#555',
 };
 
 function gradient(ctx, color) {
@@ -669,34 +890,29 @@ async function loadData() {
     renderAll();
   } catch(e) {
     console.error('Load error:', e);
-    document.getElementById('lastUpdated').textContent = 'Error loading data';
+    document.getElementById('lastUpdated').textContent = 'Error: ' + e.message;
   } finally {
     if (btn) { btn.textContent = '↻ Refresh'; btn.disabled = false; }
   }
 }
 
 function renderAll() {
-  renderOverview();
-  renderInsights();
-  renderFacebook();
-  renderGoogle();
-  renderReservations();
-  renderEvents();
-  renderEmail();
-  renderRolling();
+  const fns = [renderOverview, renderAds, renderInsights, renderFacebook, renderGoogle, renderReservations, renderEvents, renderEmail, renderRolling];
+  for (const fn of fns) {
+    try { fn(); } catch(e) { console.error(fn.name + ' failed:', e); }
+  }
 }
 
 // ── Overview ──────────────────────────────────────────────────────────────
 function renderOverview() {
   if (!DATA.summary) return;
-  const { monthly, daily } = DATA.summary;
+  const { monthly } = DATA.summary;
   const active = filterMonthly(monthly).filter(m => m.covers > 0);
   const prevActive = filterToPrev(monthly).filter(m => m.covers > 0);
 
   const totalCovers = active.reduce((a,b) => a+b.covers, 0);
   const totalSpend  = active.reduce((a,b) => a+b.spend, 0);
   const totalUsers  = active.reduce((a,b) => a+b.users, 0);
-  const bestMonth   = [...active].sort((a,b) => b.covers - a.covers)[0] || {};
 
   const prevCovers = prevActive.reduce((a,b) => a+b.covers, 0);
   const prevSpend  = prevActive.reduce((a,b) => a+b.spend, 0);
@@ -704,19 +920,66 @@ function renderOverview() {
   const currCPC = totalCovers > 0 ? totalSpend / totalCovers : 0;
   const prevCPC = prevCovers > 0 ? prevSpend / prevCovers : 0;
 
-  const dCovers = delta(totalCovers, prevCovers, v => v.toLocaleString(undefined,{maximumFractionDigits:0}));
-  const dSpend  = delta(totalSpend,  prevSpend,  v => '$' + v.toLocaleString(undefined,{maximumFractionDigits:0}), true);
-  const dCPC    = delta(currCPC,     prevCPC,    v => '$' + v.toFixed(2), true);
-  const dUsers  = delta(totalUsers,  prevUsers,  v => v.toLocaleString(undefined,{maximumFractionDigits:0}));
+  // ── North Star hero ──
+  // Use most recent month for the hero if in "all time" view, otherwise use filtered totals
+  const latestMonth = active[active.length - 1] || {};
+  const prevMonthForHero = active.length >= 2 ? active[active.length - 2] : null;
+  const heroCovers = RANGE.from ? totalCovers : (latestMonth.covers || 0);
+  const heroSpend  = RANGE.from ? totalSpend  : (latestMonth.spend  || 0);
+  const heroUsers  = RANGE.from ? totalUsers  : (latestMonth.users  || 0);
+  const heroCPC    = heroCovers > 0 ? heroSpend / heroCovers : 0;
+  const prevHeroCovers = RANGE.from ? prevCovers : (prevMonthForHero?.covers || 0);
+  const prevHeroSpend  = RANGE.from ? prevSpend  : (prevMonthForHero?.spend  || 0);
+  const prevHeroUsers  = RANGE.from ? prevUsers  : (prevMonthForHero?.users  || 0);
+  const prevHeroCPC    = prevHeroCovers > 0 ? prevHeroSpend / prevHeroCovers : 0;
 
-  const rangeLabel = RANGE.from ? 'In range' : 'All time';
-  document.getElementById('kpi-overview').innerHTML = [
-    kpiCard('Total Covers',    fmt(totalCovers),                          rangeLabel,  dCovers.cls, dCovers.text),
-    kpiCard('Total Ad Spend',  fmt(totalSpend,'$'),                       rangeLabel,  dSpend.cls,  dSpend.text),
-    kpiCard('Avg Cost/Cover',  `$${currCPC.toFixed(2)}`,                  rangeLabel,  dCPC.cls,    dCPC.text),
-    kpiCard('Website Users',   fmt(totalUsers),                           rangeLabel,  dUsers.cls,  dUsers.text),
-    kpiCard('Best Month',      bestMonth.month || '—', `${fmt(bestMonth.covers)} covers`, 'up', ''),
-  ].join('');
+  const heroLabel = RANGE.from ? 'selected period' : latestMonth.month || '';
+
+  // North Star value
+  document.getElementById('ns-value').textContent = heroCPC > 0 ? `$${heroCPC.toFixed(2)}` : '—';
+  document.getElementById('ns-sub').textContent   = `Spend per cover · $${heroSpend.toLocaleString(undefined,{maximumFractionDigits:0})} ÷ ${heroCovers.toLocaleString()} covers`;
+
+  // Trend indicator
+  const trendEl = document.getElementById('ns-trend');
+  if (prevHeroCPC > 0 && heroCPC > 0) {
+    const pct = ((heroCPC - prevHeroCPC) / prevHeroCPC * 100);
+    const efficient = heroCPC <= prevHeroCPC;
+    trendEl.textContent = efficient
+      ? `↓ Trending more efficient (${Math.abs(pct).toFixed(1)}% vs prev)`
+      : `↑ Less efficient (${Math.abs(pct).toFixed(1)}% vs prev)`;
+    trendEl.className = `north-star-trend${efficient ? '' : ' down-bad'}`;
+  } else { trendEl.textContent = ''; }
+
+  // Secondary metrics
+  const setHeroMetric = (id, val, prev, fmtFn, invertGood) => {
+    document.getElementById(id).textContent = fmtFn(val);
+    if (prev > 0) {
+      document.getElementById(id+'-prev').textContent = `prev: ${fmtFn(prev)}`;
+      const pctVal = ((val - prev) / Math.abs(prev) * 100);
+      const up = val >= prev;
+      const good = invertGood ? !up : up;
+      const chEl = document.getElementById(id+'-change');
+      chEl.textContent = `${up ? '↑' : '↓'} ${Math.abs(pctVal).toFixed(0)}%`;
+      chEl.className = `hero-metric-change ${good ? 'up' : 'down'}`;
+    }
+  };
+  setHeroMetric('ns-covers', heroCovers, prevHeroCovers, v => v.toLocaleString(undefined,{maximumFractionDigits:0}), false);
+  setHeroMetric('ns-users',  heroUsers,  prevHeroUsers,  v => v >= 1000 ? (v/1000).toFixed(1)+'K' : v.toLocaleString(), false);
+  setHeroMetric('ns-spend',  heroSpend,  prevHeroSpend,  v => '$'+v.toLocaleString(undefined,{maximumFractionDigits:0}), true);
+
+  // Bottom row
+  const fbSpend  = (() => { try { const fb = DATA.facebook; if (!fb) return 0; const m = fb.filter(r => r.month === latestMonth.month); return m.reduce((a,b) => a+(b.spend||0), 0); } catch(_){ return 0; } })();
+  const gSpend   = heroSpend - fbSpend;
+  document.getElementById('ns-total-spend').textContent = `$${heroSpend.toLocaleString(undefined,{maximumFractionDigits:0})}`;
+  document.getElementById('ns-total-spend-sub').textContent = fbSpend > 0
+    ? `$${fbSpend.toLocaleString(undefined,{maximumFractionDigits:0})} Meta · $${Math.max(0,gSpend).toLocaleString(undefined,{maximumFractionDigits:0})} Google`
+    : heroLabel;
+
+  const conv = heroUsers > 0 ? (heroCovers / heroUsers * 100) : 0;
+  document.getElementById('ns-conv').textContent = conv > 0 ? `${conv.toFixed(1)}%` : '—';
+  document.getElementById('ns-conv-sub').textContent = heroCovers > 0 && heroUsers > 0
+    ? `${heroCovers.toLocaleString()} covers ÷ ${heroUsers >= 1000 ? (heroUsers/1000).toFixed(0)+'K' : heroUsers} visitors`
+    : '';
 
   const labels = active.map(m => m.month.slice(2));
   const ctx1 = document.getElementById('chart-coversSpend');
@@ -758,16 +1021,655 @@ function renderOverview() {
   });
 }
 
+// ── Ads Combined ──────────────────────────────────────────────────────────
+function renderAds() {
+  if (!DATA.summary) return;
+  const { monthly } = DATA.summary;
+  const active = filterMonthly(monthly).filter(m => m.covers > 0);
+  const latestMonth = active[active.length - 1] || {};
+  const heroCovers = latestMonth.covers || 0;
+  const heroSpend  = latestMonth.spend  || 0;
+  const heroUsers  = latestMonth.users  || 0;
+
+  // Website Funnel
+  const funnelEl = document.getElementById('ads-funnel');
+  if (funnelEl && heroUsers > 0) {
+    const visits  = Math.round(heroUsers * 1.29); // estimate sessions vs uniques
+    const uniques = heroUsers;
+    const covers  = heroCovers;
+    const maxVal  = visits;
+    const bar = (val, color, label) =>
+      `<div style="display:flex;align-items:center;gap:16px;margin-bottom:12px;">
+        <div style="font-size:12px;color:var(--muted);width:130px;text-align:right;">${label}</div>
+        <div style="flex:1;background:#111;border-radius:4px;height:8px;overflow:hidden;">
+          <div style="height:100%;background:${color};width:${(val/maxVal*100).toFixed(1)}%;border-radius:4px;"></div>
+        </div>
+        <div style="font-size:13px;font-weight:600;width:60px;">${val.toLocaleString()}</div>
+      </div>`;
+    funnelEl.innerHTML =
+      bar(visits, '#4f8ef7', 'Website Visits') +
+      bar(uniques, '#4f8ef7cc', 'Unique Visitors') +
+      bar(covers, COLORS.green, 'Covers (Website)') +
+      `<div style="display:flex;gap:32px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border);">
+        <div><span style="font-size:22px;font-weight:700;color:${COLORS.green};">${(heroCovers/heroUsers*100).toFixed(1)}%</span> <span style="font-size:12px;color:var(--muted);">website conversion</span></div>
+        <div><span style="font-size:22px;font-weight:700;color:var(--text);">$${(heroCovers > 0 ? heroSpend/heroCovers : 0).toFixed(2)}</span> <span style="font-size:12px;color:var(--muted);">spend / cover</span></div>
+      </div>`;
+  }
+
+  // Channel Split
+  const splitEl = document.getElementById('ads-channel-split');
+  if (splitEl) {
+    const fbData  = DATA.facebook  ? DATA.facebook.find(r => r.month === latestMonth.month)  : null;
+    const gData   = DATA.googleAds ? (DATA.googleAds.monthly||[]).find(r => r.month === latestMonth.month) : null;
+    const metaSpend  = fbData  ? (fbData.spend  || 0) : 0;
+    const googleSpend= gData   ? (gData.spend   || 0) : 0;
+
+    const metaCard = `<div class="chart-card">
+      <div class="section-eyebrow">Meta Ads · Instagram & Facebook</div>
+      <div style="font-size:28px;font-weight:700;margin:8px 0 16px;">$${metaSpend.toLocaleString(undefined,{maximumFractionDigits:0})}</div>
+      ${fbData ? `<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        ${[['Reach', fmt(fbData.reach)],['Impressions', fmt(fbData.impressions)],['Clicks', fmt(fbData.clicks)],['CTR', `${(fbData.ctr||0).toFixed(2)}%`],['CPC', `$${(fbData.cpc||0).toFixed(2)}`],['CPM', `$${(fbData.cpm||0).toFixed(2)}`]].map(([l,v])=>`<div><div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:3px;">${l}</div><div style="font-size:14px;font-weight:600;">${v}</div></div>`).join('')}
+      </div>` : '<div style="color:var(--muted);font-size:13px;">No Meta data for this period</div>'}
+    </div>`;
+
+    const googleCard = `<div class="chart-card">
+      <div class="section-eyebrow">Google Ads · Search & PMax</div>
+      <div style="font-size:28px;font-weight:700;margin:8px 0 16px;">$${googleSpend.toLocaleString(undefined,{maximumFractionDigits:0})}</div>
+      ${gData ? `<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        ${[['Reservations', gData.reservations||0],['Phone Calls', gData.calls||0],['Impressions', fmt(gData.impressions)],['Clicks', fmt(gData.clicks)]].map(([l,v])=>`<div><div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:3px;">${l}</div><div style="font-size:14px;font-weight:600;">${v}</div></div>`).join('')}
+      </div>` : '<div style="color:var(--muted);font-size:13px;">No Google data for this period</div>'}
+    </div>`;
+
+    splitEl.innerHTML = metaCard + googleCard;
+  }
+}
+
 // ── Insights ──────────────────────────────────────────────────────────────
 function renderInsights() {
-  if (!DATA.insights) return;
   const grid = document.getElementById('insights-grid');
-  grid.innerHTML = DATA.insights.map(ins => `
+  // Generate insights from live data
+  const insights = [];
+  // helper
+  const pct = (a, b) => b ? ((a - b) / Math.abs(b) * 100) : null;
+  const flag = (condition, ifTrue, ifFalse) => condition ? ifTrue : ifFalse;
+
+  // Detect if the latest month is partial (fewer days than expected)
+  const today = new Date();
+  const currentYM = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}`;
+  const daysInCurrentMonth = new Date(today.getFullYear(), today.getMonth()+1, 0).getDate();
+  const dayOfMonth = today.getDate();
+  const isPartialMonth = (m) => m === currentYM;
+  const partialDays = dayOfMonth;
+  // Normalize: scale a partial month total to full-month equivalent for fair comparison
+  const normalizeFull = (val, month) => isPartialMonth(month) ? val / partialDays * daysInCurrentMonth : val;
+  // Or use daily rate comparison instead
+  const dailyRate = (val, days) => days > 0 ? val / days : val;
+  const partialNote = (month) => isPartialMonth(month) ? ` (${partialDays}-day pace)` : '';
+
+  // ── Covers & Daily Avg ────────────────────────────────────────────────
+  if (DATA.summary) {
+    const monthly = DATA.summary.monthly?.filter(m => m.covers > 0) || [];
+    const recent  = monthly.slice(-3);
+    if (recent.length >= 2) {
+      const last = recent[recent.length - 1];
+      const prev = recent[recent.length - 2];
+      // Daily avg comparison (fair — removes day-count bias)
+      const dayAvgChg = pct(last.avgDailyCovers, prev.avgDailyCovers);
+      if (dayAvgChg !== null) {
+        const isDown = dayAvgChg < -5;
+        insights.push({ type: isDown ? 'warning' : dayAvgChg > 5 ? 'positive' : 'info',
+          title: `${isDown ? '🔴 ' : dayAvgChg > 5 ? '🟢 ' : ''}Daily covers avg ${dayAvgChg >= 0 ? '↑' : '↓'} ${Math.abs(dayAvgChg).toFixed(1)}% MoM`,
+          body: `${last.avgDailyCovers} covers/day in ${last.month} vs ${prev.avgDailyCovers} in ${prev.month}. ${isDown ? 'Traffic is declining — check ad budget and seasonality.' : ''}` });
+      }
+      // Cost per cover rising is a red flag (cost/cover is already per-day safe)
+      const cpcChg = pct(last.costPerCover, prev.costPerCover);
+      if (cpcChg !== null && cpcChg > 10) {
+        insights.push({ type: 'warning',
+          title: `🔴 Cost/Cover up ${cpcChg.toFixed(1)}%${partialNote(last.month)} — efficiency dropping`,
+          body: `$${last.costPerCover}/cover in ${last.month}${partialNote(last.month)} vs $${prev.costPerCover} in ${prev.month}. You're paying more per guest — review targeting and budget allocation.` });
+      } else if (cpcChg !== null && cpcChg < -10) {
+        insights.push({ type: 'positive',
+          title: `🟢 Cost/Cover down ${Math.abs(cpcChg).toFixed(1)}% — great efficiency`,
+          body: `$${last.costPerCover}/cover in ${last.month} vs $${prev.costPerCover} in ${prev.month}. Ads driving more covers per dollar.` });
+      }
+    }
+    // 3-month cover trend
+    if (recent.length === 3) {
+      const [m1, m2, m3] = recent;
+      const declining = m3.avgDailyCovers < m2.avgDailyCovers && m2.avgDailyCovers < m1.avgDailyCovers;
+      const growing   = m3.avgDailyCovers > m2.avgDailyCovers && m2.avgDailyCovers > m1.avgDailyCovers;
+      if (declining) insights.push({ type: 'warning',
+        title: `🔴 3 consecutive months of declining daily covers`,
+        body: `${m1.avgDailyCovers} → ${m2.avgDailyCovers} → ${m3.avgDailyCovers} covers/day. Consistent downward trend — urgent attention needed.` });
+      else if (growing) insights.push({ type: 'positive',
+        title: `🟢 3 consecutive months of cover growth`,
+        body: `${m1.avgDailyCovers} → ${m2.avgDailyCovers} → ${m3.avgDailyCovers} covers/day. Strong momentum — keep current strategy.` });
+    }
+    // Best month benchmark
+    const sorted = [...monthly].sort((a,b) => b.avgDailyCovers - a.avgDailyCovers);
+    const best = sorted[0]; const last = monthly[monthly.length - 1];
+    if (best && last && best.month !== last.month) {
+      const gap = pct(last.avgDailyCovers, best.avgDailyCovers);
+      if (gap < -20) insights.push({ type: 'opportunity',
+        title: `Current pace is ${Math.abs(gap.toFixed(0))}% below your best month`,
+        body: `Best: ${best.avgDailyCovers} covers/day (${best.month}). Now: ${last.avgDailyCovers}/day. Gap = ${Math.round(best.avgDailyCovers - last.avgDailyCovers)} covers/day of upside.` });
+    }
+    // Website users drop
+    const users = DATA.summary.monthly?.filter(m => m.users > 0) || [];
+    if (users.length >= 2) {
+      const lu = users[users.length - 1]; const pu = users[users.length - 2];
+      const uchg = pct(lu.users, pu.users);
+      if (uchg !== null && uchg < -15) insights.push({ type: 'warning',
+        title: `🔴 Website traffic down ${Math.abs(uchg).toFixed(1)}% MoM`,
+        body: `${lu.users.toLocaleString()} users in ${lu.month} vs ${pu.users.toLocaleString()} in ${pu.month}. Reduced traffic may impact future cover counts.` });
+    }
+  }
+
+  // ── Facebook ──────────────────────────────────────────────────────────
+  if (DATA.facebook) {
+    const fb = (DATA.facebook.monthly || DATA.facebook).filter(m => m.spend > 0);
+    if (fb.length >= 2) {
+      const last = fb[fb.length - 1]; const prev = fb[fb.length - 2];
+      // High CPM = expensive audience
+      if (last.cpm > 12) insights.push({ type: 'warning',
+        title: `🔴 Facebook CPM $${last.cpm?.toFixed(2)} — audience costs rising`,
+        body: `Paying $${last.cpm}/1000 impressions in ${last.month}. Above $12 is costly for restaurant ads. Consider narrowing audience or testing new creatives.` });
+      // CTR change
+      const ctrChg = pct(last.ctr, prev.ctr);
+      if (ctrChg !== null && ctrChg < -15) insights.push({ type: 'warning',
+        title: `🔴 Facebook CTR dropped ${Math.abs(ctrChg).toFixed(1)}%`,
+        body: `${last.ctr?.toFixed(2)}% CTR in ${last.month} vs ${prev.ctr?.toFixed(2)}% prior. Ad fatigue likely — refresh creatives or rotate audiences.` });
+      else if (ctrChg !== null && ctrChg > 15) insights.push({ type: 'positive',
+        title: `🟢 Facebook CTR up ${ctrChg.toFixed(1)}% — strong ad engagement`,
+        body: `${last.ctr?.toFixed(2)}% CTR in ${last.month} vs ${prev.ctr?.toFixed(2)}% prior. Current creative is resonating well.` });
+      // Spend vs reach efficiency
+      const cprChg = pct(last.cpm, prev.cpm);
+      if (cprChg !== null && cprChg > 20) insights.push({ type: 'warning',
+        title: `Facebook reach getting more expensive (+${cprChg.toFixed(1)}% CPM)`,
+        body: `Cost per 1000 impressions: $${last.cpm?.toFixed(2)} vs $${prev.cpm?.toFixed(2)} prior month. Budget may deliver fewer eyeballs.` });
+      // Reservation conversions — use daily rate to handle partial months
+      if (last.reservations > 0) {
+        const lastDays = isPartialMonth(last.month) ? partialDays : (last.days || 30);
+        const prevDays = prev.days || 30;
+        const lastResDaily = last.reservations / lastDays;
+        const prevResDaily = prev.reservations / prevDays;
+        const resChg = pct(lastResDaily, prevResDaily);
+        const cprLast = last.costPerReservation || (last.spend / last.reservations);
+        const cprPrev = prev.reservations > 0 ? (prev.spend / prev.reservations) : null;
+        const partialTag = isPartialMonth(last.month) ? ` (${partialDays}-day pace)` : '';
+        if (resChg !== null && resChg < -20) insights.push({ type: 'warning',
+          title: `🔴 Facebook reservations down ${Math.abs(resChg).toFixed(0)}% daily pace${partialTag}`,
+          body: `${last.reservations} reservations in ${last.month}${partialTag} vs ${prev.reservations} in ${prev.month}. Cost/reservation: $${cprLast?.toFixed(2)}.` });
+        else if (resChg !== null && resChg > 10) insights.push({ type: 'positive',
+          title: `🟢 Facebook reservations up ${resChg.toFixed(0)}% daily pace${partialTag}`,
+          body: `${last.reservations} bookings in ${last.month}${partialTag}. Cost/reservation: $${cprLast?.toFixed(2)}.` });
+        else insights.push({ type: 'info',
+          title: `Facebook: ${last.reservations} reservations${partialTag} at $${cprLast?.toFixed(2)} each`,
+          body: `${last.month}${partialTag}. ${prev.reservations > 0 ? `Prior full month: ${prev.reservations} at $${cprPrev?.toFixed(2)}.` : ''}` });
+      }
+      // Profile visits → reservation funnel
+      if (last.profileVisits > 0) {
+        const pvToRes = last.reservations > 0 ? (last.reservations / last.profileVisits * 100) : 0;
+        const lastDays = isPartialMonth(last.month) ? partialDays : (last.days || 30);
+        const prevDays = prev.days || 30;
+        const pvDailyChg = pct(last.profileVisits / lastDays, prev.profileVisits / prevDays);
+        const partialTag = isPartialMonth(last.month) ? ` (${partialDays}-day pace)` : '';
+        if (pvToRes > 0 && pvToRes < 1) insights.push({ type: 'warning',
+          title: `🔴 Only ${pvToRes.toFixed(1)}% of Facebook profile visits become reservations`,
+          body: `${last.profileVisits.toLocaleString()} profile visits${partialTag} → only ${last.reservations} bookings. Ensure the booking link is prominent on your profile with a direct CTA.` });
+        else if (pvToRes >= 2) insights.push({ type: 'positive',
+          title: `🟢 Facebook profile converting at ${pvToRes.toFixed(1)}% to reservations`,
+          body: `${last.profileVisits.toLocaleString()} visits${partialTag} → ${last.reservations} bookings. Strong profile-to-booking rate.` });
+        if (pvDailyChg !== null && pvDailyChg < -20) insights.push({ type: 'warning',
+          title: `🔴 Facebook profile visits down ${Math.abs(pvDailyChg).toFixed(0)}% daily pace${partialTag}`,
+          body: `${last.profileVisits.toLocaleString()} in ${last.month}${partialTag} vs ${prev.profileVisits?.toLocaleString()} in ${prev.month}. Post more frequently or boost profile-driving content.` });
+      }
+    }
+  }
+
+  // ── Google Ads ────────────────────────────────────────────────────────
+  if (DATA.googleAds) {
+    const ga = (DATA.googleAds.monthly || DATA.googleAds).filter(m => m.spend > 0);
+    if (ga.length >= 2) {
+      const last = ga[ga.length - 1]; const prev = ga[ga.length - 2];
+      // Reservations from Google dropping
+      const resChg = pct(last.reservations, prev.reservations);
+      if (resChg !== null && resChg < -20) insights.push({ type: 'warning',
+        title: `🔴 Google reservation conversions down ${Math.abs(resChg).toFixed(1)}%`,
+        body: `${last.reservations} reservations in ${last.month} vs ${prev.reservations} prior. Clicks are arriving but fewer converting — check landing page and booking flow.` });
+      // Cost per reservation rising
+      const cprChg = pct(last.costPerRes, prev.costPerRes);
+      if (cprChg !== null && cprChg > 15) insights.push({ type: 'warning',
+        title: `Google cost/reservation up ${cprChg.toFixed(1)}% to $${last.costPerRes}`,
+        body: `Was $${prev.costPerRes} in ${prev.month}. Each online reservation now costs more — review keyword bids and match types.` });
+      // Calls drop is a red flag
+      const callChg = pct(last.calls, prev.calls);
+      if (callChg !== null && callChg < -30) insights.push({ type: 'warning',
+        title: `🔴 Google call conversions dropped ${Math.abs(callChg).toFixed(1)}%`,
+        body: `${last.calls} calls in ${last.month} vs ${prev.calls} in ${prev.month}. Phone-in bookings declining — verify call extension is active.` });
+      // CTR positive signal
+      if (last.ctr > 3) insights.push({ type: 'positive',
+        title: `🟢 Google CTR ${last.ctr}% — above restaurant benchmark`,
+        body: `Industry avg for restaurant search ads is ~2–3%. Your ${last.ctr}% CTR shows strong ad relevance.` });
+    }
+    // Campaigns with high spend but low conversions
+    const gcamps = DATA.googleAds?.campaigns || [];
+    const wastedCamps = gcamps.filter(c => c.spend > 200 && (!c.reservations || c.reservations < 2));
+    if (wastedCamps.length) insights.push({ type: 'warning',
+      title: `🔴 ${wastedCamps.length} Google campaign(s) spending with low conversions`,
+      body: `"${wastedCamps[0].campaign || 'Unnamed'}" spent $${wastedCamps[0].spend?.toFixed(0)} with only ${wastedCamps[0].reservations || 0} reservations. Consider pausing or restructuring.` });
+  }
+
+  // ── Reservations ──────────────────────────────────────────────────────
+  if (DATA.reservations) {
+    const rs = DATA.reservations.summary;
+    if (rs) {
+      // No-show rate
+      if (rs.noShowRate > 3) insights.push({ type: 'warning',
+        title: `🔴 No-show rate ${rs.noShowRate}% — above healthy threshold`,
+        body: `Industry target is <3%. Consider reminder SMS/email 24h before and a deposit policy for peak nights.` });
+      else insights.push({ type: 'positive',
+        title: `🟢 No-show rate only ${rs.noShowRate}% — well managed`,
+        body: `Strong confirmation process keeping no-shows low. ${rs.total?.toLocaleString()} total reservations, ${rs.totalCovers?.toLocaleString()} covers served.` });
+      // Cancellation rate
+      if (rs.cancellationRate > 15) insights.push({ type: 'warning',
+        title: `🔴 Cancellation rate ${rs.cancellationRate}% is high`,
+        body: `Over 1-in-7 bookings cancel. Earlier reminders or a soft cancellation policy may reduce this.` });
+      // Marketing opt-in rate is very low
+      if (rs.optInRate < 20) insights.push({ type: 'warning',
+        title: `🔴 Only ${rs.optInRate}% of guests opted into marketing`,
+        body: `${100 - rs.optInRate}% of guests are unreachable via email/SMS. Add an opt-in prompt at booking or on arrival — this is a significant untapped audience.` });
+      // Return rate — good news
+      if (rs.returnRate > 50) insights.push({ type: 'positive',
+        title: `🟢 ${rs.returnRate}% return guest rate — strong loyalty`,
+        body: `More than half your guests come back. Avg lifetime spend: $${rs.avgLifetimeSpend?.toFixed(0)}. Loyalty is your strongest asset.` });
+      // Completion rate
+      if (rs.completionRate < 80) insights.push({ type: 'warning',
+        title: `Reservation completion rate ${rs.completionRate}%`,
+        body: `${100 - rs.completionRate}% of bookings don't complete (cancellation + no-show). Review confirmation flow.` });
+    }
+  }
+
+  // ── Events ────────────────────────────────────────────────────────────
+  if (DATA.perfectVenue) {
+    const { closeRate, totalCompletedRevenue, avgRevenuePerEvent, statuses } = DATA.perfectVenue;
+    const lost = statuses?.find(s => s.status === 'Lost')?.count || 0;
+    const completed = statuses?.find(s => s.status === 'Completed')?.count || 0;
+    if (closeRate < 40) insights.push({ type: 'warning',
+      title: `🔴 Event close rate only ${closeRate}% — ${lost} leads lost`,
+      body: `${lost} leads went nowhere vs ${completed} completed events. Revenue at risk: ~$${(lost * (avgRevenuePerEvent||0) * 0.3).toFixed(0).toLocaleString()} if close rate improved to 45%. Add a follow-up sequence for unresponsive leads.` });
+    else insights.push({ type: 'positive',
+      title: `🟢 Event close rate ${closeRate}%`,
+      body: `${completed} completed events, $${totalCompletedRevenue?.toLocaleString() || '—'} total revenue. Avg $${avgRevenuePerEvent?.toLocaleString()}/event.` });
+    const pending = (statuses?.find(s=>s.status==='Proposal Sent')?.count||0) + (statuses?.find(s=>s.status==='Qualified')?.count||0);
+    if (pending > 5) insights.push({ type: 'opportunity',
+      title: `${pending} event leads in pipeline need follow-up`,
+      body: `Proposal Sent + Qualified leads sitting open. At avg $${avgRevenuePerEvent?.toLocaleString()}/event, that's $${(pending * (avgRevenuePerEvent||0)).toLocaleString()} of potential revenue.` });
+  }
+
+  // ── Email ──────────────────────────────────────────────────────────────
+  if (DATA.email) {
+    const em = DATA.email.monthly?.filter(m => m.total > 0) || [];
+    if (em.length >= 1) {
+      const last = em[em.length - 1];
+      // Delivery rate — undelivered emails are wasted spend
+      const deliveryRate = last.total ? (last.delivered / last.total * 100) : 100;
+      if (deliveryRate < 80) insights.push({ type: 'warning',
+        title: `🔴 Only ${deliveryRate.toFixed(0)}% of emails actually delivered`,
+        body: `${(last.total - last.delivered).toLocaleString()} emails bounced or failed in ${last.month}. Clean your list — high bounce rates damage sender reputation and deliverability.` });
+      // Unsubscribe rate
+      if (last.unsubRate > 1.5) insights.push({ type: 'warning',
+        title: `🔴 Unsubscribe rate ${last.unsubRate}% — above safe threshold`,
+        body: `${last.unsubscribed?.toLocaleString()} unsubscribes in ${last.month}. Healthy rate is <0.5%. Emails may be too frequent or irrelevant — segment your list.` });
+      // Open rate
+      if (last.openRate < 20) insights.push({ type: 'warning',
+        title: `Email open rate ${last.openRate?.toFixed(1)}% — below industry avg`,
+        body: `Restaurant email avg is ~21–25%. Test subject lines, send times (Tue/Wed 10am works well for dining), and reduce list size to active subscribers.` });
+      else if (last.openRate > 28) insights.push({ type: 'positive',
+        title: `🟢 Email open rate ${last.openRate?.toFixed(1)}% — above industry avg`,
+        body: `Strong engagement on ${last.total?.toLocaleString()} emails sent. Click rate: ${last.clickRate?.toFixed(1)}%.` });
+      if (em.length >= 2) {
+        const prev = em[em.length - 2];
+        const openChg = pct(last.openRate, prev.openRate);
+        if (openChg !== null && openChg < -20) insights.push({ type: 'warning',
+          title: `🔴 Email open rate dropped ${Math.abs(openChg).toFixed(1)}% MoM`,
+          body: `${last.openRate?.toFixed(1)}% vs ${prev.openRate?.toFixed(1)}% prior month. Audience may be fatiguing — reduce frequency or improve subject line relevance.` });
+      }
+    }
+  }
+  // ── Covers = 0 while spend is running (data gap or real issue) ────────
+  if (DATA.summary?.daily) {
+    const daily = DATA.summary.daily;
+    const recent7 = daily.slice(-7);
+    const zeroCovers = recent7.filter(d => d.covers === 0 && d.spend > 0);
+    if (zeroCovers.length >= 3) insights.push({ type: 'warning',
+      title: `🔴 ${zeroCovers.length} of last 7 days show $0 covers but active spend`,
+      body: `Dates: ${zeroCovers.map(d=>d.date).join(', ')}. Either cover data isn't syncing or ads are running with no restaurant traffic. Verify data source and check if reservation sheet is up to date.` });
+    // Spend running high on a weekday — check efficiency
+    const highSpendDays = recent7.filter(d => d.spend > 0);
+    const avgDailySpend = highSpendDays.reduce((a,b)=>a+b.spend,0) / (highSpendDays.length||1);
+    if (avgDailySpend > 250) insights.push({ type: 'warning',
+      title: `🔴 Avg daily ad spend $${avgDailySpend.toFixed(0)} — monitor ROI closely`,
+      body: `Running $${avgDailySpend.toFixed(0)}/day on ads over last 7 days. Make sure cover volume justifies this pace.` });
+  }
+
+  // ── Google Private (Demand Gen) cost per lead rising ──────────────────
+  if (DATA.googlePrivate?.length >= 2) {
+    const gp = DATA.googlePrivate.filter(m => m.leads > 0);
+    if (gp.length >= 2) {
+      const last = gp[gp.length - 1]; const prev = gp[gp.length - 2];
+      const cplChg = pct(last.costPerLead, prev.costPerLead);
+      if (cplChg > 20) insights.push({ type: 'warning',
+        title: `🔴 Google Private cost/lead up ${cplChg.toFixed(0)}% to $${last.costPerLead}`,
+        body: `Was $${prev.costPerLead} in ${prev.month}, now $${last.costPerLead} in ${last.month}. Only ${last.leads} leads for $${last.spend?.toFixed(0)} spend. Review audience targeting on this campaign.` });
+      if (last.leads < 5) insights.push({ type: 'warning',
+        title: `🔴 Google Private generating almost no leads (${last.leads} in ${last.month})`,
+        body: `$${last.spend?.toFixed(0)} spent with only ${last.leads} leads. This campaign may need restructuring or pausing.` });
+    }
+  }
+
+  // ── Events: #1 loss reason is unresponsive leads ──────────────────────
+  if (DATA.perfectVenue?.lostReasons) {
+    const unresponsive = DATA.perfectVenue.lostReasons.find(r => r.reason === 'unresponsive');
+    const totalLost = DATA.perfectVenue.lostReasons.reduce((a,b)=>a+b.count,0);
+    const competitorLoss = DATA.perfectVenue.lostReasons.find(r => r.reason === 'chose another venue');
+    const priceLoss = DATA.perfectVenue.lostReasons.find(r => r.reason === 'price');
+    if (unresponsive) insights.push({ type: 'warning',
+      title: `🔴 ${unresponsive.count} event leads lost because they went unresponsive`,
+      body: `That's ${((unresponsive.count/totalLost)*100).toFixed(0)}% of all lost leads — the #1 reason. An automated 3-touch follow-up sequence could recover 20–30% of these. At $${DATA.perfectVenue.avgRevenuePerEvent?.toLocaleString()}/event, that's potentially $${(Math.round(unresponsive.count*0.25) * (DATA.perfectVenue.avgRevenuePerEvent||0)).toLocaleString()} in recoverable revenue.` });
+    if (competitorLoss?.count) insights.push({ type: 'opportunity',
+      title: `${competitorLoss.count} groups chose a competitor venue`,
+      body: `Second biggest loss reason. Consider a win-back offer or ask why — pricing, availability, or amenities could be addressed.` });
+    if (priceLoss?.count) insights.push({ type: 'opportunity',
+      title: `${priceLoss.count} event leads lost on price`,
+      body: `Consider a mid-tier package or flexible F&B minimum to capture price-sensitive groups.` });
+  }
+
+  // ── Confirmed vs Actual Covers gap ───────────────────────────────────
+  if (DATA.reservations?.monthly && DATA.reservations?.summary) {
+    const rm = DATA.reservations.monthly.filter(m => !isPartialMonth(m.month) || m.reservations > 50);
+    const avgParty = DATA.reservations.summary.avgPartySize || 2.9;
+    const recentRm = rm.slice(-3);
+    const gaps = recentRm.map(m => {
+      const totalBooked = m.reservations + (m.cancelled||0) + (m.noShow||0);
+      const bookedCovers = Math.round(totalBooked * avgParty);
+      const lostCovers = bookedCovers - m.covers;
+      const lostPct = bookedCovers ? (lostCovers / bookedCovers * 100) : 0;
+      return { month: m.month, booked: bookedCovers, actual: m.covers, lost: lostCovers, lostPct };
+    }).filter(g => g.booked > 0);
+    const lastGap = gaps[gaps.length - 1];
+    const prevGap = gaps[gaps.length - 2];
+    if (lastGap && lastGap.lostPct > 10) {
+      const gapTrend = prevGap ? (lastGap.lostPct > prevGap.lostPct ? 'worsening' : 'improving') : '';
+      const revenueAtRisk = (lastGap.lost * (DATA.reservations.summary.avgLifetimeSpend||338) / avgParty).toFixed(0);
+      insights.push({ type: lastGap.lostPct > 15 ? 'warning' : 'opportunity',
+        title: `🔴 ${lastGap.lostPct.toFixed(0)}% of confirmed covers never showed in ${lastGap.month} — and ${gapTrend}`,
+        body: `${lastGap.booked.toLocaleString()} covers confirmed → only ${lastGap.actual.toLocaleString()} arrived. ${lastGap.lost.toLocaleString()} covers lost to cancellations & no-shows. At $${(DATA.reservations.summary.avgLifetimeSpend/avgParty).toFixed(0)}/cover lifetime value, that's ~$${parseInt(revenueAtRisk).toLocaleString()} in lifetime value walked out the door this month alone.` });
+    }
+    // Trend check — gap growing
+    if (gaps.length >= 3 && gaps[2].lostPct > gaps[1].lostPct && gaps[1].lostPct > gaps[0].lostPct) {
+      insights.push({ type: 'warning',
+        title: `🔴 Cover loss rate has grown 3 months in a row`,
+        body: `${gaps.map(g=>`${g.month}: ${g.lostPct.toFixed(0)}% lost`).join(' → ')}. The gap between bookings and actual arrivals is widening — prioritise cancellation reduction.` });
+    }
+  }
+
+  // ── Reservations: new guest acquisition slowing ───────────────────────
+  if (DATA.reservations?.monthly?.length >= 2) {
+    const rm = DATA.reservations.monthly;
+    const last = rm[rm.length - 1]; const prev = rm[rm.length - 2];
+    if (last.firstVisit && prev.firstVisit) {
+      const firstChg = pct(last.firstVisit / (last.reservations||1), prev.firstVisit / (prev.reservations||1));
+      if (firstChg !== null && firstChg < -10) insights.push({ type: 'warning',
+        title: `🔴 New guest rate declining — fewer first-time visitors`,
+        body: `First visits: ${last.firstVisit} in ${last.month} vs ${prev.firstVisit} in ${prev.month}. New guest acquisition is the pipeline for future loyalty. Boost awareness ads.` });
+    }
+    // Monthly cancellations
+    if (last.cancelled && last.reservations) {
+      const cancelRate = (last.cancelled / last.reservations * 100).toFixed(1);
+      if (parseFloat(cancelRate) > 15) insights.push({ type: 'warning',
+        title: `🔴 Cancellation rate ${cancelRate}% in ${last.month}`,
+        body: `${last.cancelled} bookings cancelled out of ${last.reservations}. Consider a 24h reminder and easy reschedule option to convert cancellations to future visits.` });
+    }
+  }
+
+  // ── Reservations: Monday/slow day opportunity ─────────────────────────
+  if (DATA.reservations?.days) {
+    const days = DATA.reservations.days;
+    const dayArr = Object.entries(days).sort((a,b)=>a[1]-b[1]);
+    const slowestDay = dayArr[0]; const busiestDay = dayArr[dayArr.length-1];
+    const gap = ((busiestDay[1] - slowestDay[1]) / busiestDay[1] * 100).toFixed(0);
+    insights.push({ type: 'opportunity',
+      title: `${slowestDay[0]} is your slowest day — ${gap}% fewer covers than ${busiestDay[0]}`,
+      body: `${slowestDay[0]}: ${slowestDay[1].toLocaleString()} reservations vs ${busiestDay[0]}: ${busiestDay[1].toLocaleString()}. A targeted ${slowestDay[0]} promotion (prix fixe, happy hour extension) could meaningfully boost weekly covers.` });
+  }
+
+  // ── Email: list growth stalled ────────────────────────────────────────
+  if (DATA.email?.subscribersByMonth?.length >= 2) {
+    const subs = DATA.email.subscribersByMonth;
+    const lastSub = subs[subs.length - 1]; const prevSub = subs[subs.length - 2];
+    if (lastSub.count < 10 && prevSub.count > 50) insights.push({ type: 'warning',
+      title: `🔴 Email list growth has nearly stopped (${lastSub.count} new in ${lastSub.month})`,
+      body: `Was ${prevSub.count} new subscribers in ${prevSub.month}, now only ${lastSub.count}. Add sign-up prompts on the website, at checkout, and via QR code on tables. Total list: ${DATA.email.totalSubscribers?.toLocaleString()}.` });
+  }
+
+  // ── Email: delivery rate (bounce/spam issue) ──────────────────────────
+  if (DATA.email?.monthly?.length) {
+    const em = DATA.email.monthly;
+    const last = em[em.length - 1];
+    if (last.total && last.delivered) {
+      const delivRate = (last.delivered / last.total * 100);
+      if (delivRate < 75) insights.push({ type: 'warning',
+        title: `🔴 Email delivery rate only ${delivRate.toFixed(0)}% — serious list hygiene issue`,
+        body: `${(last.total - last.delivered).toLocaleString()} emails bounced or failed in ${last.month}. This damages your sender reputation and future deliverability. Remove hard bounces immediately and run a re-engagement campaign before sending again.` });
+    }
+  }
+
+  // ── Google: click-to-reservation conversion rate ──────────────────────
+  if (DATA.googleAds) {
+    const ga = (DATA.googleAds.monthly || DATA.googleAds).filter(m => m.spend > 0);
+    if (ga.length) {
+      const last = ga[ga.length - 1];
+      if (last.clicks && last.reservations) {
+        const convRate = (last.reservations / last.clicks * 100);
+        if (convRate < 2) insights.push({ type: 'warning',
+          title: `🔴 Only ${convRate.toFixed(1)}% of Google clicks become reservations`,
+          body: `${last.clicks.toLocaleString()} clicks → only ${last.reservations} bookings in ${last.month}. 98%+ of paid traffic is leaving without booking. Check the landing page speed, mobile experience, and reduce steps to complete a reservation.` });
+      }
+      // Impression volume declining = losing reach
+      if (ga.length >= 3) {
+        const [m1, m2, m3] = ga.slice(-3);
+        if (m3.impressions < m2.impressions && m2.impressions < m1.impressions) {
+          const impDrop = pct(m3.impressions, m1.impressions);
+          insights.push({ type: 'warning',
+            title: `🔴 Google impressions declining 3 months straight (${impDrop?.toFixed(0)}% drop)`,
+            body: `${m1.impressions?.toLocaleString()} → ${m2.impressions?.toLocaleString()} → ${m3.impressions?.toLocaleString()} impressions. Your ads are reaching fewer people despite similar spend — Quality Score may be dropping or competition increasing bids.` });
+        }
+      }
+    }
+  }
+
+  // ── Guest lifetime value context ──────────────────────────────────────
+  if (DATA.reservations?.summary) {
+    const rs = DATA.reservations.summary;
+    if (rs.avgLifetimeSpend && DATA.summary) {
+      const monthly = DATA.summary.monthly?.filter(m=>m.covers>0) || [];
+      const last = monthly[monthly.length-1];
+      if (last) {
+        const ltv = rs.avgLifetimeSpend;
+        const cpc = last.costPerCover;
+        const roiMultiple = (ltv / (cpc * rs.avgPartySize)).toFixed(0);
+        insights.push({ type: 'positive',
+          title: `🟢 Each new guest is worth $${ltv} lifetime — ROI is ${roiMultiple}x ad spend`,
+          body: `Avg guest spends $${ltv} across their lifetime, party of ${rs.avgPartySize}. At $${cpc}/cover to acquire, every dollar spent on ads returns ~$${roiMultiple}. The real risk is losing a guest, not spending on ads.` });
+        // Cancellations = lost lifetime value
+        if (rs.cancellationRate > 10) {
+          const lostPerMonth = DATA.reservations?.monthly?.slice(-1)[0]?.cancelled || 0;
+          const lostLTV = (lostPerMonth * rs.avgPartySize * ltv / rs.total * 100).toFixed(0);
+          if (lostPerMonth > 0) insights.push({ type: 'warning',
+            title: `${lostPerMonth} cancellations last month = potentially $${(lostPerMonth * 0.3 * ltv / rs.avgPartySize * rs.avgPartySize).toFixed(0)} in lifetime value at risk`,
+            body: `Some of those ${lostPerMonth} cancelled guests may not return. A reschedule prompt (not just a cancel) could retain 20–30% of them.` });
+        }
+      }
+    }
+  }
+
+  // ── Lunch vs dinner opportunity ───────────────────────────────────────
+  if (DATA.reservations?.times) {
+    const times = DATA.reservations.times;
+    const total = times.reduce((a,b) => a + b.count, 0);
+    const lunch = times.filter(t => t.hour >= 11 && t.hour <= 14).reduce((a,b) => a + b.count, 0);
+    const dinner = times.filter(t => t.hour >= 17 && t.hour <= 21).reduce((a,b) => a + b.count, 0);
+    const lunchPct = (lunch / total * 100).toFixed(0);
+    const dinnerPct = (dinner / total * 100).toFixed(0);
+    if (parseInt(lunchPct) < 30) insights.push({ type: 'opportunity',
+      title: `Lunch is only ${lunchPct}% of covers — dinner is ${dinnerPct}%`,
+      body: `${lunch.toLocaleString()} lunch vs ${dinner.toLocaleString()} dinner reservations all-time. Growing lunch by 20% would add ~${Math.round(lunch*0.2).toLocaleString()} covers without touching dinner capacity. Consider a lunch prix-fixe or business meal promotion.` });
+  }
+
+  // ── Party size mix: mostly couples, large groups underserved ──────────
+  if (DATA.reservations?.sizes) {
+    const sizes = DATA.reservations.sizes;
+    const total = sizes.reduce((a,b) => a + b.count, 0);
+    const pairs = sizes.find(s => s.size === 2)?.count || 0;
+    const large = sizes.filter(s => s.size >= 8).reduce((a,b) => a + b.count, 0);
+    const pairPct = (pairs / total * 100).toFixed(0);
+    const largePct = (large / total * 100).toFixed(1);
+    insights.push({ type: 'info',
+      title: `${pairPct}% of bookings are couples — large groups are only ${largePct}%`,
+      body: `${pairs.toLocaleString()} two-person bookings. Large groups (8+): only ${large.toLocaleString()} bookings. Large groups spend significantly more per visit — a group dining or events page could attract higher-value bookings.` });
+  }
+
+  // ── Facebook vs Google budget split check ─────────────────────────────
+  if (DATA.facebook && DATA.googleAds && DATA.summary) {
+    const fbM = (DATA.facebook.monthly || DATA.facebook).filter(m=>m.spend>0);
+    const gaM = (DATA.googleAds.monthly || DATA.googleAds).filter(m=>m.spend>0);
+    const sumM = DATA.summary.monthly?.filter(m=>m.covers>0) || [];
+    if (fbM.length && gaM.length && sumM.length) {
+      // Match months with both channels
+      const lastGa = gaM[gaM.length-1]; const lastFb = fbM.find(m=>m.month===lastGa.month) || fbM[fbM.length-1];
+      if (lastFb && lastGa) {
+        const totalAdSpend = lastFb.spend + lastGa.spend;
+        const fbShare = (lastFb.spend / totalAdSpend * 100).toFixed(0);
+        const gaShare = (lastGa.spend / totalAdSpend * 100).toFixed(0);
+        // Google drives reservations directly; Facebook drives awareness
+        const gaEfficiency = lastGa.reservations ? (lastGa.spend / lastGa.reservations).toFixed(0) : null;
+        if (gaEfficiency) insights.push({ type: 'info',
+          title: `Budget split: Facebook ${fbShare}% / Google ${gaShare}%`,
+          body: `Facebook: $${lastFb.spend?.toFixed(0)} (awareness, ${lastFb.clicks?.toLocaleString()||0} clicks). Google: $${lastGa.spend?.toFixed(0)} (intent, ${lastGa.reservations} reservations at $${gaEfficiency}/booking). Google is your direct conversion channel — consider shifting budget if Facebook isn't driving covers.` });
+      }
+    }
+  }
+
+  // ── YoY: spend growing faster than covers ────────────────────────────
+  if (DATA.summary) {
+    const allM = DATA.summary.monthly?.filter(m=>m.covers>0) || [];
+    // Find same month last year
+    const recent = allM.slice(-6);
+    let yoyFlag = false;
+    recent.forEach(curr => {
+      const [y, mo] = curr.month.split('-');
+      const prev = allM.find(m => m.month === `${parseInt(y)-1}-${mo}`);
+      if (prev && !yoyFlag) {
+        const coverChg = pct(curr.covers, prev.covers);
+        const spendChg = pct(curr.spend, prev.spend);
+        if (spendChg !== null && coverChg !== null && spendChg > coverChg + 30) {
+          yoyFlag = true;
+          insights.push({ type: 'warning',
+            title: `🔴 Ad spend grew ${spendChg.toFixed(0)}% YoY but covers only ${coverChg.toFixed(0)}% — efficiency declining`,
+            body: `${curr.month}: $${curr.spend.toLocaleString()} spend for ${curr.covers.toLocaleString()} covers ($${curr.costPerCover}/cover). Same month last year: $${prev.spend.toLocaleString()} for ${prev.covers.toLocaleString()} covers ($${prev.costPerCover}/cover). You're paying significantly more per guest than a year ago.` });
+        } else if (coverChg !== null && coverChg > 0 && !yoyFlag) {
+          yoyFlag = true;
+          insights.push({ type: 'positive',
+            title: `🟢 Covers up ${coverChg.toFixed(0)}% vs same month last year`,
+            body: `${curr.month}: ${curr.covers.toLocaleString()} covers vs ${prev.covers.toLocaleString()} a year ago. YoY growth is the strongest signal of business health.` });
+        }
+      }
+    });
+    // Organic months (covers with zero spend) — what happened?
+    const organic = allM.filter(m => m.covers > 0 && m.spend === 0);
+    if (organic.length) insights.push({ type: 'opportunity',
+      title: `${organic.length} month(s) had strong covers with $0 ad spend`,
+      body: `${organic.map(m=>`${m.month}: ${m.covers.toLocaleString()} covers`).join(', ')}. Organic demand clearly exists. What drove traffic those months? Replicate it — PR, events, seasonal buzz, or word of mouth.` });
+  }
+
+  // ── Website-to-reservation conversion dropping ────────────────────────
+  if (DATA.summary && DATA.reservations?.monthly) {
+    const sumM = DATA.summary.monthly?.filter(m=>m.users>0) || [];
+    const resM = DATA.reservations.monthly;
+    const pairs = sumM.slice(-3).map(s => {
+      const r = resM.find(r=>r.month===s.month);
+      return r ? { month: s.month, conv: r.reservations/s.users*100 } : null;
+    }).filter(Boolean);
+    if (pairs.length >= 2) {
+      const last = pairs[pairs.length-1]; const prev = pairs[pairs.length-2];
+      const chg = pct(last.conv, prev.conv);
+      if (chg !== null && chg < -15) insights.push({ type: 'warning',
+        title: `🔴 Website-to-reservation rate dropped ${Math.abs(chg).toFixed(0)}% MoM`,
+        body: `${last.conv.toFixed(1)}% of website visitors booked in ${last.month} vs ${prev.conv.toFixed(1)}% in ${prev.month}. More people are visiting your site but not converting — check booking widget, page load speed, and mobile UX.` });
+    }
+  }
+
+  // ── Google Private: no data after Dec — campaign visibility gap ───────
+  if (DATA.googlePrivate) {
+    const gp = Array.isArray(DATA.googlePrivate) ? DATA.googlePrivate : [];
+    if (gp.length) {
+      const lastEntry = gp[gp.length-1];
+      const lastDate = new Date(lastEntry.month + '-01');
+      const monthsOld = (new Date().getFullYear() - lastDate.getFullYear())*12 + (new Date().getMonth() - lastDate.getMonth());
+      if (monthsOld >= 2) insights.push({ type: 'warning',
+        title: `🔴 Google Private (Demand Gen) has no data since ${lastEntry.month}`,
+        body: `Last recorded: ${lastEntry.leads} leads at $${lastEntry.costPerLead}/lead. If this campaign is still running, you have no visibility into its performance. Verify in Google Ads and connect reporting — or confirm it was intentionally paused.` });
+    }
+  }
+
+  // ── 6-7PM concentration: over-reliance on one time slot ──────────────
+  if (DATA.reservations?.times) {
+    const times = DATA.reservations.times;
+    const total = times.reduce((a,b)=>a+b.count,0);
+    const pm6 = times.find(t=>t.hour===18)?.count||0;
+    const pm7 = times.find(t=>t.hour===19)?.count||0;
+    const peakShare = ((pm6+pm7)/total*100).toFixed(0);
+    if (parseInt(peakShare) > 35) insights.push({ type: 'warning',
+      title: `🔴 ${peakShare}% of all reservations are jammed into 6–7PM`,
+      body: `${(pm6+pm7).toLocaleString()} of ${total.toLocaleString()} total reservations. When 6–7PM is full you're turning away revenue. Early-bird incentive (e.g. 15% off before 6PM) or late-night special (9PM+) could spread demand and grow total covers without adding a single seat.` });
+  }
+
+  // ── Large group opportunity ───────────────────────────────────────────
+  if (DATA.reservations?.sizes && DATA.reservations?.summary) {
+    const sizes = DATA.reservations.sizes;
+    const large = sizes.filter(s=>s.size>=8).reduce((a,b)=>a+b.count,0);
+    const totalB = sizes.reduce((a,b)=>a+b.count,0);
+    const avgLargeSize = large ? sizes.filter(s=>s.size>=8).reduce((a,b)=>a+b.count*b.size,0)/large : 0;
+    const ltv = DATA.reservations.summary.avgLifetimeSpend||0;
+    const ltvPerLarge = (avgLargeSize * ltv / (DATA.reservations.summary.avgPartySize||2.9)).toFixed(0);
+    if (large && ltvPerLarge > 0) insights.push({ type: 'opportunity',
+      title: `Large group bookings (8+) worth ~$${parseInt(ltvPerLarge).toLocaleString()} lifetime value each`,
+      body: `Only ${large.toLocaleString()} large group bookings (${(large/totalB*100).toFixed(1)}% of all reservations), avg ${avgLargeSize.toFixed(0)} people. A dedicated group dining page, private dining package, or group-focused ad campaign could significantly increase high-value bookings.` });
+  }
+
+  // ── Email reply rate collapse ─────────────────────────────────────────
+  if (DATA.email?.monthly) {
+    const em = DATA.email.monthly.filter(m=>m.total>0);
+    if (em.length >= 2) {
+      const last = em[em.length-1]; const prev = em[em.length-2];
+      const lastReply = last.delivered ? last.replied/last.delivered*100 : 0;
+      const prevReply = prev.delivered ? prev.replied/prev.delivered*100 : 0;
+      if (lastReply < 0.1 && last.replied !== undefined) insights.push({ type: 'warning',
+        title: `🔴 Email reply rate near zero (${lastReply.toFixed(2)}%) — no engagement`,
+        body: `Only ${last.replied} replies from ${last.delivered?.toLocaleString()} delivered emails in ${last.month}. Emails aren't prompting any response. Consider a direct call-to-action: "Reply to claim your birthday offer" or a survey to re-engage the list.` });
+    }
+  }
+
+  if (!insights.length) { grid.innerHTML = '<div class="insight-card info"><div class="insight-body">No data available yet.</div></div>'; }
+  else grid.innerHTML = insights.map(ins => `
     <div class="insight-card ${ins.type}">
       <div class="insight-title">${ins.title}</div>
       <div class="insight-body">${ins.body}</div>
     </div>
   `).join('');
+
+  renderBenchmarks();
 
   // MoM trend - last 12 months (or within range)
   if (DATA.summary) {
@@ -812,25 +1714,179 @@ function renderInsights() {
   }
 }
 
+// ── Benchmarks ────────────────────────────────────────────────────────────
+function renderBenchmarks() {
+  const el = document.getElementById('benchmarks-table');
+  if (!el) return;
+
+  // Gather your numbers
+  const sumM  = DATA.summary?.monthly?.filter(m=>m.covers>0) || [];
+  const last  = sumM[sumM.length-1] || {};
+  const fbM   = (DATA.facebook?.monthly||DATA.facebook||[]).filter(m=>m.spend>0);
+  const lastFb = fbM[fbM.length-1] || {};
+  const gaM   = (DATA.googleAds?.monthly||DATA.googleAds||[]).filter(m=>m.spend>0);
+  const lastGa = gaM[gaM.length-1] || {};
+  const rs    = DATA.reservations?.summary || {};
+  const emM   = (DATA.email?.monthly||[]).filter(m=>m.total>0);
+  const lastEm = emM[emM.length-1] || {};
+  const emailDelivRate = lastEm.total ? (lastEm.delivered/lastEm.total*100) : null;
+  const clickToRes = lastGa.clicks && lastGa.reservations ? (lastGa.reservations/lastGa.clicks*100) : null;
+  const pv = DATA.perfectVenue || {};
+
+  // [metric, yourValue, yourDisplay, benchmark, benchmarkDisplay, higherIsBetter, unit]
+  const rows = [
+    { metric: 'Cost per Cover (ads)',       yours: last.costPerCover,    yourFmt: `$${last.costPerCover}`,                  bench: 2.50,  benchFmt: '$1.50–$3.00',   better: 'lower',  context: 'Restaurant digital ad benchmark' },
+    { metric: 'No-Show Rate',               yours: rs.noShowRate,        yourFmt: `${rs.noShowRate}%`,                       bench: 5,     benchFmt: '< 5%',           better: 'lower',  context: 'Full-service restaurant avg 5–8%' },
+    { metric: 'Cancellation Rate',          yours: rs.cancellationRate,  yourFmt: `${rs.cancellationRate}%`,                 bench: 12,    benchFmt: '10–15%',         better: 'lower',  context: 'Fine/casual dining avg' },
+    { metric: 'Return Guest Rate',          yours: rs.returnRate,        yourFmt: `${rs.returnRate}%`,                       bench: 30,    benchFmt: '30–40%',         better: 'higher', context: 'Strong loyalty benchmark' },
+    { metric: 'Marketing Opt-in Rate',      yours: rs.optInRate,         yourFmt: `${rs.optInRate}%`,                        bench: 30,    benchFmt: '25–35%',         better: 'higher', context: 'Hospitality industry avg' },
+    { metric: 'Email Open Rate',            yours: lastEm.openRate,      yourFmt: `${lastEm.openRate?.toFixed(1)}%`,         bench: 22,    benchFmt: '21–25%',         better: 'higher', context: 'Restaurant & hospitality avg' },
+    { metric: 'Email Delivery Rate',        yours: emailDelivRate,       yourFmt: emailDelivRate ? `${emailDelivRate.toFixed(0)}%` : '—', bench: 95, benchFmt: '> 95%', better: 'higher', context: 'Healthy sender reputation' },
+    { metric: 'Email Unsubscribe Rate',     yours: lastEm.unsubRate,     yourFmt: `${lastEm.unsubRate}%`,                    bench: 0.5,   benchFmt: '< 0.5%',         better: 'lower',  context: 'Industry standard threshold' },
+    { metric: 'Email Click Rate',           yours: lastEm.clickRate,     yourFmt: `${lastEm.clickRate?.toFixed(1)}%`,        bench: 2.5,   benchFmt: '2–3%',           better: 'higher', context: 'Restaurant email benchmark' },
+    { metric: 'Facebook CTR',               yours: lastFb.ctr,           yourFmt: `${lastFb.ctr?.toFixed(2)}%`,              bench: 1.5,   benchFmt: '0.9–1.5%',       better: 'higher', context: 'Restaurant Facebook ads avg' },
+    { metric: 'Facebook CPM',               yours: lastFb.cpm,           yourFmt: `$${lastFb.cpm?.toFixed(2)}`,             bench: 10,    benchFmt: '$8–$12',          better: 'lower',  context: 'Restaurant Facebook campaign avg' },
+    { metric: 'Google CTR',                 yours: lastGa.ctr,           yourFmt: `${lastGa.ctr?.toFixed(2)}%`,              bench: 3,     benchFmt: '2–4%',           better: 'higher', context: 'Restaurant search campaign avg' },
+    { metric: 'Google Click → Reservation', yours: clickToRes,           yourFmt: clickToRes ? `${clickToRes.toFixed(1)}%` : '—', bench: 3, benchFmt: '2–5%',         better: 'higher', context: 'Restaurant booking conversion avg' },
+    { metric: 'Google Cost per Reservation',yours: lastGa.costPerRes,    yourFmt: `$${lastGa.costPerRes}`,                   bench: 15,    benchFmt: '$10–$20',         better: 'lower',  context: 'Restaurant search to booking' },
+    { metric: 'Event Close Rate',           yours: pv.closeRate,         yourFmt: `${pv.closeRate}%`,                        bench: 45,    benchFmt: '40–55%',         better: 'higher', context: 'Events & private dining industry' },
+    { metric: 'Avg Event Revenue',          yours: pv.avgRevenuePerEvent,yourFmt: `$${pv.avgRevenuePerEvent?.toLocaleString()}`, bench: 3000, benchFmt: '$2,500–$5,000', better: 'higher', context: 'Private dining / buyout avg' },
+    { metric: 'Guest Lifetime Value',       yours: rs.avgLifetimeSpend,  yourFmt: `$${rs.avgLifetimeSpend?.toFixed(0)}`,     bench: 200,   benchFmt: '$150–$300',      better: 'higher', context: 'Full-service restaurant avg' },
+    { metric: 'Avg Party Size',             yours: rs.avgPartySize,      yourFmt: `${rs.avgPartySize}`,                      bench: 2.5,   benchFmt: '2.2–2.8',        better: 'higher', context: 'Urban casual dining avg' },
+  ].filter(r => r.yours !== undefined && r.yours !== null && r.yours !== 0);
+
+  const verdict = (yours, bench, better) => {
+    if (yours === null || yours === undefined) return { icon: '—', cls: '', text: 'No data' };
+    const ratio = yours / bench;
+    const winning = better === 'higher' ? ratio >= 0.95 : ratio <= 1.05;
+    const warning = better === 'higher' ? ratio < 0.7  : ratio > 1.4;
+    if (winning) return { icon: '✅', cls: 'green', text: 'On track' };
+    if (warning)  return { icon: '🔴', cls: 'red',   text: 'Needs attention' };
+    return         { icon: '🟡', cls: 'amber', text: 'Watch' };
+  };
+
+  // Booked vs Actual chart
+  if (DATA.reservations?.monthly && DATA.reservations?.summary) {
+    const rm = DATA.reservations.monthly.slice(-12);
+    const avgParty = DATA.reservations.summary.avgPartySize || 2.9;
+    const labels = rm.map(m => m.month.slice(2));
+    const booked = rm.map(m => Math.round((m.reservations + (m.cancelled||0) + (m.noShow||0)) * avgParty));
+    const actual = rm.map(m => m.covers);
+    mkChart('chart-bookedVsActual', {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [
+          { label: 'Confirmed Covers (at booking)', data: booked, backgroundColor: COLORS.blue + '55', borderColor: COLORS.blue, borderWidth: 1 },
+          { label: 'Actual Covers (arrived)',        data: actual, backgroundColor: COLORS.green + '99', borderColor: COLORS.green, borderWidth: 1 },
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        interaction: { mode: 'index' },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              afterBody: (items) => {
+                const b = items[0]?.raw || 0; const a = items[1]?.raw || 0;
+                const lost = b - a; const pct = b ? (lost/b*100).toFixed(1) : 0;
+                return [`Lost: ${lost.toLocaleString()} covers (${pct}%)`];
+              }
+            }
+          }
+        },
+        scales: { x: {}, y: { beginAtZero: true } }
+      }
+    });
+  }
+
+  el.innerHTML = `<table class="benchmark-table">
+    <thead><tr>
+      <th>Metric</th>
+      <th>Your Number</th>
+      <th>Industry Benchmark</th>
+      <th></th>
+      <th>Context</th>
+    </tr></thead>
+    <tbody>${rows.map(r => {
+      const v = verdict(r.yours, r.bench, r.better);
+      return `<tr>
+        <td class="bm-metric">${r.metric}</td>
+        <td class="bm-yours" style="color:${v.cls==='green'?'var(--green)':v.cls==='red'?'var(--red)':'var(--accent)'}">${r.yourFmt}</td>
+        <td class="bm-industry">${r.benchFmt}</td>
+        <td class="bm-status">${v.icon}</td>
+        <td class="bm-verdict">${r.context}</td>
+      </tr>`;
+    }).join('')}
+    </tbody>
+  </table>`;
+}
+
 // ── Facebook ──────────────────────────────────────────────────────────────
+function aggregateFbDaily(dailyArr) {
+  if (!dailyArr || !dailyArr.length) return null;
+  const agg = dailyArr.reduce((acc, d) => {
+    acc.spend += d.spend; acc.reach += d.reach; acc.impressions += d.impressions;
+    acc.clicks += d.clicks; acc.resEvent += (d.resEvent||0); acc.resResults += (d.resResults||0);
+    acc.profileVisits += (d.profileVisits||0);
+    return acc;
+  }, { spend:0, reach:0, impressions:0, clicks:0, resEvent:0, resResults:0, profileVisits:0 });
+  agg.ctr = agg.impressions > 0 ? +(agg.clicks/agg.impressions*100).toFixed(2) : 0;
+  agg.cpc = agg.clicks > 0 ? +(agg.spend/agg.clicks).toFixed(2) : 0;
+  agg.cpm = agg.impressions > 0 ? +(agg.spend/agg.impressions*1000).toFixed(2) : 0;
+  agg.reservations = agg.resEvent;
+  agg.costPerResEvent   = agg.resEvent   > 0 ? +(agg.spend/agg.resEvent).toFixed(2)   : 0;
+  agg.costPerResResults = agg.resResults > 0 ? +(agg.spend/agg.resResults).toFixed(2) : 0;
+  agg.costPerReservation = agg.costPerResEvent;
+  return agg;
+}
+
 function renderFacebook() {
   if (!DATA.facebook) return;
-  const fb = filterMonthly(DATA.facebook).filter(m => m.spend > 0);
-  const fbPrev = filterToPrev(DATA.facebook).filter(m => m.spend > 0);
+  const fbMonthly = DATA.facebook.monthly || DATA.facebook;
+  const fbDaily   = DATA.facebook.daily || [];
+
+  // If exact date range selected, aggregate from daily for current period
+  let fb, fbPrev, useDaily = false;
+  if (RANGE.from && RANGE.to && fbDaily.length && !RANGE_IS_PRESET) {
+    const inRange = fbDaily.filter(d => d.date >= RANGE.from && d.date <= RANGE.to);
+    const inPrev  = PREV_RANGE.from ? fbDaily.filter(d => d.date >= PREV_RANGE.from && d.date <= PREV_RANGE.to) : [];
+    const aggCurr = aggregateFbDaily(inRange);
+    const aggPrev = aggregateFbDaily(inPrev);
+    fb     = aggCurr ? [aggCurr] : [];
+    fbPrev = aggPrev ? [aggPrev] : [];
+    useDaily = true;
+  } else {
+    fb     = filterMonthly(fbMonthly).filter(m => m.spend > 0);
+    fbPrev = filterToPrev(fbMonthly).filter(m => m.spend > 0);
+  }
 
   const totSpend  = fb.reduce((a,b) => a+b.spend, 0);
   const totReach  = fb.reduce((a,b) => a+b.reach, 0);
   const totClicks = fb.reduce((a,b) => a+b.clicks, 0);
   const totImpr   = fb.reduce((a,b) => a+b.impressions, 0);
+  const totResEvent   = fb.reduce((a,b) => a+(b.resEvent||b.reservations||0), 0);
+  const totResResults = fb.reduce((a,b) => a+(b.resResults||0), 0);
+  const totRes    = totResEvent;
+  const totPV     = fb.reduce((a,b) => a+(b.profileVisits||0), 0);
   const avgCPC    = fb.length ? fb.reduce((a,b) => a+b.cpc, 0) / fb.length : 0;
   const avgCTR    = fb.length ? fb.reduce((a,b) => a+b.ctr, 0) / fb.length : 0;
+  const avgCPR        = totResEvent   > 0 ? totSpend / totResEvent   : 0;
+  const avgCPRResults = totResResults > 0 ? totSpend / totResResults : 0;
+  const pvToRes   = totPV > 0 ? (totRes / totPV * 100) : 0;
 
   const pSpend  = fbPrev.reduce((a,b) => a+b.spend, 0);
   const pReach  = fbPrev.reduce((a,b) => a+b.reach, 0);
   const pClicks = fbPrev.reduce((a,b) => a+b.clicks, 0);
   const pImpr   = fbPrev.reduce((a,b) => a+b.impressions, 0);
+  const pResEvent   = fbPrev.reduce((a,b) => a+(b.resEvent||b.reservations||0), 0);
+  const pResResults = fbPrev.reduce((a,b) => a+(b.resResults||0), 0);
+  const pRes    = pResEvent;
+  const pPV     = fbPrev.reduce((a,b) => a+(b.profileVisits||0), 0);
   const pCPC    = fbPrev.length ? fbPrev.reduce((a,b) => a+b.cpc, 0) / fbPrev.length : 0;
   const pCTR    = fbPrev.length ? fbPrev.reduce((a,b) => a+b.ctr, 0) / fbPrev.length : 0;
+  const pCPR        = pRes > 0 ? pSpend / pRes : 0;
+  const pCPRResults = pResResults > 0 ? pSpend / pResResults : 0;
 
   const dSpend  = delta(totSpend,  pSpend,  v => '$' + v.toLocaleString(undefined,{maximumFractionDigits:0}), true);
   const dReach  = delta(totReach,  pReach,  v => v.toLocaleString(undefined,{maximumFractionDigits:0}));
@@ -838,23 +1894,39 @@ function renderFacebook() {
   const dImpr   = delta(totImpr,   pImpr,   v => v.toLocaleString(undefined,{maximumFractionDigits:0}));
   const dCPC    = delta(avgCPC,    pCPC,    v => '$' + v.toFixed(2), true);
   const dCTR    = delta(avgCTR,    pCTR,    v => v.toFixed(2) + '%');
+  const dRes        = delta(totResEvent,   pResEvent,   v => v.toLocaleString());
+  const dCPR        = delta(avgCPR,        pCPR,        v => '$' + v.toFixed(2), true);
+  const dResResults = delta(totResResults, pResResults, v => v.toLocaleString());
+  const dCPRResults = delta(avgCPRResults, pCPRResults, v => '$' + v.toFixed(2), true);
+  const dPV     = delta(totPV,     pPV,     v => v.toLocaleString());
 
   const rangeLabel = RANGE.from ? 'In range' : 'All time';
   document.getElementById('kpi-facebook').innerHTML = [
-    kpiCard('Total FB Spend',    `$${totSpend.toLocaleString(undefined,{maximumFractionDigits:0})}`, rangeLabel,          dSpend.cls,  dSpend.text),
-    kpiCard('Total Reach',       fmt(totReach),   'Unique accounts',  dReach.cls,  dReach.text),
-    kpiCard('Total Clicks',      fmt(totClicks),  'Link clicks',      dClicks.cls, dClicks.text),
-    kpiCard('Avg CTR',           `${avgCTR.toFixed(2)}%`, 'CTR',      dCTR.cls,    dCTR.text),
-    kpiCard('Avg CPC',           `$${avgCPC.toFixed(2)}`, 'Per click', dCPC.cls,   dCPC.text),
-    kpiCard('Total Impressions', fmt(totImpr),    'Ad impressions',   dImpr.cls,   dImpr.text),
+    kpiCard('Total FB Spend',      `$${totSpend.toLocaleString(undefined,{maximumFractionDigits:0})}`, rangeLabel,       dSpend.cls,  dSpend.text),
+    kpiCard('Reservation (Event)',          fmt(totResEvent),        'Pixel-tracked',    dRes.cls,    dRes.text),
+    kpiCard('Cost / Reservation (Event)',   avgCPR > 0 ? `$${avgCPR.toFixed(2)}` : '—', 'Per pixel event', dCPR.cls, dCPR.text),
+    kpiCard('Reservation (Results)',        totResResults > 0 ? fmt(totResResults) : '—', 'Attribution-based', dResResults.cls, dResResults.text),
+    kpiCard('Cost / Reservation (Results)', avgCPRResults > 0 ? `$${avgCPRResults.toFixed(2)}` : '—', 'Per attributed res', dCPRResults.cls, dCPRResults.text),
+    kpiCard('Profile Visits',      fmt(totPV),      'Page profile',     dPV.cls,     dPV.text),
+    kpiCard('Profile → Reservation',pvToRes > 0 ? `${pvToRes.toFixed(1)}%` : '—', 'Visit-to-book rate', '', ''),
+    kpiCard('Total Reach',         fmt(totReach),   'Unique accounts',  dReach.cls,  dReach.text),
+    kpiCard('Total Clicks',        fmt(totClicks),  'Link clicks',      dClicks.cls, dClicks.text),
+    kpiCard('Avg CTR',             `${avgCTR.toFixed(2)}%`, 'CTR',      dCTR.cls,    dCTR.text),
+    kpiCard('Avg CPC',             `$${avgCPC.toFixed(2)}`, 'Per click', dCPC.cls,   dCPC.text),
+    kpiCard('Total Impressions',   fmt(totImpr),    'Ad impressions',   dImpr.cls,   dImpr.text),
   ].join('');
 
-  const labels = fb.map(m => m.month.slice(2));
+  // Use daily data for charts when date range is selected
+  const chartData = (useDaily && RANGE.from && RANGE.to)
+    ? fbDaily.filter(d => d.date >= RANGE.from && d.date <= RANGE.to)
+    : filterMonthly(fbMonthly).filter(m => m.spend > 0);
+  const labels = chartData.map(m => m.date ? m.date.slice(5) : m.month.slice(2));
+
   mkChart('chart-fbSpendClicks', {
     type: 'bar',
     data: { labels, datasets: [
-      { label: 'Spend ($)', data: fb.map(m => m.spend), backgroundColor: COLORS.accent+'88', yAxisID: 'y' },
-      { label: 'Clicks', data: fb.map(m => m.clicks), type: 'line', borderColor: COLORS.green, backgroundColor: 'transparent', borderWidth: 2, tension: 0.3, yAxisID: 'y1' },
+      { label: 'Spend ($)', data: chartData.map(m => m.spend), backgroundColor: COLORS.accent+'88', yAxisID: 'y' },
+      { label: 'Clicks', data: chartData.map(m => m.clicks), type: 'line', borderColor: COLORS.green, backgroundColor: 'transparent', borderWidth: 2, tension: 0.3, yAxisID: 'y1' },
     ]},
     options: { responsive: true, maintainAspectRatio: false, scales: {
       y: { position: 'left' }, y1: { position: 'right', grid: { drawOnChartArea: false } }
@@ -863,23 +1935,131 @@ function renderFacebook() {
 
   mkChart('chart-fbCTR', {
     type: 'line',
-    data: { labels, datasets: [{ label: 'CTR %', data: fb.map(m => m.ctr), borderColor: COLORS.blue, backgroundColor: (ctx) => gradient(ctx.chart.ctx, COLORS.blue), fill: true, tension: 0.4, pointRadius: 4 }]},
+    data: { labels, datasets: [{ label: 'CTR %', data: chartData.map(m => m.ctr), borderColor: COLORS.blue, backgroundColor: (ctx) => gradient(ctx.chart.ctx, COLORS.blue), fill: true, tension: 0.4, pointRadius: 4 }]},
     options: { responsive: true, maintainAspectRatio: false, scales: { y: { ticks: { callback: v => v+'%' } } } }
   });
 
   mkChart('chart-fbCPC', {
     type: 'line',
-    data: { labels, datasets: [{ label: 'CPC $', data: fb.map(m => m.cpc), borderColor: COLORS.red, backgroundColor: (ctx) => gradient(ctx.chart.ctx, COLORS.red), fill: true, tension: 0.4, pointRadius: 4 }]},
+    data: { labels, datasets: [{ label: 'CPC $', data: chartData.map(m => m.cpc), borderColor: COLORS.red, backgroundColor: (ctx) => gradient(ctx.chart.ctx, COLORS.red), fill: true, tension: 0.4, pointRadius: 4 }]},
     options: { responsive: true, maintainAspectRatio: false, scales: { y: { ticks: { callback: v => '$'+v } } } }
   });
+
+  // Reservations + Profile Visits charts (only if data exists)
+  const hasRes = chartData.some(m => (m.resEvent||m.reservations) > 0);
+  const hasPV  = chartData.some(m => m.profileVisits > 0);
+  if (hasRes || hasPV) {
+    const chartRes = document.getElementById('chart-fbReservations');
+    const chartPV  = document.getElementById('chart-fbProfileVisits');
+    if (chartRes && hasRes) mkChart('chart-fbReservations', {
+      type: 'bar',
+      data: { labels, datasets: [
+        { label: 'Reservation (Event)', data: chartData.map(m => m.resEvent||m.reservations||0), backgroundColor: COLORS.green+'99', borderColor: COLORS.green, borderWidth: 1, yAxisID: 'y' },
+        { label: 'Reservation (Results)', data: chartData.map(m => m.resResults||0), backgroundColor: COLORS.blue+'99', borderColor: COLORS.blue, borderWidth: 1, yAxisID: 'y' },
+        { label: 'Spend ($)', data: chartData.map(m => m.spend||0), type: 'line', borderColor: COLORS.accent, backgroundColor: 'transparent', borderWidth: 2, tension: 0.3, yAxisID: 'y1' },
+      ]},
+      options: { responsive: true, maintainAspectRatio: false, scales: {
+        y: { position: 'left', title: { display: true, text: 'Reservations' } },
+        y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => '$'+v }, title: { display: true, text: 'Spend ($)' } }
+      }}
+    });
+    if (chartPV && hasPV) mkChart('chart-fbProfileVisits', {
+      type: 'bar',
+      data: { labels, datasets: [
+        { label: 'Profile Visits', data: chartData.map(m => m.profileVisits||0), backgroundColor: COLORS.purple+'99', borderColor: COLORS.purple, borderWidth: 1, yAxisID: 'y' },
+        { label: 'Reservation (Event)', data: chartData.map(m => m.resEvent||m.reservations||0), type: 'line', borderColor: COLORS.green, backgroundColor: 'transparent', borderWidth: 2, tension: 0.3, pointRadius: 4, yAxisID: 'y1' },
+      ]},
+      options: { responsive: true, maintainAspectRatio: false, scales: {
+        y: { position: 'left', title: { display: true, text: 'Profile Visits' } },
+        y1: { position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: 'Reservations' }, beginAtZero: true }
+      }}
+    });
+  }
+
+  // Campaign breakdown table — aggregate from campMonthly for date range
+  const campMonthlyAll = DATA.facebook.campMonthly || DATA.facebook.campaigns || [];
+  const campMap = {};
+  const fromMo = RANGE.from ? RANGE.from.slice(0,7) : null;
+  const toMo   = RANGE.to   ? RANGE.to.slice(0,7)   : null;
+  const srcRows = (fromMo || toMo)
+    ? campMonthlyAll.filter(d => {
+        const mo = d.month || d.date?.slice(0,7);
+        return (!fromMo || mo >= fromMo) && (!toMo || mo <= toMo);
+      })
+    : campMonthlyAll;
+  srcRows.forEach(d => {
+    if (!campMap[d.campaign]) campMap[d.campaign] = { campaign: d.campaign, spend:0, reach:0, impressions:0, clicks:0, resEvent:0, resResults:0, profileVisits:0, thruPlays:0, resultsCount:0, resultsType:'' };
+    const c = campMap[d.campaign];
+    c.spend+=d.spend; c.reach+=d.reach; c.impressions+=d.impressions; c.clicks+=d.clicks;
+    c.resEvent+=(d.resEvent||0); c.resResults+=(d.resResults||0); c.profileVisits+=(d.profileVisits||0);
+    c.thruPlays+=(d.thruPlays||0); c.resultsCount+=(d.resultsCount||0);
+    if (!c.resultsType && d.resultsType) c.resultsType = d.resultsType;
+  });
+  const campRows = Object.values(campMap).map(c => {
+    c.ctr = c.impressions > 0 ? +(c.clicks/c.impressions*100).toFixed(2) : 0;
+    c.cpc = c.clicks > 0 ? +(c.spend/c.clicks).toFixed(2) : 0;
+    c.costPerResEvent   = c.resEvent   > 0 ? +(c.spend/c.resEvent).toFixed(2)   : 0;
+    c.costPerResResults = c.resResults > 0 ? +(c.spend/c.resResults).toFixed(2) : 0;
+    c.profileToReservation = c.profileVisits > 0 ? +(c.resEvent/c.profileVisits*100).toFixed(2) : 0;
+    return c;
+  }).sort((a,b) => b.spend - a.spend);
+
+  const tbl = document.getElementById('fb-campaign-table');
+  if (tbl && campRows.length) {
+    tbl.innerHTML = `<table style="width:100%;border-collapse:collapse;font-size:13px">
+      <thead><tr style="border-bottom:1px solid var(--border);color:var(--muted)">
+        <th style="text-align:left;padding:8px 10px">Campaign</th>
+        <th style="text-align:right;padding:8px 10px">Amount Spent</th>
+        <th style="text-align:right;padding:8px 10px;color:var(--green)">Reservation (Results)</th>
+        <th style="text-align:right;padding:8px 10px">Cost/Reservation</th>
+        <th style="text-align:right;padding:8px 10px;color:var(--purple)">Profile Visits</th>
+        <th style="text-align:right;padding:8px 10px">Cost/Profile Visit</th>
+        <th style="text-align:right;padding:8px 10px;color:var(--accent)">ThruPlays</th>
+        <th style="text-align:right;padding:8px 10px">Cost/ThruPlay</th>
+      </tr></thead>
+      <tbody>${campRows.map((c,i) => {
+        const rType = (c.resultsType||'').toLowerCase();
+        const isVideo = rType.includes('thru') || rType.includes('video');
+        const thruPlays = c.thruPlays > 0 ? c.thruPlays : (isVideo ? (c.resultsCount||0) : 0);
+        const costPerThru = thruPlays > 0 ? +(c.spend/thruPlays).toFixed(2) : 0;
+        const costPerPV = c.profileVisits > 0 ? +(c.spend/c.profileVisits).toFixed(2) : 0;
+        return `<tr style="border-bottom:1px solid var(--border)20;background:${i%2===0?'transparent':'var(--card2)20'}">
+        <td style="padding:8px 10px;font-weight:500;min-width:180px;max-width:300px;white-space:normal;word-break:break-word">${c.campaign}</td>
+        <td style="text-align:right;padding:8px 10px">$${c.spend.toFixed(0)}</td>
+        <td style="text-align:right;padding:8px 10px;color:${(c.resResults||0)>0?'var(--green)':'var(--muted)'};font-weight:${(c.resResults||0)>0?'700':'400'}">${(c.resResults||0) > 0 ? (c.resResults||0) : '—'}</td>
+        <td style="text-align:right;padding:8px 10px;color:${c.costPerResResults>0?(c.costPerResResults>30?'var(--red)':'var(--accent)'):'var(--muted)'}">${c.costPerResResults > 0 ? '$'+c.costPerResResults : '—'}</td>
+        <td style="text-align:right;padding:8px 10px;color:${c.profileVisits>0?'var(--purple)':'var(--muted)'}">${c.profileVisits > 0 ? c.profileVisits.toLocaleString() : '—'}</td>
+        <td style="text-align:right;padding:8px 10px">${costPerPV > 0 ? '$'+costPerPV : '—'}</td>
+        <td style="text-align:right;padding:8px 10px;color:${thruPlays>0?'var(--accent)':'var(--muted)'}">${thruPlays > 0 ? thruPlays.toLocaleString() : '—'}</td>
+        <td style="text-align:right;padding:8px 10px">${costPerThru > 0 ? '$'+costPerThru : '—'}</td>
+      </tr>`;}).join('')}</tbody>
+    </table>`;
+  }
 }
 
 // ── Google ─────────────────────────────────────────────────────────────────
 function renderGoogle() {
   if (!DATA.googleAds) return;
   const { monthly, campaigns } = DATA.googleAds;
-  const active = filterMonthly(monthly).filter(m => m.spend > 0);
-  const prevActive = filterToPrev(monthly).filter(m => m.spend > 0);
+  const gDaily = DATA.googleAds.daily || [];
+
+  let active, prevActive, useDaily = false;
+  if (RANGE.from && RANGE.to && gDaily.length && !RANGE_IS_PRESET) {
+    const inRange = gDaily.filter(d => d.date >= RANGE.from && d.date <= RANGE.to);
+    const inPrev  = PREV_RANGE.from ? gDaily.filter(d => d.date >= PREV_RANGE.from && d.date <= PREV_RANGE.to) : [];
+    const aggDaily = arr => arr.length ? arr.reduce((acc, d) => {
+      acc.spend += d.spend; acc.clicks += d.clicks; acc.impressions += d.impressions;
+      acc.reservations += (d.reservations||0); acc.storeVisits += (d.storeVisits||0); acc.calls += (d.calls||0); return acc;
+    }, { spend:0, clicks:0, impressions:0, reservations:0, storeVisits:0, calls:0 }) : null;
+    const aggCurr = aggDaily(inRange);
+    const aggPrev = aggDaily(inPrev);
+    active = aggCurr ? [aggCurr] : [];
+    prevActive = aggPrev ? [aggPrev] : [];
+    useDaily = true;
+  } else {
+    active = filterMonthly(monthly).filter(m => m.spend > 0);
+    prevActive = filterToPrev(monthly).filter(m => m.spend > 0);
+  }
 
   const totSpend  = active.reduce((a,b)=>a+b.spend,0);
   const totClicks = active.reduce((a,b)=>a+b.clicks,0);
@@ -890,15 +2070,19 @@ function renderGoogle() {
 
   const pSpend  = prevActive.reduce((a,b)=>a+b.spend,0);
   const pClicks = prevActive.reduce((a,b)=>a+b.clicks,0);
-  const pImpr   = prevActive.reduce((a,b)=>a+b.impressions,0);
-  const pRes    = prevActive.reduce((a,b)=>a+b.reservations,0);
-  const pCalls  = prevActive.reduce((a,b)=>a+b.calls,0);
+  const pImpr       = prevActive.reduce((a,b)=>a+b.impressions,0);
+  const pRes        = prevActive.reduce((a,b)=>a+b.reservations,0);
+  const pStoreVisits= prevActive.reduce((a,b)=>a+(b.storeVisits||0),0);
+  const pCalls      = prevActive.reduce((a,b)=>a+b.calls,0);
   const prevCPR = pRes > 0 ? pSpend / pRes : 0;
+
+  const totStoreVisits = active.reduce((a,b)=>a+(b.storeVisits||0),0);
 
   const dSpend  = delta(totSpend,  pSpend,  v => '$' + v.toLocaleString(undefined,{maximumFractionDigits:0}), true);
   const dClicks = delta(totClicks, pClicks, v => v.toLocaleString(undefined,{maximumFractionDigits:0}));
   const dImpr   = delta(totImpr,   pImpr,   v => v.toLocaleString(undefined,{maximumFractionDigits:0}));
   const dRes    = delta(totRes,    pRes,    v => v.toLocaleString(undefined,{maximumFractionDigits:0}));
+  const dSV     = delta(totStoreVisits, pStoreVisits, v => v.toLocaleString(undefined,{maximumFractionDigits:0}));
   const dCalls  = delta(totCalls,  pCalls,  v => v.toLocaleString(undefined,{maximumFractionDigits:0}));
   const dCPR    = delta(currCPR,   prevCPR, v => '$' + v.toFixed(0), true);
 
@@ -908,17 +2092,21 @@ function renderGoogle() {
     kpiCard('Total Clicks',       fmt(totClicks), 'Website visits',  dClicks.cls, dClicks.text),
     kpiCard('Total Impressions',  fmt(totImpr),   'Ad views',        dImpr.cls,   dImpr.text),
     kpiCard('Reservations',       totRes.toLocaleString(), 'Attributed', dRes.cls, dRes.text),
+    kpiCard('Store Visits',       totStoreVisits.toLocaleString(), 'In-person visits', dSV.cls, dSV.text),
     kpiCard('Calls from Ads',     totCalls.toLocaleString(), 'Phone calls', dCalls.cls, dCalls.text),
     kpiCard('Cost / Reservation', currCPR > 0 ? `$${currCPR.toFixed(0)}` : '—', 'Avg', dCPR.cls, dCPR.text),
   ].join('');
 
-  const labels = active.map(m => m.month.slice(2));
+  const chartData = (useDaily && RANGE.from && RANGE.to)
+    ? gDaily.filter(d => d.date >= RANGE.from && d.date <= RANGE.to)
+    : filterMonthly(monthly).filter(m => m.spend > 0);
+  const labels = chartData.map(m => m.date ? m.date.slice(5) : m.month.slice(2));
   mkChart('chart-googleMonthly', {
     type: 'bar',
     data: { labels, datasets: [
-      { label: 'Spend ($)', data: active.map(m => m.spend), backgroundColor: COLORS.blue+'88', yAxisID: 'y' },
-      { label: 'Clicks', data: active.map(m => m.clicks), type: 'line', borderColor: COLORS.green, tension: 0.3, yAxisID: 'y1' },
-      { label: 'Reservations', data: active.map(m => m.reservations), type: 'line', borderColor: COLORS.accent, tension: 0.3, yAxisID: 'y2' },
+      { label: 'Spend ($)', data: chartData.map(m => m.spend), backgroundColor: COLORS.blue+'88', yAxisID: 'y' },
+      { label: 'Clicks', data: chartData.map(m => m.clicks), type: 'line', borderColor: COLORS.green, tension: 0.3, yAxisID: 'y1' },
+      { label: 'Reservations', data: chartData.map(m => m.reservations||0), type: 'line', borderColor: COLORS.accent, tension: 0.3, yAxisID: 'y2' },
     ]},
     options: { responsive: true, maintainAspectRatio: false, scales: {
       y: { position: 'left' },
@@ -929,28 +2117,50 @@ function renderGoogle() {
 
   mkChart('chart-googleCTR', {
     type: 'line',
-    data: { labels, datasets: [{ label: 'CTR %', data: active.map(m => m.ctr), borderColor: COLORS.purple, backgroundColor: (ctx) => gradient(ctx.chart.ctx, COLORS.purple), fill: true, tension: 0.4 }]},
+    data: { labels, datasets: [{ label: 'CTR %', data: chartData.map(m => m.ctr||0), borderColor: COLORS.purple, backgroundColor: (ctx) => gradient(ctx.chart.ctx, COLORS.purple), fill: true, tension: 0.4 }]},
     options: { responsive: true, maintainAspectRatio: false, scales: { y: { ticks: { callback: v => v+'%' } } } }
   });
 
-  const resMonths = active.filter(m => m.costPerRes > 0);
+  const resMonths = chartData.filter(m => (m.costPerRes||0) > 0);
   mkChart('chart-googleCPR', {
     type: 'bar',
-    data: { labels: resMonths.map(m => m.month.slice(2)), datasets: [{ label: 'Cost/Res ($)', data: resMonths.map(m => m.costPerRes), backgroundColor: COLORS.accent2+'88', borderColor: COLORS.accent2 }]},
+    data: { labels: resMonths.map(m => m.date ? m.date.slice(5) : m.month.slice(2)), datasets: [{ label: 'Cost/Res ($)', data: resMonths.map(m => m.costPerRes||0), backgroundColor: COLORS.accent2+'88', borderColor: COLORS.accent2 }]},
     options: { responsive: true, maintainAspectRatio: false, scales: { y: { ticks: { callback: v => '$'+v } } } }
   });
 
+  // Filter campaigns by date range using campMonthly (month-level granularity)
+  const gCampMonthly = DATA.googleAds.campMonthly || [];
+  const gFromMo = RANGE.from ? RANGE.from.slice(0,7) : null;
+  const gToMo   = RANGE.to   ? RANGE.to.slice(0,7)   : null;
+  const gSrcRows = (gFromMo || gToMo)
+    ? gCampMonthly.filter(d => (!gFromMo || d.month >= gFromMo) && (!gToMo || d.month <= gToMo))
+    : gCampMonthly;
+  // Note: campaign table uses monthly granularity; KPI/charts use exact daily data
+  const gCampMap = {};
+  gSrcRows.forEach(d => {
+    if (!gCampMap[d.name]) gCampMap[d.name] = { name: d.name, spend: 0, clicks: 0, impressions: 0, reservations: 0, storeVisits: 0, calls: 0 };
+    const c = gCampMap[d.name];
+    c.spend += d.spend; c.clicks += d.clicks; c.impressions += d.impressions; c.reservations += d.reservations; c.storeVisits += (d.storeVisits||0); c.calls += d.calls;
+  });
+  const gCampRows = Object.values(gCampMap).map(c => ({
+    ...c,
+    cpc: c.clicks > 0 ? +(c.spend/c.clicks).toFixed(2) : 0,
+    costPerRes: c.reservations > 0 ? +(c.spend/c.reservations).toFixed(2) : 0,
+  })).sort((a,b) => b.spend - a.spend);
+
   document.getElementById('table-campaigns').innerHTML = `
     <table>
-      <thead><tr><th>Campaign</th><th>Spend</th><th>Clicks</th><th>CPC</th><th>Reservations</th><th>Calls</th><th>Cost/Res</th></tr></thead>
-      <tbody>${campaigns.map(c => `
+      <thead><tr><th>Campaign</th><th>Spend</th><th>Clicks</th><th>CPC</th><th>Reservations</th><th>Cost/Res</th><th>Store Visits</th><th>Calls</th></tr></thead>
+      <tbody>${gCampRows.map(c => `
         <tr>
           <td>${c.name}</td>
-          <td>$${c.spend.toLocaleString()}</td>
+          <td>$${c.spend.toLocaleString(undefined,{maximumFractionDigits:0})}</td>
           <td>${c.clicks.toLocaleString()}</td>
-          <td>$${c.cpc}</td>
-          <td>${c.reservations}</td>
-          <td>${c.calls}</td>
+          <td>${c.cpc > 0 ? '$'+c.cpc : '—'}</td>
+          <td>${c.reservations > 0 ? c.reservations : '—'}</td>
+          <td>${c.costPerRes > 0 ? '$'+c.costPerRes : '—'}</td>
+          <td>${(c.storeVisits||0) > 0 ? c.storeVisits.toLocaleString() : '—'}</td>
+          <td>${c.calls > 0 ? c.calls : '—'}</td>
           <td>${c.costPerRes > 0 ? '$'+c.costPerRes : '—'}</td>
         </tr>`).join('')}
       </tbody>
@@ -961,14 +2171,81 @@ function renderGoogle() {
 function renderReservations() {
   if (!DATA.reservations) return;
   const { summary, days, times, sizes, monthly } = DATA.reservations;
+  const resDaily = DATA.reservations.daily || [];
+  const resFVDaily = DATA.reservations.firstVisitDaily || [];
+  const resRepeatDaily = DATA.reservations.repeatDaily || [];
+
+  // Use daily for exact ranges, monthly for presets/all-time
+  let activeData, prevData, useDaily = false;
+  if (RANGE.from && RANGE.to && resDaily.length && !RANGE_IS_PRESET) {
+    activeData = resDaily.filter(d => d.date >= RANGE.from && d.date <= RANGE.to);
+    prevData   = PREV_RANGE.from ? resDaily.filter(d => d.date >= PREV_RANGE.from && d.date <= PREV_RANGE.to) : [];
+    useDaily = true;
+  } else {
+    activeData = filterMonthly(monthly);
+    prevData   = filterToPrev(monthly);
+  }
+
+  const active = activeData;
+  const prev   = prevData;
+  const rangeLabel = RANGE.from ? 'In range' : 'All time';
+
+  const totRes    = active.length ? active.reduce((a,b)=>a+b.reservations,0) : summary.total;
+  const totCovers = active.length ? active.reduce((a,b)=>a+b.covers,0)       : summary.totalCovers;
+  const totCancel       = active.length ? active.reduce((a,b)=>a+(b.cancelled||0),0) : 0;
+  const totNoShow       = active.length ? active.reduce((a,b)=>a+(b.noShow||0),0) : 0;
+  const totNotConfirmed = active.length ? active.reduce((a,b)=>a+(b.notConfirmed||0),0) : 0;
+  const totCanceled     = totCancel - totNoShow - totNotConfirmed;
+  const cancelRate = totRes > 0 ? +((totCancel/totRes)*100).toFixed(1) : summary.cancellationRate;
+  const totOptIn = active.length ? active.reduce((a,b)=>a+(b.optIn||0),0) : 0;
+  const optInRate = totRes > 0 ? +((totOptIn/totRes)*100).toFixed(1) : summary.optInRate;
+  const totConfirmed = active.reduce((a,b)=>a+(b.seatedRes||0),0);
+  const totConfirmedCovers = active.reduce((a,b)=>a+(b.seatedCovers||0),0);
+  const pConfirmed = prev.reduce((a,b)=>a+(b.seatedRes||0),0);
+  const pConfirmedCovers = prev.reduce((a,b)=>a+(b.seatedCovers||0),0);
+  // First visit uses visit-date-keyed data for exact date ranges
+  const firstVisit = (useDaily && resFVDaily.length)
+    ? resFVDaily.filter(d => d.date >= RANGE.from && d.date <= RANGE.to).reduce((a,b)=>a+(b.firstVisit||0),0)
+    : active.reduce((a,b)=>a+(b.firstVisit||0),0);
+  const pFirstVisit = (useDaily && resFVDaily.length && PREV_RANGE.from)
+    ? resFVDaily.filter(d => d.date >= PREV_RANGE.from && d.date <= PREV_RANGE.to).reduce((a,b)=>a+(b.firstVisit||0),0)
+    : prevData.reduce((a,b)=>a+(b.firstVisit||0),0);
+  const repeat = (useDaily && resRepeatDaily.length)
+    ? resRepeatDaily.filter(d => d.date >= RANGE.from && d.date <= RANGE.to).reduce((a,b)=>a+(b.repeat||0),0)
+    : active.reduce((a,b)=>a+(b.repeat||0),0);
+  const pRepeat = (useDaily && resRepeatDaily.length && PREV_RANGE.from)
+    ? resRepeatDaily.filter(d => d.date >= PREV_RANGE.from && d.date <= PREV_RANGE.to).reduce((a,b)=>a+(b.repeat||0),0)
+    : prevData.reduce((a,b)=>a+(b.repeat||0),0);
+  const totalVisitBased = firstVisit + repeat;
+  const returnRate = totalVisitBased > 0 ? +(repeat/totalVisitBased*100).toFixed(1) : summary.returnRate;
+  const pTotalVisitBased = pFirstVisit + pRepeat;
+  const pReturnRate2 = pTotalVisitBased > 0 ? +(pRepeat/pTotalVisitBased*100).toFixed(1) : 0;
+
+  const pRes        = prev.reduce((a,b)=>a+b.reservations,0);
+  const pCovers     = prev.reduce((a,b)=>a+b.covers,0);
+  const pCancel     = prev.reduce((a,b)=>a+(b.cancelled||0),0);
+  const pCancelRate  = pRes > 0 ? +((pCancel/pRes)*100).toFixed(1) : 0;
+  const pReturnRate  = pReturnRate2;
+  const pAvgParty    = pRes > 0 ? +(pCovers/pRes).toFixed(1) : 0;
+  const avgParty     = totRes > 0 ? +(totCovers/totRes).toFixed(1) : summary.avgPartySize;
+
+  const dRes        = delta(totRes,      pRes,        v => v.toLocaleString());
+  const dCovers     = delta(totCovers,   pCovers,     v => v.toLocaleString());
+  const dCancel     = delta(cancelRate,  pCancelRate, v => v.toFixed(1)+'%', true);
+  const dReturn     = delta(returnRate,  pReturnRate, v => v.toFixed(1)+'%');
+  const dAvgParty   = delta(avgParty,    pAvgParty,   v => v.toFixed(1));
 
   document.getElementById('kpi-reservations').innerHTML = [
-    kpiCard('Total Reservations', fmt(summary.total), 'All time','',''),
-    kpiCard('Total Covers', fmt(summary.totalCovers), 'Guests served','',''),
-    kpiCard('Avg Party Size', summary.avgPartySize, 'Per booking','',''),
-    kpiCard('Return Rate', `${summary.returnRate}%`, 'Returning guests', 'up',''),
-    kpiCard('Cancellation Rate', `${summary.cancellationRate}%`, '', summary.cancellationRate > 15 ? 'down' : '', ''),
-    kpiCard('Marketing Opt-In', `${summary.optInRate}%`, 'Email subscribers','',''),
+    kpiCard('Total Reservations', fmt(totRes),    rangeLabel,      dRes.cls,      dRes.text),
+    kpiCard('Total Covers',       fmt(totCovers), 'Guests served', dCovers.cls,   dCovers.text),
+    kpiCard('Avg Party Size',     avgParty,       'Per booking',   dAvgParty.cls, dAvgParty.text),
+    kpiCard('First Visit',  fmt(firstVisit), 'New guests',      delta(firstVisit, pFirstVisit, v=>v.toLocaleString()).cls, delta(firstVisit, pFirstVisit, v=>v.toLocaleString()).text),
+    kpiCard('Repeat Visit', fmt(repeat),      'Returning guests', delta(repeat, pRepeat, v=>v.toLocaleString()).cls, delta(repeat, pRepeat, v=>v.toLocaleString()).text),
+    kpiCard('Return Rate',        `${returnRate}%`, 'Returning guests', dReturn.cls, dReturn.text),
+    kpiCard('Cancellation Rate', `${cancelRate}%`, `Canceled: ${totCanceled} / No Show: ${totNoShow} / Not Confirmed: ${totNotConfirmed}`, dCancel.cls, dCancel.text),
+    kpiCard('Marketing Opt-In', `${optInRate}%`, `${totOptIn.toLocaleString()} opted in`, '', ''),
+    kpiCard('Completed Reservations', fmt(totConfirmed), 'Done / Assumed / Confirmed / Paid / Seated', delta(totConfirmed, pConfirmed, v=>v.toLocaleString()).cls, delta(totConfirmed, pConfirmed, v=>v.toLocaleString()).text),
+    kpiCard('Completed Covers', fmt(totConfirmedCovers), 'Done / Assumed / Confirmed / Paid / Seated', delta(totConfirmedCovers, pConfirmedCovers, v=>v.toLocaleString()).cls, delta(totConfirmedCovers, pConfirmedCovers, v=>v.toLocaleString()).text),
   ].join('');
 
   const dayOrder = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
@@ -992,22 +2269,25 @@ function renderReservations() {
     options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { boxWidth: 12, font: { size: 11 } } } } }
   });
 
-  const monthlyFiltered = filterMonthly(monthly).filter(m => m.reservations > 0).slice(-18);
+  const chartSrc = useDaily
+    ? resDaily.filter(d => d.date >= RANGE.from && d.date <= RANGE.to)
+    : (RANGE.from ? filterMonthly(monthly) : monthly.slice(-18)).filter(m => m.reservations > 0);
+  const chartLabels = chartSrc.map(m => (m.date || m.month).slice(5));
   mkChart('chart-resFirstReturn', {
     type: 'bar',
-    data: { labels: monthlyFiltered.map(m => m.month.slice(2)), datasets: [
-      { label: 'First Visit', data: monthlyFiltered.map(m => m.firstVisit), backgroundColor: COLORS.accent+'88', stack: 'a' },
-      { label: 'Returning', data: monthlyFiltered.map(m => m.reservations - m.firstVisit), backgroundColor: COLORS.blue+'88', stack: 'a' },
+    data: { labels: chartLabels, datasets: [
+      { label: 'First Visit', data: chartSrc.map(m => m.firstVisit||0), backgroundColor: COLORS.accent+'88', stack: 'a' },
+      { label: 'Returning', data: chartSrc.map(m => (m.reservations||0) - (m.firstVisit||0)), backgroundColor: COLORS.blue+'88', stack: 'a' },
     ]},
     options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true } } }
   });
 
-  const resMonthlyAll = filterMonthly(monthly).filter(m => m.reservations > 0);
+  const resMonthlyAll = chartSrc;
   mkChart('chart-resMonthly', {
     type: 'line',
-    data: { labels: resMonthlyAll.map(m => m.month.slice(2)), datasets: [
-      { label: 'Reservations', data: resMonthlyAll.map(m => m.reservations), borderColor: COLORS.blue, tension: 0.3, yAxisID: 'y' },
-      { label: 'Covers', data: resMonthlyAll.map(m => m.covers), borderColor: COLORS.green, tension: 0.3, yAxisID: 'y' },
+    data: { labels: chartLabels, datasets: [
+      { label: 'Reservations', data: resMonthlyAll.map(m => m.reservations||0), borderColor: COLORS.blue, tension: 0.3, yAxisID: 'y' },
+      { label: 'Covers', data: resMonthlyAll.map(m => m.covers||0), borderColor: COLORS.green, tension: 0.3, yAxisID: 'y' },
     ]},
     options: { responsive: true, maintainAspectRatio: false }
   });
@@ -1017,15 +2297,41 @@ function renderReservations() {
 function renderEvents() {
   if (!DATA.perfectVenue) return;
   const { statuses, lostReasons, monthly, totalCompletedRevenue, avgRevenuePerEvent, closeRate } = DATA.perfectVenue;
-  const total = statuses.reduce((a,b) => a+b.count, 0);
+
+  const pvDailyAll = DATA.perfectVenue.daily || [];
+  const pvCustom = RANGE.from && RANGE.to && pvDailyAll.length && !RANGE_IS_PRESET;
+  let activeArr, prevArr;
+  if (pvCustom) {
+    activeArr = pvDailyAll.filter(d => d.date >= RANGE.from && d.date <= RANGE.to);
+    prevArr   = PREV_RANGE.from ? pvDailyAll.filter(d => d.date >= PREV_RANGE.from && d.date <= PREV_RANGE.to) : [];
+  } else {
+    activeArr = filterMonthly(monthly);
+    prevArr   = filterToPrev(monthly);
+  }
+  const rangeLabel = RANGE.from ? 'In range' : 'All time';
+
+  const total        = statuses.reduce((a,b)=>a+b.count,0);
+  const totLeads     = RANGE.from ? activeArr.reduce((a,b)=>a+(b.leads||0),0)     : total;
+  const totCompleted = RANGE.from ? activeArr.reduce((a,b)=>a+(b.completed||0),0) : (statuses.find(s=>s.status==='Completed')?.count||0);
+  const totLost      = RANGE.from ? activeArr.reduce((a,b)=>a+(b.lost||0),0)      : (statuses.find(s=>s.status==='Lost')?.count||0);
+  const currClose    = (totCompleted+totLost) > 0 ? +((totCompleted/(totCompleted+totLost))*100).toFixed(1) : closeRate;
+
+  const pLeads     = prevArr.reduce((a,b)=>a+(b.leads||0),0);
+  const pCompleted = prevArr.reduce((a,b)=>a+(b.completed||0),0);
+  const pLost      = prevArr.reduce((a,b)=>a+(b.lost||0),0);
+  const pClose     = (pCompleted+pLost) > 0 ? +((pCompleted/(pCompleted+pLost))*100).toFixed(1) : 0;
+
+  const dLeads     = delta(totLeads,     pLeads,     v => v.toLocaleString());
+  const dCompleted = delta(totCompleted, pCompleted, v => v.toLocaleString());
+  const dClose     = delta(currClose,    pClose,     v => v.toFixed(1)+'%');
 
   document.getElementById('kpi-events').innerHTML = [
-    kpiCard('Total Leads', total, 'All time','',''),
-    kpiCard('Close Rate', `${closeRate}%`, 'Completed/decided', closeRate > 40 ? 'up' : 'down',''),
-    kpiCard('Completed Events', statuses.find(s=>s.status==='Completed')?.count||0, '','',''),
-    kpiCard('Lost Leads', statuses.find(s=>s.status==='Lost')?.count||0, '','',''),
-    kpiCard('Total Revenue', `$${totalCompletedRevenue.toLocaleString()}`, 'Completed events','',''),
-    kpiCard('Avg Revenue/Event', `$${avgRevenuePerEvent}`, 'Per completed event','',''),
+    kpiCard('Total Leads',       totLeads,                          rangeLabel,            dLeads.cls,     dLeads.text),
+    kpiCard('Close Rate',        `${currClose}%`,                   'Completed/decided',   dClose.cls,     dClose.text),
+    kpiCard('Completed Events',  totCompleted,                      '',                    dCompleted.cls, dCompleted.text),
+    kpiCard('Lost Leads',        totLost,                           '',                    '',''),
+    kpiCard('Total Revenue',     `$${totalCompletedRevenue.toLocaleString()}`, 'All time completed','',''),
+    kpiCard('Avg Revenue/Event', `$${avgRevenuePerEvent}`,          'Per completed event', '',''),
   ].join('');
 
   const funnelColors = { Completed: COLORS.green, Confirmed: COLORS.blue, 'Proposal Sent': COLORS.purple, Lead: COLORS.accent, Qualified: COLORS.accent2, Lost: COLORS.red };
@@ -1047,13 +2353,18 @@ function renderEvents() {
     options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } } }
   });
 
-  const monthlyFiltered = filterMonthly(monthly).slice(-18);
+  const pvDailyArr = DATA.perfectVenue.daily || [];
+  const pvUseDaily = RANGE.from && RANGE.to && pvDailyArr.length && !RANGE_IS_PRESET;
+  const pvChartSrc = pvUseDaily
+    ? pvDailyArr.filter(d => d.date >= RANGE.from && d.date <= RANGE.to)
+    : (RANGE.from ? filterMonthly(monthly) : monthly.slice(-18));
+  const pvChartLabels = pvChartSrc.map(m => (m.date || m.month).slice(5));
   mkChart('chart-eventsMonthly', {
     type: 'bar',
-    data: { labels: monthlyFiltered.map(m => m.month.slice(2)), datasets: [
-      { label: 'Total Leads', data: monthlyFiltered.map(m => m.leads), backgroundColor: COLORS.blue+'88' },
-      { label: 'Completed', data: monthlyFiltered.map(m => m.completed), backgroundColor: COLORS.green+'88' },
-      { label: 'Lost', data: monthlyFiltered.map(m => m.lost), backgroundColor: COLORS.red+'44' },
+    data: { labels: pvChartLabels, datasets: [
+      { label: 'Total Leads', data: pvChartSrc.map(m => m.leads||0), backgroundColor: COLORS.blue+'88' },
+      { label: 'Completed', data: pvChartSrc.map(m => m.completed||0), backgroundColor: COLORS.green+'88' },
+      { label: 'Lost', data: pvChartSrc.map(m => m.lost||0), backgroundColor: COLORS.red+'44' },
     ]},
     options: { responsive: true, maintainAspectRatio: false }
   });
