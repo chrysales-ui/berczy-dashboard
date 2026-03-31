@@ -1,24 +1,24 @@
 {
   "summary": {
-    "total": 30236,
-    "totalCovers": 87688,
+    "total": 30700,
+    "totalCovers": 89109,
     "avgPartySize": 2.9,
-    "completionRate": 84.1,
+    "completionRate": 83.9,
     "cancellationRate": 13.3,
-    "noShowRate": 1.8,
-    "firstVisitRate": 38.8,
-    "returnRate": 61.2,
-    "optInRate": 12.4,
-    "avgLifetimeSpend": 355.17
+    "noShowRate": 1.7,
+    "firstVisitRate": 36.6,
+    "returnRate": 63.4,
+    "optInRate": 12.3,
+    "avgLifetimeSpend": 354.4
   },
   "days": {
-    "Mon": 2147,
-    "Tue": 4064,
-    "Wed": 3897,
-    "Thu": 4263,
-    "Fri": 5699,
-    "Sat": 6392,
-    "Sun": 3774
+    "Mon": 2204,
+    "Tue": 4129,
+    "Wed": 3959,
+    "Thu": 4326,
+    "Fri": 5774,
+    "Sat": 6473,
+    "Sun": 3835
   },
   "times": [
     {
@@ -43,7 +43,7 @@
     },
     {
       "label": "12PM",
-      "count": 2732,
+      "count": 2727,
       "hour": 12
     },
     {
@@ -53,7 +53,7 @@
     },
     {
       "label": "2PM",
-      "count": 690,
+      "count": 692,
       "hour": 14
     },
     {
@@ -68,22 +68,22 @@
     },
     {
       "label": "5PM",
-      "count": 3895,
+      "count": 3897,
       "hour": 17
     },
     {
       "label": "6PM",
-      "count": 5697,
+      "count": 5694,
       "hour": 18
     },
     {
       "label": "7PM",
-      "count": 5675,
+      "count": 5677,
       "hour": 19
     },
     {
       "label": "8PM",
-      "count": 3719,
+      "count": 3721,
       "hour": 20
     },
     {
@@ -93,7 +93,7 @@
     },
     {
       "label": "10PM",
-      "count": 1030,
+      "count": 1029,
       "hour": 22
     },
     {
@@ -105,55 +105,55 @@
   "sizes": [
     {
       "size": 1,
-      "count": 1926
+      "count": 1951
     },
     {
       "size": 2,
-      "count": 17725
+      "count": 17990
     },
     {
       "size": 3,
-      "count": 3712
+      "count": 3772
     },
     {
       "size": 4,
-      "count": 3779
+      "count": 3825
     },
     {
       "size": 5,
-      "count": 1078
+      "count": 1103
     },
     {
       "size": 6,
-      "count": 878
+      "count": 897
     },
     {
       "size": 7,
-      "count": 301
+      "count": 306
     },
     {
       "size": 8,
-      "count": 313
+      "count": 320
     },
     {
       "size": 9,
-      "count": 101
+      "count": 107
     },
     {
       "size": 10,
-      "count": 121
+      "count": 122
     },
     {
       "size": 11,
-      "count": 42
+      "count": 43
     },
     {
       "size": 12,
-      "count": 69
+      "count": 70
     },
     {
       "size": 13,
-      "count": 17
+      "count": 18
     },
     {
       "size": 14,
@@ -197,7 +197,7 @@
     },
     {
       "size": 25,
-      "count": 4
+      "count": 5
     },
     {
       "size": 26,
@@ -242,6 +242,10 @@
     {
       "size": 45,
       "count": 3
+    },
+    {
+      "size": 47,
+      "count": 1
     },
     {
       "size": 49,
@@ -487,11 +491,11 @@
     },
     {
       "month": "2026-03",
-      "reservations": 1458,
-      "covers": 4265,
-      "firstVisit": 514,
-      "cancelled": 177,
-      "noShow": 20
+      "reservations": 1922,
+      "covers": 5686,
+      "firstVisit": 0,
+      "cancelled": 241,
+      "noShow": 0
     }
   ]
 }

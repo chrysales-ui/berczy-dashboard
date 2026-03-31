@@ -3651,37 +3651,37 @@
     {
       "date": "2026-03-01",
       "spend": 184,
-      "covers": 97,
+      "covers": 93,
       "users": 544
     },
     {
       "date": "2026-03-02",
       "spend": 183,
-      "covers": 83,
+      "covers": 79,
       "users": 487
     },
     {
       "date": "2026-03-03",
       "spend": 241,
-      "covers": 203,
+      "covers": 199,
       "users": 579
     },
     {
       "date": "2026-03-04",
       "spend": 221,
-      "covers": 226,
+      "covers": 232,
       "users": 619
     },
     {
       "date": "2026-03-05",
       "spend": 212,
-      "covers": 208,
+      "covers": 206,
       "users": 668
     },
     {
       "date": "2026-03-06",
       "spend": 213,
-      "covers": 215,
+      "covers": 211,
       "users": 676
     },
     {
@@ -3705,13 +3705,13 @@
     {
       "date": "2026-03-10",
       "spend": 179,
-      "covers": 236,
+      "covers": 238,
       "users": 506
     },
     {
       "date": "2026-03-11",
       "spend": 165,
-      "covers": 216,
+      "covers": 201,
       "users": 509
     },
     {
@@ -3723,19 +3723,19 @@
     {
       "date": "2026-03-13",
       "spend": 178,
-      "covers": 195,
+      "covers": 188,
       "users": 502
     },
     {
       "date": "2026-03-14",
       "spend": 174,
-      "covers": 245,
+      "covers": 243,
       "users": 663
     },
     {
       "date": "2026-03-15",
       "spend": 167,
-      "covers": 197,
+      "covers": 195,
       "users": 654
     },
     {
@@ -3747,37 +3747,37 @@
     {
       "date": "2026-03-17",
       "spend": 200,
-      "covers": 176,
+      "covers": 169,
       "users": 466
     },
     {
       "date": "2026-03-18",
       "spend": 162,
-      "covers": 160,
+      "covers": 152,
       "users": 522
     },
     {
       "date": "2026-03-19",
       "spend": 191,
-      "covers": 224,
+      "covers": 221,
       "users": 505
     },
     {
       "date": "2026-03-20",
       "spend": 172,
-      "covers": 229,
+      "covers": 224,
       "users": 609
     },
     {
       "date": "2026-03-21",
       "spend": 149,
-      "covers": 265,
+      "covers": 263,
       "users": 613
     },
     {
       "date": "2026-03-22",
       "spend": 161,
-      "covers": 159,
+      "covers": 156,
       "users": 551
     }
   ],
@@ -3965,11 +3965,11 @@
     {
       "month": "2026-03",
       "spend": 4117,
-      "covers": 4265,
+      "covers": 4201,
       "users": 12479,
       "days": 22,
-      "costPerCover": 0.97,
-      "avgDailyCovers": 193.9
+      "costPerCover": 0.98,
+      "avgDailyCovers": 191
     }
   ]
 }
