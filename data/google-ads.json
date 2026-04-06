@@ -200,14 +200,25 @@
     },
     {
       "month": "2026-03",
-      "spend": 2394.6100000000006,
-      "impressions": 412628,
-      "clicks": 9823,
+      "spend": 2530.8700000000013,
+      "impressions": 437234,
+      "clicks": 10302,
       "reservations": 173,
       "calls": 42,
-      "ctr": 2.38,
-      "cpc": 0.24,
-      "costPerRes": 13.84
+      "ctr": 2.36,
+      "cpc": 0.25,
+      "costPerRes": 14.63
+    },
+    {
+      "month": "2026-04",
+      "spend": 343.13,
+      "impressions": 63585,
+      "clicks": 1499,
+      "reservations": 0,
+      "calls": 0,
+      "ctr": 2.36,
+      "cpc": 0.23,
+      "costPerRes": 0
     }
   ],
   "campaigns": [
@@ -223,33 +234,33 @@
     },
     {
       "name": "GG | PMAX - Table Reservation",
-      "spend": 43420.61999999999,
-      "clicks": 262061,
-      "impressions": 24683606,
+      "spend": 43714.349999999984,
+      "clicks": 263701,
+      "impressions": 24765139,
       "reservations": 943,
       "calls": 304,
       "cpc": 0.17,
-      "costPerRes": 46.05
+      "costPerRes": 46.36
     },
     {
       "name": "GG | Search - Table Reservation",
-      "spend": 3977.8500000000004,
-      "clicks": 7885,
-      "impressions": 211003,
+      "spend": 4126.05,
+      "clicks": 8173,
+      "impressions": 217531,
       "reservations": 62,
       "calls": 14,
       "cpc": 0.5,
-      "costPerRes": 64.16
+      "costPerRes": 66.55
     },
     {
       "name": "GG | Search - Brand",
-      "spend": 388.03999999999996,
-      "clicks": 567,
-      "impressions": 2051,
+      "spend": 425.4999999999999,
+      "clicks": 617,
+      "impressions": 2181,
       "reservations": 24,
       "calls": 11,
-      "cpc": 0.68,
-      "costPerRes": 16.17
+      "cpc": 0.69,
+      "costPerRes": 17.73
     }
   ]
 }
